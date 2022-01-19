@@ -1,0 +1,148 @@
+import { SerializedStyles, css, keyframes } from '@emotion/react'
+import React, {
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
+
+type ParallaxTranslateProps = {
+  children: React.ReactNode
+  disable?: boolean
+  animateOnce?: boolean
+  fromBack?: boolean
+  wrapperCss?: SerializedStyles
+  parallaxElementCss?: SerializedStyles
+  innerCss?: SerializedStyles
+  as?: React.ElementType
+}
+
+const ParallaxTranslate = ({
+  children,
+  disable,
+  animateOnce,
+  fromBack,
+  wrapperCss,
+  parallaxElementCss,
+  innerCss,
+  as = 'div',
+  ...props
+}: ParallaxTranslateProps) => {
+  const Element = as
+
+  const parallaxWrapRef = useRef<HTMLElement | null>(null)
+  const parallaxRef = useRef<HTMLDivElement | null>(null)
+
+  const [offset, setOffset] = useState(0)
+
+  const requestRunning = useRef(false)
+  const handleSetOffset = useCallback(() => {
+    if (!requestRunning.current && !disable) {
+      window.requestAnimationFrame(() => {
+        const wrapPos =
+          parallaxWrapRef.current?.getBoundingClientRect().y || 0
+        const windowHeight = window.innerHeight
+        const distFromCenter = wrapPos - windowHeight / 3
+        const linearCalc = distFromCenter / windowHeight
+        setOffset(linearCalc)
+        requestRunning.current = false
+      })
+      requestRunning.current = true
+    }
+  }, [disable])
+  useLayoutEffect(handleSetOffset, [handleSetOffset])
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setAnimatedIn(true)
+          window.addEventListener('scroll', handleSetOffset, {
+            passive: true,
+          })
+        } else {
+          !animateOnce && setAnimatedIn(false)
+          window.removeEventListener('scroll', handleSetOffset)
+        }
+      })
+    },
+    {
+      root: null,
+      rootMargin: '0% 0%',
+    }
+  )
+
+  useLayoutEffect(() => {
+    if (!disable && parallaxRef.current && parallaxWrapRef.current) {
+      observer.observe(parallaxRef.current)
+      observer.observe(parallaxWrapRef.current)
+    }
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('scroll', handleSetOffset)
+    }
+  })
+
+  const [animatedIn, setAnimatedIn] = useState(false)
+
+  const parallaxStyle = css`
+    position: relative;
+    overflow: visible;
+    display: flex;
+    --translate-factor: 100;
+  `
+  const parallaxElementStyle = css`
+    position: relative;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    display: flex;
+  `
+  const animateIn = keyframes`
+    from {
+      transform: scale3d(1.2, 1.2, 1);
+      opacity: 0;
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+      opacity: 1;
+    }
+    `
+  const animateInFromBack = keyframes`
+  from {
+    transform: scale3d(0.75, 0.75, 1);
+    opacity: 0;
+  }
+  to {
+    transform: scale3d(1, 1, 1);
+    opacity: 1;
+  }
+  `
+  const animateInStyle = css`
+    position: relative;
+    opacity: 0;
+    ${animatedIn &&
+    css`
+      animation: ${fromBack ? animateInFromBack : animateIn} 1000ms
+        cubic-bezier(0.25, 0.75, 0.25, 1) forwards;
+    `}
+  `
+  return (
+    <Element
+      ref={parallaxWrapRef}
+      css={[parallaxStyle, wrapperCss]}
+      {...props}
+    >
+      <div
+        css={[parallaxElementStyle, parallaxElementCss]}
+        style={{
+          transform: `translate3d(0, calc(${offset}px * var(--translate-factor, 100)), 0)`,
+        }}
+        ref={parallaxRef}
+      >
+        <div css={[animateInStyle, innerCss]}>{children}</div>
+      </div>
+    </Element>
+  )
+}
+
+export default ParallaxTranslate
