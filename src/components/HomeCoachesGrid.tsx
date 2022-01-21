@@ -42,21 +42,26 @@ const HomeCoachesGrid = () => {
 
   const { width: windowWidth, height: windowHeight } =
     useWindowDimensions()
-  const columns = useMemo(() => {
+
+  // Columns and rows are stored in state because
+  // otherwise Emotion loads the wrong values in production.
+  const [columns, setColumns] = useState(3)
+  useEffect(() => {
     if (windowWidth < breakpoints.ms) {
-      return 3
-    }
-    if (windowWidth < breakpoints.ml) {
-      return 4
+      setColumns(3)
+    } else if (windowWidth < breakpoints.ml) {
+      setColumns(4)
     } else {
-      return 5
+      setColumns(5)
     }
-  }, [windowWidth])
-  const rows = useMemo(() => {
-    const ar = windowHeight / windowWidth
-    return Math.ceil(ar * columns)
   }, [windowWidth, windowHeight])
+  const [rows, setRows] = useState(1)
+  useEffect(() => {
+    setRows(Math.ceil((windowHeight / windowWidth) * columns))
+  }, [windowWidth, windowHeight, columns])
+
   const totalCoaches = columns * rows
+
   const shuffledNumbers = useMemo(() => {
     if (totalCoaches) {
       return shuffle([...Array(totalCoaches).keys()])
@@ -81,14 +86,13 @@ const HomeCoachesGrid = () => {
           containerRef.current?.getBoundingClientRect().bottom || 0
         const height =
           containerRef.current?.getBoundingClientRect().height || 0
-        const windowHeight = window.innerHeight
         const ratio = (windowHeight - pos + height) / height
         setAnimationIndex(clamp(ratio * totalCoaches, 0, totalCoaches))
         requestRunning.current = false
       })
       requestRunning.current = true
     }
-  }, [])
+  }, [totalCoaches, windowHeight])
   useLayoutEffect(handleScroll, [handleScroll])
 
   const scrollObserver =
@@ -137,17 +141,11 @@ const HomeCoachesGrid = () => {
     `}
   `
   const outerWrapperStyle = css`
-    max-width: 100vw;
+    width: 100vw;
     overflow: hidden;
     position: fixed;
     top: 0;
     left: 0;
-    &:before {
-      content: '';
-      ${absoluteFill};
-      background: #fff;
-      opacity: ${backgroundOpacity};
-    }
   `
   const gridWrapperStyle = css`
     position: relative;
@@ -156,9 +154,17 @@ const HomeCoachesGrid = () => {
     grid-template-rows: repeat(${rows}, auto);
     grid-gap: 4px;
   `
+  const backgroundStyle = css`
+    ${absoluteFill};
+    background: #fff;
+  `
   return (
     <div css={containerStyle} ref={containerRef}>
       <div css={outerWrapperStyle}>
+        <div
+          css={backgroundStyle}
+          style={{ opacity: backgroundOpacity }}
+        />
         <div css={gridWrapperStyle}>
           {coachesSubset.map((coach: any, i: number) => (
             <CoachThumbnail

@@ -2,7 +2,6 @@ import { css } from '@emotion/react'
 import { clamp } from 'lodash'
 import {
   useCallback,
-  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -103,9 +102,7 @@ const HomePromiseBackground = () => {
     one: 0,
     two: 0,
   })
-  useEffect(() => {
-    console.log(offset - 1)
-  }, [offset])
+
   const lineWidth = columnPosition.two - columnPosition.one
   const lineHeight = Math.abs(offset - 1) * 125
 
@@ -181,6 +178,9 @@ const HomePromiseBackground = () => {
             style={{
               strokeDasharray: 100,
               strokeDashoffset: clamp(offset * 200 + 50, 50, 100),
+              transform:
+                'opacity 300ms ease, stroke-dashoffset 100ms ease',
+              opacity: offset * 200 + 50 > 95 ? 0 : 1,
             }}
           />
         </svg>
