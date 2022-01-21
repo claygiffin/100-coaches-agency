@@ -15,7 +15,7 @@ import { absoluteFill } from '../theme/mixins'
 import { breakpoints } from '../theme/variables'
 import CoachThumbnail from './CoachThumbnail'
 
-const HomeCoachesGrid = ({}) => {
+const HomeCoachesGrid = () => {
   const { coaches } = useStaticQuery(graphql`
     query {
       coaches: allDatoCmsCoach {

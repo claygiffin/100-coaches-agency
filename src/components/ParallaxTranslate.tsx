@@ -1,4 +1,4 @@
-import { SerializedStyles, css, keyframes } from '@emotion/react'
+import { SerializedStyles, css } from '@emotion/react'
 import React, {
   useCallback,
   useLayoutEffect,
@@ -97,33 +97,20 @@ const ParallaxTranslate = ({
     will-change: transform;
     display: flex;
   `
-  const animateIn = keyframes`
-    from {
-      transform: scale3d(1.2, 1.2, 1);
-      opacity: 0;
-    }
-    to {
-      transform: scale3d(1, 1, 1);
-      opacity: 1;
-    }
-    `
-  const animateInFromBack = keyframes`
-  from {
-    transform: scale3d(0.75, 0.75, 1);
-    opacity: 0;
-  }
-  to {
-    transform: scale3d(1, 1, 1);
-    opacity: 1;
-  }
-  `
   const animateInStyle = css`
     position: relative;
+    transition-property: opacity, transform;
+    transition-duration: 500ms;
+    transition-timing-function: cubic-bezier(0.25, 0.75, 0.25, 1);
     opacity: 0;
+    transform: ${fromBack
+      ? `scale3d(0.75, 0.75, 1)`
+      : `scale3d(1.2, 1.2, 1)`};
     ${animatedIn &&
     css`
-      animation: ${fromBack ? animateInFromBack : animateIn} 1000ms
-        cubic-bezier(0.25, 0.75, 0.25, 1) forwards;
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+      transition-duration: 1000ms;
     `}
   `
   return (

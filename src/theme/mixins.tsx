@@ -4,7 +4,7 @@ import { parseToHsl } from 'polished'
 import { breakpoints, colors } from './variables'
 
 export const mq = (minMax = 'max') => {
-  let bp = Object.create(breakpoints)
+  const bp = Object.create(breakpoints)
   Object.keys(breakpoints).forEach(key => {
     bp[key] = `@media (${minMax}-width: ${breakpoints[key]}px)`
   })
@@ -68,9 +68,9 @@ export const scrim = (
     100: 0,
   }
   const hsl = parseToHsl(startColor)
-  let stops = []
-  for (let colorStop in scrimCoordinates) {
-    let stop = `hsla(${hsl.hue}, ${hsl.saturation * 100}%, ${
+  const stops = []
+  for (const colorStop in scrimCoordinates) {
+    const stop = `hsla(${hsl.hue}, ${hsl.saturation * 100}%, ${
       hsl.lightness * 100
     }%, ${scrimCoordinates[colorStop] * startOpacity}) ${colorStop}%`
     stops.push(stop)

@@ -16,9 +16,8 @@ const HomeCoaches = () => {
   `)
   const sectionStyle = css`
     display: grid;
-    grid-template-rows: 105vh 140vh;
+    grid-template-rows: 102vh 40vmax;
     grid-template-columns: 1fr;
-    margin-bottom: 10vh;
   `
   const parallaxWrapperStyle = css`
     grid-row: 1 / 3;

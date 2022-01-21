@@ -5,7 +5,7 @@ import emotionNormalize from 'emotion-normalize'
 
 import { mq } from './mixins'
 
-const GlobalStyles = ({}) => {
+const GlobalStyles = () => {
   const globalStyles = css`
     ${emotionNormalize}
 
@@ -59,6 +59,9 @@ const GlobalStyles = ({}) => {
         font-size: calc(9px + 0.21vw);
       }
     }
+    body {
+      font-size: var(--fs-18);
+    }
     h1 {
       font-family: var(--serif);
       font-weight: 225;
@@ -68,6 +71,10 @@ const GlobalStyles = ({}) => {
       font-family: var(--serif);
       font-weight: 225;
       line-height: 1.125;
+    }
+    p {
+      line-height: 2;
+      font-weight: 300;
     }
   `
 
