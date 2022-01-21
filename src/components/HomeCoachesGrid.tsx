@@ -67,6 +67,7 @@ const HomeCoachesGrid = () => {
   )
 
   const [animationIndex, setAnimationIndex] = useState(0)
+  const [inView, setInView] = useState(false)
 
   const containerRef = useRef<HTMLDivElement | null>(null)
 
@@ -92,10 +93,12 @@ const HomeCoachesGrid = () => {
     entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          setInView(true)
           window.addEventListener('scroll', handleScroll, {
             passive: true,
           })
         } else {
+          setInView(false)
           window.removeEventListener('scroll', handleScroll)
         }
       })
@@ -123,6 +126,10 @@ const HomeCoachesGrid = () => {
   const containerStyle = css`
     grid-row: 2 / 3;
     grid-column: 1 / -1;
+    ${!inView &&
+    css`
+      visibility: hidden;
+    `}
   `
   const outerWrapperStyle = css`
     max-width: 100vw;

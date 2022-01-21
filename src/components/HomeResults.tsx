@@ -1,19 +1,19 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
-import HomePromiseBackground from './HomePromiseBackground'
 
-const HomePromise = () => {
+const HomeResults = () => {
   const { home } = useStaticQuery(graphql`
     query {
       home: datoCmsHome {
-        promiseHeading
-        promiseBodyNode {
+        resultsHeading
+        resultsSubheadingNode {
           childMarkdownRemark {
             html
           }
@@ -21,6 +21,7 @@ const HomePromise = () => {
       }
     }
   `)
+
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
 
   const [sectionRef, setSectionRef] = useState(null)
@@ -31,31 +32,35 @@ const HomePromise = () => {
     useElementRect(sectionRef)
 
   const sectionStyle = css`
+    clip-path: url(#${clipId});
+    background: #fff;
     ${baseGrid}
     z-index: 2;
-    background: linear-gradient(
-      to top right,
-      ${colors.goldShade3},
-      ${colors.goldShade2},
-      ${colors.goldShade1},
-      ${colors.gold}
-    );
-    clip-path: url(#${clipId});
-    color: white;
-    margin-top: -10.5vw;
-    padding: calc(10.5vw + var(--gutter-xlg)) 0
-      calc(10.5vw + var(--gutter-xlg));
+    color: #555;
+    margin-top: -11.5vw;
+    padding: calc(11.5vw + var(--gutter-lg)) 0
+      calc(7vw + var(--gutter-lg));
   `
   const headingStyle = css`
-    grid-column: 2 / span 7;
+    grid-column: 2 / -2;
     font-size: var(--fs-60);
     margin-bottom: 0.333em;
-    text-shadow: 0 0 3px ${colors.goldShade3};
+    align-self: flex-end;
+    justify-self: center;
+    max-width: 25ch;
+    text-align: center;
+    em {
+      display: inline-block;
+      font-style: normal;
+      color: ${colors.goldTint1};
+    }
   `
   const bodyStyle = css`
-    grid-column: 2 / span 8;
+    grid-column: 2 / -2;
     font-size: var(--fs-21);
-    text-shadow: 0 0 3px ${colors.goldShade3};
+    text-align: center;
+    justify-self: center;
+    max-width: 75ch;
   `
   return (
     <section css={sectionStyle} ref={setRefs}>
@@ -63,29 +68,31 @@ const HomePromise = () => {
         <defs>
           <clipPath id={clipId}>
             <path
-              d={`M${sectWidth},${0.02 * sectWidth} C${
-                0.75 * sectWidth
-              },${-0.0625 * sectWidth} ${0.435 * sectWidth},${
-                0.16 * sectWidth
+              d={`M${sectWidth},${0.105 * sectWidth} C${
+                0.48 * sectWidth
+              },${0.14 * sectWidth} ${0.48 * sectWidth},${
+                -0.015 * sectWidth
               } 0,${
-                0.0875 * sectWidth
+                0.003 * sectWidth
               } L0,${sectHeight} L${sectWidth},${sectHeight} L${sectWidth},${
-                0.02 * sectWidth
+                0.105 * sectWidth
               } Z`}
             />
           </clipPath>
         </defs>
       </svg>
-      <HomePromiseBackground />
-      <h2 css={headingStyle}>{home.promiseHeading}</h2>
+      <h2
+        css={headingStyle}
+        dangerouslySetInnerHTML={{ __html: home.resultsHeading }}
+      />
       <div
         css={bodyStyle}
         dangerouslySetInnerHTML={{
-          __html: home.promiseBodyNode.childMarkdownRemark.html,
+          __html: home.resultsSubheadingNode.childMarkdownRemark.html,
         }}
       />
     </section>
   )
 }
 
-export default HomePromise
+export default HomeResults

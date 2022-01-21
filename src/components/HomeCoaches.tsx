@@ -48,6 +48,7 @@ const HomeCoaches = () => {
     text-align: center;
     justify-self: center;
     em {
+      display: inline-block;
       font-style: normal;
       color: ${colors.goldShade1};
     }

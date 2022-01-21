@@ -15,7 +15,7 @@ const Shape = ({
   position,
   ...props
 }: ShapeProps) => {
-  const animationDelay = useMemo(() => Math.random() * -5000, [])
+  const animationDelay = useMemo(() => Math.random() * -4000, [])
   const triangleRotation = useMemo(
     () => Math.floor(Math.random() * 4) * 90,
     []
@@ -49,7 +49,7 @@ const Shape = ({
   const shapeStyle = css`
     width: 100%;
     animation-name: ${!brighten && animation};
-    animation-duration: 5000ms;
+    animation-duration: 4000ms;
     animation-fill-mode: forwards;
     animation-timing-function: ease;
     animation-iteration-count: infinite;

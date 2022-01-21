@@ -170,6 +170,7 @@ const HomePromiseBackground = () => {
         >
           <polygon
             points={`0,0 ${lineWidth},${lineHeight}`}
+            strokeWidth="9"
             stroke="#fff"
             strokeLinecap="round"
             strokeLinejoin="round"
