@@ -58,7 +58,9 @@ const HomeCoachesGrid = () => {
   }, [windowWidth, windowHeight])
   const totalCoaches = columns * rows
   const shuffledNumbers = useMemo(() => {
-    return shuffle([...Array(totalCoaches).keys()])
+    if (totalCoaches) {
+      return shuffle([...Array(totalCoaches).keys()])
+    } else return []
   }, [totalCoaches])
 
   const coachesSubset = useMemo(
@@ -89,32 +91,35 @@ const HomeCoachesGrid = () => {
   }, [])
   useLayoutEffect(handleScroll, [handleScroll])
 
-  const scrollObserver = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setInView(true)
-          window.addEventListener('scroll', handleScroll, {
-            passive: true,
-          })
-        } else {
-          setInView(false)
-          window.removeEventListener('scroll', handleScroll)
-        }
-      })
-    },
-    {
-      root: null,
-      rootMargin: '15% 0%',
-    }
-  )
+  const scrollObserver =
+    typeof window !== 'undefined'
+      ? new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                setInView(true)
+                window.addEventListener('scroll', handleScroll, {
+                  passive: true,
+                })
+              } else {
+                setInView(false)
+                window.removeEventListener('scroll', handleScroll)
+              }
+            })
+          },
+          {
+            root: null,
+            rootMargin: '15% 0%',
+          }
+        )
+      : null
 
   useEffect(() => {
     if (containerRef.current) {
-      scrollObserver.observe(containerRef.current)
+      scrollObserver?.observe(containerRef.current)
     }
     return () => {
-      scrollObserver.disconnect()
+      scrollObserver?.disconnect()
       window.removeEventListener('scroll', handleScroll)
     }
   })

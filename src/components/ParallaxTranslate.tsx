@@ -52,33 +52,36 @@ const ParallaxTranslate = ({
   }, [disable])
   useLayoutEffect(handleSetOffset, [handleSetOffset])
 
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setAnimatedIn(true)
-          window.addEventListener('scroll', handleSetOffset, {
-            passive: true,
-          })
-        } else {
-          !animateOnce && setAnimatedIn(false)
-          window.removeEventListener('scroll', handleSetOffset)
-        }
-      })
-    },
-    {
-      root: null,
-      rootMargin: '0% 0%',
-    }
-  )
+  const observer =
+    typeof window !== 'undefined'
+      ? new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                setAnimatedIn(true)
+                window.addEventListener('scroll', handleSetOffset, {
+                  passive: true,
+                })
+              } else {
+                !animateOnce && setAnimatedIn(false)
+                window.removeEventListener('scroll', handleSetOffset)
+              }
+            })
+          },
+          {
+            root: null,
+            rootMargin: '0% 0%',
+          }
+        )
+      : null
 
   useLayoutEffect(() => {
     if (!disable && parallaxRef.current && parallaxWrapRef.current) {
-      observer.observe(parallaxRef.current)
-      observer.observe(parallaxWrapRef.current)
+      observer?.observe(parallaxRef.current)
+      observer?.observe(parallaxWrapRef.current)
     }
     return () => {
-      observer.disconnect()
+      observer?.disconnect()
       window.removeEventListener('scroll', handleSetOffset)
     }
   })

@@ -64,30 +64,33 @@ const HomePromiseBackground = () => {
   }, [])
   useLayoutEffect(handleSetOffset, [handleSetOffset])
 
-  const observer = new IntersectionObserver(
-    entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          window.addEventListener('scroll', handleSetOffset, {
-            passive: true,
-          })
-        } else {
-          window.removeEventListener('scroll', handleSetOffset)
-        }
-      })
-    },
-    {
-      root: null,
-      rootMargin: '0% 0%',
-    }
-  )
+  const observer =
+    typeof window !== 'undefined'
+      ? new IntersectionObserver(
+          entries => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                window.addEventListener('scroll', handleSetOffset, {
+                  passive: true,
+                })
+              } else {
+                window.removeEventListener('scroll', handleSetOffset)
+              }
+            })
+          },
+          {
+            root: null,
+            rootMargin: '0% 0%',
+          }
+        )
+      : null
 
   useLayoutEffect(() => {
     if (parallaxRef.current) {
-      observer.observe(parallaxRef.current)
+      observer?.observe(parallaxRef.current)
     }
     return () => {
-      observer.disconnect()
+      observer?.disconnect()
       window.removeEventListener('scroll', handleSetOffset)
     }
   })
