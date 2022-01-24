@@ -53,6 +53,7 @@ const GlobalStyles = () => {
     }
 
     html {
+      background-color: #000;
       font-family: var(--sans-serif);
       font-size: 12px;
       ${mq('min').l} {

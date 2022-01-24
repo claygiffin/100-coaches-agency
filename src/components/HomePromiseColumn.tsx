@@ -7,7 +7,7 @@ import Shape from './HomePromiseShape'
 
 type ShapeProps = {
   brightCircle?: boolean
-  brightenPosition?: () => void
+  brightenPosition?: (arg: { top: number; left: number }) => void
   columnPosition?: (arg: number) => void
   startingIndex?: number
   offset?: number
@@ -31,16 +31,15 @@ const ShapeColumn = ({
 
   const [colRef, setColRef] = useState<HTMLDivElement | null>(null)
   const setRefs = useCallback(node => {
-    if (columnPosition) {
-      setColRef(node)
-    }
+    setColRef(node)
   }, [])
   const size = useElementRect(colRef)
   useEffect(() => {
     if (columnPosition && colRef) {
       columnPosition(colRef.offsetLeft)
     }
-  }, [colRef, size])
+  }, [colRef, size, columnPosition])
+
   return (
     <div
       css={columnStyle}
@@ -66,9 +65,10 @@ const ShapeColumn = ({
                 : 'circle'
             }
             brighten={
-              brightCircle &&
-              i === 2 &&
-              clamp((offset - 0.5) * -7.5, 0.067, 1)
+              (brightCircle &&
+                i === 2 &&
+                clamp((offset - 0.5) * -5, 0.067, 1)) ||
+              null
             }
           />
         )

@@ -15,7 +15,6 @@
     "emitDecoratorMetadata": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "downlevelIteration": true,
-    "noEmptyFunction": false
+    "downlevelIteration": true
   }
 }

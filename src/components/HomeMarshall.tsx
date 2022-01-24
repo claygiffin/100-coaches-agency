@@ -35,46 +35,48 @@ const HomeMarshall = () => {
   const { width: sectWidth, height: sectHeight } =
     useElementRect(sectionRef)
 
-  const sectionStyle = css`
-    clip-path: url(#${clipId});
-    background: linear-gradient(to bottom right, #555, #000);
-    ${baseGrid}
-    z-index: 2;
-    color: #fff;
-    margin-top: -7vw;
-    padding: calc(7vw + var(--gutter-xlg)) 0
-      calc(11.5vw + var(--gutter-lg));
-  `
-  const headingStyle = css`
-    grid-column: -8 / span 6;
-    font-size: var(--fs-60);
-    margin-bottom: 0.333em;
-    align-self: flex-end;
-    justify-self: flex-start;
-    max-width: 16ch;
-    em {
-      font-style: normal;
-      color: ${colors.goldTint1};
-    }
-  `
-  const bodyStyle = css`
-    grid-column: -7 / span 5;
-    font-size: var(--fs-21);
-  `
-  const imageWrapStyle = css`
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 50vw;
-    height: 95vh;
-    filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5));
-  `
-  const imageStyle = css`
-    width: 100%;
-    height: 100%;
-  `
+  const styles = {
+    section: css`
+      clip-path: url(#${clipId});
+      background: linear-gradient(to bottom right, #555, #000);
+      ${baseGrid}
+      z-index: 2;
+      color: #fff;
+      margin-top: -7vw;
+      padding: calc(7vw + var(--gutter-xlg)) 0
+        calc(11.5vw + var(--gutter-lg));
+    `,
+    heading: css`
+      grid-column: -8 / span 6;
+      font-size: var(--fs-60);
+      margin-bottom: 0.333em;
+      align-self: flex-end;
+      justify-self: flex-start;
+      max-width: 16ch;
+      em {
+        font-style: normal;
+        color: ${colors.goldTint1};
+      }
+    `,
+    body: css`
+      grid-column: -7 / span 5;
+      font-size: var(--fs-21);
+    `,
+    imageWrap: css`
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 50vw;
+      height: 95vh;
+      filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5));
+    `,
+    image: css`
+      width: 100%;
+      height: 100%;
+    `,
+  }
   return (
-    <section css={sectionStyle} ref={setRefs}>
+    <section css={styles.section} ref={setRefs}>
       <svg width="0" height="0">
         <defs>
           <clipPath id={clipId}>
@@ -92,20 +94,20 @@ const HomeMarshall = () => {
           </clipPath>
         </defs>
       </svg>
-      <div css={imageWrapStyle}>
+      <div css={styles.imageWrap}>
         <GatsbyImage
-          css={imageStyle}
+          css={styles.image}
           image={home.marshallImage.gatsbyImageData}
           alt={home.marshallImage.alt || ''}
           objectPosition="100% 0%"
         />
       </div>
       <h2
-        css={headingStyle}
+        css={styles.heading}
         dangerouslySetInnerHTML={{ __html: home.marshallHeading }}
       />
       <div
-        css={bodyStyle}
+        css={styles.body}
         dangerouslySetInnerHTML={{
           __html: home.marshallBodyNode.childMarkdownRemark.html,
         }}

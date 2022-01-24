@@ -88,48 +88,50 @@ const ParallaxTranslate = ({
 
   const [animatedIn, setAnimatedIn] = useState(false)
 
-  const parallaxStyle = css`
-    position: relative;
-    overflow: visible;
-    display: flex;
-    --translate-factor: 100;
-  `
-  const parallaxElementStyle = css`
-    position: relative;
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
-    display: flex;
-  `
-  const animateInStyle = css`
-    position: relative;
-    transition-property: opacity, transform;
-    transition-duration: 500ms;
-    transition-timing-function: cubic-bezier(0.25, 0.75, 0.25, 1);
-    opacity: 0;
-    transform: ${fromBack
-      ? `scale3d(0.75, 0.75, 1)`
-      : `scale3d(1.2, 1.2, 1)`};
-    ${animatedIn &&
-    css`
-      opacity: 1;
-      transform: scale3d(1, 1, 1);
-      transition-duration: 1000ms;
-    `}
-  `
+  const styles = {
+    parallax: css`
+      position: relative;
+      overflow: visible;
+      display: flex;
+      --translate-factor: 100;
+    `,
+    parallaxElement: css`
+      position: relative;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      display: flex;
+    `,
+    animateIn: css`
+      position: relative;
+      transition-property: opacity, transform;
+      transition-duration: 500ms;
+      transition-timing-function: cubic-bezier(0.25, 0.75, 0.25, 1);
+      opacity: 0;
+      transform: ${fromBack
+        ? `scale3d(0.75, 0.75, 1)`
+        : `scale3d(1.2, 1.2, 1)`};
+      ${animatedIn &&
+      css`
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+        transition-duration: 1000ms;
+      `}
+    `,
+  }
   return (
     <Element
       ref={parallaxWrapRef}
-      css={[parallaxStyle, wrapperCss]}
+      css={[styles.parallax, wrapperCss]}
       {...props}
     >
       <div
-        css={[parallaxElementStyle, parallaxElementCss]}
+        css={[styles.parallaxElement, parallaxElementCss]}
         style={{
           transform: `translate3d(0, calc(${offset}px * var(--translate-factor, 100)), 0)`,
         }}
         ref={parallaxRef}
       >
-        <div css={[animateInStyle, innerCss]}>{children}</div>
+        <div css={[styles.animateIn, innerCss]}>{children}</div>
       </div>
     </Element>
   )

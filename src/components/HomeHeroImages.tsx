@@ -18,23 +18,25 @@ const HomeHeroImages = () => {
       }
     }
   `)
-  const containerStyle = css`
-    ${absoluteFill}
-    z-index: 0;
-  `
-  const imageWrap = css`
-    ${absoluteFill}
-  `
-  const imageStyle = css`
-    min-width: 100%;
-    min-height: 100%;
-  `
+  const styles = {
+    container: css`
+      ${absoluteFill}
+      z-index: 0;
+    `,
+    imageWrap: css`
+      ${absoluteFill}
+    `,
+    image: css`
+      min-width: 100%;
+      min-height: 100%;
+    `,
+  }
   return (
-    <div css={containerStyle}>
+    <div css={styles.container}>
       {home.heroImages.map((image: any, i: number) => (
-        <div css={imageWrap} key={i}>
+        <div css={styles.imageWrap} key={i}>
           <GatsbyImage
-            css={imageStyle}
+            css={styles.image}
             image={image.gatsbyImageData}
             alt={image.alt || ''}
           />

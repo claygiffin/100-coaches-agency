@@ -43,22 +43,22 @@ const HomeCoachesGrid = () => {
   const { width: windowWidth, height: windowHeight } =
     useWindowDimensions()
 
-  // Columns and rows are stored in state because
-  // otherwise Emotion loads the wrong values in production.
-  const [columns, setColumns] = useState(3)
-  useEffect(() => {
+  const parallaxRef = useRef<HTMLDivElement | null>(null)
+
+  const columns = useMemo(() => {
     if (windowWidth < breakpoints.ms) {
-      setColumns(3)
+      return 3
     } else if (windowWidth < breakpoints.ml) {
-      setColumns(4)
+      return 4
     } else {
-      setColumns(5)
+      return 5
     }
-  }, [windowWidth, windowHeight])
-  const [rows, setRows] = useState(1)
-  useEffect(() => {
-    setRows(Math.ceil((windowHeight / windowWidth) * columns))
-  }, [windowWidth, windowHeight, columns])
+  }, [windowWidth])
+
+  const rows = useMemo(() => {
+    const ar = windowHeight / windowWidth || 0
+    return Math.ceil(ar * columns)
+  }, [windowHeight, windowWidth, columns])
 
   const totalCoaches = columns * rows
 
@@ -70,29 +70,28 @@ const HomeCoachesGrid = () => {
 
   const coachesSubset = useMemo(
     () => sampleSize(coaches.nodes, totalCoaches),
-    [totalCoaches]
+    [totalCoaches, coaches.nodes]
   )
 
-  const [animationIndex, setAnimationIndex] = useState(0)
+  const [offset, setOffset] = useState(0)
+  const animationIndex = clamp(offset * totalCoaches, 0, totalCoaches)
   const [inView, setInView] = useState(false)
-
-  const containerRef = useRef<HTMLDivElement | null>(null)
 
   const requestRunning = useRef(false)
   const handleScroll = useCallback(() => {
     if (!requestRunning.current) {
       window.requestAnimationFrame(() => {
         const pos =
-          containerRef.current?.getBoundingClientRect().bottom || 0
+          parallaxRef.current?.getBoundingClientRect().bottom || 0
         const height =
-          containerRef.current?.getBoundingClientRect().height || 0
+          parallaxRef.current?.getBoundingClientRect().height || 0
         const ratio = (windowHeight - pos + height) / height
-        setAnimationIndex(clamp(ratio * totalCoaches, 0, totalCoaches))
+        setOffset(ratio)
         requestRunning.current = false
       })
       requestRunning.current = true
     }
-  }, [totalCoaches, windowHeight])
+  }, [windowHeight])
   useLayoutEffect(handleScroll, [handleScroll])
 
   const scrollObserver =
@@ -119,8 +118,8 @@ const HomeCoachesGrid = () => {
       : null
 
   useEffect(() => {
-    if (containerRef.current) {
-      scrollObserver?.observe(containerRef.current)
+    if (parallaxRef.current) {
+      scrollObserver?.observe(parallaxRef.current)
     }
     return () => {
       scrollObserver?.disconnect()
@@ -128,44 +127,45 @@ const HomeCoachesGrid = () => {
     }
   })
 
-  const backgroundOpacity = useMemo(() => {
-    return Math.min((animationIndex / totalCoaches) * 1.5, 1)
-  }, [animationIndex, totalCoaches])
+  const backgroundOpacity =
+    Math.min((animationIndex / totalCoaches) * 1.5, 1) || 0
 
-  const containerStyle = css`
-    grid-row: 2 / 3;
-    grid-column: 1 / -1;
-    ${!inView &&
-    css`
-      visibility: hidden;
-    `}
-  `
-  const outerWrapperStyle = css`
-    width: 100vw;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    left: 0;
-  `
-  const gridWrapperStyle = css`
-    position: relative;
-    display: grid;
-    grid-template-columns: repeat(${columns}, 1fr);
-    grid-template-rows: repeat(${rows}, auto);
-    grid-gap: 4px;
-  `
-  const backgroundStyle = css`
-    ${absoluteFill};
-    background: #fff;
-  `
+  const styles = {
+    container: css`
+      grid-row: 2 / 3;
+      grid-column: 1 / -1;
+      ${!inView &&
+      css`
+        visibility: hidden;
+      `}
+    `,
+    outerWrapper: css`
+      width: 100vw;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      left: 0;
+    `,
+    gridWrapper: css`
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(${columns}, 1fr);
+      grid-template-rows: repeat(${rows}, auto);
+      grid-gap: 4px;
+    `,
+    background: css`
+      ${absoluteFill};
+      background: #fff;
+    `,
+  }
   return (
-    <div css={containerStyle} ref={containerRef}>
-      <div css={outerWrapperStyle}>
+    <div css={styles.container} ref={parallaxRef}>
+      <div css={styles.outerWrapper}>
         <div
-          css={backgroundStyle}
+          css={styles.background}
           style={{ opacity: backgroundOpacity }}
         />
-        <div css={gridWrapperStyle}>
+        <div css={styles.gridWrapper}>
           {coachesSubset.map((coach: any, i: number) => (
             <CoachThumbnail
               coach={coach}

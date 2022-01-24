@@ -7,6 +7,7 @@ import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid, goldGradient } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import HomeHeroImages from './HomeHeroImages'
+import LogoStacked from './LogoStacked'
 
 const HomeHero = () => {
   const { home } = useStaticQuery(graphql`
@@ -26,51 +27,64 @@ const HomeHero = () => {
   const { width: sectWidth, height: sectHeight } =
     useElementRect(sectionRefState)
 
-  const sectionStyle = css`
-    ${baseGrid}
-    grid-template-rows: 100px auto auto calc(var(--gutter-lg) + 10vw);
-    background: linear-gradient(to bottom right, #333, #111);
-    color: white;
-    clip-path: url(#${clipId});
-    min-height: calc(101 * var(--vh, 1vh));
-    z-index: 1;
-    &:before {
-      content: '';
-      ${goldGradient()};
-      position: absolute;
-      width: 100%;
-      height: 0.5rem;
+  const styles = {
+    section: css`
+      ${baseGrid}
+      grid-template-rows: auto auto auto 12.5vw;
+      background: linear-gradient(to bottom right, #333, #111);
+      color: white;
+      clip-path: url(#${clipId});
+      min-height: calc(101 * var(--vh, 1vh));
       z-index: 1;
-    }
-  `
-  const ribbonsStyle = css`
-    grid-column: 1 / -1;
-    position: absolute;
-    bottom: 0;
-  `
-  const headingStyle = css`
-    display: contents;
-    > span {
+      &:before {
+        content: '';
+        ${goldGradient()};
+        position: absolute;
+        width: 100%;
+        height: 0.5rem;
+        z-index: 1;
+      }
+    `,
+    ribbons: css`
+      grid-column: 1 / -1;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    `,
+    heading: css`
+      display: contents;
+      > span {
+        font-size: var(--fs-108);
+        display: inline-block;
+        z-index: 3;
+        max-width: 10ch;
+        margin-bottom: 0.15em;
+        &:nth-of-type(1) {
+          grid-row: 2 / 3;
+          grid-column: 2 / -2;
+          align-self: flex-end;
+        }
+        &:nth-of-type(2) {
+          grid-row: 3 / 4;
+          grid-column: 5 / -2;
+          align-self: flex-start;
+          color: ${colors.gold};
+        }
+      }
+    `,
+    logo: css`
       font-size: var(--fs-108);
-      display: inline-block;
-      z-index: 3;
-      max-width: 10ch;
-      margin-bottom: 0.15em;
-      &:nth-of-type(1) {
-        grid-row: 2 / 3;
-        grid-column: 2 / -2;
-        align-self: flex-end;
-      }
-      &:nth-of-type(2) {
-        grid-row: 3 / 4;
-        grid-column: 5 / -2;
-        align-self: flex-start;
-        color: ${colors.gold};
-      }
-    }
-  `
+      height: 0.875em;
+      width: auto;
+      position: relative;
+      grid-column: 2 / -2;
+      justify-self: center;
+      margin: 0.375em 0 0.875em;
+    `,
+  }
   return (
-    <section css={sectionStyle} ref={sectionRef}>
+    <section css={styles.section} ref={sectionRef}>
       <svg width="0" height="0">
         <defs>
           <clipPath id={clipId}>
@@ -89,7 +103,7 @@ const HomeHero = () => {
         </defs>
       </svg>
       <HomeHeroImages />
-      <svg viewBox="0 0 1440 415" css={ribbonsStyle}>
+      <svg viewBox="0 0 1440 415" css={styles.ribbons}>
         <defs>
           <linearGradient
             x1="100%"
@@ -114,7 +128,8 @@ const HomeHero = () => {
           fill="url(#goldGradient)"
         />
       </svg>
-      <h1 css={headingStyle}>
+      <LogoStacked css={styles.logo} />
+      <h1 css={styles.heading}>
         <span>{home.heroHeading1}</span>
         <span>{home.heroHeading2}</span>
       </h1>

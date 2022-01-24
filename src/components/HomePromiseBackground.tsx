@@ -9,13 +9,11 @@ import {
 } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { useWindowHeight } from '../hooks/useWindowDimensions'
 import { absoluteFill } from '../theme/mixins'
 import { breakpoints } from '../theme/variables'
 import ShapeColumn from './HomePromiseColumn'
 
 const HomePromiseBackground = () => {
-  const windowHeight = useWindowHeight()
   const [containerRef, setContainerRef] = useState(null)
   const parallaxRef = useRef<HTMLDivElement | null>(null)
   const setRefs = useCallback(node => {
@@ -40,7 +38,7 @@ const HomePromiseBackground = () => {
   const rows = useMemo(() => {
     const ar = containerHeight / containerWidth || 0
     return Math.ceil(ar * columns * 2)
-  }, [containerHeight, containerWidth])
+  }, [containerHeight, containerWidth, columns])
 
   const [offset, setOffset] = useState(0)
 
@@ -48,6 +46,7 @@ const HomePromiseBackground = () => {
   const handleSetOffset = useCallback(() => {
     if (!requestRunning.current) {
       window.requestAnimationFrame(() => {
+        const windowHeight = window.innerHeight
         const containerPos =
           parallaxRef.current?.getBoundingClientRect().y || 0
         const containerHeight =
@@ -106,25 +105,27 @@ const HomePromiseBackground = () => {
   const lineWidth = columnPosition.two - columnPosition.one
   const lineHeight = Math.abs(offset - 1) * 125
 
-  const containerStyle = css`
-    ${absoluteFill}
-    display: grid;
-    grid-template-columns: repeat(${columns}, 1fr);
-    grid-gap: var(--gutter-xlg);
-    padding: 0 var(--gutter-mlg);
-    box-sizing: border-box;
-    overflow: hidden;
-    > div {
-      &:nth-last-of-type(odd) {
-        --translate-factor: 75;
+  const styles = {
+    container: css`
+      ${absoluteFill}
+      display: grid;
+      grid-template-columns: repeat(${columns}, 1fr);
+      grid-gap: var(--gutter-xlg);
+      padding: 0 var(--gutter-mlg);
+      box-sizing: border-box;
+      overflow: hidden;
+      > div {
+        &:nth-last-of-type(odd) {
+          --translate-factor: 75;
+        }
+        &:nth-last-of-type(even) {
+          --translate-factor: 200;
+        }
       }
-      &:nth-last-of-type(even) {
-        --translate-factor: 200;
-      }
-    }
-  `
+    `,
+  }
   return (
-    <div css={containerStyle} ref={setRefs}>
+    <div css={styles.container} ref={setRefs}>
       {[...Array(columns - 2)].map((_, i) => (
         <ShapeColumn
           key={i}
@@ -137,20 +138,32 @@ const HomePromiseBackground = () => {
         rows={rows}
         offset={offset}
         brightCircle
-        columnPosition={(pos: number) =>
-          setColumnPosition({ ...columnPosition, one: pos })
-        }
+        columnPosition={useCallback(
+          (pos: number) =>
+            setColumnPosition(prevState => ({
+              ...prevState,
+              one: pos,
+            })),
+          []
+        )}
       />
       <ShapeColumn
         rows={rows}
         offset={offset}
         brightCircle
-        brightenPosition={(position: { top: number; left: number }) =>
-          setBrightenPosition(position)
-        }
-        columnPosition={(pos: number) =>
-          setColumnPosition({ ...columnPosition, two: pos })
-        }
+        brightenPosition={useCallback(
+          (position: { top: number; left: number }) =>
+            setBrightenPosition(position),
+          []
+        )}
+        columnPosition={useCallback(
+          (pos: number) =>
+            setColumnPosition(prevState => ({
+              ...prevState,
+              two: pos,
+            })),
+          []
+        )}
       />
       {
         <svg
@@ -178,8 +191,8 @@ const HomePromiseBackground = () => {
             style={{
               strokeDasharray: 100,
               strokeDashoffset: clamp(offset * 200 + 50, 50, 100),
-              transform:
-                'opacity 300ms ease, stroke-dashoffset 100ms ease',
+              transition:
+                'opacity 100ms ease, stroke-dashoffset 150ms ease',
               opacity: offset * 200 + 50 > 95 ? 0 : 1,
             }}
           />
