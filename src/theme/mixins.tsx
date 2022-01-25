@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { parseToHsl } from 'polished'
 
-import { breakpoints, colors } from './variables'
+import { breakpoints } from './variables'
 
 export const mq = (minMax = 'max') => {
   const bp = Object.create(breakpoints)
@@ -33,16 +33,6 @@ export const absoluteFill = css`
   right: 0;
   bottom: 0;
   left: 0;
-`
-
-export const goldGradient = (direction = '60deg') => css`
-  background: linear-gradient(
-    ${direction},
-    ${colors.goldShade3},
-    ${colors.goldShade2},
-    ${colors.goldShade1},
-    ${colors.gold}
-  );
 `
 
 export const scrim = (
@@ -83,3 +73,11 @@ export const scrim = (
     );
   `
 }
+
+export const button = css`
+  background: #000;
+  font-size: var(--fs-16);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1em 1.5em;
+`

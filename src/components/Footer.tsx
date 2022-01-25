@@ -24,6 +24,7 @@ const Footer = () => {
       z-index: 3;
       height: 300px;
       margin-top: -5vw;
+      padding: 5vw 0 0;
     `,
     ribbons: css`
       grid-column: 1 / -1;

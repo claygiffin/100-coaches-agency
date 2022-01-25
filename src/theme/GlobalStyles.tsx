@@ -77,6 +77,23 @@ const GlobalStyles = () => {
       line-height: 2;
       font-weight: 300;
     }
+    input,
+    textarea,
+    select {
+      border-radius: 0;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    *:-webkit-autofill {
+      &,
+      &:hover,
+      &:focus,
+      &:active {
+        transition: all 0s 99999s;
+        border-radius: 0;
+      }
+    }
   `
 
   return <Global styles={globalStyles} />

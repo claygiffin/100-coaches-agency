@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { baseGrid, goldGradient } from '../theme/mixins'
+import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import HomeHeroImages from './HomeHeroImages'
 import LogoStacked from './LogoStacked'
@@ -38,7 +38,13 @@ const HomeHero = () => {
       z-index: 1;
       &:before {
         content: '';
-        ${goldGradient()};
+        background-image: linear-gradient(
+          to right,
+          ${colors.goldShade3},
+          ${colors.goldShade2},
+          ${colors.goldShade1},
+          ${colors.gold}
+        );
         position: absolute;
         width: 100%;
         height: 0.5rem;

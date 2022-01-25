@@ -1,5 +1,5 @@
 import HomeCoaches from '../components/HomeCoaches'
-import HomeFormSection from '../components/HomeFormSection'
+import HomeContact from '../components/HomeContact'
 import HomeHero from '../components/HomeHero'
 import HomeMarshall from '../components/HomeMarshall'
 import HomePromise from '../components/HomePromise'
@@ -16,7 +16,7 @@ const IndexPage = () => {
       <HomePromise />
       <HomeMarshall />
       <HomeResults />
-      <HomeFormSection />
+      <HomeContact />
     </Layout>
   )
 }

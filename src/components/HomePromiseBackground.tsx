@@ -28,7 +28,7 @@ const HomePromiseBackground = () => {
     if (containerWidth < breakpoints.ms) {
       return 3
     }
-    if (containerWidth < breakpoints.ml) {
+    if (containerWidth < breakpoints.m) {
       return 4
     } else {
       return 5
@@ -49,12 +49,12 @@ const HomePromiseBackground = () => {
         const windowHeight = window.innerHeight
         const containerPos =
           parallaxRef.current?.getBoundingClientRect().y || 0
-        const containerHeight =
-          parallaxRef.current?.getBoundingClientRect().height || 0
-        const dist =
-          containerPos + containerHeight / 2 - windowHeight / 2
-        const ratio = dist / windowHeight
-        setOffset(ratio)
+        // const containerHeight =
+        //   parallaxRef.current?.getBoundingClientRect().height || 0
+        // const distCenter =
+        //   containerPos + containerHeight / 2 - windowHeight / 2
+        // const ratioCenter = distCenter / windowHeight
+        setOffset(containerPos / windowHeight)
         requestRunning.current = false
       })
       requestRunning.current = true
@@ -102,26 +102,37 @@ const HomePromiseBackground = () => {
     two: 0,
   })
 
-  const lineWidth = columnPosition.two - columnPosition.one
-  const lineHeight = Math.abs(offset - 1) * 125
+  const translateFactors = useMemo(() => {
+    if (containerWidth < breakpoints.ms) {
+      return [100, 50]
+    } else {
+      return [200, 75]
+    }
+  }, [containerWidth])
+  const lineWidth = Math.abs(columnPosition.two - columnPosition.one)
+  const lineHeight =
+    Math.abs(offset - 1) * (translateFactors[0] - translateFactors[1])
 
   const styles = {
     container: css`
       ${absoluteFill}
       display: grid;
       grid-template-columns: repeat(${columns}, 1fr);
-      grid-gap: var(--gutter-xlg);
+      grid-gap: calc(3rem + 5vw);
       padding: 0 var(--gutter-mlg);
       box-sizing: border-box;
       overflow: hidden;
+      --translate-factor: ${translateFactors[0]};
       > div {
         &:nth-last-of-type(odd) {
-          --translate-factor: 75;
-        }
-        &:nth-last-of-type(even) {
-          --translate-factor: 200;
+          --translate-factor: ${translateFactors[1]};
         }
       }
+    `,
+    line: css`
+      z-index: 4;
+      position: absolute;
+      overflow: visible;
     `,
   }
   return (
@@ -168,17 +179,15 @@ const HomePromiseBackground = () => {
       {
         <svg
           viewBox={`0 0 ${lineWidth} ${lineHeight}`}
+          css={styles.line}
           style={{
-            zIndex: 4,
-            position: 'absolute',
-            overflow: 'visible',
             top: `${brightenPosition.top}px`,
             left: `${columnPosition.one + brightenPosition.left}px`,
             width: `${lineWidth}px`,
             height: `${lineHeight}px`,
             transform: `translate3d(0, calc(${
               offset - 1
-            }px * 200), 0) `,
+            }px * var(--translate-factor)), 0) `,
           }}
         >
           <polygon
@@ -190,10 +199,10 @@ const HomePromiseBackground = () => {
             pathLength="100"
             style={{
               strokeDasharray: 100,
-              strokeDashoffset: clamp(offset * 200 + 50, 50, 100),
+              strokeDashoffset: clamp(offset * 200 + 75, 50, 100),
               transition:
                 'opacity 100ms ease, stroke-dashoffset 150ms ease',
-              opacity: offset * 200 + 50 > 95 ? 0 : 1,
+              opacity: offset * 200 + 75 > 85 ? 0 : 1,
             }}
           />
         </svg>

@@ -72,11 +72,12 @@ const HomeResults = () => {
       em {
         display: inline-block;
         font-style: normal;
-        color: ${colors.goldTint1};
+        color: ${colors.goldShade1};
       }
     `,
     body: css`
       font-size: var(--fs-21);
+      line-height: 1.5;
       max-width: 75ch;
     `,
   }

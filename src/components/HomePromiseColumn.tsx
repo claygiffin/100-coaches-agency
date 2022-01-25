@@ -26,7 +26,7 @@ const ShapeColumn = ({
   const columnStyle = css`
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: var(--gutter-lg);
+    grid-gap: calc(2.5rem + 4vw);
   `
 
   const [colRef, setColRef] = useState<HTMLDivElement | null>(null)
@@ -51,7 +51,7 @@ const ShapeColumn = ({
       ref={setRefs}
       {...props}
     >
-      {[...Array(rows + 1)].map((_, i) => {
+      {[...Array(rows)].map((_, i) => {
         const shapeIndex = i + startingIndex
         return (
           <Shape
@@ -67,7 +67,7 @@ const ShapeColumn = ({
             brighten={
               (brightCircle &&
                 i === 2 &&
-                clamp((offset - 0.5) * -5, 0.067, 1)) ||
+                clamp((offset - 0.25) * -5, 0.067, 1)) ||
               null
             }
           />
