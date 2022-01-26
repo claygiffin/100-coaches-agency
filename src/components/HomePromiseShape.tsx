@@ -21,12 +21,18 @@ const Shape = ({
     []
   )
   const [shapeRef, setShapeRef] = useState<HTMLDivElement | null>(null)
-  const setRefs = useCallback(node => {
-    setShapeRef(node)
-  }, [])
+  const setRefs = useCallback(
+    node => {
+      if (brighten) {
+        setShapeRef(node)
+      }
+    },
+    [brighten]
+  )
   const size = useElementRect(shapeRef)
   useEffect(() => {
     if (brighten && shapeRef && position) {
+      console.log(shapeRef.offsetParent, shapeRef.offsetLeft, size)
       position({
         top: shapeRef.offsetTop + size.height / 2,
         left: shapeRef.offsetLeft + size.width / 2,
@@ -48,6 +54,7 @@ const Shape = ({
   const styles = {
     shape: css`
       width: 100%;
+      height: 100%;
       animation-name: ${!brighten && animation};
       animation-duration: 4000ms;
       animation-fill-mode: forwards;

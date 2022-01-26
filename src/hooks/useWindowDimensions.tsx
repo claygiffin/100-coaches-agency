@@ -19,28 +19,28 @@ export const useWindowDimensions = () => {
   const handleThrottledResize = throttle(handleResize, 300)
 
   useLayoutEffect(() => {
-    const keyboardTriggers = document.querySelectorAll(
-      'input, select, textarea'
-    )
+    // const keyboardTriggers = document.querySelectorAll(
+    //   'input, select, textarea'
+    // )
     window.addEventListener('resize', handleThrottledResize, {
       passive: true,
     })
-    keyboardTriggers.forEach(trigger => {
-      trigger.addEventListener(
-        'blur',
-        () => setTimeout(handleResize, 100),
-        {
-          passive: true,
-        }
-      )
-    })
+    // keyboardTriggers.forEach(trigger => {
+    //   trigger.addEventListener(
+    //     'blur',
+    //     () => setTimeout(handleResize, 100),
+    //     {
+    //       passive: true,
+    //     }
+    //   )
+    // })
     return () => {
       window.removeEventListener('resize', handleThrottledResize)
-      keyboardTriggers.forEach(trigger => {
-        trigger.removeEventListener('blur', () =>
-          setTimeout(handleResize, 100)
-        )
-      })
+      // keyboardTriggers.forEach(trigger => {
+      //   trigger.removeEventListener('blur', () =>
+      //     setTimeout(handleResize, 100)
+      //   )
+      // })
     }
   }, [handleThrottledResize, handleResize])
 

@@ -24,15 +24,21 @@ const ShapeColumn = ({
   ...props
 }: ShapeProps) => {
   const columnStyle = css`
+    position: relative;
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: calc(2.5rem + 4vw);
   `
 
   const [colRef, setColRef] = useState<HTMLDivElement | null>(null)
-  const setRefs = useCallback(node => {
-    setColRef(node)
-  }, [])
+  const setRefs = useCallback(
+    node => {
+      if (columnPosition) {
+        setColRef(node)
+      }
+    },
+    [columnPosition]
+  )
   const size = useElementRect(colRef)
   useEffect(() => {
     if (columnPosition && colRef) {

@@ -15,7 +15,10 @@ export const useElementRect = (element: HTMLElement | null) => {
             height: entry.borderBoxSize[0].blockSize,
           })
         } else if (entry.contentRect) {
-          setRect(entry.contentRect)
+          setRect({
+            width: entry.contentRect.width,
+            height: entry.contentRect.height,
+          })
         }
       })
     })

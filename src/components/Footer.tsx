@@ -1,10 +1,12 @@
 import { css } from '@emotion/react'
+import { Link } from 'gatsby'
 import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import LogoStacked from './LogoStacked'
 
 const Footer = () => {
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
@@ -16,15 +18,16 @@ const Footer = () => {
   const { width: sectWidth, height: sectHeight } =
     useElementRect(sectionRef)
 
+  const year = useMemo(() => new Date().getFullYear(), [])
+
   const styles = {
     footer: css`
       clip-path: url(#${clipId});
       background-color: #000;
-      ${baseGrid}
+      position: relative;
       z-index: 3;
-      height: 300px;
       margin-top: -5vw;
-      padding: 5vw 0 0;
+      overflow: hidden;
     `,
     ribbons: css`
       grid-column: 1 / -1;
@@ -33,10 +36,37 @@ const Footer = () => {
       left: 0;
       width: 100%;
     `,
+    content: css`
+      ${baseGrid}
+      padding: 5vw 0 0;
+    `,
+    logo: css`
+      grid-column: 2 / -2;
+      justify-self: center;
+      font-size: var(--fs-60);
+      height: 1em;
+      margin: 0.75em 0;
+      svg {
+        height: 100%;
+        width: auto;
+      }
+    `,
+    rights: css`
+      grid-column: 2 / -2;
+      font-size: var(--fs-13);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #ffffff88;
+      margin-bottom: 1.5em;
+      span {
+        display: inline-block;
+      }
+    `,
   }
   return (
     <footer css={styles.footer} ref={setRefs}>
-      <svg width="0" height="0">
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id={clipId}>
             <path
@@ -78,6 +108,15 @@ const Footer = () => {
           fill="url(#goldGradient)"
         />
       </svg>
+      <div css={styles.content}>
+        <Link to="/" css={styles.logo}>
+          <LogoStacked />
+        </Link>
+        <div css={styles.rights}>
+          <span>100 Coaches Agency.</span>{' '}
+          <span>All rights reserved.</span> <span>© {year}</span>
+        </div>
+      </div>
     </footer>
   )
 }

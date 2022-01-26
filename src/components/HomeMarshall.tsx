@@ -7,6 +7,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import AnimateIn from './AnimateIn'
 
 const HomeMarshall = () => {
   const { home } = useStaticQuery(graphql`
@@ -37,22 +38,29 @@ const HomeMarshall = () => {
 
   const styles = {
     section: css`
+      position: relative;
+      z-index: 2;
       clip-path: url(#${clipId});
       background: linear-gradient(to bottom right, #555, #000);
-      ${baseGrid}
-      z-index: 2;
       color: #fff;
       margin-top: -7vw;
+    `,
+    content: css`
       padding: calc(7vw + var(--gutter-xlg)) 0
         calc(11.5vw + var(--gutter-lg));
+      ${baseGrid}
     `,
+    contentInner: css``,
     heading: css`
       grid-column: -8 / span 6;
       font-size: var(--fs-60);
-      margin-bottom: 0.333em;
       align-self: flex-end;
       justify-self: flex-start;
       max-width: 16ch;
+      h2 {
+        font-size: inherit;
+        margin-bottom: 0.333em;
+      }
       em {
         font-style: normal;
         color: ${colors.goldTint1};
@@ -77,7 +85,7 @@ const HomeMarshall = () => {
   }
   return (
     <section css={styles.section} ref={setRefs}>
-      <svg width="0" height="0">
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id={clipId}>
             <path
@@ -102,16 +110,20 @@ const HomeMarshall = () => {
           objectPosition="100% 0%"
         />
       </div>
-      <h2
-        css={styles.heading}
-        dangerouslySetInnerHTML={{ __html: home.marshallHeading }}
-      />
-      <div
-        css={styles.body}
-        dangerouslySetInnerHTML={{
-          __html: home.marshallBodyNode.childMarkdownRemark.html,
-        }}
-      />
+      <div css={styles.content}>
+        <AnimateIn fromBack css={styles.heading}>
+          <h2
+            dangerouslySetInnerHTML={{ __html: home.marshallHeading }}
+          />
+        </AnimateIn>
+        <AnimateIn fromBack css={styles.body}>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: home.marshallBodyNode.childMarkdownRemark.html,
+            }}
+          />
+        </AnimateIn>
+      </div>
     </section>
   )
 }

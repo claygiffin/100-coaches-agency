@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import AnimateIn from './AnimateIn'
 import Form from './Form'
 
 const HomeContact = () => {
@@ -39,16 +40,22 @@ const HomeContact = () => {
       clip-path: url(#${clipId});
       background: linear-gradient(to bottom right, #555, #000);
       color: #fff;
-      ${baseGrid}
-      z-index: 3;
+      position: relative;
+      z-index: 2;
       margin-top: -7vw;
+    `,
+    content: css`
+      ${baseGrid}
       padding: calc(7vw + var(--gutter-lg)) 0
         calc(5vw + var(--gutter-xlg) + var(--gutter-mlg));
     `,
     heading: css`
       font-size: var(--fs-60);
       grid-column: 2 / -2;
-      margin: 0.333em 0;
+      h2 {
+        font-size: inherit;
+        margin: 0.333em 0;
+      }
       em {
         display: inline-block;
         font-style: normal;
@@ -73,7 +80,7 @@ const HomeContact = () => {
   }
   return (
     <section css={styles.section} ref={setRefs}>
-      <svg width="0" height="0">
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id={clipId}>
             <path
@@ -90,17 +97,23 @@ const HomeContact = () => {
           </clipPath>
         </defs>
       </svg>
-      <h2
-        css={styles.heading}
-        dangerouslySetInnerHTML={{ __html: home.contactHeading }}
-      />
-      <div
-        css={styles.body}
-        dangerouslySetInnerHTML={{
-          __html: home.contactBodyNode.childMarkdownRemark.html,
-        }}
-      />
-      <Form data={home.contactForm[0]} css={styles.form} />
+      <div css={styles.content}>
+        <AnimateIn css={styles.heading} fromBack>
+          <h2
+            dangerouslySetInnerHTML={{ __html: home.contactHeading }}
+          />
+        </AnimateIn>
+        <AnimateIn css={styles.body} fromBack>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: home.contactBodyNode.childMarkdownRemark.html,
+            }}
+          />
+        </AnimateIn>
+        <AnimateIn css={styles.form} fromBack>
+          <Form data={home.contactForm[0]} />
+        </AnimateIn>
+      </div>
     </section>
   )
 }

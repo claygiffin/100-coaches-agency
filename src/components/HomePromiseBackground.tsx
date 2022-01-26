@@ -116,12 +116,14 @@ const HomePromiseBackground = () => {
   const styles = {
     container: css`
       ${absoluteFill}
+      overflow: hidden;
+    `,
+    innerContainer: css`
+      padding: 0 var(--gutter-mlg);
+      box-sizing: border-box;
       display: grid;
       grid-template-columns: repeat(${columns}, 1fr);
       grid-gap: calc(3rem + 5vw);
-      padding: 0 var(--gutter-mlg);
-      box-sizing: border-box;
-      overflow: hidden;
       --translate-factor: ${translateFactors[0]};
       > div {
         &:nth-last-of-type(odd) {
@@ -137,76 +139,78 @@ const HomePromiseBackground = () => {
   }
   return (
     <div css={styles.container} ref={setRefs}>
-      {[...Array(columns - 2)].map((_, i) => (
-        <ShapeColumn
-          key={i}
-          rows={rows}
-          startingIndex={i}
-          offset={offset}
-        />
-      ))}
-      <ShapeColumn
-        rows={rows}
-        offset={offset}
-        brightCircle
-        columnPosition={useCallback(
-          (pos: number) =>
-            setColumnPosition(prevState => ({
-              ...prevState,
-              one: pos,
-            })),
-          []
-        )}
-      />
-      <ShapeColumn
-        rows={rows}
-        offset={offset}
-        brightCircle
-        brightenPosition={useCallback(
-          (position: { top: number; left: number }) =>
-            setBrightenPosition(position),
-          []
-        )}
-        columnPosition={useCallback(
-          (pos: number) =>
-            setColumnPosition(prevState => ({
-              ...prevState,
-              two: pos,
-            })),
-          []
-        )}
-      />
-      {
-        <svg
-          viewBox={`0 0 ${lineWidth} ${lineHeight}`}
-          css={styles.line}
-          style={{
-            top: `${brightenPosition.top}px`,
-            left: `${columnPosition.one + brightenPosition.left}px`,
-            width: `${lineWidth}px`,
-            height: `${lineHeight}px`,
-            transform: `translate3d(0, calc(${
-              offset - 1
-            }px * var(--translate-factor)), 0) `,
-          }}
-        >
-          <polygon
-            points={`0,0 ${lineWidth},${lineHeight}`}
-            strokeWidth="9"
-            stroke="#fff"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            pathLength="100"
-            style={{
-              strokeDasharray: 100,
-              strokeDashoffset: clamp(offset * 200 + 75, 50, 100),
-              transition:
-                'opacity 100ms ease, stroke-dashoffset 150ms ease',
-              opacity: offset * 200 + 75 > 85 ? 0 : 1,
-            }}
+      <div css={styles.innerContainer}>
+        {[...Array(columns - 2)].map((_, i) => (
+          <ShapeColumn
+            key={i}
+            rows={rows}
+            startingIndex={i}
+            offset={offset}
           />
-        </svg>
-      }
+        ))}
+        <ShapeColumn
+          rows={rows}
+          offset={offset}
+          brightCircle
+          columnPosition={useCallback(
+            (pos: number) =>
+              setColumnPosition(prevState => ({
+                ...prevState,
+                one: pos,
+              })),
+            []
+          )}
+        />
+        <ShapeColumn
+          rows={rows}
+          offset={offset}
+          brightCircle
+          brightenPosition={useCallback(
+            (position: { top: number; left: number }) =>
+              setBrightenPosition(position),
+            []
+          )}
+          columnPosition={useCallback(
+            (pos: number) =>
+              setColumnPosition(prevState => ({
+                ...prevState,
+                two: pos,
+              })),
+            []
+          )}
+        />
+        {
+          <svg
+            viewBox={`0 0 ${lineWidth} ${lineHeight}`}
+            css={styles.line}
+            style={{
+              top: `${brightenPosition.top}px`,
+              left: `${columnPosition.one + brightenPosition.left}px`,
+              width: `${lineWidth}px`,
+              height: `${lineHeight}px`,
+              transform: `translate3d(0, calc(${
+                offset - 1
+              }px * var(--translate-factor)), 0) `,
+            }}
+          >
+            <polygon
+              points={`0,0 ${lineWidth},${lineHeight}`}
+              strokeWidth="9"
+              stroke="#fff"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              pathLength="100"
+              style={{
+                strokeDasharray: 100,
+                strokeDashoffset: clamp(offset * 200 + 75, 50, 100),
+                transition:
+                  'opacity 100ms ease, stroke-dashoffset 150ms ease',
+                opacity: offset * 200 + 75 > 85 ? 0 : 1,
+              }}
+            />
+          </svg>
+        }
+      </div>
     </div>
   )
 }

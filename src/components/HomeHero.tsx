@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import AnimateIn from './AnimateIn'
 import HomeHeroImages from './HomeHeroImages'
 import LogoStacked from './LogoStacked'
 
@@ -91,7 +92,7 @@ const HomeHero = () => {
   }
   return (
     <section css={styles.section} ref={sectionRef}>
-      <svg width="0" height="0">
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id={clipId}>
             <path
@@ -136,8 +137,12 @@ const HomeHero = () => {
       </svg>
       <LogoStacked css={styles.logo} />
       <h1 css={styles.heading}>
-        <span>{home.heroHeading1}</span>
-        <span>{home.heroHeading2}</span>
+        <AnimateIn as="span" innerAs="span">
+          <span>{home.heroHeading1}</span>
+        </AnimateIn>
+        <AnimateIn as="span" innerAs="span">
+          <span>{home.heroHeading2}</span>
+        </AnimateIn>
       </h1>
     </section>
   )

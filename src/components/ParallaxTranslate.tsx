@@ -11,6 +11,7 @@ type ParallaxTranslateProps = {
   disable?: boolean
   animateOnce?: boolean
   fromBack?: boolean
+  css?: SerializedStyles
   wrapperCss?: SerializedStyles
   parallaxElementCss?: SerializedStyles
   innerCss?: SerializedStyles

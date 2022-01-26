@@ -81,7 +81,7 @@ const GlobalStyles = () => {
     textarea,
     select {
       border-radius: 0;
-      &:focus-visible {
+      &:focus {
         outline: none;
       }
     }

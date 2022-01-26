@@ -31,8 +31,6 @@ const Form = ({ data, ...props }: FormProps) => {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
-  console.log('rerender')
-
   const handleChange = (name: string, value: string) => {
     setFormData({
       ...formData,
@@ -126,6 +124,17 @@ ${error}`)
         ${colors.goldShade1},
         ${colors.gold}
       );
+      &:before {
+        content: '';
+        ${absoluteFill};
+        z-index: 0;
+        transition: background 300ms ease;
+      }
+      span {
+        color: white;
+        position: relative;
+        transition: color 300ms ease;
+      }
       input {
         ${absoluteFill}
         opacity: 0;
@@ -133,6 +142,15 @@ ${error}`)
         padding: 0;
         border: none;
         cursor: pointer;
+      }
+      &:hover,
+      &:focus-within {
+        span {
+          color: ${colors.goldShade1};
+        }
+        &:before {
+          background: white;
+        }
       }
     `,
     multilineTextField: css`
@@ -167,7 +185,7 @@ ${error}`)
 
   return (
     <div css={styles.wrapper} {...props}>
-      <LoadingSpinner css={styles.spinner} />
+      <LoadingSpinner css={styles.spinner} color="#fff" />
       {submitted && (
         <div
           css={styles.submitted}

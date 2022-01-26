@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import AnimateIn from './AnimateIn'
 import HomePromiseBackground from './HomePromiseBackground'
 
 const HomePromise = () => {
@@ -32,7 +33,7 @@ const HomePromise = () => {
 
   const styles = {
     section: css`
-      ${baseGrid}
+      position: relative;
       z-index: 2;
       background: linear-gradient(
         to top right,
@@ -44,14 +45,21 @@ const HomePromise = () => {
       clip-path: url(#${clipId});
       color: white;
       margin-top: -10.5vw;
+    `,
+    content: css`
+      ${baseGrid}
       padding: calc(10.5vw + var(--gutter-xlg)) 0
         calc(10.5vw + var(--gutter-xlg));
     `,
     heading: css`
       grid-column: 2 / span 7;
       font-size: var(--fs-60);
-      margin-bottom: 0.333em;
-      text-shadow: 0 0 3px ${colors.goldShade3};
+      margin-top: 0.75em;
+      h2 {
+        font-size: inherit;
+        margin: 0 0 0.333em;
+        text-shadow: 0 0 3px ${colors.goldShade3};
+      }
     `,
     body: css`
       grid-column: 2 / span 8;
@@ -62,7 +70,7 @@ const HomePromise = () => {
 
   return (
     <section css={styles.section} ref={setRefs}>
-      <svg width="0" height="0">
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id={clipId}>
             <path
@@ -80,13 +88,18 @@ const HomePromise = () => {
         </defs>
       </svg>
       <HomePromiseBackground />
-      <h2 css={styles.heading}>{home.promiseHeading}</h2>
-      <div
-        css={styles.body}
-        dangerouslySetInnerHTML={{
-          __html: home.promiseBodyNode.childMarkdownRemark.html,
-        }}
-      />
+      <div css={styles.content}>
+        <AnimateIn css={styles.heading}>
+          <h2>{home.promiseHeading}</h2>
+        </AnimateIn>
+        <AnimateIn css={styles.body}>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: home.promiseBodyNode.childMarkdownRemark.html,
+            }}
+          />
+        </AnimateIn>
+      </div>
     </section>
   )
 }
