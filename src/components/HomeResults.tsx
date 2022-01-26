@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { baseGrid } from '../theme/mixins'
+import { absoluteFill, baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 
@@ -33,17 +33,21 @@ const HomeResults = () => {
 
   const styles = {
     section: css`
-      clip-path: url(#${clipId});
-      background: #fff;
       z-index: 2;
       position: relative;
-      color: #555;
       margin-top: -11.5vw;
+      &:before {
+        content: '';
+        ${absoluteFill}
+        clip-path: url(#${clipId});
+        background: #fff;
+      }
     `,
     content: css`
       ${baseGrid}
       padding: calc(11.5vw + var(--gutter-lg)) 0
-        calc(7vw + var(--gutter-lg));
+      calc(7vw + var(--gutter-lg));
+      color: #555;
     `,
     text: css`
       grid-column: 2 / -2;

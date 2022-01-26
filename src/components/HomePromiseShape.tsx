@@ -32,7 +32,6 @@ const Shape = ({
   const size = useElementRect(shapeRef)
   useEffect(() => {
     if (brighten && shapeRef && position) {
-      console.log(shapeRef.offsetParent, shapeRef.offsetLeft, size)
       position({
         top: shapeRef.offsetTop + size.height / 2,
         left: shapeRef.offsetLeft + size.width / 2,

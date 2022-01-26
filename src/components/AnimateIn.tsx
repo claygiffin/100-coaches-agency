@@ -33,6 +33,7 @@ const AnimateIn = ({
       position: relative;
     `,
     inner: css`
+      position: relative;
       display: block;
       opacity: 0;
       transform: ${fromBack
@@ -50,14 +51,15 @@ const AnimateIn = ({
     `,
     sizer: css`
       ${absoluteFill}
+      pointer-events: none;
     `,
   }
   return (
     <Element css={[styles.outer]} {...props}>
+      <div css={styles.sizer} ref={inViewRef} />
       <InnerElement css={[styles.inner, innerCss]}>
         {children}
       </InnerElement>
-      <div css={styles.sizer} ref={inViewRef} />
     </Element>
   )
 }

@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import { SerializedStyles, css } from '@emotion/react'
 import { clamp } from 'lodash'
 import {
   useCallback,
@@ -13,7 +13,11 @@ import { absoluteFill } from '../theme/mixins'
 import { breakpoints } from '../theme/variables'
 import ShapeColumn from './HomePromiseColumn'
 
-const HomePromiseBackground = () => {
+type Props = {
+  innerCss?: SerializedStyles
+}
+
+const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
   const [containerRef, setContainerRef] = useState(null)
   const parallaxRef = useRef<HTMLDivElement | null>(null)
   const setRefs = useCallback(node => {
@@ -49,11 +53,6 @@ const HomePromiseBackground = () => {
         const windowHeight = window.innerHeight
         const containerPos =
           parallaxRef.current?.getBoundingClientRect().y || 0
-        // const containerHeight =
-        //   parallaxRef.current?.getBoundingClientRect().height || 0
-        // const distCenter =
-        //   containerPos + containerHeight / 2 - windowHeight / 2
-        // const ratioCenter = distCenter / windowHeight
         setOffset(containerPos / windowHeight)
         requestRunning.current = false
       })
@@ -138,8 +137,8 @@ const HomePromiseBackground = () => {
     `,
   }
   return (
-    <div css={styles.container} ref={setRefs}>
-      <div css={styles.innerContainer}>
+    <div css={styles.container} ref={setRefs} {...props}>
+      <div css={[styles.innerContainer, innerCss]}>
         {[...Array(columns - 2)].map((_, i) => (
           <ShapeColumn
             key={i}

@@ -35,6 +35,10 @@ const HomePromise = () => {
     section: css`
       position: relative;
       z-index: 2;
+      margin-top: -10.5vw;
+    `,
+    background: css`
+      clip-path: url(#${clipId});
       background: linear-gradient(
         to top right,
         ${colors.goldShade3},
@@ -42,14 +46,12 @@ const HomePromise = () => {
         ${colors.goldShade1},
         ${colors.gold}
       );
-      clip-path: url(#${clipId});
-      color: white;
-      margin-top: -10.5vw;
     `,
     content: css`
       ${baseGrid}
       padding: calc(10.5vw + var(--gutter-xlg)) 0
-        calc(10.5vw + var(--gutter-xlg));
+      calc(10.5vw + var(--gutter-xlg));
+      color: white;
     `,
     heading: css`
       grid-column: 2 / span 7;
@@ -87,7 +89,7 @@ const HomePromise = () => {
           </clipPath>
         </defs>
       </svg>
-      <HomePromiseBackground />
+      <HomePromiseBackground innerCss={styles.background} />
       <div css={styles.content}>
         <AnimateIn css={styles.heading}>
           <h2>{home.promiseHeading}</h2>
