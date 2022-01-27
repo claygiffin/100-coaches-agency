@@ -1,7 +1,8 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import { absoluteFill } from '../theme/mixins'
 import { focalPoint } from '../utils/helpers'
@@ -24,21 +25,36 @@ const HomeHeroImages = () => {
       }
     }
   `)
+
+  const { ref: inViewRef, inView } = useInView({
+    rootMargin: '10% 0% -10%',
+    initialInView: true,
+  })
   const numberImages = home.heroImages.length
   const transitionDuration = 1000
   const slideDuration = 5000
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(-1)
 
+  // Trigger animation effects on initial load
   useEffect(() => {
     const delay = setTimeout(() => {
-      if (activeIndex < numberImages - 1) {
-        setActiveIndex(prev => prev + 1)
-      } else {
-        setActiveIndex(0)
-      }
-    }, slideDuration)
+      setActiveIndex(0)
+    }, 10)
     return () => clearTimeout(delay)
+  }, [])
+
+  const handleSlideChange = useCallback(() => {
+    if (activeIndex < numberImages - 1) {
+      setActiveIndex(prev => prev + 1)
+    } else {
+      setActiveIndex(0)
+    }
   }, [activeIndex, numberImages])
+
+  useEffect(() => {
+    const delay = setTimeout(handleSlideChange, slideDuration)
+    return () => clearTimeout(delay)
+  }, [handleSlideChange])
 
   const styles = {
     container: css`
@@ -67,12 +83,12 @@ const HomeHeroImages = () => {
     `,
   }
   return (
-    <div css={styles.container}>
+    <div css={styles.container} ref={inViewRef}>
       {home.heroImages.map((image: any, i: number) => (
         <div
           css={[
             styles.imageWrap,
-            activeIndex === i && styles.active,
+            inView && activeIndex === i && styles.active,
             css`
               transform-origin: ${focalPoint(image.focalPoint)};
             `,

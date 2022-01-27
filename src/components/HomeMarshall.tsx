@@ -75,7 +75,7 @@ const HomeMarshall = () => {
       bottom: 0;
       left: 0;
       width: 50vw;
-      height: 95vh;
+      height: 100vh;
       filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5));
     `,
     image: css`
@@ -107,7 +107,7 @@ const HomeMarshall = () => {
           css={styles.image}
           image={home.marshallImage.gatsbyImageData}
           alt={home.marshallImage.alt || ''}
-          objectPosition="100% 0%"
+          objectPosition="100% 15%"
         />
       </div>
       <div css={styles.content}>
