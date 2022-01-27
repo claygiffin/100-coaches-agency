@@ -43,6 +43,7 @@ const HomeHeroImages = () => {
   const styles = {
     container: css`
       ${absoluteFill}
+      overflow: hidden;
       z-index: 0;
     `,
     imageWrap: css`

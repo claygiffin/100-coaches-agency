@@ -1,9 +1,6 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { uniqueId } from 'lodash'
-import { useCallback, useMemo, useState } from 'react'
 
-import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
@@ -22,14 +19,6 @@ const HomePromise = () => {
       }
     }
   `)
-  const clipId = useMemo(() => uniqueId('clipPath--'), [])
-
-  const [sectionRef, setSectionRef] = useState(null)
-  const setRefs = useCallback(node => {
-    setSectionRef(node)
-  }, [])
-  const { width: sectWidth, height: sectHeight } =
-    useElementRect(sectionRef)
 
   const styles = {
     section: css`
@@ -37,16 +26,7 @@ const HomePromise = () => {
       z-index: 2;
       margin-top: -10.5vw;
     `,
-    background: css`
-      clip-path: url(#${clipId});
-      background: linear-gradient(
-        to top right,
-        ${colors.goldShade3},
-        ${colors.goldShade2},
-        ${colors.goldShade1},
-        ${colors.gold}
-      );
-    `,
+
     content: css`
       ${baseGrid}
       padding: calc(10.5vw + var(--gutter-xlg)) 0
@@ -71,25 +51,8 @@ const HomePromise = () => {
   }
 
   return (
-    <section css={styles.section} ref={setRefs}>
-      <svg width="0" height="0" style={{ position: 'absolute' }}>
-        <defs>
-          <clipPath id={clipId}>
-            <path
-              d={`M${sectWidth},${0.02 * sectWidth} C${
-                0.75 * sectWidth
-              },${-0.0625 * sectWidth} ${0.435 * sectWidth},${
-                0.16 * sectWidth
-              } 0,${
-                0.0875 * sectWidth
-              } L0,${sectHeight} L${sectWidth},${sectHeight} L${sectWidth},${
-                0.02 * sectWidth
-              } Z`}
-            />
-          </clipPath>
-        </defs>
-      </svg>
-      <HomePromiseBackground innerCss={styles.background} />
+    <section css={styles.section}>
+      <HomePromiseBackground />
       <div css={styles.content}>
         <AnimateIn css={styles.heading}>
           <h2>{home.promiseHeading}</h2>

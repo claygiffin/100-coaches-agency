@@ -1,5 +1,6 @@
 import { SerializedStyles, css } from '@emotion/react'
 import { clamp } from 'lodash'
+import { uniqueId } from 'lodash'
 import {
   useCallback,
   useLayoutEffect,
@@ -10,6 +11,7 @@ import {
 
 import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill } from '../theme/mixins'
+import { colors } from '../theme/variables'
 import { breakpoints } from '../theme/variables'
 import ShapeColumn from './HomePromiseColumn'
 
@@ -18,6 +20,8 @@ type Props = {
 }
 
 const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
+  const clipId = useMemo(() => uniqueId('clipPath--'), [])
+
   const [containerRef, setContainerRef] = useState(null)
   const parallaxRef = useRef<HTMLDivElement | null>(null)
   const setRefs = useCallback(node => {
@@ -116,6 +120,14 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
     container: css`
       ${absoluteFill}
       overflow: hidden;
+      clip-path: url(#${clipId});
+      background: linear-gradient(
+        to top right,
+        ${colors.goldShade3},
+        ${colors.goldShade2},
+        ${colors.goldShade1},
+        ${colors.gold}
+      );
     `,
     innerContainer: css`
       padding: 0 var(--gutter-mlg);
@@ -138,6 +150,23 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
   }
   return (
     <div css={styles.container} ref={setRefs} {...props}>
+      <svg width="0" height="0" style={{ position: 'absolute' }}>
+        <defs>
+          <clipPath id={clipId}>
+            <path
+              d={`M${containerWidth},${0.02 * containerWidth} C${
+                0.75 * containerWidth
+              },${-0.0625 * containerWidth} ${0.435 * containerWidth},${
+                0.16 * containerWidth
+              } 0,${
+                0.0875 * containerWidth
+              } L0,${containerHeight} L${containerWidth},${containerHeight} L${containerWidth},${
+                0.02 * containerWidth
+              } Z`}
+            />
+          </clipPath>
+        </defs>
+      </svg>
       <div css={[styles.innerContainer, innerCss]}>
         {[...Array(columns - 2)].map((_, i) => (
           <ShapeColumn

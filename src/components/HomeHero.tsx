@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { baseGrid } from '../theme/mixins'
+import { absoluteFill, baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 import HomeHeroImages from './HomeHeroImages'
@@ -32,10 +32,13 @@ const HomeHero = () => {
     section: css`
       ${baseGrid}
       grid-template-rows: auto auto auto 12.5vw;
-      background: linear-gradient(to bottom right, #333, #111);
-      color: white;
-      clip-path: url(#${clipId});
       min-height: calc(101 * var(--vh, 1vh));
+      color: white;
+    `,
+    background: css`
+      clip-path: url(#${clipId});
+      background: linear-gradient(to bottom right, #333, #111);
+      ${absoluteFill}
       z-index: 1;
       &:before {
         content: '';
@@ -64,7 +67,7 @@ const HomeHero = () => {
       > span {
         font-size: var(--fs-108);
         display: inline-block;
-        z-index: 3;
+        z-index: 2;
         max-width: 10ch;
         margin-bottom: 0.15em;
         &:nth-of-type(1) {
@@ -81,6 +84,7 @@ const HomeHero = () => {
       }
     `,
     logo: css`
+      z-index: 2;
       font-size: var(--fs-108);
       height: 0.875em;
       width: auto;
@@ -109,32 +113,34 @@ const HomeHero = () => {
           </clipPath>
         </defs>
       </svg>
-      <HomeHeroImages />
-      <svg viewBox="0 0 1440 415" css={styles.ribbons}>
-        <defs>
-          <linearGradient
-            x1="100%"
-            y1="45%"
-            x2="0%"
-            y2="55%"
-            id="goldGradient"
-          >
-            <stop stopColor={colors.gold} offset="0%" />
-            <stop stopColor={colors.goldShade1} offset="33%" />
-            <stop stopColor={colors.goldShade2} offset="67%" />
-            <stop stopColor={colors.goldShade3} offset="100%" />
-          </linearGradient>
-        </defs>
-        <path
-          d="M1440,64 C970,446 518.5,407 0,0 L0,415 L1440,415 L1440,64 Z"
-          fill="#fff"
-          opacity={0.1}
-        />
-        <path
-          d="M0,288.5 C544.5,80.5 674,765 1440,64 L1440,415 L0,415 L0,288.5 Z"
-          fill="url(#goldGradient)"
-        />
-      </svg>
+      <div css={styles.background}>
+        <HomeHeroImages />
+        <svg viewBox="0 0 1440 415" css={styles.ribbons}>
+          <defs>
+            <linearGradient
+              x1="100%"
+              y1="45%"
+              x2="0%"
+              y2="55%"
+              id="goldGradient"
+            >
+              <stop stopColor={colors.gold} offset="0%" />
+              <stop stopColor={colors.goldShade1} offset="33%" />
+              <stop stopColor={colors.goldShade2} offset="67%" />
+              <stop stopColor={colors.goldShade3} offset="100%" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M1440,64 C970,446 518.5,407 0,0 L0,415 L1440,415 L1440,64 Z"
+            fill="#fff"
+            opacity={0.1}
+          />
+          <path
+            d="M0,288.5 C544.5,80.5 674,765 1440,64 L1440,415 L0,415 L0,288.5 Z"
+            fill="url(#goldGradient)"
+          />
+        </svg>
+      </div>
       <LogoStacked css={styles.logo} />
       <h1 css={styles.heading}>
         <AnimateIn as="span" innerAs="span">
