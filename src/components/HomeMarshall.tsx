@@ -5,7 +5,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { baseGrid } from '../theme/mixins'
+import { absoluteFill, baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 
@@ -40,17 +40,19 @@ const HomeMarshall = () => {
     section: css`
       position: relative;
       z-index: 2;
+      margin-top: -7vw;
+    `,
+    background: css`
+      ${absoluteFill};
       clip-path: url(#${clipId});
       background: linear-gradient(to bottom right, #555, #000);
-      color: #fff;
-      margin-top: -7vw;
     `,
     content: css`
       padding: calc(7vw + var(--gutter-xlg)) 0
         calc(11.5vw + var(--gutter-lg));
       ${baseGrid}
+      color: #fff;
     `,
-    contentInner: css``,
     heading: css`
       grid-column: -8 / span 6;
       font-size: var(--fs-60);
@@ -102,13 +104,15 @@ const HomeMarshall = () => {
           </clipPath>
         </defs>
       </svg>
-      <div css={styles.imageWrap}>
-        <GatsbyImage
-          css={styles.image}
-          image={home.marshallImage.gatsbyImageData}
-          alt={home.marshallImage.alt || ''}
-          objectPosition="100% 15%"
-        />
+      <div css={styles.background}>
+        <div css={styles.imageWrap}>
+          <GatsbyImage
+            css={styles.image}
+            image={home.marshallImage.gatsbyImageData}
+            alt={home.marshallImage.alt || ''}
+            objectPosition="100% 15%"
+          />
+        </div>
       </div>
       <div css={styles.content}>
         <AnimateIn fromBack css={styles.heading}>
