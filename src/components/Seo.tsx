@@ -44,7 +44,9 @@ const Seo = ({
   const metaDescription =
     description || site.globalSeo.fallbackSeo.description
   const metaTitle = title || site.globalSeo.fallbackSeo.title
-  const titleSuffix = site.globalSeo.titleSuffix || ''
+  const titleSuffix = noSuffix
+    ? ''
+    : ' | ' + site.globalSeo.titleSuffix || ''
 
   return (
     <Helmet
@@ -52,7 +54,7 @@ const Seo = ({
         lang,
       }}
       title={metaTitle}
-      titleTemplate={noSuffix ? `%s` : `%s${titleSuffix}`}
+      titleTemplate={`%s${titleSuffix}`}
       meta={[
         {
           name: `description`,
@@ -60,7 +62,7 @@ const Seo = ({
         },
         {
           property: `og:title`,
-          content: metaTitle + titleSuffix,
+          content: `${metaTitle}${titleSuffix}`,
         },
         {
           property: `og:description`,

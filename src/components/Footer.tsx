@@ -109,7 +109,7 @@ const Footer = () => {
         />
       </svg>
       <div css={styles.content}>
-        <Link to="/" css={styles.logo}>
+        <Link to="/" css={styles.logo} aria-label="100 Coaches Agency">
           <LogoStacked />
         </Link>
         <div css={styles.rights}>

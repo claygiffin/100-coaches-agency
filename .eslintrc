@@ -5,9 +5,9 @@
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "jsxPragma": null
   },
-  "plugins": [],
   "env": {
     "browser": true,
     "node": true
@@ -32,6 +32,7 @@
     "no-anonymous-exports-page-templates": "warn",
     "limited-exports-page-templates": "warn",
     "prettier/prettier": "warn",
-    "@typescript-eslint/ban-types": "warn"
+    "@typescript-eslint/ban-types": "warn",
+    "no-throw-literal": "warn"
   }
 }

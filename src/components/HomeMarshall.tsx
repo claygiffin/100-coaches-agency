@@ -5,7 +5,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { absoluteFill, baseGrid } from '../theme/mixins'
+import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 
@@ -54,7 +54,7 @@ const HomeMarshall = () => {
       color: #fff;
     `,
     heading: css`
-      grid-column: -8 / span 6;
+      grid-column: span 6 / -2;
       font-size: var(--fs-60);
       align-self: flex-end;
       justify-self: flex-start;
@@ -67,10 +67,20 @@ const HomeMarshall = () => {
         font-style: normal;
         color: ${colors.goldTint1};
       }
+      ${mq().ms} {
+        grid-column-start: 2;
+      }
     `,
     body: css`
-      grid-column: -7 / span 5;
+      grid-column: span 5 / -2;
       font-size: var(--fs-21);
+      ${mq().m} {
+        grid-column-start: span 6;
+      }
+      ${mq().ms} {
+        grid-column-start: 2;
+        margin-bottom: 2.5em;
+      }
     `,
     imageWrap: css`
       position: fixed;
@@ -79,10 +89,16 @@ const HomeMarshall = () => {
       width: 50vw;
       height: 100vh;
       filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5));
+      ${mq().ms} {
+        width: 90vw;
+      }
     `,
     image: css`
       width: 100%;
       height: 100%;
+      ${mq().ms} {
+        filter: contrast(0.5) brightness(0.333);
+      }
     `,
   }
   return (

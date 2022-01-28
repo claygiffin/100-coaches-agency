@@ -12,6 +12,7 @@ const GlobalStyles = () => {
     :root {
       /* Font Sizes */
       --fs-108: max(4rem, 5rem + 3.333vw);
+      --fs-84: max(3.5rem, 3.875rem + 2.6vw);
       --fs-60: max(3rem, 2.75rem + 1.875vw);
       --fs-48: max(2.5rem, 2.25rem + 1.25vw);
       --fs-36: max(2.25rem, 2rem + 0.833vw);
@@ -45,7 +46,7 @@ const GlobalStyles = () => {
 
       --margin-outer: calc(3 * var(--gutter-md));
       ${mq().s} {
-        --margin-outer: calc(var(--gutter-md) + 0.5rem);
+        --margin-outer: calc(var(--gutter-md) * 2);
       }
       --column-width: calc(
         (100vw - 2 * var(--margin-outer) - 11 * var(--gutter-md)) / 12

@@ -13,7 +13,7 @@ import {
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
 import { absoluteFill } from '../theme/mixins'
 import { breakpoints } from '../theme/variables'
-import CoachThumbnail from './CoachThumbnail'
+import CoachThumbnail from './HomeCoachThumbnail'
 
 const HomeCoachesGrid = () => {
   const { coaches } = useStaticQuery(graphql`
@@ -81,6 +81,7 @@ const HomeCoachesGrid = () => {
   const handleScroll = useCallback(() => {
     if (!requestRunning.current) {
       window.requestAnimationFrame(() => {
+        const windowHeight = window.innerHeight
         const pos =
           parallaxRef.current?.getBoundingClientRect().bottom || 0
         const height =
@@ -91,7 +92,7 @@ const HomeCoachesGrid = () => {
       })
       requestRunning.current = true
     }
-  }, [windowHeight])
+  }, [])
   useLayoutEffect(handleScroll, [handleScroll])
 
   const scrollObserver =
@@ -143,8 +144,9 @@ const HomeCoachesGrid = () => {
       width: 100vw;
       overflow: hidden;
       position: fixed;
-      top: 0;
+      top: 50%;
       left: 0;
+      transform: translateY(-50%);
     `,
     gridWrapper: css`
       position: relative;

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import { scrim } from '../theme/mixins'
+import { mq, scrim } from '../theme/mixins'
 import { colors } from '../theme/variables'
 
 type CoachThumbnailProps = {
@@ -54,7 +54,11 @@ const CoachThumbnail = ({ coach, animated }: CoachThumbnailProps) => {
         padding-bottom: 1em;
         position: relative;
         text-shadow: 0 0 0.25em #000;
-
+        ${mq().s} {
+          font-size: var(--fs-16);
+          font-weight: 450;
+          padding-bottom: 0;
+        }
         &:after {
           content: '';
           width: 1.5em;
@@ -64,6 +68,9 @@ const CoachThumbnail = ({ coach, animated }: CoachThumbnailProps) => {
           left: 50%;
           bottom: 0.5em;
           transform: translate(-50%, 1px);
+          ${mq().s} {
+            display: none;
+          }
         }
       }
       h3 {
@@ -73,6 +80,9 @@ const CoachThumbnail = ({ coach, animated }: CoachThumbnailProps) => {
         font-style: italic;
         margin: 0;
         text-shadow: 0 0 0.25em #000;
+        ${mq().s} {
+          display: none;
+        }
       }
     `,
     image: css`

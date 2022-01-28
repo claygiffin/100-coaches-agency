@@ -21,7 +21,9 @@ export const baseGrid = css`
   grid-column-gap: var(--gutter-md);
   width: 100%;
   ${mq().s} {
-    grid-template-columns: 0.5rem repeat(12, 1fr) 0.5rem;
+    grid-template-columns: var(--gutter-md) repeat(12, 1fr) var(
+        --gutter-md
+      );
   }
 `
 
@@ -78,6 +80,8 @@ export const button = css`
   background: #000;
   font-size: var(--fs-16);
   text-transform: uppercase;
+  text-decoration: none;
   letter-spacing: 0.1em;
   padding: 1em 1.5em;
+  line-height: 1.125;
 `

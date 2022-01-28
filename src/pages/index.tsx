@@ -6,6 +6,7 @@ import HomePromise from '../components/HomePromise'
 import HomeResults from '../components/HomeResults'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
+import WorkWithUsButton from '../components/WorkWithUsButton'
 
 const IndexPage = () => {
   return (
@@ -17,6 +18,7 @@ const IndexPage = () => {
       <HomeMarshall />
       <HomeResults />
       <HomeContact />
+      <WorkWithUsButton anchorId="#work-with-us" text="Work With Us" />
     </Layout>
   )
 }

@@ -179,7 +179,7 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
         <ShapeColumn
           rows={rows}
           offset={offset}
-          brightCircle
+          brightCircle={containerWidth >= breakpoints.ms}
           columnPosition={useCallback(
             (pos: number) =>
               setColumnPosition(prevState => ({
@@ -192,7 +192,7 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
         <ShapeColumn
           rows={rows}
           offset={offset}
-          brightCircle
+          brightCircle={containerWidth >= breakpoints.ms}
           brightenPosition={useCallback(
             (position: { top: number; left: number }) =>
               setBrightenPosition(position),
@@ -207,7 +207,7 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
             []
           )}
         />
-        {
+        {containerWidth >= breakpoints.ms && (
           <svg
             viewBox={`0 0 ${lineWidth} ${lineHeight}`}
             css={styles.line}
@@ -237,7 +237,7 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
               }}
             />
           </svg>
-        }
+        )}
       </div>
     </div>
   )

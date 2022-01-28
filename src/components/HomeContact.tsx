@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { absoluteFill, baseGrid } from '../theme/mixins'
+import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 import Form from './Form'
@@ -58,7 +58,7 @@ const HomeContact = () => {
       grid-column: 2 / -2;
       h2 {
         font-size: inherit;
-        margin: 0.333em 0;
+        margin: 0.5em 0;
       }
       em {
         display: inline-block;
@@ -76,14 +76,26 @@ const HomeContact = () => {
         font-weight: 400;
         color: ${colors.goldTint1};
       }
+      ${mq().m} {
+        grid-column: 2 / span 6;
+      }
+      ${mq().ms} {
+        grid-column: 2 / -2;
+      }
     `,
     form: css`
       grid-column: span 5 / -2;
       margin-top: 2.5rem;
+      ${mq().m} {
+        grid-column: span 6 / -2;
+      }
+      ${mq().ms} {
+        grid-column: 2 / -2;
+      }
     `,
   }
   return (
-    <section css={styles.section} ref={setRefs}>
+    <section css={styles.section} ref={setRefs} id="work-with-us">
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
           <clipPath id={clipId}>

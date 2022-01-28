@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { absoluteFill, baseGrid } from '../theme/mixins'
+import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 
@@ -65,12 +65,17 @@ const HomeResults = () => {
         display: inline-block;
         font-style: normal;
         color: ${colors.goldShade1};
+        ${mq().s} {
+          display: inline;
+        }
       }
     `,
     body: css`
       font-size: var(--fs-21);
-      line-height: 1.5;
       max-width: 75ch;
+      p {
+        line-height: 1.667;
+      }
     `,
   }
 

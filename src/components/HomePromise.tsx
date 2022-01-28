@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import { baseGrid } from '../theme/mixins'
+import { baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 import HomePromiseBackground from './HomePromiseBackground'
@@ -26,7 +26,6 @@ const HomePromise = () => {
       z-index: 2;
       margin-top: -10.5vw;
     `,
-
     content: css`
       ${baseGrid}
       padding: calc(10.5vw + var(--gutter-xlg)) 0
@@ -37,6 +36,9 @@ const HomePromise = () => {
       grid-column: 2 / span 7;
       font-size: var(--fs-60);
       margin-top: 0.75em;
+      ${mq().ms} {
+        grid-column-end: -2;
+      }
       h2 {
         font-size: inherit;
         margin: 0 0 0.333em;
@@ -47,6 +49,9 @@ const HomePromise = () => {
       grid-column: 2 / span 8;
       font-size: var(--fs-21);
       text-shadow: 0 0 3px ${colors.goldShade3};
+      ${mq().ms} {
+        grid-column-end: -2;
+      }
     `,
   }
 

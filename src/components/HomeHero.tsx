@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { absoluteFill, baseGrid } from '../theme/mixins'
+import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 import HomeHeroImages from './HomeHeroImages'
@@ -31,9 +31,13 @@ const HomeHero = () => {
   const styles = {
     section: css`
       ${baseGrid}
-      grid-template-rows: auto auto auto 12.5vw;
+      grid-template-rows: 1.5em auto auto;
       min-height: calc(101 * var(--vh, 1vh));
       color: white;
+      font-size: var(--fs-108);
+      ${mq().s} {
+        font-size: var(--fs-84);
+      }
     `,
     background: css`
       clip-path: url(#${clipId});
@@ -64,34 +68,42 @@ const HomeHero = () => {
     `,
     heading: css`
       display: contents;
+      font-size: inherit;
       > span {
-        font-size: var(--fs-108);
+        font-size: inherit;
         display: inline-block;
         z-index: 2;
         max-width: 10ch;
-        margin-bottom: 0.15em;
         &:nth-of-type(1) {
           grid-row: 2 / 3;
           grid-column: 2 / -2;
           align-self: flex-end;
+          margin-top: 0.75em;
+          margin-bottom: 0.125em;
         }
         &:nth-of-type(2) {
           grid-row: 3 / 4;
           grid-column: 5 / -2;
           align-self: flex-start;
           color: ${colors.gold};
+          margin-bottom: max(12.5vw, 2em);
+          ${mq().m} {
+            grid-column-start: 4;
+          }
+          ${mq().s} {
+            grid-column-start: 2;
+          }
         }
       }
     `,
     logo: css`
       z-index: 2;
-      font-size: var(--fs-108);
       height: 0.875em;
       width: auto;
       position: relative;
       grid-column: 2 / -2;
       justify-self: center;
-      margin: 0.375em 0 0.875em;
+      margin: 0.375em 0 0;
     `,
   }
   return (
