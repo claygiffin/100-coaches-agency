@@ -10,7 +10,7 @@ import TextField from './TextField'
 
 type FormProps = {
   data: {
-    name: string
+    formName: string
     formFields: [
       {
         __typename: string
@@ -57,7 +57,7 @@ const Form = ({ data, ...props }: FormProps) => {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: encode({ 'form-name': data.name, ...formData }),
+        body: encode({ 'form-name': data.formName, ...formData }),
       })
       if (response) {
         setSubmitting(false)
@@ -199,7 +199,7 @@ ${error}`)
         />
       )}
       <form
-        name={data.name}
+        name={data.formName}
         data-netlify
         netlify-honeypot="bot-field"
         method="post"
@@ -210,7 +210,7 @@ ${error}`)
         <input
           type="hidden"
           name="form-name"
-          value={data.name}
+          value={data.formName}
           aria-hidden
         />
         {data.formFields.map((field, i) => (
