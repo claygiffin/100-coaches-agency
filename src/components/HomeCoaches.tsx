@@ -18,7 +18,7 @@ const HomeCoaches = () => {
     section: css`
       display: grid;
       background-color: #fff;
-      grid-template-rows: 102vh 40vmax;
+      grid-template-rows: 110vh 40vmax;
       grid-template-columns: 1fr;
       margin-top: -15vw;
       padding-top: 15vw;
