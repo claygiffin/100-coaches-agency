@@ -51,6 +51,7 @@ const Form = ({ data, ...props }: FormProps) => {
         )
         .join('&')
     }
+    console.log(encode({ 'form-name': data.formName, ...formData }))
     try {
       const response = await fetch('/', {
         method: 'POST',
@@ -61,6 +62,7 @@ const Form = ({ data, ...props }: FormProps) => {
       })
       if (response) {
         setSubmitting(false)
+        console.log(response)
       }
       if (response.ok) {
         setSubmitted(true)
@@ -203,8 +205,8 @@ ${error}`)
         data-netlify
         netlify-honeypot="bot-field"
         method="post"
-        onSubmit={handleSubmit}
         css={styles.form}
+        onSubmit={handleSubmit}
       >
         <input type="hidden" name="bot-field" aria-hidden />
         <input
