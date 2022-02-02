@@ -159,7 +159,7 @@ ${error}`)
     submitted: css`
       grid-area: 1 / 1 / 2 / 2;
       animation: ${animateIn} 300ms ease-out forwards;
-      align-self: center;
+      align-self: flex-start;
       h2 {
         font-size: var(--fs-30);
         margin-top: 0;
