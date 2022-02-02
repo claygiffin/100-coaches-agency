@@ -27,7 +27,7 @@ const HomeCoachesGrid = () => {
               imgixParams: {
                 q: 65
                 fit: "facearea"
-                facepad: 3
+                facepad: 3.5
                 sat: -100
               }
             )

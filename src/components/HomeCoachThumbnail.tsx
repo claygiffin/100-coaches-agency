@@ -88,6 +88,9 @@ const CoachThumbnail = ({ coach, animated }: CoachThumbnailProps) => {
     image: css`
       min-width: 100%;
       min-height: 100%;
+      > div {
+        max-width: 100% !important;
+      }
     `,
   }
   return (
