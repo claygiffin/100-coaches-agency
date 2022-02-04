@@ -115,6 +115,7 @@ const TextField = ({ label, type, onChange, required }: FieldProps) => {
       color: #ffffffcc;
       max-width: 100%;
       line-height: 1.333;
+      padding-right: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -132,12 +133,16 @@ const TextField = ({ label, type, onChange, required }: FieldProps) => {
           color: ${colors.goldTint1};
         }
       `}
-    `,
-    required: css`
-      display: inline-block;
-      font-size: 75%;
-      margin-left: 0.125em;
-      transform: translateY(-0.125em);
+      ${required &&
+      css`
+        &:after {
+          content: '*';
+          display: inline-block;
+          font-size: 75%;
+          margin-left: 0.125em;
+          transform: translateY(-0.125em);
+        }
+      `}
     `,
   }
 
@@ -145,7 +150,6 @@ const TextField = ({ label, type, onChange, required }: FieldProps) => {
     <div css={styles.container}>
       <label htmlFor={name} css={styles.label}>
         {label}
-        {required && <span css={styles.required}>*</span>}
       </label>
       <div css={styles.inputBase}>
         <input

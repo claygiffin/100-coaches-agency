@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import { baseGrid } from '../theme/mixins'
+import { baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import HomeCoachesGrid from './HomeCoachesGrid'
 import ParallaxTranslate from './ParallaxTranslate'
@@ -55,6 +55,9 @@ const HomeCoaches = () => {
         display: inline-block;
         font-style: normal;
         color: ${colors.goldShade1};
+        ${mq().s} {
+          display: inline;
+        }
       }
     `,
   }

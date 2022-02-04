@@ -201,11 +201,11 @@ ${error}`)
         />
       )}
       <form
+        css={styles.form}
         name={data.formName}
         data-netlify
         netlify-honeypot="bot-field"
         method="post"
-        css={styles.form}
         onSubmit={handleSubmit}
       >
         <input type="hidden" name="bot-field" aria-hidden />

@@ -54,8 +54,12 @@ const CoachThumbnail = ({ coach, animated }: CoachThumbnailProps) => {
         padding-bottom: 1em;
         position: relative;
         text-shadow: 0 0 0.25em #000;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: break-spaces;
         ${mq().s} {
-          font-size: var(--fs-16);
+          font-size: var(--fs-14);
           font-weight: 450;
           padding-bottom: 0;
         }

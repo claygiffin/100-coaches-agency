@@ -109,12 +109,16 @@ const MultilineTextField = ({
           color: ${colors.goldTint1};
         }
       `}
-    `,
-    required: css`
-      display: inline-block;
-      font-size: 75%;
-      margin-left: 0.125em;
-      transform: translateY(-0.125em);
+      ${required &&
+      css`
+        &:after {
+          content: '*';
+          display: inline-block;
+          font-size: 75%;
+          margin-left: 0.125em;
+          transform: translateY(-0.125em);
+        }
+      `}
     `,
   }
 
@@ -122,11 +126,6 @@ const MultilineTextField = ({
     <div css={styles.container} {...props}>
       <label htmlFor={name} css={styles.label}>
         {label}
-        {required && (
-          <span className="required" css={styles.required}>
-            *
-          </span>
-        )}
       </label>
       <div css={styles.inputBase}>
         <span css={[styles.sizeArea, styles.sizer]}>

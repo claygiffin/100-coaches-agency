@@ -4,6 +4,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import { useCallback, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
+import { useWindowDimensions } from '../hooks/useWindowDimensions'
 import { absoluteFill } from '../theme/mixins'
 import { focalPoint } from '../utils/helpers'
 
@@ -12,9 +13,27 @@ const HomeHeroImages = () => {
     query {
       home: datoCmsHome {
         heroImages {
-          gatsbyImageData(
+          horizontal: gatsbyImageData(
             layout: FULL_WIDTH
-            imgixParams: { q: 75, sat: -100, bri: -33, con: -75 }
+            imgixParams: {
+              q: 75
+              sat: -100
+              bri: -33
+              con: -75
+              ar: "16:10"
+              fit: "crop"
+            }
+          )
+          vertical: gatsbyImageData(
+            layout: FULL_WIDTH
+            imgixParams: {
+              q: 75
+              sat: -100
+              bri: -33
+              con: -75
+              ar: "2:3"
+              fit: "crop"
+            }
           )
           alt
           focalPoint {
@@ -34,6 +53,19 @@ const HomeHeroImages = () => {
   const transitionDuration = 1000
   const slideDuration = 5000
   const [activeIndex, setActiveIndex] = useState(-1)
+
+  const windowDimensions = useWindowDimensions()
+
+  const getImage = useCallback(
+    image => {
+      if (windowDimensions.width > windowDimensions.height) {
+        return image.horizontal
+      } else {
+        return image.vertical
+      }
+    },
+    [windowDimensions]
+  )
 
   // Trigger animation effects on initial load
   useEffect(() => {
@@ -97,7 +129,8 @@ const HomeHeroImages = () => {
         >
           <GatsbyImage
             css={styles.image}
-            image={image.gatsbyImageData}
+            // objectPosition={focalPoint(image.focalPoint)}
+            image={getImage(image)}
             alt={image.alt || ''}
           />
         </div>
