@@ -39,7 +39,10 @@ const Form = ({ data, ...props }: FormProps) => {
   }
 
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
     setSubmitting(true)
+    
     const encode = (data: { [key: string]: string }) => {
       return Object.keys(data)
         .map(
@@ -61,7 +64,7 @@ const Form = ({ data, ...props }: FormProps) => {
       })
       if (response) {
         setSubmitting(false)
-        console.log(response)
+        console.log(response.json)
       }
       if (response.ok) {
         setSubmitted(true)
@@ -75,7 +78,6 @@ ${response.status} ${response.statusText}`
       alert(`Sorry, there was an error submitting this form: 
 ${error}`)
     }
-    e.preventDefault()
   }
 
   const animateIn = keyframes`
