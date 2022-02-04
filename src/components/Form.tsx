@@ -42,7 +42,7 @@ const Form = ({ data, ...props }: FormProps) => {
     e.preventDefault()
 
     setSubmitting(true)
-    
+
     const encode = (data: { [key: string]: string }) => {
       return Object.keys(data)
         .map(
@@ -64,7 +64,7 @@ const Form = ({ data, ...props }: FormProps) => {
       })
       if (response) {
         setSubmitting(false)
-        console.log(response.json)
+        console.log(response.json())
       }
       if (response.ok) {
         setSubmitted(true)
