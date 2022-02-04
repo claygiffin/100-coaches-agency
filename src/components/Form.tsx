@@ -53,7 +53,6 @@ const Form = ({ data, ...props }: FormProps) => {
         )
         .join('&')
     }
-    console.log(encode({ 'form-name': data.formName, ...formData }))
     try {
       const response = await fetch('/', {
         method: 'POST',
@@ -64,7 +63,6 @@ const Form = ({ data, ...props }: FormProps) => {
       })
       if (response) {
         setSubmitting(false)
-        console.log(response.json())
       }
       if (response.ok) {
         setSubmitted(true)
