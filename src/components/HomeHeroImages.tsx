@@ -99,6 +99,7 @@ const HomeHeroImages = () => {
       z-index: 0;
       opacity: 0;
       transform: scale3d(1, 1, 1);
+      backface-visibility: hidden;
       transition: opacity 0ms linear ${transitionDuration}ms,
         transform 0ms linear ${transitionDuration}ms;
     `,

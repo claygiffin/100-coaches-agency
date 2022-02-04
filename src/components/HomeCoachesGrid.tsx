@@ -135,10 +135,6 @@ const HomeCoachesGrid = () => {
     container: css`
       grid-row: 2 / 3;
       grid-column: 1 / -1;
-      ${!inView &&
-      css`
-        visibility: hidden;
-      `}
     `,
     outerWrapper: css`
       width: 100vw;
@@ -154,6 +150,10 @@ const HomeCoachesGrid = () => {
       grid-template-columns: repeat(${columns}, 1fr);
       grid-template-rows: repeat(${rows}, auto);
       grid-gap: 4px;
+      ${!inView &&
+      css`
+        display: none;
+      `}
     `,
     background: css`
       ${absoluteFill};

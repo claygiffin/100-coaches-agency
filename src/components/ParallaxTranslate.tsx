@@ -99,7 +99,7 @@ const ParallaxTranslate = ({
     parallaxElement: css`
       position: relative;
       transform: translate3d(0, 0, 0);
-      will-change: transform;
+      backface-visibility: hidden;
       display: flex;
     `,
     animateIn: css`
@@ -108,6 +108,7 @@ const ParallaxTranslate = ({
       transition-duration: 500ms;
       transition-timing-function: cubic-bezier(0.25, 0.75, 0.25, 1);
       opacity: 0;
+      backface-visibility: hidden;
       transform: ${fromBack
         ? `scale3d(0.75, 0.75, 1)`
         : `scale3d(1.2, 1.2, 1)`};
