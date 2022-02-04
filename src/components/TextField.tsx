@@ -21,7 +21,7 @@ const TextField = ({ label, type, onChange, required }: FieldProps) => {
     }
   }
   const handleBlur = () => {
-    onChange(label, value)
+    onChange(name, value)
     if (value.length > 0) {
       setShrink(true)
     } else {
