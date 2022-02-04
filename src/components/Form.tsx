@@ -1,4 +1,5 @@
 import { SerializedStyles, css, keyframes } from '@emotion/react'
+import { kebabCase } from 'lodash'
 import { Fragment, SyntheticEvent, useState } from 'react'
 
 import { mq } from '../theme/mixins'
@@ -47,7 +48,7 @@ const Form = ({ data, ...props }: FormProps) => {
       return Object.keys(data)
         .map(
           key =>
-            encodeURIComponent(key) +
+            kebabCase(encodeURIComponent(key)) +
             '=' +
             encodeURIComponent(data[key])
         )
