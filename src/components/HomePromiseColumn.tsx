@@ -53,7 +53,6 @@ const ShapeColumn = ({
         transform: `translate3d(0, calc(${
           offset - 1
         }px * var(--translate-factor, 100)), 0)`,
-        backfaceVisibility: 'hidden',
       }}
       ref={setRefs}
       {...props}

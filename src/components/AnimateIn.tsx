@@ -36,7 +36,6 @@ const AnimateIn = ({
       position: relative;
       display: block;
       opacity: 0;
-      backface-visibility: hidden;
       transform: ${fromBack
         ? `scale3D(0.875, 0.875, 1)`
         : `scale3D(1.125, 1.125, 1)`};

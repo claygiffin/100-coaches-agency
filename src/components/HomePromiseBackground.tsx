@@ -146,7 +146,6 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
       z-index: 4;
       position: absolute;
       overflow: visible;
-      backface-visibility: hidden;
     `,
   }
   return (
