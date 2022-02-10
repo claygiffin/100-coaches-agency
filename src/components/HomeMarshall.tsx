@@ -126,7 +126,7 @@ const HomeMarshall = () => {
             css={styles.image}
             image={home.marshallImage.gatsbyImageData}
             alt={home.marshallImage.alt || ''}
-            objectPosition="100% 15%"
+            objectPosition="100% 20%"
           />
         </div>
       </div>
