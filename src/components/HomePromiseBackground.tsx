@@ -50,18 +50,13 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
 
   const [offset, setOffset] = useState(0)
 
-  const requestRunning = useRef(false)
   const handleSetOffset = useCallback(() => {
-    if (!requestRunning.current) {
-      window.requestAnimationFrame(() => {
-        const windowHeight = window.innerHeight
-        const containerPos =
-          parallaxRef.current?.getBoundingClientRect().y || 0
-        setOffset(containerPos / windowHeight)
-        requestRunning.current = false
-      })
-      requestRunning.current = true
-    }
+    window.requestAnimationFrame(() => {
+      const windowHeight = window.innerHeight
+      const containerPos =
+        parallaxRef.current?.getBoundingClientRect().y || 0
+      setOffset(containerPos / windowHeight)
+    })
   }, [])
   useLayoutEffect(handleSetOffset, [handleSetOffset])
 

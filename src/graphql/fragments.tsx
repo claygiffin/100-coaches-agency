@@ -1,5 +1,36 @@
 import { graphql } from 'gatsby'
 
+export const CoachFragment = graphql`
+  fragment CoachFragment on DatoCmsCoach {
+    __typename
+    id: originalId
+    name
+    photo {
+      thumbnail: gatsbyImageData(
+        width: 360
+        aspectRatio: 1
+        imgixParams: { q: 65, fit: "facearea", facepad: 3.5, sat: -100 }
+      )
+      large: gatsbyImageData(
+        width: 800
+        imgixParams: { q: 80, sat: -100 }
+      )
+      small: gatsbyImageData(
+        width: 400
+        imgixParams: { q: 65, sat: -100 }
+      )
+      alt
+    }
+    jobTitle
+    jobTitleExtended
+    photoAlignment
+    bio {
+      value
+    }
+    bioSummary
+  }
+`
+
 export const FormFragment = graphql`
   fragment FormFragment on DatoCmsForm {
     __typename
@@ -18,12 +49,6 @@ export const FormFragment = graphql`
       ... on DatoCmsMultilineTextField {
         ...MultilineTextFieldFragment
       }
-      # ... on DatoCmsSelectField {
-      #   ...SelectFieldFragment
-      # }
-      # ... on DatoCmsSelectStateField {
-      #   ...SelectStateFieldFragment
-      # }
     }
   }
 `
@@ -44,24 +69,3 @@ export const MultilineTextFieldFragment = graphql`
     required
   }
 `
-// export const SelectFieldFragment = graphql`
-//   fragment SelectFieldFragment on DatoCmsSelectField {
-//     __typename
-//     id: originalId
-//     label
-//     options {
-//       id: originalId
-//       label
-//       value
-//     }
-//     required
-//   }
-// `
-// export const SelectStateFieldFragment = graphql`
-//   fragment SelectStateFieldFragment on DatoCmsSelectStateField {
-//     __typename
-//     id: originalId
-//     label
-//     required
-//   }
-// `

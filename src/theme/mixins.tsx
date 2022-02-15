@@ -6,7 +6,7 @@ import { breakpoints } from './variables'
 export const mq = (minMax = 'max') => {
   const bp = Object.create(breakpoints)
   Object.keys(breakpoints).forEach(key => {
-    bp[key] = `@media (${minMax}-width: ${breakpoints[key]}px)`
+    bp[key] = `@media (${minMax}-width: ${bp[key]}px)`
   })
   return bp
 }

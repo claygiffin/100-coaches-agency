@@ -11,7 +11,6 @@ import {
 } from 'react'
 
 import { useWindowDimensions } from '../hooks/useWindowDimensions'
-import { absoluteFill } from '../theme/mixins'
 import { breakpoints } from '../theme/variables'
 import CoachThumbnail from './HomeCoachThumbnail'
 
@@ -20,21 +19,7 @@ const HomeCoachesGrid = () => {
     query {
       coaches: allDatoCmsCoach {
         nodes {
-          photo {
-            gatsbyImageData(
-              width: 360
-              aspectRatio: 1
-              imgixParams: {
-                q: 65
-                fit: "facearea"
-                facepad: 3.5
-                sat: -100
-              }
-            )
-            alt
-          }
-          name
-          jobTitle
+          ...CoachFragment
         }
       }
     }
@@ -77,21 +62,16 @@ const HomeCoachesGrid = () => {
   const animationIndex = clamp(offset * totalCoaches, 0, totalCoaches)
   const [inView, setInView] = useState(false)
 
-  const requestRunning = useRef(false)
   const handleScroll = useCallback(() => {
-    if (!requestRunning.current) {
-      window.requestAnimationFrame(() => {
-        const windowHeight = window.innerHeight
-        const pos =
-          parallaxRef.current?.getBoundingClientRect().bottom || 0
-        const height =
-          parallaxRef.current?.getBoundingClientRect().height || 0
-        const ratio = (windowHeight - pos + height) / height
-        setOffset(ratio)
-        requestRunning.current = false
-      })
-      requestRunning.current = true
-    }
+    window.requestAnimationFrame(() => {
+      const windowHeight = window.innerHeight
+      const pos =
+        parallaxRef.current?.getBoundingClientRect().bottom || 0
+      const height =
+        parallaxRef.current?.getBoundingClientRect().height || 0
+      const ratio = (windowHeight - pos + height) / height
+      setOffset(ratio)
+    })
   }, [])
   useLayoutEffect(handleScroll, [handleScroll])
 
@@ -113,7 +93,7 @@ const HomeCoachesGrid = () => {
           },
           {
             root: null,
-            rootMargin: '15% 0%',
+            rootMargin: '10% 0%',
           }
         )
       : null
@@ -128,13 +108,11 @@ const HomeCoachesGrid = () => {
     }
   })
 
-  const backgroundOpacity =
-    Math.min((animationIndex / totalCoaches) * 1.5, 1) || 0
-
   const styles = {
     container: css`
       grid-row: 2 / 3;
       grid-column: 1 / -1;
+      z-index: 1;
     `,
     outerWrapper: css`
       width: 100vw;
@@ -155,18 +133,10 @@ const HomeCoachesGrid = () => {
         display: none;
       `}
     `,
-    background: css`
-      ${absoluteFill};
-      background: #fff;
-    `,
   }
   return (
     <div css={styles.container} ref={parallaxRef}>
       <div css={styles.outerWrapper}>
-        <div
-          css={styles.background}
-          style={{ opacity: backgroundOpacity }}
-        />
         <div css={styles.gridWrapper}>
           {coachesSubset.map((coach: any, i: number) => (
             <CoachThumbnail

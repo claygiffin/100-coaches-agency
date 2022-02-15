@@ -44,9 +44,7 @@ const Seo = ({
   const metaDescription =
     description || site.globalSeo.fallbackSeo.description
   const metaTitle = title || site.globalSeo.fallbackSeo.title
-  const titleSuffix = noSuffix
-    ? ''
-    : ' | ' + site.globalSeo.titleSuffix || ''
+  const titleSuffix = noSuffix ? '' : site.globalSeo.titleSuffix || ''
 
   return (
     <Helmet

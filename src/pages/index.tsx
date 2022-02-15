@@ -10,7 +10,7 @@ import WorkWithUsButton from '../components/WorkWithUsButton'
 
 const IndexPage = () => {
   return (
-    <Layout>
+    <Layout homeNav>
       <Seo noSuffix />
       <HomeHero />
       <HomeCoaches />

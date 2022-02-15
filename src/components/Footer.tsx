@@ -10,6 +10,7 @@ import LogoStacked from './LogoStacked'
 
 const Footer = () => {
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
+  const gradientId = useMemo(() => uniqueId('gradient--'), [])
 
   const [sectionRef, setSectionRef] = useState(null)
   const setRefs = useCallback(node => {
@@ -90,7 +91,7 @@ const Footer = () => {
             y1="45%"
             x2="0%"
             y2="55%"
-            id="goldGradient"
+            id={gradientId}
           >
             <stop stopColor={colors.gold} offset="0%" />
             <stop stopColor={colors.goldShade1} offset="33%" />
@@ -105,7 +106,7 @@ const Footer = () => {
         />
         <path
           d="M0,107.5 C526,168.5 736.5,-97 1440,89.5 L1440,0 L0,0 L0,107.5 Z"
-          fill="url(#goldGradient)"
+          fill={`url(#${gradientId})`}
         />
       </svg>
       <div css={styles.content}>
