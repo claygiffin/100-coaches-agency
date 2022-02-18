@@ -8,6 +8,7 @@ export type CoachProps = {
     thumbnail: IGatsbyImageData
     large: IGatsbyImageData
     small: IGatsbyImageData
+    thumbnailUrl: string
     alt: string
   }
   jobTitle: string
@@ -17,6 +18,7 @@ export type CoachProps = {
     value: any
   }
   bioSummary: string
+  seo: SeoProps
 }
 
 export type SeoProps = {

@@ -23,6 +23,14 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allDatoCmsCoach {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
     }
   `)
 
@@ -35,6 +43,15 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         categoryName: node.categoryName,
         featuredCoachId: node.featuredCoach.id,
+      },
+    })
+  })
+  data.allDatoCmsCoach.edges.forEach(({ node }) => {
+    createPage({
+      path: `/coaches/profiles/${toSlug(node.name)}/`,
+      component: path.resolve(`./src/templates/CoachProfilePage.tsx`),
+      context: {
+        id: node.id,
       },
     })
   })

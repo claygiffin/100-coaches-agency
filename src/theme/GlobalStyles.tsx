@@ -13,7 +13,7 @@ const GlobalStyles = () => {
       /* Font Sizes */
       --fs-108: max(4rem, 5rem + 3.333vw);
       --fs-84: max(3.5rem, 3.875rem + 2.6vw);
-      --fs-72: max(3.25rem, 3.3125rem + 1.2375vw);
+      --fs-72: max(3.25rem, 3.3125rem + 2.2375vw);
       --fs-60: max(3rem, 2.75rem + 1.875vw);
       --fs-48: max(2.5rem, 2.25rem + 1.25vw);
       --fs-36: max(2.25rem, 2rem + 0.833vw);
@@ -35,10 +35,6 @@ const GlobalStyles = () => {
         'Liberation Serif', Georgia, serif;
 
       /* Padding/Gutters/Margins */
-      --pd-sm: clamp(3rem, 2.5vw, 6rem);
-      --pd-md: clamp(4.5rem, 5vw, 9rem);
-      --pd-lg: clamp(6rem, 7.5vw, 12rem);
-      --pd-xl: clamp(12rem, 12.5vw, 18rem);
       --gutter-sm: max(1.25vw, 0.75rem);
       --gutter-md: max(2.5vw, 1rem);
       --gutter-mlg: max(3.333vw, 2rem);
@@ -102,6 +98,7 @@ const GlobalStyles = () => {
       background-color: transparent;
       color: inherit;
       padding: 0;
+      cursor: pointer;
     }
   `
 

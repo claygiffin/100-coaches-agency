@@ -12,4 +12,5 @@ export const colors = {
   goldShade2: '#C67C27',
   goldShade3: '#A66427',
   goldTint1: '#F5BD5D',
+  goldTint2: '#FFCC73',
 }

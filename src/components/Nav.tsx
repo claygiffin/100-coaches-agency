@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import CoachCategoryMenu from './CoachCategoryMenu'
 import LogoHorizontal from './LogoHorizontal'
 
 type NavProps = {
@@ -58,10 +59,13 @@ const Nav = ({ homeNav }: NavProps) => {
     background: css`
       ${absoluteFill}
       z-index: 0;
-      ${homeNav &&
-      css`
-        display: none;
-      `}
+      svg {
+        ${absoluteFill}
+        ${homeNav &&
+        css`
+          display: none;
+        `}
+      }
     `,
     logoWrap: css`
       align-self: center;
@@ -92,6 +96,14 @@ const Nav = ({ homeNav }: NavProps) => {
       text-transform: uppercase;
       display: block;
       padding: 1em;
+      position: relative;
+      cursor: pointer;
+      transition: color 200ms ease;
+      @media (hover: hover) {
+        &:hover {
+          color: ${colors.goldTint2};
+        }
+      }
     `,
     button: css`
       appearance: none;
@@ -100,12 +112,22 @@ const Nav = ({ homeNav }: NavProps) => {
       margin-left: 1em;
       line-height: 1.1;
       border-radius: 1.25em;
-      color: ${colors.gold};
+      color: ${colors.goldTint1};
       border: 1px solid currentColor;
+      transition-property: color, border-color, background-color;
+      transition-duration: 200ms;
+      transition-timing-function: ease;
+      @media (hover: hover) {
+        &:hover {
+          background: ${colors.goldShade1};
+          border-color: ${colors.goldShade1};
+          color: #fff;
+        }
+      }
     `,
   }
   return (
-    <nav css={styles.nav} ref={navRef}>
+    <nav css={styles.nav}>
       <Global
         styles={css`
           :root {
@@ -113,30 +135,32 @@ const Nav = ({ homeNav }: NavProps) => {
           }
         `}
       />
-      <svg css={styles.background}>
-        <defs>
-          <linearGradient
-            x1="0%"
-            y1="49%"
-            x2="100%"
-            y2="51%"
-            id={gradientId}
-          >
-            <stop stopColor="#111" offset="0%" />
-            <stop stopColor="#555" offset="100%" />
-          </linearGradient>
-        </defs>
-        <path
-          d={`M0,${navHeight - 0.007 * navWidth} C${navWidth * 0.413},${
-            navHeight - 0.03 * navWidth
-          } ${navWidth * 0.663},${
-            navHeight + 0.0184 * navWidth
-          } ${navWidth},${
-            navHeight - 0.007 * navWidth
-          } L${navWidth},0 L0,0 L0,${navHeight - 0.03 * navWidth} Z`}
-          fill={`url(#${gradientId})`}
-        />
-      </svg>
+      <div css={styles.background} ref={navRef}>
+        <svg>
+          <defs>
+            <linearGradient
+              x1="0%"
+              y1="49%"
+              x2="100%"
+              y2="51%"
+              id={gradientId}
+            >
+              <stop stopColor="#111" offset="0%" />
+              <stop stopColor="#555" offset="100%" />
+            </linearGradient>
+          </defs>
+          <path
+            d={`M0,${navHeight - 0.007 * navWidth} C${
+              navWidth * 0.413
+            },${navHeight - 0.03 * navWidth} ${navWidth * 0.663},${
+              navHeight + 0.0184 * navWidth
+            } ${navWidth},${
+              navHeight - 0.007 * navWidth
+            } L${navWidth},0 L0,0 L0,${navHeight - 0.03 * navWidth} Z`}
+            fill={`url(#${gradientId})`}
+          />
+        </svg>
+      </div>
       <Link
         to="/"
         css={styles.logoWrap}
@@ -145,9 +169,10 @@ const Nav = ({ homeNav }: NavProps) => {
         <LogoHorizontal />
       </Link>
       <div css={styles.navItems}>
-        <Link css={styles.link} to="/">
-          Coaching
-        </Link>
+        <span css={styles.link}>
+          Coaches
+          <CoachCategoryMenu />
+        </span>
         <Link css={styles.link} to="/">
           Our Story
         </Link>

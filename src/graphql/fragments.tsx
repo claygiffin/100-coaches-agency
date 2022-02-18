@@ -19,6 +19,17 @@ export const CoachFragment = graphql`
         width: 400
         imgixParams: { q: 65, sat: -100 }
       )
+      thumbnailUrl: url(
+        imgixParams: {
+          q: 65
+          w: "800"
+          h: "800"
+          fit: "facearea"
+          facepad: 3.5
+          sat: -100
+          bg: "FFFFFF"
+        }
+      )
       alt
     }
     jobTitle
@@ -28,9 +39,11 @@ export const CoachFragment = graphql`
       value
     }
     bioSummary
+    seo {
+      ...SeoFragment
+    }
   }
 `
-
 export const FormFragment = graphql`
   fragment FormFragment on DatoCmsForm {
     __typename
@@ -67,5 +80,14 @@ export const MultilineTextFieldFragment = graphql`
     id: originalId
     label
     required
+  }
+`
+export const SeoFragment = graphql`
+  fragment SeoFragment on DatoCmsSeoField {
+    title
+    description
+    image {
+      url(imgixParams: { maxW: 800, maxH: 800, fit: "crop" })
+    }
   }
 `

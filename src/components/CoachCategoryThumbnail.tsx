@@ -5,6 +5,9 @@ import { useMemo } from 'react'
 
 import { colors } from '../theme/variables'
 import { CoachProps } from '../types/customTypes'
+import { toSlug } from '../utils/helpers'
+import CoachProfile from './CoachProfile'
+import Lightbox from './Lightbox'
 
 type PropTypes = {
   coach: CoachProps
@@ -16,6 +19,7 @@ const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
 
   const styles = {
     container: css`
+      position: relative;
       display: flex;
       flex-direction: column;
       cursor: pointer;
@@ -100,8 +104,8 @@ const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
               id={gradientId}
             >
               <stop stopColor={colors.goldShade3} offset="0%" />
-              <stop stopColor={colors.goldShade2} offset="33%" />
-              <stop stopColor={colors.goldShade1} offset="67%" />
+              <stop stopColor={colors.goldShade2} offset="30%" />
+              <stop stopColor={colors.goldShade1} offset="60%" />
               <stop stopColor={colors.gold} offset="100%" />
             </linearGradient>
           </defs>
@@ -120,13 +124,16 @@ const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
         <GatsbyImage
           css={styles.image}
           image={coach.photo.small}
-          alt={coach.photo.alt || ''}
+          alt={coach.photo.alt || `${coach.name} — ${coach.jobTitle}`}
         />
       </div>
       <div css={styles.text}>
         <h2>{coach.name}</h2>
         <h3>{coach.jobTitle}</h3>
       </div>
+      <Lightbox slug={`coaches/profiles/${toSlug(coach.name)}`}>
+        <CoachProfile coach={coach} />
+      </Lightbox>
     </div>
   )
 }

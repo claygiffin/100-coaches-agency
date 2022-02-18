@@ -23,6 +23,7 @@ const Layout = ({ children, mainCss, homeNav }: LayoutProps) => {
       <Nav homeNav={homeNav} />
       <main css={[styles.main, mainCss]}>{children}</main>
       <Footer />
+      <div id="lightbox-container" />
     </Fragment>
   )
 }

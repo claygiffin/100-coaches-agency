@@ -5,6 +5,9 @@ import { VscArrowRight } from 'react-icons/vsc'
 import { absoluteFill, baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps } from '../types/customTypes'
+import { toSlug } from '../utils/helpers'
+import CoachProfile from './CoachProfile'
+import Lightbox from './Lightbox'
 
 type PropTypes = {
   featuredCoach: CoachProps
@@ -25,6 +28,7 @@ const CoachCategoryFeatured = ({
       z-index: 1;
       color: white;
       align-self: center;
+      position: relative;
       ${featuredCoach.photoAlignment === 'Right' &&
       css`
         grid-column: 2 / span 7;
@@ -49,6 +53,12 @@ const CoachCategoryFeatured = ({
         letter-spacing: 0.1em;
         font-weight: 325;
         margin: 0;
+        transition: color 300ms ease;
+      }
+      @media (hover: hover) {
+        &:hover h2 {
+          color: ${colors.goldTint2};
+        }
       }
       h3 {
         font-size: var(--fs-16);
@@ -61,16 +71,28 @@ const CoachCategoryFeatured = ({
         font-size: var(--fs-16);
         max-width: 75ch;
       }
-      button {
+      > button {
         font-size: var(--fs-14);
         text-transform: uppercase;
         letter-spacing: 0.1em;
         color: ${colors.gold};
         font-weight: 500;
-        margin: 0.5em 0 3em;
+        padding: 0.5em 0.5em 0.75em;
+        margin: 0 -0.5em 2.25em;
+        position: static;
+        transition: color 300ms ease;
         svg {
           font-size: 125%;
-          transform: translateY(12.5%);
+          transform: translate3D(0, 15%, 0);
+          transition: transform 300ms ease-in-out;
+        }
+        @media (hover: hover) {
+          &:hover {
+            color: ${colors.goldTint2};
+            svg {
+              transform: translate3d(20%, 15%, 0);
+            }
+          }
         }
       }
     `,
@@ -135,12 +157,20 @@ const CoachCategoryFeatured = ({
         <p>{featuredCoach.bioSummary}</p>
         <button>
           Read more <VscArrowRight />
+          <Lightbox
+            slug={`coaches/profiles/${toSlug(featuredCoach.name)}`}
+          >
+            <CoachProfile coach={featuredCoach} />
+          </Lightbox>
         </button>
       </div>
       <div css={styles.photo}>
         <GatsbyImage
           image={featuredCoach.photo.large}
-          alt={featuredCoach.photo.alt || ''}
+          alt={
+            featuredCoach.photo.alt ||
+            `${featuredCoach.name} — ${featuredCoach.jobTitle}`
+          }
         />
       </div>
       <svg css={styles.bottomCurve} viewBox="0 0 1440 34">
