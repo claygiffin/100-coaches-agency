@@ -21,7 +21,7 @@ const GlobalStyles = () => {
       --fs-24: max(1.667rem, 1.5rem + 0.417vw);
       --fs-21: max(1.5rem, 1.25rem + 0.417vw);
       --fs-18: max(1.333rem, 1rem + 0.417vw);
-      --fs-16: max(1.333rem, 0.8333rem + 0.417vw);
+      --fs-16: max(1.25rem, 0.8333rem + 0.417vw);
       --fs-15: 1.25rem;
       --fs-14: 1.167rem;
       --fs-13: 1.0888rem;

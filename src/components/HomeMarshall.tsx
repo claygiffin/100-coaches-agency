@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
@@ -8,6 +8,7 @@ import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
+import ArrowButton from './ArrowButton'
 
 const HomeMarshall = () => {
   const { home } = useStaticQuery(graphql`
@@ -74,13 +75,17 @@ const HomeMarshall = () => {
     body: css`
       grid-column: span 5 / -2;
       font-size: var(--fs-21);
-      ${mq().m} {
+      ${mq().ml} {
         grid-column-start: span 6;
       }
       ${mq().ms} {
         grid-column-start: 2;
         margin-bottom: 2.5em;
       }
+    `,
+    button: css`
+      font-size: var(--fs-16);
+      margin-top: 2.25em;
     `,
     imageWrap: css`
       position: fixed;
@@ -141,6 +146,13 @@ const HomeMarshall = () => {
             dangerouslySetInnerHTML={{
               __html: home.marshallBodyNode.childMarkdownRemark.html,
             }}
+          />
+          <ArrowButton
+            as={Link}
+            to="/our-story"
+            text="Read more"
+            style="OUTLINE"
+            css={styles.button}
           />
         </AnimateIn>
       </div>

@@ -1,11 +1,11 @@
 import { css } from '@emotion/react'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import { VscArrowRight } from 'react-icons/vsc'
 
-import { absoluteFill, baseGrid } from '../theme/mixins'
+import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps } from '../types/customTypes'
 import { toSlug } from '../utils/helpers'
+import ArrowButton from './ArrowButton'
 import CoachProfile from './CoachProfile'
 import Lightbox from './Lightbox'
 
@@ -32,10 +32,16 @@ const CoachCategoryFeatured = ({
       ${featuredCoach.photoAlignment === 'Right' &&
       css`
         grid-column: 2 / span 7;
+        ${mq().m} {
+          grid-column-end: span 6;
+        }
       `}
       ${featuredCoach.photoAlignment === 'Left' &&
       css`
         grid-column: span 7 / -2;
+        ${mq().m} {
+          grid-column-start: span 6;
+        }
       `}
       > span {
         display: block;
@@ -54,6 +60,9 @@ const CoachCategoryFeatured = ({
         font-weight: 325;
         margin: 0;
         transition: color 300ms ease;
+        ${mq().s} {
+          font-size: var(--fs-30);
+        }
       }
       @media (hover: hover) {
         &:hover h2 {
@@ -66,47 +75,56 @@ const CoachCategoryFeatured = ({
         font-style: italic;
         color: #aaa;
         margin: 0.75em 0 1.5em;
+        ${mq().s} {
+          font-size: var(--fs-14);
+          margin-bottom: 1em;
+        }
       }
       p {
         font-size: var(--fs-16);
         max-width: 75ch;
-      }
-      > button {
-        font-size: var(--fs-14);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: ${colors.gold};
-        font-weight: 500;
-        padding: 0.5em 0.5em 0.75em;
-        margin: 0 -0.5em 2.25em;
-        position: static;
-        transition: color 300ms ease;
-        svg {
-          font-size: 125%;
-          transform: translate3D(0, 15%, 0);
-          transition: transform 300ms ease-in-out;
-        }
-        @media (hover: hover) {
-          &:hover {
-            color: ${colors.goldTint2};
-            svg {
-              transform: translate3d(20%, 15%, 0);
-            }
-          }
+        ${mq().ms} {
+          display: none;
         }
       }
     `,
     photo: css`
       position: absolute;
       bottom: 0;
+      display: flex;
+      width: 100%;
+      min-height: 100%;
+      max-height: 110%;
       ${featuredCoach.photoAlignment === 'Right' &&
       css`
         grid-column: span 6 / -1;
+        ${mq().m} {
+          grid-column-start: span 8;
+        }
+        ${mq().s} {
+          grid-column-start: span 9;
+        }
       `}
       ${featuredCoach.photoAlignment === 'Left' &&
       css`
         grid-column: 1 / span 6;
+        ${mq().m} {
+          grid-column-end: span 8;
+        }
+        ${mq().s} {
+          grid-column-end: span 9;
+        }
       `}
+      > div {
+        width: 100%;
+        > div {
+          max-width: none !important;
+        }
+      }
+    `,
+    button: css`
+      margin-bottom: 2.25em;
+      position: static;
     `,
     background: css`
       ${absoluteFill}
@@ -155,14 +173,13 @@ const CoachCategoryFeatured = ({
           {featuredCoach.jobTitleExtended || featuredCoach.jobTitle}
         </h3>
         <p>{featuredCoach.bioSummary}</p>
-        <button>
-          Read more <VscArrowRight />
+        <ArrowButton text="Read more" css={styles.button}>
           <Lightbox
             slug={`coaches/profiles/${toSlug(featuredCoach.name)}`}
           >
             <CoachProfile coach={featuredCoach} />
           </Lightbox>
-        </button>
+        </ArrowButton>
       </div>
       <div css={styles.photo}>
         <GatsbyImage
@@ -170,6 +187,11 @@ const CoachCategoryFeatured = ({
           alt={
             featuredCoach.photo.alt ||
             `${featuredCoach.name} — ${featuredCoach.jobTitle}`
+          }
+          objectPosition={
+            featuredCoach.photoAlignment === 'Right'
+              ? '0% 0%'
+              : '100% 0%'
           }
         />
       </div>

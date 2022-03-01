@@ -5,6 +5,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { StructuredText } from 'react-datocms'
 
 import { useElementRect } from '../hooks/useElementRect'
+import { mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps } from '../types/customTypes'
 import Seo from './Seo'
@@ -35,6 +36,9 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
       ${coach.photoAlignment === 'Right' &&
       css`
         grid-template-columns: 3fr 2fr;
+        ${mq().ms} {
+          grid-template-columns: 1fr 1fr;
+        }
       `}
       ${coach.photoAlignment === 'Left' &&
       css`
@@ -56,7 +60,7 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
     headerText: css`
       position: relative;
       color: white;
-      padding: calc(var(--gutter-md) + 6%) var(--gutter-sm)
+      padding: calc(var(--gutter-md) + 10%) var(--gutter-sm)
         var(--gutter-md) var(--gutter-lg);
       grid-row: 2 / 3;
       ${coach.photoAlignment === 'Right' &&
@@ -67,12 +71,19 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
       css`
         grid-column: 2 / 3;
       `}
+      ${mq().ms} {
+        padding-top: calc(var(--gutter-md) + 12%);
+        padding-left: var(--gutter-md);
+      }
       h1 {
         font-size: var(--fs-48);
         text-transform: uppercase;
         letter-spacing: 0.1em;
         font-weight: 325;
         margin: 0.333em 0 0;
+        ${mq().ms} {
+          font-size: var(--fs-30);
+        }
       }
       h2 {
         font-family: var(--sans-serif);
@@ -81,10 +92,14 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
         font-style: italic;
         color: #ddd;
         margin: 0.75em 0 2em;
+        ${mq().ms} {
+          font-size: var(--fs-14);
+        }
       }
     `,
     photoWrap: css`
       grid-row: 1 / 3;
+      display: flex;
       ${coach.photoAlignment === 'Right' &&
       css`
         grid-column: 2 / 3;
@@ -93,11 +108,22 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
       css`
         grid-column: 1 / 2;
       `}
+      > div {
+        width: 100%;
+        > div {
+          max-width: none !important;
+        }
+      }
     `,
     body: css`
       background-color: #fff;
+      color: #555;
       padding: var(--gutter-md) var(--gutter-lg) var(--gutter-lg);
       pointer-events: all;
+      ${mq().ms} {
+        padding-left: var(--gutter-md);
+        padding-right: var(--gutter-md);
+      }
     `,
   }
   return (
@@ -145,8 +171,9 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
         </div>
         <div css={styles.photoWrap}>
           <GatsbyImage
-            image={coach.photo.large}
+            image={coach.photo.small}
             alt={coach.photo.alt || `${coach.name} — ${coach.jobTitle}`}
+            objectPosition="0% 0%"
           />
         </div>
       </section>

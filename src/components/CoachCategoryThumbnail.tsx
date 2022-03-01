@@ -3,6 +3,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import { uniqueId } from 'lodash'
 import { useMemo } from 'react'
 
+import { mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps } from '../types/customTypes'
 import { toSlug } from '../utils/helpers'
@@ -72,6 +73,9 @@ const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
         max-width: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        ${mq().s} {
+          font-size: var(--fs-16);
+        }
         &:after {
           content: '';
           width: 1.5em;
@@ -88,6 +92,9 @@ const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
         font-weight: 300;
         font-style: italic;
         margin: 0.25em 0 1.5em;
+        ${mq().s} {
+          font-size: var(--fs-13);
+        }
       }
     `,
   }

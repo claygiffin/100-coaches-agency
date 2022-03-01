@@ -81,7 +81,7 @@ const HomeHero = () => {
       margin-top: 0.75em;
       margin-bottom: 0;
       z-index: 2;
-      ${mq().ml} {
+      ${mq().ls} {
         text-align: center;
       }
       > span > span {
@@ -89,7 +89,7 @@ const HomeHero = () => {
         display: inline-block;
         z-index: 2;
         width: 100%;
-        ${mq().ml} {
+        ${mq().ls} {
           display: inline;
         }
         &:nth-of-type(1) {

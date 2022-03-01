@@ -181,7 +181,7 @@ const Lightbox = ({
     `,
     closeButton: css`
       pointer-events: all;
-      position: absolute;
+      position: fixed;
       top: 0;
       right: 0;
       width: 1.25rem;
@@ -202,7 +202,7 @@ const Lightbox = ({
         }
       }
       display: none;
-      ${mq().m} {
+      ${mq().ml} {
         display: block;
       }
     `,
@@ -213,13 +213,12 @@ const Lightbox = ({
       top: 0;
       left: 0;
       z-index: 10;
-      animation-name: ${animations.blurIn};
-      animation-duration: 300ms;
-      animation-timing-function: linear;
-      animation-fill-mode: forwards;
+      background-color: #f2f2f2aa;
+      backdrop-filter: blur(0.333rem);
       ${closing &&
       css`
-        animation-name: ${animations.blurOut};
+        background-color: transparent;
+        backdrop-filter: none;
       `}
     `,
     backgroundClose: css`
@@ -228,6 +227,10 @@ const Lightbox = ({
       grid-column: 1 / -1;
       z-index: 0;
       cursor: url(${closeX}) 21 21, auto;
+      ${closing &&
+      css`
+        display: none;
+      `}
     `,
   }
   return (
@@ -251,32 +254,30 @@ const Lightbox = ({
                 onClick={handleBack}
                 aria-hidden
               />
-              <div css={styles.content}>
-                {children}
-                <svg
-                  css={styles.closeButton}
-                  aria-label="Close Lightbox"
-                  onClick={handleBack}
-                  onKeyPress={handleBack}
-                  tabIndex={0}
-                  width="15px"
-                  height="15px"
-                  viewBox="0 0 15 15"
-                >
-                  <line
-                    x1="0.535714286"
-                    y1="0.535714286"
-                    x2="14.4642857"
-                    y2="14.4642857"
-                  />
-                  <line
-                    x1="14.4642857"
-                    y1="0.535714286"
-                    x2="0.535714286"
-                    y2="14.4642857"
-                  />
-                </svg>
-              </div>
+              <div css={styles.content}>{children}</div>
+              <svg
+                css={styles.closeButton}
+                aria-label="Close Lightbox"
+                onClick={handleBack}
+                onKeyPress={handleBack}
+                tabIndex={0}
+                width="15px"
+                height="15px"
+                viewBox="0 0 15 15"
+              >
+                <line
+                  x1="0.535714286"
+                  y1="0.535714286"
+                  x2="14.4642857"
+                  y2="14.4642857"
+                />
+                <line
+                  x1="14.4642857"
+                  y1="0.535714286"
+                  x2="0.535714286"
+                  y2="14.4642857"
+                />
+              </svg>
             </div>
           </Fragment>,
           portalTarget

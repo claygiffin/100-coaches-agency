@@ -4,7 +4,7 @@ import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
-import { absoluteFill } from '../theme/mixins'
+import { absoluteFill, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import CoachCategoryMenu from './CoachCategoryMenu'
 import LogoHorizontal from './LogoHorizontal'
@@ -87,6 +87,11 @@ const Nav = ({ homeNav }: NavProps) => {
       align-items: center;
       margin-right: var(--gutter-md);
       z-index: 1;
+      ${mq().ml} {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
     `,
     link: css`
       color: #fff;

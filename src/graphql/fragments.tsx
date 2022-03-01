@@ -12,8 +12,8 @@ export const CoachFragment = graphql`
         imgixParams: { q: 65, fit: "facearea", facepad: 3.5, sat: -100 }
       )
       large: gatsbyImageData(
-        width: 800
-        imgixParams: { q: 80, sat: -100 }
+        width: 720
+        imgixParams: { q: 75, sat: -100 }
       )
       small: gatsbyImageData(
         width: 400

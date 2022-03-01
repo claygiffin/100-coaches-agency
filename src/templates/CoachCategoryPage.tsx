@@ -6,7 +6,7 @@ import CoachCategoryNav from '../components/CoachCategoryNav'
 import CoachCategoryThumbnail from '../components/CoachCategoryThumbnail'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
-import { baseGrid } from '../theme/mixins'
+import { baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps, SeoProps } from '../types/customTypes'
 
@@ -85,6 +85,12 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
       grid-gap: var(--gutter-sm);
       padding: var(--gutter-md) var(--gutter-md)
         calc(var(--gutter-xlg) + 5vw);
+      ${mq().ml} {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      ${mq().ms} {
+        grid-template-columns: repeat(2, 1fr);
+      }
     `,
   }
   return (
