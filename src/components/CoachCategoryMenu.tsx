@@ -10,7 +10,7 @@ import {
 import { createPortal } from 'react-dom'
 import { BsChevronRight } from 'react-icons/bs'
 
-import { absoluteFill } from '../theme/mixins'
+import { absoluteFill, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { toSlug } from '../utils/helpers'
 import ScrollToggle from './ScrollToggle'
@@ -112,6 +112,10 @@ const CoachCategoryMenu = () => {
       display: grid;
       grid-template-columns: 1fr 2fr;
       z-index: 10;
+      ${mq().ms} {
+        grid-template-columns: 1fr;
+        overflow: auto;
+      }
     `,
     intro: css`
       background: linear-gradient(to top right, #333, #222);
@@ -137,6 +141,9 @@ const CoachCategoryMenu = () => {
           font-style: normal;
         }
       }
+      ${mq().ms} {
+        padding: var(--gutter-xlg) var(--margin-outer) var(--gutter-lg);
+      }
     `,
     linksOuter: css`
       background: linear-gradient(to top right, #444, #222);
@@ -155,13 +162,21 @@ const CoachCategoryMenu = () => {
         transform: translate3d(0, 0, 0);
         animation-name: ${animations.linksOut};
       `}
+      ${mq().ms} {
+        grid-template-columns: 1fr;
+        overflow: visible;
+        padding: var(--gutter-md) var(--margin-outer);
+      }
     `,
     linksInner: css`
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-column-gap: var(--gutter-md);
-      grid-row-gap: calc(2 * var(--gutter-md));
+      grid-row-gap: max(calc(2 * var(--gutter-md)), 3rem);
       margin-top: 1em;
+      ${mq().ms} {
+        grid-template-columns: 1fr;
+      }
     `,
     link: css`
       color: #fff;
@@ -174,12 +189,17 @@ const CoachCategoryMenu = () => {
         height: 1px;
         background: #ffffff33;
         position: absolute;
-        top: calc(-1 * var(--gutter-md));
+        top: min(calc(-1 * var(--gutter-md)), -1.5rem);
         left: 0;
         pointer-events: none;
       }
       &:nth-of-type(-n + 2):after {
         display: none;
+      }
+      ${mq().ms} {
+        &:nth-of-type(2):after {
+          display: block;
+        }
       }
       &:before {
         content: '';
@@ -193,6 +213,9 @@ const CoachCategoryMenu = () => {
       }
       h3 {
         position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
         color: ${colors.gold};
         font-family: var(--serif);
         font-weight: 310;
@@ -200,9 +223,8 @@ const CoachCategoryMenu = () => {
         margin: 0;
         transition: color 300ms ease;
         svg {
-          position: absolute;
-          right: 0;
-          top: 0.0875em;
+          flex: none;
+          margin-top: 0.0875em;
           color: #ffffff33;
           transition: color 300ms ease;
         }
@@ -215,6 +237,9 @@ const CoachCategoryMenu = () => {
         line-height: 1.5;
         color: #ddd;
         position: relative;
+        ${mq().ms} {
+          font-size: var(--fs-14);
+        }
       }
       @media (hover: hover) {
         &:hover {
@@ -282,8 +307,10 @@ const CoachCategoryMenu = () => {
                     css={styles.link}
                   >
                     <h3>
-                      {category.categoryName}{' '}
-                      {category.categoryNameSuffix}
+                      <span>
+                        {category.categoryName}{' '}
+                        {category.categoryNameSuffix}
+                      </span>
                       <BsChevronRight />
                     </h3>
                     <h4>{category.description}</h4>
