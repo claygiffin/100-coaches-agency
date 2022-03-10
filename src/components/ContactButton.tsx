@@ -1,17 +1,16 @@
 import { css } from '@emotion/react'
-import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { IoChatbubbleEllipses } from 'react-icons/io5'
-import smoothscroll from 'smoothscroll-polyfill'
 
 import { useElementWidth } from '../hooks/useElementRect'
 import { colors } from '../theme/variables'
+import ContactLightbox from './ContactLightbox'
 
 type Props = {
-  anchorId: `#${string}`
   text: string
 }
 
-const WorkWithUsButton = ({ anchorId, text }: Props) => {
+const ContactButton = ({ text }: Props) => {
   const [textRef, setTextRef] = useState(null)
   const textRefSetter = useCallback(node => {
     setTextRef(node)
@@ -19,17 +18,9 @@ const WorkWithUsButton = ({ anchorId, text }: Props) => {
 
   const textWidth = useElementWidth(textRef)
 
-  useEffect(() => smoothscroll.polyfill(), [])
-
-  const handleClick = (e: SyntheticEvent) => {
-    e.preventDefault()
-    const anchorTarget =
-      document.getElementById(anchorId.substring(1)) || document.body
-    anchorTarget.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
   const styles = {
     button: css`
+      position: relative;
       display: flex;
       align-items: center;
       position: fixed;
@@ -67,23 +58,23 @@ const WorkWithUsButton = ({ anchorId, text }: Props) => {
         padding-right: 0.5em;
       }
       @media (hover: hover) {
-        a:hover > & {
+        button:hover > & {
           width: ${textWidth}px;
-          transition-duration: 450ms;
-          transition-timing-function: cubic-bezier(0.7, 0, 0.5, 1);
+          transition-duration: 300ms;
+          transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
         }
       }
     `,
   }
   return (
-    <a href={anchorId} css={styles.button} onClick={handleClick}>
-      {/* <GrContact /> */}
+    <button css={styles.button}>
       <IoChatbubbleEllipses css={styles.icon} />
       <span css={styles.text}>
         <span ref={textRefSetter}>{text}</span>
       </span>
-    </a>
+      <ContactLightbox />
+    </button>
   )
 }
 
-export default WorkWithUsButton
+export default ContactButton

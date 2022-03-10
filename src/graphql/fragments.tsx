@@ -44,6 +44,49 @@ export const CoachFragment = graphql`
     }
   }
 `
+export const TeamMemberFragment = graphql`
+  fragment TeamMemberFragment on DatoCmsTeamMember {
+    __typename
+    id: originalId
+    name
+    photo {
+      thumbnail: gatsbyImageData(
+        width: 360
+        aspectRatio: 1
+        imgixParams: { q: 65, fit: "facearea", facepad: 3.5, sat: -100 }
+      )
+      large: gatsbyImageData(
+        width: 720
+        imgixParams: { q: 75, sat: -100 }
+      )
+      small: gatsbyImageData(
+        width: 400
+        imgixParams: { q: 65, sat: -100 }
+      )
+      thumbnailUrl: url(
+        imgixParams: {
+          q: 65
+          w: "800"
+          h: "800"
+          fit: "facearea"
+          facepad: 3.5
+          sat: -100
+          bg: "FFFFFF"
+        }
+      )
+      alt
+    }
+    jobTitle
+    jobTitleExtended
+    photoAlignment
+    bio {
+      value
+    }
+    seo {
+      ...SeoFragment
+    }
+  }
+`
 export const FormFragment = graphql`
   fragment FormFragment on DatoCmsForm {
     __typename
@@ -88,6 +131,16 @@ export const SeoFragment = graphql`
     description
     image {
       url(imgixParams: { maxW: 800, maxH: 800, fit: "crop" })
+    }
+  }
+`
+export const TitleDescriptionFragment = graphql`
+  fragment TitleDescriptionFragment on DatoCmsTitleDescription {
+    title
+    descriptionNode {
+      childMarkdownRemark {
+        html
+      }
     }
   }
 `

@@ -17,7 +17,7 @@ export type CoachProps = {
   bio: {
     value: any
   }
-  bioSummary: string
+  bioSummary?: string
   seo: SeoProps
 }
 

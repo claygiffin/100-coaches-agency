@@ -149,8 +149,8 @@ const HomeMarshall = () => {
           />
           <ArrowButton
             as={Link}
-            to="/our-story"
-            text="Read more"
+            to="/about"
+            text="Learn more about us"
             style="OUTLINE"
             css={styles.button}
           />

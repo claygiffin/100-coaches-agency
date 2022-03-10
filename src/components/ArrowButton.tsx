@@ -38,7 +38,11 @@ const ArrowButton = <E extends ElementType>({
       margin-left: -0.5em;
       position: relative;
       transition: color 300ms ease;
-      color: ${color === 'GOLD_LIGHT' ? colors.gold : '#fff'};
+      color: ${color === 'GOLD_LIGHT'
+        ? colors.gold
+        : color === 'GOLD_DARK'
+        ? colors.goldShade1
+        : '#fff'};
       ${style === 'OUTLINE' &&
       css`
         margin-left: 0;

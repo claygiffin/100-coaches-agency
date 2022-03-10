@@ -2,6 +2,7 @@ import { SerializedStyles, css } from '@emotion/react'
 import { Fragment, ReactNode } from 'react'
 
 import GlobalStyles from '../theme/GlobalStyles'
+import ContactButton from './ContactButton'
 import Footer from './Footer'
 import Nav from './Nav'
 
@@ -23,6 +24,7 @@ const Layout = ({ children, mainCss, homeNav }: LayoutProps) => {
       <Nav homeNav={homeNav} />
       <main css={[styles.main, mainCss]}>{children}</main>
       <Footer />
+      <ContactButton text="Work With Us" />
       <div id="lightbox-container" />
     </Fragment>
   )

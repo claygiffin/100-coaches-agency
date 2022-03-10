@@ -7,6 +7,7 @@ import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import CoachCategoryMenu from './CoachCategoryMenu'
+import ContactLightbox from './ContactLightbox'
 import LogoHorizontal from './LogoHorizontal'
 
 type NavProps = {
@@ -178,13 +179,16 @@ const Nav = ({ homeNav }: NavProps) => {
           Coaches
           <CoachCategoryMenu />
         </span>
-        <Link css={styles.link} to="/">
-          Our Story
+        <Link css={styles.link} to="/about">
+          About Us
         </Link>
-        <Link css={styles.link} to="/">
-          Lorem Ipsum
+        <Link css={styles.link} to="/speakers-and-workshops">
+          Speakers & Workshops
         </Link>
-        <button css={[styles.link, styles.button]}>Work With Us</button>
+        <button css={[styles.link, styles.button]}>
+          Work With Us
+          <ContactLightbox />
+        </button>
       </div>
     </nav>
   )

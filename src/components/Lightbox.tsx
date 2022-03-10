@@ -23,7 +23,7 @@ const Lightbox = ({
   onClick = () => {
     return
   },
-  slug = '',
+  slug,
   children,
 }: LightboxProps) => {
   const isBrowser = typeof window !== `undefined`
@@ -91,22 +91,22 @@ const Lightbox = ({
         background-color: transparent;
       }
       99% {
-        background-color: #f2f2f2cc;
+        background-color: #f8f8f8dd;
         backdrop-filter: blur(0);
       }
       100% {
-        background-color: #f2f2f2cc;
+        background-color: #f8f8f8dd;
         backdrop-filter: blur(0.333rem);
       }
     `,
     blurOut: keyframes`
       0% {
         backdrop-filter: blur(0.333rem);
-        background-color: #f2f2f2cc;
+        background-color: #f8f8f8dd;
       }
       1% {
         backdrop-filter: blur(0);
-        background-color: #f2f2f2cc;
+        background-color: #f8f8f8dd;
       }
       100% {
         background-color: transparent;
@@ -196,14 +196,14 @@ const Lightbox = ({
         transition: color 300ms ease;
       }
       @media (hover: hover) {
+        display: none;
+        ${mq().ml} {
+          display: block;
+        }
         &:hover {
           transform: scale3d(1.25, 1.25, 1.25);
           color: ${colors.gold};
         }
-      }
-      display: none;
-      ${mq().ml} {
-        display: block;
       }
     `,
     background: css`
@@ -213,10 +213,15 @@ const Lightbox = ({
       top: 0;
       left: 0;
       z-index: 10;
-      background-color: #f2f2f2aa;
-      backdrop-filter: blur(0.333rem);
+      /* background-color: #f2f2f2aa;
+      backdrop-filter: blur(0.333rem); */
+      animation-name: ${animations.blurIn};
+      animation-duration: 300ms;
+      animation-timing-function: ease-in;
+      animation-fill-mode: forwards;
       ${closing &&
       css`
+        animation-name: ${animations.blurOut};
         background-color: transparent;
         backdrop-filter: none;
       `}
@@ -226,7 +231,7 @@ const Lightbox = ({
       grid-row: 1 / 4;
       grid-column: 1 / -1;
       z-index: 0;
-      cursor: url(${closeX}) 21 21, auto;
+      cursor: url(${closeX}) 22.5 22.5, auto;
       ${closing &&
       css`
         display: none;
