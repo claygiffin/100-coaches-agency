@@ -1,8 +1,8 @@
 import { css } from '@emotion/react'
 import { graphql } from 'gatsby'
 
+import CategoryNav from '../components/CategoryNav'
 import CoachCategoryFeatured from '../components/CoachCategoryFeatured'
-import CoachCategoryNav from '../components/CoachCategoryNav'
 import CoachCategoryThumbnail from '../components/CoachCategoryThumbnail'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
@@ -12,11 +12,18 @@ import { CoachProps, SeoProps } from '../types/customTypes'
 
 export const data = graphql`
   query ($categoryName: String!, $featuredCoachId: String!) {
+    categories: allDatoCmsCoachCategory(
+      sort: { fields: position, order: ASC }
+    ) {
+      nodes {
+        categoryName
+      }
+    }
     category: datoCmsCoachCategory(
       categoryName: { eq: $categoryName }
     ) {
       categoryName
-      categoryNameSuffix
+      categoryNameFull
       description
       featuredCoach {
         ...CoachFragment
@@ -43,9 +50,14 @@ export const data = graphql`
 
 type PropTypes = {
   data: {
+    categories: {
+      nodes: {
+        categoryName: string
+      }[]
+    }
     category: {
       categoryName: string
-      categoryNameSuffix: string
+      categoryNameFull: string
       description: string
       featuredCoach: CoachProps
       seo: SeoProps
@@ -57,7 +69,7 @@ type PropTypes = {
 }
 
 const CoachCategoryPage = ({ data }: PropTypes) => {
-  const { category, coaches } = data
+  const { categories, category, coaches } = data
 
   const styles = {
     intro: css`
@@ -98,15 +110,18 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
       <Seo
         title={
           category.seo?.title ||
-          `${category.categoryName} ${category.categoryNameSuffix}`
+          category.categoryNameFull ||
+          category.categoryName
         }
         description={category.seo?.description}
       />
       <section css={styles.intro}>
-        <CoachCategoryNav current={category.categoryName} />
-        <h1>
-          {category.categoryName} {category.categoryNameSuffix}
-        </h1>
+        <CategoryNav
+          categories={categories}
+          current={category.categoryName}
+          path="/coaches/"
+        />
+        <h1>{category.categoryNameFull || category.categoryName}</h1>
         <p>{category.description}</p>
       </section>
       <CoachCategoryFeatured featuredCoach={category.featuredCoach} />

@@ -8,7 +8,17 @@ import { absoluteFill } from '../theme/mixins'
 import { colors } from '../theme/variables'
 
 const AboutHow = () => {
-  const { page } = useStaticQuery(graphql`
+  type QueryProps = {
+    page: {
+      howHeading: string
+      howBodyNode: { childMarkdownRemark: { html: string } }
+      howDetails: Array<{
+        title: string
+        descriptionNode: { childMarkdownRemark: { html: string } }
+      }>
+    }
+  }
+  const { page }: QueryProps = useStaticQuery(graphql`
     query {
       page: datoCmsAboutPage {
         howHeading
@@ -51,7 +61,7 @@ const AboutHow = () => {
     `,
     heading: css`
       font-size: var(--fs-60);
-      margin: 0;
+      margin: 0.5em 0 0;
       color: ${colors.goldTint1};
     `,
     body: css`
@@ -97,7 +107,7 @@ const AboutHow = () => {
           __html: page.howBodyNode.childMarkdownRemark.html,
         }}
       />
-      {page.howDetails.map((detail: any, i: number) => (
+      {page.howDetails.map((detail, i: number) => (
         <div key={i}>
           <h3 css={styles.title}>{detail.title}</h3>
           <div

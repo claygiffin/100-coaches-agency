@@ -9,6 +9,7 @@ import { colors } from '../theme/variables'
 import CoachCategoryMenu from './CoachCategoryMenu'
 import ContactLightbox from './ContactLightbox'
 import LogoHorizontal from './LogoHorizontal'
+import SwCategoryMenu from './SwCategoryMenu'
 
 type NavProps = {
   homeNav?: boolean
@@ -179,11 +180,12 @@ const Nav = ({ homeNav }: NavProps) => {
           Coaches
           <CoachCategoryMenu />
         </span>
+        <span css={styles.link}>
+          Speakers & Workshops
+          <SwCategoryMenu />
+        </span>
         <Link css={styles.link} to="/about">
           About Us
-        </Link>
-        <Link css={styles.link} to="/speakers-and-workshops">
-          Speakers & Workshops
         </Link>
         <button css={[styles.link, styles.button]}>
           Work With Us

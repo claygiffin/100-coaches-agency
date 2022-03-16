@@ -25,16 +25,17 @@ const ContactLightbox = () => {
     formContainer: css`
       pointer-events: all;
       background: linear-gradient(to top right, #222, #555);
-      padding: var(--gutter-md);
+      padding: var(--gutter-sm) var(--gutter-md);
       box-sizing: border-box;
-      width: 100vw;
+      width: calc(100% - 1.5rem);
       max-width: 48ch;
       color: white;
+      margin: 0 0.75rem;
     `,
     heading: css`
       font-size: var(--fs-48);
       font-weight: 325;
-      margin: 0;
+      margin: 0.5em 0 0;
       em {
         font-style: normal;
         color: ${colors.goldTint1};
@@ -43,6 +44,9 @@ const ContactLightbox = () => {
     body: css`
       font-size: var(--fs-16);
       margin-bottom: 2em;
+    `,
+    form: css`
+      margin-bottom: 2.5rem;
     `,
   }
   return (
@@ -61,7 +65,7 @@ const ContactLightbox = () => {
               contactForm.lightboxBodyNode.childMarkdownRemark.html,
           }}
         />
-        <Form data={contactForm.form[0]} />
+        <Form css={styles.form} data={contactForm.form[0]} />
       </div>
     </Lightbox>
   )

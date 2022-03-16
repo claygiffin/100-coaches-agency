@@ -8,7 +8,7 @@ interface OwnProps<E extends ElementType = ElementType> {
   as?: E
   text: string
   children?: ReactNode
-  style?: 'OUTLINE' | 'FILL'
+  style?: 'INLINE' | 'OUTLINE' | 'FILL'
   color?: 'GOLD_LIGHT' | 'GOLD_DARK' | 'WHITE'
   css?: SerializedStyles
 }
@@ -18,7 +18,7 @@ type PropTypes<E extends ElementType> = OwnProps<E> &
 const ArrowButton = <E extends ElementType>({
   text,
   children,
-  style,
+  style = 'INLINE',
   color = 'GOLD_LIGHT',
   as,
   ...props
@@ -61,7 +61,7 @@ const ArrowButton = <E extends ElementType>({
             ? colors.goldTint2
             : color === 'GOLD_DARK'
             ? colors.goldShade2
-            : '#ffffffaa'};
+            : '#ffffffcc'};
           svg {
             transform: translate3d(20%, 15%, 0);
           }

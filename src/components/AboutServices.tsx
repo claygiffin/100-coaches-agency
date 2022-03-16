@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import DatoLink from './DatoLink'
 
 const AboutServices = () => {
   const { page } = useStaticQuery(graphql`
@@ -13,7 +14,23 @@ const AboutServices = () => {
       page: datoCmsAboutPage {
         servicesHeading
         services {
-          ...TitleDescriptionFragment
+          title
+          descriptionNode {
+            childMarkdownRemark {
+              html
+            }
+          }
+          link {
+            ... on DatoCmsInternalLink {
+              ...InternalLinkFragment
+            }
+            ... on DatoCmsCoachMenuLink {
+              ...CoachMenuLinkFragment
+            }
+            ... on DatoCmsSWMenuLink {
+              ...SWMenuLinkFragment
+            }
+          }
         }
       }
     }
@@ -30,15 +47,13 @@ const AboutServices = () => {
     section: css`
       position: relative;
       display: grid;
-      padding: calc(var(--gutter-md) + 7vw) var(--margin-outer)
+      padding: calc(var(--gutter-sm) + 7vw) var(--margin-outer)
         calc(var(--gutter-lg) + 4vw);
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       grid-column-gap: var(--gutter-lg);
+      margin-top: -2.5vw;
       color: #fff;
-      ${mq().ml}{
-        grid-template-columns: repeat(2, 1fr);
-      }
-      ${mq().m}{
+      ${mq().m} {
         grid-template-columns: 1fr;
       }
       &:before {
@@ -55,7 +70,7 @@ const AboutServices = () => {
     heading: css`
       font-size: var(--fs-60);
       grid-column: 1 / -1;
-      margin: 0 0 0.5em;
+      margin: 0.5em 0;
     `,
     title: css`
       font-size: var(--fs-21);
@@ -68,7 +83,10 @@ const AboutServices = () => {
       font-size: var(--fs-18);
       font-weight: 600;
       max-width: 80ch;
-      margin-bottom: 2em;
+      margin-bottom: 1.5em;
+    `,
+    link: css`
+      margin-bottom: 3em;
     `,
   }
   return (
@@ -99,6 +117,13 @@ const AboutServices = () => {
             dangerouslySetInnerHTML={{
               __html: service.descriptionNode.childMarkdownRemark.html,
             }}
+          />
+          <DatoLink
+            css={styles.link}
+            link={service.link[0]}
+            buttonColor="WHITE"
+            buttonStyle="OUTLINE"
+            arrowButton
           />
         </div>
       ))}

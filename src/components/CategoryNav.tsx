@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { Link } from 'gatsby'
 import { Fragment, useCallback, useMemo, useState } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 
@@ -10,18 +10,23 @@ import {
 import { colors } from '../theme/variables'
 import { toSlug } from '../utils/helpers'
 
-const CoachCategoryNav = ({ current = '' }) => {
-  const { categories } = useStaticQuery(graphql`
-    query {
-      categories: allDatoCmsCoachCategory(
-        sort: { fields: position, order: ASC }
-      ) {
-        nodes {
-          categoryName
-        }
-      }
-    }
-  `)
+type PropTypes = {
+  current: string
+  categories: {
+    nodes: Array<{
+      categoryName: string
+    }>
+  }
+  path: string
+  theme?: 'DARK' | 'LIGHT'
+}
+
+const CategoryNav = ({
+  current = '',
+  categories,
+  path,
+  theme = 'DARK',
+}: PropTypes) => {
   const [navRef, setNavRef] = useState(null)
   const navRefCallback = useCallback(node => {
     setNavRef(node)
@@ -104,7 +109,7 @@ const CoachCategoryNav = ({ current = '' }) => {
       line-height: 1.125;
       padding: 0.5em 0;
       font-weight: 400;
-      color: #666;
+      color: ${theme === 'DARK' ? '#666' : '#ddd'};
       text-decoration: none;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -119,18 +124,22 @@ const CoachCategoryNav = ({ current = '' }) => {
       }
     `,
     active: css`
-      color: ${colors.goldShade1};
-      border-color: ${colors.goldShade1};
+      color: ${theme === 'DARK' ? colors.goldShade1 : colors.goldTint1};
+      border-color: currentColor;
     `,
     button: css`
-      color: ${colors.goldShade1};
-      border-color: ${colors.goldShade1};
+      color: ${theme === 'DARK' ? colors.goldShade1 : colors.goldTint1};
+      border-color: ${theme === 'DARK'
+        ? colors.goldShade1
+        : colors.goldTint1};
       border-width: 1px;
       padding: 0.25em 0;
       margin-bottom: 0.5em;
       @media (hover: hover) {
         &:hover {
-          color: ${colors.goldShade3};
+          color: ${theme === 'DARK'
+            ? colors.goldShade3
+            : colors.goldTint2};
         }
       }
       svg {
@@ -157,7 +166,9 @@ const CoachCategoryNav = ({ current = '' }) => {
         <div css={styles.navItems} ref={navRefCallback}>
           {categories.nodes.map((category: any, i: number) => (
             <Link
-              to={`/coaches/${toSlug(category.categoryName)}/`}
+              to={`${('/' + path + '/').replace(/\/\//g, '/')}${toSlug(
+                category.categoryName
+              )}/`}
               css={[
                 styles.link,
                 category.categoryName === current && styles.active,
@@ -206,4 +217,4 @@ const CoachCategoryNav = ({ current = '' }) => {
   )
 }
 
-export default CoachCategoryNav
+export default CategoryNav

@@ -13,31 +13,11 @@ const AboutTeam = () => {
   const { page, team } = useStaticQuery(graphql`
     query {
       page: datoCmsAboutPage {
-        aboutHeading
-        aboutBodyNode {
-          childMarkdownRemark {
-            html
-          }
-        }
-        servicesHeading
-        services {
-          ...TitleDescriptionFragment
-        }
-        howHeading
-        howBodyNode {
-          childMarkdownRemark {
-            html
-          }
-        }
-        howDetails {
-          ...TitleDescriptionFragment
-        }
         teamHeading
-        seo {
-          ...SeoFragment
-        }
       }
-      team: allDatoCmsTeamMember {
+      team: allDatoCmsTeamMember(
+        sort: { fields: position, order: ASC }
+      ) {
         nodes {
           ...TeamMemberFragment
         }
@@ -69,7 +49,7 @@ const AboutTeam = () => {
       grid-column: 2 / -2;
       color: ${colors.goldShade1};
       font-size: var(--fs-60);
-      margin: 0 0 0.5em;
+      margin: 0.5em 0;
       position: relative;
     `,
     teamMembers: css`

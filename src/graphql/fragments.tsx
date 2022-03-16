@@ -50,15 +50,6 @@ export const TeamMemberFragment = graphql`
     id: originalId
     name
     photo {
-      thumbnail: gatsbyImageData(
-        width: 360
-        aspectRatio: 1
-        imgixParams: { q: 65, fit: "facearea", facepad: 3.5, sat: -100 }
-      )
-      large: gatsbyImageData(
-        width: 720
-        imgixParams: { q: 75, sat: -100 }
-      )
       small: gatsbyImageData(
         width: 400
         imgixParams: { q: 65, sat: -100 }
@@ -142,5 +133,27 @@ export const TitleDescriptionFragment = graphql`
         html
       }
     }
+  }
+`
+export const InternalLinkFragment = graphql`
+  fragment InternalLinkFragment on DatoCmsInternalLink {
+    id: originalId
+    __typename
+    linkText
+    url
+  }
+`
+export const CoachMenuLinkFragment = graphql`
+  fragment CoachMenuLinkFragment on DatoCmsCoachMenuLink {
+    id: originalId
+    __typename
+    linkText
+  }
+`
+export const SWMenuLinkFragment = graphql`
+  fragment SWMenuLinkFragment on DatoCmsSWMenuLink {
+    id: originalId
+    __typename
+    linkText
   }
 `

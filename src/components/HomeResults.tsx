@@ -1,6 +1,5 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { Link } from 'gatsby'
 import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
 
@@ -9,6 +8,7 @@ import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
 import ArrowButton from './ArrowButton'
+import SwCategoryMenu from './SwCategoryMenu'
 
 const HomeResults = () => {
   const { home } = useStaticQuery(graphql`
@@ -121,11 +121,12 @@ const HomeResults = () => {
           <ArrowButton
             css={styles.button}
             color="GOLD_DARK"
-            as={Link}
             style="OUTLINE"
             text="Explore our workshops"
             to="/speakers-and-workshops/"
-          />
+          >
+            <SwCategoryMenu />
+          </ArrowButton>
         </AnimateIn>
       </div>
     </section>

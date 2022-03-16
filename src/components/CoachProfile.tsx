@@ -29,6 +29,7 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
     article: css`
       font-size: var(--fs-18);
       max-width: calc(72ch + 2 * var(--gutter-lg));
+      width: 100%;
     `,
     header: css`
       display: grid;

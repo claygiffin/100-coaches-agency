@@ -23,6 +23,13 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allDatoCmsSwCategory {
+        edges {
+          node {
+            categoryName
+          }
+        }
+      }
       allDatoCmsCoach {
         edges {
           node {
@@ -43,6 +50,17 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         categoryName: node.categoryName,
         featuredCoachId: node.featuredCoach.id,
+      },
+    })
+  })
+  data.allDatoCmsSwCategory.edges.forEach(({ node }) => {
+    createPage({
+      path: `/speakers-workshops/${toSlug(node.categoryName)}/`,
+      component: path.resolve(
+        `./src/templates/SpeakersWorkshopsPage.tsx`
+      ),
+      context: {
+        categoryName: node.categoryName,
       },
     })
   })

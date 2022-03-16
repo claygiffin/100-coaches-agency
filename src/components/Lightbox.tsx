@@ -174,19 +174,20 @@ const Lightbox = ({
       `}
       ${mq().s} {
         grid-column: 1 / -1;
-        margin: 0 0.5rem;
         width: auto;
         box-sizing: border-box;
       }
     `,
     closeButton: css`
+      position: relative;
       pointer-events: all;
       position: fixed;
+      overflow: visible;
       top: 0;
       right: 0;
       width: 1.25rem;
       height: 1.25rem;
-      padding: 1.25rem;
+      padding: 1rem 1rem 1.5rem 1.5rem;
       cursor: pointer;
       transition: transform 400ms cubic-bezier(0.33, 3, 0.25, 0.5);
       color: #555;
@@ -194,6 +195,9 @@ const Lightbox = ({
         stroke: currentColor;
         stroke-width: 1.5;
         transition: color 300ms ease;
+      }
+      circle {
+        fill: #fff;
       }
       @media (hover: hover) {
         display: none;
@@ -213,8 +217,6 @@ const Lightbox = ({
       top: 0;
       left: 0;
       z-index: 10;
-      /* background-color: #f2f2f2aa;
-      backdrop-filter: blur(0.333rem); */
       animation-name: ${animations.blurIn};
       animation-duration: 300ms;
       animation-timing-function: ease-in;
@@ -270,6 +272,7 @@ const Lightbox = ({
                 height="15px"
                 viewBox="0 0 15 15"
               >
+                <circle r="15" cx="7.5" cy="7.5" />
                 <line
                   x1="0.535714286"
                   y1="0.535714286"
