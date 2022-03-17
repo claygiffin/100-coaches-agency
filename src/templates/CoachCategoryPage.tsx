@@ -27,6 +27,12 @@ export const data = graphql`
       description
       featuredCoach {
         ...CoachFragment
+        photo {
+          large: gatsbyImageData(
+            width: 720
+            imgixParams: { q: 75, sat: -100 }
+          )
+        }
       }
       seo {
         title

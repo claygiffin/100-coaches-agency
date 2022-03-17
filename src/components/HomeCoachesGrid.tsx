@@ -19,7 +19,21 @@ const HomeCoachesGrid = () => {
     query {
       coaches: allDatoCmsCoach {
         nodes {
-          ...CoachFragment
+          name
+          jobTitle
+          photo {
+            alt
+            thumbnail: gatsbyImageData(
+              width: 360
+              aspectRatio: 1
+              imgixParams: {
+                q: 65
+                fit: "facearea"
+                facepad: 3.5
+                sat: -100
+              }
+            )
+          }
         }
       }
     }

@@ -6,9 +6,7 @@ import { useMemo } from 'react'
 import { mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps } from '../types/customTypes'
-import { toSlug } from '../utils/helpers'
-import CoachProfile from './CoachProfile'
-import Lightbox from './Lightbox'
+import CoachProfileLightbox from './CoachProfileLightbox'
 
 type PropTypes = {
   coach: CoachProps
@@ -138,9 +136,7 @@ const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
         <h2>{coach.name}</h2>
         <h3>{coach.jobTitle}</h3>
       </div>
-      <Lightbox slug={`coaches/profiles/${toSlug(coach.name)}`}>
-        <CoachProfile coach={coach} />
-      </Lightbox>
+      <CoachProfileLightbox coach={coach} />
     </div>
   )
 }

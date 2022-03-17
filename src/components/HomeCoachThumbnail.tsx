@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 import { mq, scrim } from '../theme/mixins'
 import { colors } from '../theme/variables'
@@ -8,7 +8,7 @@ type CoachThumbnailProps = {
   coach: {
     photo: {
       alt?: string
-      thumbnail: any
+      thumbnail: IGatsbyImageData
     }
     name: string
     jobTitle: string

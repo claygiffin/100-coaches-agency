@@ -1,6 +1,9 @@
 import { css } from '@emotion/react'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
+import { useMemo } from 'react'
 
 import CategoryNav from '../components/CategoryNav'
+import { useWindowDimensions } from '../hooks/useWindowDimensions'
 import { absoluteFill, baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
 
@@ -9,6 +12,11 @@ type PropTypes = {
     categoryName: string
     categoryNameFull?: string
     description: string
+    heroImage: {
+      horizontal: IGatsbyImageData
+      vertical: IGatsbyImageData
+      alt?: string
+    }
   }
   allCategories: {
     nodes: {
@@ -19,6 +27,15 @@ type PropTypes = {
 }
 
 const SwIntro = ({ category, allCategories }: PropTypes) => {
+  const windowDimensions = useWindowDimensions()
+
+  const heroImage = useMemo(() => {
+    if (windowDimensions.width > windowDimensions.height) {
+      return category.heroImage.horizontal
+    } else {
+      return category.heroImage.vertical
+    }
+  }, [windowDimensions, category.heroImage])
   const styles = {
     intro: css`
       ${baseGrid}
@@ -43,10 +60,21 @@ const SwIntro = ({ category, allCategories }: PropTypes) => {
       ${absoluteFill}
       z-index: 0;
     `,
+    heroImage: css`
+      width: 100%;
+      height: 100%;
+    `,
   }
   return (
     <section css={styles.intro}>
-      <div css={styles.background} />
+      <div css={styles.background}>
+        <GatsbyImage
+          css={styles.heroImage}
+          image={heroImage}
+          alt={category.heroImage.alt || ''}
+          backgroundColor="#111"
+        />
+      </div>
       <CategoryNav
         path="/speakers-workshops/"
         categories={allCategories}

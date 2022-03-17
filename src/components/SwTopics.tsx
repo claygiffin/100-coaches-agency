@@ -6,6 +6,7 @@ import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps } from '../types/customTypes'
+import CoachProfileLightbox from './CoachProfileLightbox'
 
 type PropTypes = {
   topics: {
@@ -58,7 +59,39 @@ const SwTopics = ({ topics }: PropTypes) => {
       font-size: var(--fs-18);
       color: #555;
       max-width: 80ch;
+      margin-bottom: 0.5em;
+    `,
+    coaches: css`
+      font-size: var(--fs-18);
       margin-bottom: 3em;
+      max-width: 85ch;
+      h3 {
+        font-size: inherit;
+        font-weight: 500;
+        display: inline-block;
+        color: #555;
+        margin-right: 0.5em;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    `,
+    coach: css`
+      position: relative;
+      cursor: pointer;
+      display: inline-block;
+      font-size: inherit;
+      font-weight: 500;
+      margin-right: 0.333em;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding: 0.333em 0;
+      color: ${colors.goldShade2};
+      transition: color 300ms ease;
+      @media (hover: hover) {
+        &:hover {
+          color: ${colors.gold};
+        }
+      }
     `,
   }
   return (
@@ -92,6 +125,16 @@ const SwTopics = ({ topics }: PropTypes) => {
                 '</p>',
             }}
           />
+          <div css={styles.coaches}>
+            <h3>Speakers: </h3>
+            {topic.coaches.map((coach, i) => (
+              <h4 key={i} css={styles.coach}>
+                {coach.name}
+                <CoachProfileLightbox coach={coach} />
+                {i + 1 < topic.coaches.length && ', '}
+              </h4>
+            ))}
+          </div>
         </div>
       ))}
     </section>

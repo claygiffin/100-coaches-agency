@@ -1,4 +1,5 @@
 import { graphql } from 'gatsby'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
@@ -20,6 +21,31 @@ export const data = graphql`
       categoryName
       categoryNameFull
       description
+      heroImage {
+        horizontal: gatsbyImageData(
+          layout: FULL_WIDTH
+          imgixParams: {
+            q: 75
+            sat: -100
+            bri: -40
+            con: -75
+            ar: "16:10"
+            fit: "crop"
+          }
+        )
+        vertical: gatsbyImageData(
+          layout: FULL_WIDTH
+          imgixParams: {
+            q: 75
+            sat: -100
+            bri: -40
+            con: -75
+            ar: "2:3"
+            fit: "crop"
+          }
+        )
+        alt
+      }
       topics {
         title
         description
@@ -47,6 +73,11 @@ type PropTypes = {
       categoryName: string
       categoryNameFull: string
       description: string
+      heroImage: {
+        horizontal: IGatsbyImageData
+        vertical: IGatsbyImageData
+        alt?: string
+      }
       topics: {
         title: string
         description: string
