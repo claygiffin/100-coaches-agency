@@ -26,7 +26,7 @@ const Footer = () => {
       clip-path: url(#${clipId});
       background-color: #000;
       position: relative;
-      z-index: 3;
+      z-index: 4;
       margin-top: -5vw;
       overflow: hidden;
     `,

@@ -44,7 +44,7 @@ const Nav = ({ homeNav }: NavProps) => {
       margin-bottom: -1.4vw;
       padding-bottom: 1.4vw;
       padding-top: 3px;
-      z-index: 4;
+      z-index: 10;
       &:before {
         content: '';
         display: block;

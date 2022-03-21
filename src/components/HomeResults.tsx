@@ -35,7 +35,7 @@ const HomeResults = () => {
 
   const styles = {
     section: css`
-      z-index: 2;
+      z-index: 4;
       position: relative;
       margin-top: -11.5vw;
       &:before {

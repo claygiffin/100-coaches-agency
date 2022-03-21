@@ -40,7 +40,7 @@ const HomeContact = () => {
   const styles = {
     section: css`
       position: relative;
-      z-index: 2;
+      z-index: 4;
       margin-top: -7vw;
       &:before {
         content: '';

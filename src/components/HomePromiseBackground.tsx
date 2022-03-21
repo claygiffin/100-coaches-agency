@@ -153,10 +153,15 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
                 0.75 * containerWidth
               },${-0.0625 * containerWidth} ${0.435 * containerWidth},${
                 0.16 * containerWidth
-              } 0,${
-                0.0875 * containerWidth
-              } L0,${containerHeight} L${containerWidth},${containerHeight} L${containerWidth},${
-                0.02 * containerWidth
+              } 0,${0.0875 * containerWidth} L0,${
+                containerHeight - 0.02 * containerWidth
+              } C${0.333 * containerWidth},${
+                containerHeight - 0.2 * containerWidth
+              } ${0.68 * containerWidth},${
+                containerHeight + 0.06 * containerWidth
+              } ${containerWidth},${
+                containerHeight - 0.02 * containerWidth
+              }
               } Z`}
             />
           </clipPath>

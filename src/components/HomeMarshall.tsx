@@ -40,12 +40,9 @@ const HomeMarshall = () => {
   const styles = {
     section: css`
       position: relative;
-      z-index: 2;
-      margin-top: -7vw;
-    `,
-    background: css`
-      ${absoluteFill};
-      clip-path: url(#${clipId});
+      z-index: 3;
+      margin-top: -8.5vw;
+      background-color: #333;
       background: linear-gradient(to bottom right, #555, #000);
     `,
     content: css`
@@ -87,13 +84,17 @@ const HomeMarshall = () => {
       font-size: var(--fs-16);
       margin-top: 2.25em;
     `,
+    background: css`
+      ${absoluteFill};
+      clip-path: inset(0 0 0 0);
+    `,
     imageWrap: css`
       position: fixed;
       bottom: 0;
       left: 0;
       width: 50vw;
       height: 100vh;
-      filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5));
+      /* filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5)); */
       ${mq().ms} {
         width: 90vw;
       }
