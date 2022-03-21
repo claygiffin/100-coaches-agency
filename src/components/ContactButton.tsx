@@ -26,7 +26,7 @@ const ContactButton = ({ text }: Props) => {
       position: fixed;
       bottom: 1.5rem;
       right: 1.5rem;
-      z-index: 10;
+      z-index: 3;
       text-transform: uppercase;
       text-decoration: none;
       letter-spacing: 0.1em;

@@ -6,6 +6,7 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import BurgerIcon from './BurgerIcon'
 import CoachCategoryMenu from './CoachCategoryMenu'
 import ContactLightbox from './ContactLightbox'
 import LogoHorizontal from './LogoHorizontal'
@@ -25,6 +26,14 @@ const Nav = ({ homeNav }: NavProps) => {
   const { width: navWidth, height: navHeight } =
     useElementRect(navRefState)
 
+  const [burgerOpen, setBurgerOpen] = useState(false)
+  const handleOpen = () => {
+    setBurgerOpen(true)
+  }
+  const handleClose = () => {
+    setBurgerOpen(false)
+  }
+
   const styles = {
     nav: css`
       display: flex;
@@ -35,7 +44,7 @@ const Nav = ({ homeNav }: NavProps) => {
       margin-bottom: -1.4vw;
       padding-bottom: 1.4vw;
       padding-top: 3px;
-      z-index: 3;
+      z-index: 4;
       &:before {
         content: '';
         display: block;
@@ -74,9 +83,13 @@ const Nav = ({ homeNav }: NavProps) => {
       z-index: 1;
       margin: 1.5em 0 1.5em var(--margin-outer);
       svg {
+        display: block;
         font-size: var(--fs-24);
         height: 1em;
         width: auto;
+        ${mq().ms} {
+          height: 0.875em;
+        }
       }
       ${homeNav &&
       css`
@@ -89,16 +102,38 @@ const Nav = ({ homeNav }: NavProps) => {
       align-items: center;
       margin-right: var(--gutter-md);
       z-index: 1;
-      ${mq().ml} {
+      font-size: var(--fs-15);
+      ${mq().ls} {
         position: absolute;
         top: 0;
         right: 0;
+        background: linear-gradient(to top right, #000, #333);
+        padding: 0 1.5em;
+        margin: 0;
+        flex-direction: column;
+        justify-content: center;
+        height: calc(100 * var(--vh, 1vh));
+        width: 100vw;
+        overflow: auto;
+        font-size: var(--fs-24);
+        box-sizing: border-box;
+        transform: translate3d(0, -100%, 0);
+        opacity: 0;
+        transition: opacity 200ms ease, transform 300ms ease;
+        ${burgerOpen &&
+        css`
+          transform: translate3d(0, 0, 0);
+          opacity: 1;
+        `}
+        ${mq().ms} {
+          font-size: var(--fs-21);
+        }
       }
     `,
     link: css`
       color: #fff;
       text-decoration: none;
-      font-size: var(--fs-15);
+      font-size: inherit;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       display: block;
@@ -106,10 +141,15 @@ const Nav = ({ homeNav }: NavProps) => {
       position: relative;
       cursor: pointer;
       transition: color 200ms ease;
+      text-align: center;
       @media (hover: hover) {
         &:hover {
           color: ${colors.goldTint2};
         }
+      }
+      ${mq().ls} {
+        margin: 0.25em 0;
+        font-weight: 300;
       }
     `,
     button: css`
@@ -130,6 +170,9 @@ const Nav = ({ homeNav }: NavProps) => {
           border-color: ${colors.goldShade1};
           color: #fff;
         }
+      }
+      ${mq().ls} {
+        margin: 1em 0 1.5em;
       }
     `,
   }
@@ -175,14 +218,15 @@ const Nav = ({ homeNav }: NavProps) => {
       >
         <LogoHorizontal />
       </Link>
+      <BurgerIcon onOpen={handleOpen} onClose={handleClose} />
       <div css={styles.navItems}>
         <span css={styles.link}>
           Coaches
-          <CoachCategoryMenu />
+          <CoachCategoryMenu backArrow />
         </span>
         <span css={styles.link}>
           Speakers & Workshops
-          <SwCategoryMenu />
+          <SwCategoryMenu backArrow />
         </span>
         <Link css={styles.link} to="/about">
           About Us

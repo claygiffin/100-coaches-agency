@@ -25,9 +25,15 @@ type PropTypes = {
   }
   heading: string
   path: string
+  backArrow?: boolean
 }
 
-const CategoryMenu = ({ categories, heading, path }: PropTypes) => {
+const CategoryMenu = ({
+  categories,
+  heading,
+  path,
+  backArrow,
+}: PropTypes) => {
   const isBrowser = typeof window !== `undefined`
 
   const portalTarget =
@@ -87,6 +93,10 @@ const CategoryMenu = ({ categories, heading, path }: PropTypes) => {
         opacity: 0;
         transform: translate3d(-9rem,0,0);
       }`,
+    barOut: keyframes`
+      to {
+        opacity: 0;
+      }`,
   }
   const styles = {
     button: css`
@@ -101,10 +111,37 @@ const CategoryMenu = ({ categories, heading, path }: PropTypes) => {
       color: #fff;
       display: grid;
       grid-template-columns: 1fr 2fr;
-      z-index: 10;
+      z-index: 5;
       ${mq().ms} {
         grid-template-columns: 1fr;
         overflow: auto;
+      }
+      &:before {
+        content: '';
+        display: block;
+        background-image: linear-gradient(
+          to right,
+          ${colors.goldShade3},
+          ${colors.goldShade2},
+          ${colors.goldShade1},
+          ${colors.gold}
+        );
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        z-index: 2;
+        opacity: 0;
+        animation-name: ${animations.animateIn};
+        animation-duration: 300ms;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        transition: opacity 300ms ease;
+        ${closing &&
+        css`
+          animation-name: ${animations.barOut}; ;
+        `}
       }
     `,
     intro: css`
@@ -251,21 +288,36 @@ const CategoryMenu = ({ categories, heading, path }: PropTypes) => {
     closeButton: css`
       position: absolute;
       top: var(--gutter-sm);
-      right: var(--gutter-sm);
-      width: 1.5em;
-      height: 1.5em;
-      padding: 0.5em;
+      right: var(--gutter-md);
+      width: 2rem;
+      height: auto;
+      padding: 1rem;
       cursor: pointer;
-      color: #666;
-      transition: color 200ms ease;
-      line {
+      color: ${colors.goldTint1};
+      transition: color 200ms ease, opacity 200ms ease;
+      line,
+      polyline {
+        stroke-width: 3;
         stroke: currentColor;
+        fill: transparent;
       }
       @media (hover: hover) {
         &:hover {
           color: ${colors.gold};
         }
       }
+      opacity: 0;
+      transform: translate3d(9rem, 0, 0);
+      animation-name: ${animations.animateIn};
+      animation-duration: 300ms;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+      ${closing &&
+      css`
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        animation-name: ${animations.linksOut};
+      `}
     `,
   }
   return (
@@ -315,20 +367,30 @@ const CategoryMenu = ({ categories, heading, path }: PropTypes) => {
               onClick={handleClose}
               onKeyPress={handleClose}
               tabIndex={0}
-              viewBox="0 0 15 15"
+              viewBox="0 0 24 24"
+              vectorEffect="non-scaling-stroke"
             >
-              <line
-                x1="0.535714286"
-                y1="0.535714286"
-                x2="14.4642857"
-                y2="14.4642857"
-              />
-              <line
-                x1="14.4642857"
-                y1="0.535714286"
-                x2="0.535714286"
-                y2="14.4642857"
-              />
+              {backArrow ? (
+                <Fragment>
+                  <line x1="2.59882061" y1="11.5" x2="24" y2="11.5" />
+                  <polyline points="11.6153846 2.26923077 2.38461538 11.5 11.6153846 20.7307692" />
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <line
+                    x1="3.51471863"
+                    y1="3.51471863"
+                    x2="20.4852814"
+                    y2="20.4852814"
+                  />
+                  <line
+                    x1="3.51471863"
+                    y1="20.4852814"
+                    x2="20.4852814"
+                    y2="3.51471863"
+                  />
+                </Fragment>
+              )}
             </svg>
             <ScrollToggle />
           </nav>,

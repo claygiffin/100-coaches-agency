@@ -82,6 +82,10 @@ const CategoryNav = ({
           display: none;
         `}
       }
+      ${collapsed &&
+      css`
+        margin-bottom: 1.5em;
+      `}
     `,
     navItems: css`
       display: flex;
@@ -101,8 +105,6 @@ const CategoryNav = ({
         height: ${collapsedContainerHeight}px;
       `}
     `,
-    collapsedContainer: css``,
-
     link: css`
       font-size: var(--fs-18);
       display: block;
@@ -189,10 +191,7 @@ const CategoryNav = ({
               <FiChevronDown />
             </button>
             <div css={styles.navItemsCollapsed}>
-              <div
-                css={styles.collapsedContainer}
-                ref={collapsedContainerCallback}
-              >
+              <div ref={collapsedContainerCallback}>
                 {categories.nodes.map((category: any, i: number) => {
                   if (category.categoryName !== current) {
                     return (

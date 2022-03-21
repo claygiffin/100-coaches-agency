@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 
 import CategoryMenu from './CategoryMenu'
 
-const CoachCategoryMenu = () => {
+const CoachCategoryMenu = ({ backArrow }: { backArrow?: boolean }) => {
   type QueryTypes = {
     coachCategories: {
       nodes: Array<{
@@ -31,6 +31,7 @@ const CoachCategoryMenu = () => {
       path="/coaches/"
       categories={coachCategories}
       heading="Lorem ipsum <em>coaches</em> ent dolor emet consec taur."
+      backArrow={backArrow}
     />
   )
 }

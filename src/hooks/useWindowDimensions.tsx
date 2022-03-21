@@ -25,7 +25,7 @@ export const useWindowDimensions = () => {
     return () => {
       window.removeEventListener('resize', handleThrottledResize)
     }
-  }, [handleThrottledResize, handleResize])
+  }, [handleThrottledResize])
 
   return windowDimensions
 }
