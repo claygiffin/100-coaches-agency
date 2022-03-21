@@ -222,11 +222,11 @@ const Nav = ({ homeNav }: NavProps) => {
       <div css={styles.navItems}>
         <span css={styles.link}>
           Coaches
-          <CoachCategoryMenu backArrow />
+          <CoachCategoryMenu backArrow={burgerOpen} />
         </span>
         <span css={styles.link}>
           Speakers & Workshops
-          <SwCategoryMenu backArrow />
+          <SwCategoryMenu backArrow={burgerOpen} />
         </span>
         <Link css={styles.link} to="/about">
           About Us

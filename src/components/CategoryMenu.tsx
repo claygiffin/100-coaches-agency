@@ -111,7 +111,7 @@ const CategoryMenu = ({
       color: #fff;
       display: grid;
       grid-template-columns: 1fr 2fr;
-      z-index: 5;
+      z-index: 11;
       ${mq().ms} {
         grid-template-columns: 1fr;
         overflow: auto;
