@@ -126,7 +126,7 @@ const SwTopics = ({ topics }: PropTypes) => {
             }}
           />
           <div css={styles.coaches}>
-            <h3>Speakers: </h3>
+            <h3>Featured Experts: </h3>
             {topic.coaches.map((coach, i) => (
               <h4 key={i} css={styles.coach}>
                 {coach.name}
