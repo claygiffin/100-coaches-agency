@@ -43,11 +43,35 @@ const ArrowButton = <E extends ElementType>({
         : color === 'GOLD_DARK'
         ? colors.goldShade1
         : '#fff'};
+      @media (hover: hover) {
+        &:hover {
+          color: ${color === 'GOLD_LIGHT'
+            ? colors.goldTint2
+            : color === 'GOLD_DARK'
+            ? colors.goldShade2
+            : '#ffffffcc'};
+        }
+      }
       ${style === 'OUTLINE' &&
       css`
         margin-left: 0;
         outline: 1px solid currentColor;
         padding: 0.5em 0.75em 0.75em 1em;
+      `}
+      ${style === 'FILL' &&
+      css`
+        color: ${color === 'WHITE' ? colors.goldShade1 : '#fff'};
+        background: ${color === 'WHITE' ? '#fff' : colors.goldShade1};
+        padding: 0.5em 0.75em 0.75em 1em;
+        transition: color 300ms ease, background-color 300ms ease;
+        @media (hover: hover) {
+          &:hover {
+            background: ${color === 'WHITE'
+              ? '#ffffffcc'
+              : colors.goldShade2};
+            color: ${color === 'WHITE' ? colors.goldShade1 : '#fff'};
+          }
+        }
       `}
       svg {
         margin-left: 0.25em;
@@ -57,11 +81,6 @@ const ArrowButton = <E extends ElementType>({
       }
       @media (hover: hover) {
         &:hover {
-          color: ${color === 'GOLD_LIGHT'
-            ? colors.goldTint2
-            : color === 'GOLD_DARK'
-            ? colors.goldShade2
-            : '#ffffffcc'};
           svg {
             transform: translate3d(20%, 15%, 0);
           }

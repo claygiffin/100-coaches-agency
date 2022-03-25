@@ -90,6 +90,7 @@ const AboutTeam = () => {
             coach={teamMember}
             key={i}
             index={i}
+            directory="team"
           />
         ))}
       </div>

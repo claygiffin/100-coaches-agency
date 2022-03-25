@@ -5,11 +5,15 @@ import Lightbox from './Lightbox'
 
 type PropTypes = {
   coach: CoachProps
+  directory?: string
 }
 
-const CoachProfileLightbox = ({ coach }: PropTypes) => {
+const CoachProfileLightbox = ({
+  coach,
+  directory = 'coaches/profiles',
+}: PropTypes) => {
   return (
-    <Lightbox slug={`coaches/profiles/${toSlug(coach.name)}`}>
+    <Lightbox slug={`${directory}/${toSlug(coach.name)}`}>
       <CoachProfile coach={coach} />
     </Lightbox>
   )

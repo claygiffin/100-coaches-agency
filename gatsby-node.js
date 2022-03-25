@@ -38,6 +38,14 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allDatoCmsTeamMember {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
     }
   `)
 
@@ -67,6 +75,15 @@ exports.createPages = async ({ graphql, actions }) => {
   data.allDatoCmsCoach.edges.forEach(({ node }) => {
     createPage({
       path: `/coaches/profiles/${toSlug(node.name)}/`,
+      component: path.resolve(`./src/templates/CoachProfilePage.tsx`),
+      context: {
+        id: node.id,
+      },
+    })
+  })
+  data.allDatoCmsTeamMember.edges.forEach(({ node }) => {
+    createPage({
+      path: `/team/${toSlug(node.name)}/`,
       component: path.resolve(`./src/templates/CoachProfilePage.tsx`),
       context: {
         id: node.id,

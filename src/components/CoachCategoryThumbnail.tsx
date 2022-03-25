@@ -11,9 +11,14 @@ import CoachProfileLightbox from './CoachProfileLightbox'
 type PropTypes = {
   coach: CoachProps
   index: number
+  directory?: string
 }
 
-const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
+const CoachCategoryThumbnail = ({
+  coach,
+  index,
+  directory,
+}: PropTypes) => {
   const gradientId = useMemo(() => uniqueId('gradient--'), [])
 
   const styles = {
@@ -136,7 +141,7 @@ const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
         <h2>{coach.name}</h2>
         <h3>{coach.jobTitle}</h3>
       </div>
-      <CoachProfileLightbox coach={coach} />
+      <CoachProfileLightbox coach={coach} directory={directory} />
     </div>
   )
 }

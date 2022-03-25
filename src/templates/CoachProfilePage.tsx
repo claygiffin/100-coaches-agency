@@ -3,12 +3,15 @@ import { graphql } from 'gatsby'
 
 import CoachProfile from '../components/CoachProfile'
 import Layout from '../components/Layout'
-import { CoachProps } from '../types/customTypes'
+import { CoachProps, TeamMemberProps } from '../types/customTypes'
 
 export const data = graphql`
   query ($id: String!) {
     coach: datoCmsCoach(id: { eq: $id }) {
       ...CoachFragment
+    }
+    teamMember: datoCmsTeamMember(id: { eq: $id }) {
+      ...TeamMemberFragment
     }
   }
 `
@@ -16,6 +19,7 @@ export const data = graphql`
 type PropTypes = {
   data: {
     coach: CoachProps
+    teamMember: TeamMemberProps
   }
 }
 
@@ -31,7 +35,7 @@ const CoachProfilePage = ({ data }: PropTypes) => {
   }
   return (
     <Layout mainCss={styles.layout}>
-      <CoachProfile coach={data.coach} />
+      <CoachProfile coach={data.coach || data.teamMember} />
     </Layout>
   )
 }

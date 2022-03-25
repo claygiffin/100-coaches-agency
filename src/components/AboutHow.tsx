@@ -6,6 +6,8 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import ArrowButton from './ArrowButton'
+import ContactLightbox from './ContactLightbox'
 
 const AboutHow = () => {
   type QueryProps = {
@@ -16,6 +18,7 @@ const AboutHow = () => {
         title: string
         descriptionNode: { childMarkdownRemark: { html: string } }
       }>
+      howLinkText: string
     }
   }
   const { page }: QueryProps = useStaticQuery(graphql`
@@ -30,6 +33,7 @@ const AboutHow = () => {
         howDetails {
           ...TitleDescriptionFragment
         }
+        howLinkText
       }
     }
   `)
@@ -83,6 +87,9 @@ const AboutHow = () => {
       max-width: 80ch;
       margin-bottom: 2em;
     `,
+    button: css`
+      font-size: var(--fs-16);
+    `,
   }
   return (
     <section css={styles.section} ref={refCallback}>
@@ -118,6 +125,14 @@ const AboutHow = () => {
           />
         </div>
       ))}
+      <ArrowButton
+        text={page.howLinkText}
+        style="OUTLINE"
+        color="GOLD_LIGHT"
+        css={styles.button}
+      >
+        <ContactLightbox />
+      </ArrowButton>
     </section>
   )
 }

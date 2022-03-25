@@ -1,5 +1,4 @@
 import { SerializedStyles, css } from '@emotion/react'
-import { clamp } from 'lodash'
 import { uniqueId } from 'lodash'
 import {
   useCallback,
@@ -229,9 +228,9 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
               pathLength="100"
               style={{
                 strokeDasharray: 100,
-                strokeDashoffset: clamp(offset * 200 + 75, 50, 100),
+                strokeDashoffset: offset * 200 + 75 > 60 ? 100 : 50,
                 transition:
-                  'opacity 100ms ease, stroke-dashoffset 150ms ease',
+                  'opacity 100ms ease, stroke-dashoffset 2000ms ease',
                 opacity: offset * 200 + 75 > 85 ? 0 : 1,
               }}
             />
