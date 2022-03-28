@@ -33,7 +33,7 @@ const HomeHero = () => {
     section: css`
       ${baseGrid}
       grid-template-rows: var(--nav-height) auto auto 18vw;
-      min-height: calc(101 * var(--vh, 1vh));
+      min-height: 101vh;
       color: white;
       font-size: var(--fs-84);
       z-index: 2;

@@ -1,46 +1,15 @@
 import { css } from '@emotion/react'
-import { useCallback, useEffect, useState } from 'react'
 
 import { mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import ScrollToggle from './ScrollToggle'
 
 type PropTypes = {
-  onOpen: () => void
-  onClose: () => void
+  open: boolean
+  toggleOpen: () => void
 }
 
-const BurgerIcon = ({ onOpen, onClose }: PropTypes) => {
-  const [open, setOpen] = useState(false)
-
-  const toggleOpen = () => {
-    setOpen(prev => !prev)
-  }
-
-  const escFunction = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'Escape' || e.key === 'Esc') {
-        setOpen(false)
-      }
-    },
-    [setOpen]
-  )
-
-  useEffect(() => {
-    open && document.addEventListener('keydown', escFunction, false)
-    return () => {
-      document.removeEventListener('keydown', escFunction, false)
-    }
-  }, [open, escFunction])
-
-  useEffect(() => {
-    if (open) {
-      onOpen()
-    } else {
-      onClose()
-    }
-  }, [open, onOpen, onClose])
-
+const BurgerIcon = ({ open, toggleOpen }: PropTypes) => {
   const styles = {
     burgerIcon: css`
       position: relative;
@@ -124,7 +93,6 @@ const BurgerIcon = ({ onOpen, onClose }: PropTypes) => {
       aria-label="Menu"
       css={styles.burgerIcon}
       onClick={toggleOpen}
-      onKeyPress={toggleOpen}
     >
       <span />
       <span />

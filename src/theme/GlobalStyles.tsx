@@ -3,13 +3,18 @@ import '../fonts/_font-face.css'
 import { Global, css } from '@emotion/react'
 import emotionNormalize from 'emotion-normalize'
 
+import { useWindowHeight } from '../hooks/useWindowDimensions'
 import { mq } from './mixins'
 
 const GlobalStyles = () => {
+  const vh = useWindowHeight()
+
   const globalStyles = css`
     ${emotionNormalize}
 
     :root {
+      --vh: ${vh / 100 + 'px' || '1vh'};
+
       /* Font Sizes */
       --fs-108: max(4rem, 5rem + 3.333vw);
       --fs-84: max(3.5rem, 3.875rem + 2.6vw);

@@ -1,7 +1,7 @@
 import { Global, css } from '@emotion/react'
 import { Link } from 'gatsby'
 import { uniqueId } from 'lodash'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, mq } from '../theme/mixins'
@@ -27,12 +27,24 @@ const Nav = ({ homeNav }: NavProps) => {
     useElementRect(navRefState)
 
   const [burgerOpen, setBurgerOpen] = useState(false)
-  const handleOpen = () => {
-    setBurgerOpen(true)
-  }
   const handleClose = () => {
     setBurgerOpen(false)
   }
+  const escFunction = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        setBurgerOpen(false)
+      }
+    },
+    [setBurgerOpen]
+  )
+  useEffect(() => {
+    burgerOpen &&
+      document.addEventListener('keydown', escFunction, false)
+    return () => {
+      document.removeEventListener('keydown', escFunction, false)
+    }
+  }, [burgerOpen, escFunction])
 
   const styles = {
     nav: css`
@@ -218,7 +230,10 @@ const Nav = ({ homeNav }: NavProps) => {
       >
         <LogoHorizontal />
       </Link>
-      <BurgerIcon onOpen={handleOpen} onClose={handleClose} />
+      <BurgerIcon
+        open={burgerOpen}
+        toggleOpen={() => setBurgerOpen(prev => !prev)}
+      />
       <div css={styles.navItems}>
         <span css={styles.link}>
           Coaches
@@ -228,7 +243,13 @@ const Nav = ({ homeNav }: NavProps) => {
           Speakers & Workshops
           <SwCategoryMenu backArrow={burgerOpen} />
         </span>
-        <Link css={styles.link} to="/about">
+        <Link
+          css={styles.link}
+          to="/about/"
+          onClick={() =>
+            window.location.pathname === '/about/' && handleClose()
+          }
+        >
           About Us
         </Link>
         <button css={[styles.link, styles.button]}>

@@ -28,6 +28,9 @@ const ShapeColumn = ({
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: calc(2.5rem + 4vw);
+    @media (prefers-reduced-motion) {
+      transform: none !important;
+    }
   `
 
   const [colRef, setColRef] = useState<HTMLDivElement | null>(null)

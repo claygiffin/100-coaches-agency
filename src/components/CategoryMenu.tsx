@@ -322,13 +322,7 @@ const CategoryMenu = ({
   }
   return (
     <Fragment>
-      <span
-        css={styles.button}
-        onClick={() => setOpen(true)}
-        onKeyPress={() => setOpen(true)}
-        role="button"
-        tabIndex={0}
-      />
+      <button css={styles.button} onClick={() => setOpen(true)} />
       {open &&
         portalTarget &&
         createPortal(
@@ -338,27 +332,32 @@ const CategoryMenu = ({
             </div>
             <div css={styles.linksOuter}>
               <div css={styles.linksInner}>
-                {categories.nodes.map((category, i) => (
-                  <Link
-                    to={`${('/' + path + '/').replace(
-                      /\/\//g,
-                      '/'
-                    )}${toSlug(category.categoryName)}/`}
-                    key={i}
-                    onClick={handleClose}
-                    onKeyPress={handleClose}
-                    css={styles.link}
-                  >
-                    <h3>
-                      <span>
-                        {category.categoryNameFull ||
-                          category.categoryName}
-                      </span>
-                      <BsChevronRight />
-                    </h3>
-                    <h4>{category.description}</h4>
-                  </Link>
-                ))}
+                {categories.nodes.map((category, i) => {
+                  const slug = `${('/' + path + '/').replace(
+                    /\/\//g,
+                    '/'
+                  )}${toSlug(category.categoryName)}/`
+                  return (
+                    <Link
+                      to={slug}
+                      key={i}
+                      onClick={() => {
+                        slug === window.location.pathname &&
+                          handleClose()
+                      }}
+                      css={styles.link}
+                    >
+                      <h3>
+                        <span>
+                          {category.categoryNameFull ||
+                            category.categoryName}
+                        </span>
+                        <BsChevronRight />
+                      </h3>
+                      <h4>{category.description}</h4>
+                    </Link>
+                  )
+                })}
               </div>
             </div>
             <svg

@@ -242,13 +242,7 @@ const Lightbox = ({
   }
   return (
     <Fragment>
-      <span
-        css={styles.button}
-        onClick={handleOpen}
-        onKeyPress={handleOpen}
-        role="button"
-        tabIndex={0}
-      />
+      <button css={styles.button} onClick={handleOpen} />
       {open &&
         portalTarget &&
         createPortal(

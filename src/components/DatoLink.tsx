@@ -29,7 +29,6 @@ const DatoLink = ({
   buttonColor,
   ...props
 }: PropTypes) => {
-  console.log(link.__typename)
   return (
     <Fragment>
       {arrowButton ? (

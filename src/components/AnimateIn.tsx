@@ -48,6 +48,10 @@ const AnimateIn = ({
         opacity: 1;
         transform: scale3d(1, 1, 1);
       `};
+      @media (prefers-reduced-motion) {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+      }
     `,
     sizer: css`
       ${absoluteFill}
