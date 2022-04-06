@@ -196,9 +196,10 @@ const CategoryNav = ({
                   if (category.categoryName !== current) {
                     return (
                       <Link
-                        to={`/coaches/${toSlug(
-                          category.categoryName
-                        )}/`}
+                        to={`${('/' + path + '/').replace(
+                          /\/\//g,
+                          '/'
+                        )}${toSlug(category.categoryName)}/`}
                         css={styles.link}
                         key={i}
                       >
