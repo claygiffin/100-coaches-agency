@@ -95,6 +95,9 @@ const HomeCoaches = () => {
       ${baseGrid}
       align-items: center;
       justify-content: center;
+      ${mq().s} {
+        transform: none !important;
+      }
     `,
     heading: css`
       color: #555;

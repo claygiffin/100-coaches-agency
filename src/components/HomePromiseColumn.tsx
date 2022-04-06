@@ -3,6 +3,7 @@ import { clamp } from 'lodash'
 import { useCallback, useEffect, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
+import { mq } from '../theme/mixins'
 import Shape from './HomePromiseShape'
 
 type ShapeProps = {
@@ -30,6 +31,13 @@ const ShapeColumn = ({
     grid-gap: calc(2.5rem + 4vw);
     @media (prefers-reduced-motion) {
       transform: none !important;
+    }
+    ${mq().s} {
+      transform: translate3d(
+        0,
+        calc(-1px * var(--translate-factor, 100)),
+        0
+      ) !important;
     }
   `
 

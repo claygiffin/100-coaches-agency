@@ -16,6 +16,7 @@ const Layout = ({ children, mainCss, homeNav }: LayoutProps) => {
   const styles = {
     main: css`
       position: relative;
+      background-color: #fff;
     `,
   }
   return (

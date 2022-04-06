@@ -79,6 +79,9 @@ const GlobalStyles = () => {
     p {
       line-height: 2;
       font-weight: 300;
+      ${mq().s} {
+        line-height: 1.8;
+      }
     }
     input,
     textarea,

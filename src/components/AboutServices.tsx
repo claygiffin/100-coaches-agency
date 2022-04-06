@@ -46,16 +46,8 @@ const AboutServices = () => {
   const styles = {
     section: css`
       position: relative;
-      display: grid;
-      padding: calc(var(--gutter-sm) + 7vw) var(--margin-outer)
-        calc(var(--gutter-lg) + 4vw);
-      grid-template-columns: repeat(2, 1fr);
-      grid-column-gap: var(--gutter-lg);
       margin-top: -2.5vw;
       color: #fff;
-      ${mq().m} {
-        grid-template-columns: 1fr;
-      }
       &:before {
         content: '';
         ${absoluteFill}
@@ -63,8 +55,20 @@ const AboutServices = () => {
         z-index: 0;
         clip-path: url(#${clipId});
       }
+    `,
+    content: css`
+      position: relative;
+      display: grid;
+      box-sizing: border-box;
+      padding: calc(var(--gutter-sm) + 7vw) var(--margin-outer)
+        calc(var(--gutter-lg) + 4vw);
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: var(--gutter-lg);
       > * {
         position: relative;
+      }
+      ${mq().m} {
+        grid-template-columns: 1fr;
       }
     `,
     heading: css`
@@ -108,25 +112,28 @@ const AboutServices = () => {
           </clipPath>
         </defs>
       </svg>
-      <h2 css={styles.heading}>{page.servicesHeading}</h2>
-      {page.services.map((service: any, i: number) => (
-        <div key={i}>
-          <h3 css={styles.title}>{service.title}</h3>
-          <div
-            css={styles.description}
-            dangerouslySetInnerHTML={{
-              __html: service.descriptionNode.childMarkdownRemark.html,
-            }}
-          />
-          <DatoLink
-            css={styles.link}
-            link={service.link[0]}
-            buttonColor="WHITE"
-            buttonStyle="OUTLINE"
-            arrowButton
-          />
-        </div>
-      ))}
+      <div css={styles.content}>
+        <h2 css={styles.heading}>{page.servicesHeading}</h2>
+        {page.services.map((service: any, i: number) => (
+          <div key={i}>
+            <h3 css={styles.title}>{service.title}</h3>
+            <div
+              css={styles.description}
+              dangerouslySetInnerHTML={{
+                __html:
+                  service.descriptionNode.childMarkdownRemark.html,
+              }}
+            />
+            <DatoLink
+              css={styles.link}
+              link={service.link[0]}
+              buttonColor="WHITE"
+              buttonStyle="OUTLINE"
+              arrowButton
+            />
+          </div>
+        ))}
+      </div>
     </section>
   )
 }

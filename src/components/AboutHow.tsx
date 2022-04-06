@@ -47,10 +47,8 @@ const AboutHow = () => {
 
   const styles = {
     section: css`
-      position: relative;
-      display: grid;
-      padding: calc(var(--gutter-lg) + 4vw) var(--margin-outer);
       color: #fff;
+      position: relative;
       margin-top: -4vw;
       &:before {
         content: '';
@@ -59,6 +57,13 @@ const AboutHow = () => {
         z-index: 0;
         clip-path: url(#${clipId});
       }
+    `,
+    content: css`
+      position: relative;
+      display: grid;
+      width: 100%;
+      box-sizing: border-box;
+      padding: calc(var(--gutter-lg) + 4vw) var(--margin-outer);
       > * {
         position: relative;
       }
@@ -107,32 +112,34 @@ const AboutHow = () => {
           </clipPath>
         </defs>
       </svg>
-      <h2 css={styles.heading}>{page.howHeading}</h2>
-      <div
-        css={styles.body}
-        dangerouslySetInnerHTML={{
-          __html: page.howBodyNode.childMarkdownRemark.html,
-        }}
-      />
-      {page.howDetails.map((detail, i: number) => (
-        <div key={i}>
-          <h3 css={styles.title}>{detail.title}</h3>
-          <div
-            css={styles.description}
-            dangerouslySetInnerHTML={{
-              __html: detail.descriptionNode.childMarkdownRemark.html,
-            }}
-          />
-        </div>
-      ))}
-      <ArrowButton
-        text={page.howLinkText}
-        style="OUTLINE"
-        color="GOLD_LIGHT"
-        css={styles.button}
-      >
-        <ContactLightbox />
-      </ArrowButton>
+      <div css={styles.content}>
+        <h2 css={styles.heading}>{page.howHeading}</h2>
+        <div
+          css={styles.body}
+          dangerouslySetInnerHTML={{
+            __html: page.howBodyNode.childMarkdownRemark.html,
+          }}
+        />
+        {page.howDetails.map((detail, i: number) => (
+          <div key={i}>
+            <h3 css={styles.title}>{detail.title}</h3>
+            <div
+              css={styles.description}
+              dangerouslySetInnerHTML={{
+                __html: detail.descriptionNode.childMarkdownRemark.html,
+              }}
+            />
+          </div>
+        ))}
+        <ArrowButton
+          text={page.howLinkText}
+          style="OUTLINE"
+          color="GOLD_LIGHT"
+          css={styles.button}
+        >
+          <ContactLightbox />
+        </ArrowButton>
+      </div>
     </section>
   )
 }

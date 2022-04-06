@@ -2,7 +2,7 @@ import { SerializedStyles, css } from '@emotion/react'
 import { ElementType, ReactNode } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-import { absoluteFill } from '../theme/mixins'
+import { absoluteFill, mq } from '../theme/mixins'
 
 type Props = {
   children: ReactNode
@@ -50,6 +50,9 @@ const AnimateIn = ({
       `};
       @media (prefers-reduced-motion) {
         opacity: 1;
+        transform: scale3d(1, 1, 1);
+      }
+      ${mq().s} {
         transform: scale3d(1, 1, 1);
       }
     `,
