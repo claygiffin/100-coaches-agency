@@ -84,5 +84,18 @@ module.exports = {
         // ...
       },
     },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: [process.env.GOOGLE_ANALYTICS_KEY],
+      },
+    },
+    'gatsby-plugin-sitemap',
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://agency.100coaches.com/`,
+      },
+    },
   ],
 }
