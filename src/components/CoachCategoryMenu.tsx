@@ -30,7 +30,7 @@ const CoachCategoryMenu = ({ backArrow }: { backArrow?: boolean }) => {
     <CategoryMenu
       path="/coaches/"
       categories={coachCategories}
-      heading="<em>Coaches</em> dedicated to finding the right solutions to your business challenges."
+      heading="Coaches dedicated to finding the right solutions to your business challenges."
       backArrow={backArrow}
     />
   )

@@ -28,7 +28,7 @@ const SwCategoryMenu = ({ backArrow }: { backArrow?: boolean }) => {
     <CategoryMenu
       path="/speakers-workshops/"
       categories={categories}
-      heading="<em>Keynote speakers & workshops</em> delivered by world-class experts."
+      heading="Keynote speakers and workshops delivered by world-class experts."
       backArrow={backArrow}
     />
   )
