@@ -41,9 +41,9 @@ const ShapeColumn = ({
     }
   `
 
-  const [colRef, setColRef] = useState<HTMLDivElement | null>(null)
+  const [colRef, setColRef] = useState<HTMLElement | null>(null)
   const setRefs = useCallback(
-    node => {
+    (node: HTMLElement | null) => {
       if (columnPosition) {
         setColRef(node)
       }

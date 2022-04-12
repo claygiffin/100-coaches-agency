@@ -27,23 +27,26 @@ const CategoryNav = ({
   path,
   theme = 'DARK',
 }: PropTypes) => {
-  const [navRef, setNavRef] = useState(null)
-  const navRefCallback = useCallback(node => {
+  const [navRef, setNavRef] = useState<HTMLElement | null>(null)
+  const navRefCallback = useCallback((node: HTMLElement | null) => {
     setNavRef(node)
   }, [])
   const navWidth = useElementWidth(navRef)
 
-  const [widthRef, setWidthRef] = useState(null)
-  const widthRefCallback = useCallback(node => {
+  const [widthRef, setWidthRef] = useState<HTMLElement | null>(null)
+  const widthRefCallback = useCallback((node: HTMLElement | null) => {
     setWidthRef(node)
   }, [])
   const containerWidth = useElementWidth(widthRef)
 
   const [collapsedContainerRef, setCollapsedContainerRef] =
-    useState(null)
-  const collapsedContainerCallback = useCallback(node => {
-    setCollapsedContainerRef(node)
-  }, [])
+    useState<HTMLElement | null>(null)
+  const collapsedContainerCallback = useCallback(
+    (node: HTMLElement | null) => {
+      setCollapsedContainerRef(node)
+    },
+    []
+  )
   const collapsedContainerHeight = useElementHeight(
     collapsedContainerRef
   )

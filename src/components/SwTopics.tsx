@@ -18,8 +18,8 @@ type PropTypes = {
 
 const SwTopics = ({ topics }: PropTypes) => {
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
-  const [sectionRef, setSectionRef] = useState(null)
-  const refCallback = useCallback(node => {
+  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const refCallback = useCallback((node: HTMLElement | null) => {
     setSectionRef(node)
   }, [])
   const { width: sectWidth, height: sectHeight } =
