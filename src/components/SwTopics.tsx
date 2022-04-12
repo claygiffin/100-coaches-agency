@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
 import { uniqueId } from 'lodash'
-import { useCallback, useMemo, useState } from 'react'
+import { Fragment, useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, baseGrid } from '../theme/mixins'
@@ -126,14 +126,18 @@ const SwTopics = ({ topics }: PropTypes) => {
             }}
           />
           <div css={styles.coaches}>
-            <h3>Featured Experts: </h3>
-            {topic.coaches.map((coach, i) => (
-              <h4 key={i} css={styles.coach}>
-                {coach.name}
-                <CoachProfileLightbox coach={coach} />
-                {i + 1 < topic.coaches.length && ', '}
-              </h4>
-            ))}
+            {topic.coaches.length > 0 && (
+              <Fragment>
+                <h3>Featured Experts: </h3>
+                {topic.coaches.map((coach, i) => (
+                  <h4 key={i} css={styles.coach}>
+                    {coach.name}
+                    <CoachProfileLightbox coach={coach} />
+                    {i + 1 < topic.coaches.length && ', '}
+                  </h4>
+                ))}
+              </Fragment>
+            )}
           </div>
         </div>
       ))}
