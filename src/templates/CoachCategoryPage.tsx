@@ -40,6 +40,7 @@ export const data = graphql`
       }
     }
     coaches: allDatoCmsCoach(
+      sort: { fields: position, order: ASC }
       filter: {
         coachingCategories: {
           elemMatch: { categoryName: { eq: $categoryName } }

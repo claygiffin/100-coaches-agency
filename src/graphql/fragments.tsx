@@ -8,7 +8,13 @@ export const CoachFragment = graphql`
     photo {
       small: gatsbyImageData(
         width: 400
-        imgixParams: { q: 65, sat: -100 }
+        imgixParams: {
+          q: 65
+          sat: -100
+          ar: "1:1"
+          fit: "crop"
+          crop: "focalpoint"
+        }
       )
       thumbnailUrl: url(
         imgixParams: {
