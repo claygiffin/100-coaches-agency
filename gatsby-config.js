@@ -17,7 +17,7 @@ module.exports = {
   siteMetadata: {
     title: `100 Coaches Agency`,
     author: `Clay Giffin // Doublespace`,
-    siteUrl: `https://www.100coaches.com/`,
+    siteUrl: `https://agency.100coaches.com/`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
