@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: User-agent: *
-Allow: /
-
 Sitemap: https://agency.100coaches.com/sitemap/sitemap-index.xml
