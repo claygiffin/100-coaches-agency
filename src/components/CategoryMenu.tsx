@@ -322,7 +322,11 @@ const CategoryMenu = ({
   }
   return (
     <Fragment>
-      <button css={styles.button} onClick={() => setOpen(true)} />
+      <button
+        css={styles.button}
+        onClick={() => setOpen(true)}
+        aria-label="Open Menu"
+      />
       {open &&
         portalTarget &&
         createPortal(

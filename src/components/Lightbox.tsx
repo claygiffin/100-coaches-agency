@@ -242,7 +242,11 @@ const Lightbox = ({
   }
   return (
     <Fragment>
-      <button css={styles.button} onClick={handleOpen} />
+      <button
+        css={styles.button}
+        onClick={handleOpen}
+        aria-label="Open Lightbox"
+      />
       {open &&
         portalTarget &&
         createPortal(
