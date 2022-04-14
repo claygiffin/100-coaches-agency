@@ -26,8 +26,8 @@ const HomeResults = () => {
 
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
 
-  const [sectionRef, setSectionRef] = useState(null)
-  const setRefs = useCallback(node => {
+  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const setRefs = useCallback((node: HTMLElement | null) => {
     setSectionRef(node)
   }, [])
   const { width: sectWidth, height: sectHeight } =
