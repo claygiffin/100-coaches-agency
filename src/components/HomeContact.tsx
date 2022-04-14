@@ -10,7 +10,7 @@ import AnimateIn from './AnimateIn'
 import Form from './Form'
 
 const HomeContact = () => {
-  const { home } = useStaticQuery(graphql`
+  const { home, contactForm } = useStaticQuery(graphql`
     query {
       home: datoCmsHome {
         contactHeading
@@ -19,7 +19,9 @@ const HomeContact = () => {
             html
           }
         }
-        contactForm {
+      }
+      contactForm: datoCmsContactForm {
+        form {
           ...FormFragment
         }
       }
@@ -28,8 +30,8 @@ const HomeContact = () => {
 
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
 
-  const [sectionRef, setSectionRef] = useState(null)
-  const setRefs = useCallback(node => {
+  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const setRefs = useCallback((node: HTMLElement | null) => {
     setSectionRef(node)
   }, [])
   const { width: sectWidth, height: sectHeight } =
@@ -38,7 +40,7 @@ const HomeContact = () => {
   const styles = {
     section: css`
       position: relative;
-      z-index: 2;
+      z-index: 4;
       margin-top: -7vw;
       &:before {
         content: '';
@@ -127,7 +129,7 @@ const HomeContact = () => {
           />
         </AnimateIn>
         <AnimateIn css={styles.form} fromBack>
-          <Form data={home.contactForm[0]} />
+          <Form data={contactForm.form[0]} />
         </AnimateIn>
       </div>
     </section>

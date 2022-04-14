@@ -90,7 +90,11 @@ const HomeHeroImages = () => {
 
   const styles = {
     container: css`
-      ${absoluteFill}
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: calc(100% - 1.75vw);
       overflow: hidden;
       z-index: 0;
     `,

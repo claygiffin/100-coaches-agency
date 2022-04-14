@@ -5,9 +5,7 @@ type SeoProps = {
   title?: string
   description?: string
   lang?: string
-  image?: {
-    url: string
-  }
+  imageUrl?: string
   noSuffix?: boolean
 }
 
@@ -15,7 +13,7 @@ const Seo = ({
   title = ``,
   description = ``,
   lang = `en`,
-  image,
+  imageUrl,
   noSuffix = false,
 }: SeoProps) => {
   const { site } = useStaticQuery(
@@ -44,9 +42,7 @@ const Seo = ({
   const metaDescription =
     description || site.globalSeo.fallbackSeo.description
   const metaTitle = title || site.globalSeo.fallbackSeo.title
-  const titleSuffix = noSuffix
-    ? ''
-    : ' | ' + site.globalSeo.titleSuffix || ''
+  const titleSuffix = noSuffix ? '' : site.globalSeo.titleSuffix || ''
 
   return (
     <Helmet
@@ -92,7 +88,7 @@ const Seo = ({
           name: `image`,
           property: `og:image`,
           content:
-            image?.url || site.globalSeo.fallbackSeo.image?.url || null,
+            imageUrl || site.globalSeo.fallbackSeo.image?.url || null,
         },
       ]}
     />

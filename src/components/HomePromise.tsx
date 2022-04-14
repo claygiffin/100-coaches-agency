@@ -4,6 +4,8 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
+import ArrowButton from './ArrowButton'
+import CoachCategoryMenu from './CoachCategoryMenu'
 import HomePromiseBackground from './HomePromiseBackground'
 
 const HomePromise = () => {
@@ -23,13 +25,13 @@ const HomePromise = () => {
   const styles = {
     section: css`
       position: relative;
-      z-index: 2;
+      z-index: 4;
       margin-top: -10.5vw;
     `,
     content: css`
       ${baseGrid}
       padding: calc(10.5vw + var(--gutter-xlg)) 0
-      calc(10.5vw + var(--gutter-xlg));
+      calc(8.5vw + var(--gutter-xlg));
       color: white;
     `,
     heading: css`
@@ -44,6 +46,11 @@ const HomePromise = () => {
         margin: 0 0 0.333em;
         text-shadow: 0 0 3px ${colors.goldShade3};
       }
+    `,
+    button: css`
+      font-size: var(--fs-16);
+      margin-top: 2.25em;
+      margin-bottom: 2em;
     `,
     body: css`
       grid-column: 2 / span 8;
@@ -68,6 +75,14 @@ const HomePromise = () => {
               __html: home.promiseBodyNode.childMarkdownRemark.html,
             }}
           />
+          <ArrowButton
+            text="See our coaches"
+            style="OUTLINE"
+            color="WHITE"
+            css={styles.button}
+          >
+            <CoachCategoryMenu />
+          </ArrowButton>
         </AnimateIn>
       </div>
     </section>

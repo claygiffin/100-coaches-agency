@@ -20,6 +20,7 @@ const HomeHero = () => {
     }
   `)
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
+  const gradientId = useMemo(() => uniqueId('gradient--'), [])
 
   const [sectionRefState, setSectionRefState] = useState(null)
   const sectionRef = useCallback(node => {
@@ -31,33 +32,17 @@ const HomeHero = () => {
   const styles = {
     section: css`
       ${baseGrid}
-      grid-template-rows: 1.5em auto auto;
-      min-height: calc(101 * var(--vh, 1vh));
+      grid-template-rows: var(--nav-height) auto auto 18vw;
+      min-height: 101vh;
       color: white;
-      font-size: var(--fs-108);
-      ${mq().s} {
-        font-size: var(--fs-84);
-      }
+      font-size: var(--fs-84);
+      z-index: 2;
     `,
     background: css`
       clip-path: url(#${clipId});
       background: linear-gradient(to bottom right, #333, #111);
       ${absoluteFill}
       z-index: 1;
-      &:before {
-        content: '';
-        background-image: linear-gradient(
-          to right,
-          ${colors.goldShade3},
-          ${colors.goldShade2},
-          ${colors.goldShade1},
-          ${colors.gold}
-        );
-        position: absolute;
-        width: 100%;
-        height: 0.5rem;
-        z-index: 1;
-      }
     `,
     ribbons: css`
       grid-column: 1 / -1;
@@ -66,44 +51,55 @@ const HomeHero = () => {
       left: 0;
       width: 100%;
     `,
+    logoWrap: css`
+      position: relative;
+      z-index: 2;
+      grid-column: 2 / -2;
+      grid-row: 2 / 3;
+      justify-self: center;
+      align-self: flex-end;
+      width: 100%;
+      height: 100%;
+      max-height: 1.667em;
+      display: flex;
+      justify-content: center;
+      margin: 0.75em 0 0.25em;
+    `,
+    logoWrapInner: css`
+      width: 100%;
+    `,
+    logo: css`
+      display: block;
+      height: 100%;
+      width: 100%;
+    `,
     heading: css`
-      display: contents;
       font-size: inherit;
-      > span {
+      align-self: flex-start;
+      grid-column: 2 / -2;
+      grid-row: 3 / 4;
+      margin-top: 0.75em;
+      margin-bottom: 0;
+      z-index: 2;
+      ${mq().ls} {
+        text-align: center;
+      }
+      > span > span {
         font-size: inherit;
         display: inline-block;
         z-index: 2;
-        max-width: 10ch;
+        width: 100%;
+        ${mq().ls} {
+          display: inline;
+        }
         &:nth-of-type(1) {
-          grid-row: 2 / 3;
-          grid-column: 2 / -2;
-          align-self: flex-end;
-          margin-top: 0.75em;
           margin-bottom: 0.125em;
         }
         &:nth-of-type(2) {
-          grid-row: 3 / 4;
-          grid-column: 5 / -2;
-          align-self: flex-start;
+          text-align: right;
           color: ${colors.gold};
-          margin-bottom: max(12.5vw, 2em);
-          ${mq().m} {
-            grid-column-start: 4;
-          }
-          ${mq().s} {
-            grid-column-start: 2;
-          }
         }
       }
-    `,
-    logo: css`
-      z-index: 2;
-      height: 0.875em;
-      width: auto;
-      position: relative;
-      grid-column: 2 / -2;
-      justify-self: center;
-      margin: 0.375em 0 0;
     `,
   }
   return (
@@ -134,7 +130,7 @@ const HomeHero = () => {
               y1="45%"
               x2="0%"
               y2="55%"
-              id="goldGradient"
+              id={gradientId}
             >
               <stop stopColor={colors.gold} offset="0%" />
               <stop stopColor={colors.goldShade1} offset="33%" />
@@ -149,19 +145,17 @@ const HomeHero = () => {
           />
           <path
             d="M0,288.5 C544.5,80.5 674,765 1440,64 L1440,415 L0,415 L0,288.5 Z"
-            fill="url(#goldGradient)"
+            fill={`url(#${gradientId})`}
           />
         </svg>
       </div>
-      <LogoStacked css={styles.logo} />
-      <h1 css={styles.heading}>
-        <AnimateIn as="span" innerAs="span">
-          <span>{home.heroHeading1}</span>
-        </AnimateIn>
-        <AnimateIn as="span" innerAs="span">
-          <span>{home.heroHeading2}</span>
-        </AnimateIn>
-      </h1>
+      <AnimateIn css={styles.logoWrap} innerCss={styles.logoWrapInner}>
+        <LogoStacked css={styles.logo} />
+      </AnimateIn>
+      <AnimateIn as="h1" innerAs="span" css={styles.heading}>
+        <span>{home.heroHeading1}</span>{' '}
+        <span>{home.heroHeading2}</span>
+      </AnimateIn>
     </section>
   )
 }

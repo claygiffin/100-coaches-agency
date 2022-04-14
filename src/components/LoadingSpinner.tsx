@@ -12,9 +12,8 @@ const LoadingSpinner = ({
     }
     50% {
       transform: translate(-50%, -50%) scale(1);
-    }
-  }
-`
+    }  
+  `
   const spinnerStyle = css`
     display: block;
     position: absolute;

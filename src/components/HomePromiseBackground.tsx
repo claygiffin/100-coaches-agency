@@ -1,5 +1,4 @@
 import { SerializedStyles, css } from '@emotion/react'
-import { clamp } from 'lodash'
 import { uniqueId } from 'lodash'
 import {
   useCallback,
@@ -50,18 +49,13 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
 
   const [offset, setOffset] = useState(0)
 
-  const requestRunning = useRef(false)
   const handleSetOffset = useCallback(() => {
-    if (!requestRunning.current) {
-      window.requestAnimationFrame(() => {
-        const windowHeight = window.innerHeight
-        const containerPos =
-          parallaxRef.current?.getBoundingClientRect().y || 0
-        setOffset(containerPos / windowHeight)
-        requestRunning.current = false
-      })
-      requestRunning.current = true
-    }
+    window.requestAnimationFrame(() => {
+      const windowHeight = window.innerHeight
+      const containerPos =
+        parallaxRef.current?.getBoundingClientRect().y || 0
+      setOffset(containerPos / windowHeight)
+    })
   }, [])
   useLayoutEffect(handleSetOffset, [handleSetOffset])
 
@@ -158,10 +152,14 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
                 0.75 * containerWidth
               },${-0.0625 * containerWidth} ${0.435 * containerWidth},${
                 0.16 * containerWidth
-              } 0,${
-                0.0875 * containerWidth
-              } L0,${containerHeight} L${containerWidth},${containerHeight} L${containerWidth},${
-                0.02 * containerWidth
+              } 0,${0.0875 * containerWidth} L0,${
+                containerHeight - 0.02 * containerWidth
+              } C${0.333 * containerWidth},${
+                containerHeight - 0.2 * containerWidth
+              } ${0.68 * containerWidth},${
+                containerHeight + 0.06 * containerWidth
+              } ${containerWidth},${
+                containerHeight - 0.02 * containerWidth
               } Z`}
             />
           </clipPath>
@@ -230,9 +228,9 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
               pathLength="100"
               style={{
                 strokeDasharray: 100,
-                strokeDashoffset: clamp(offset * 200 + 75, 50, 100),
+                strokeDashoffset: offset * 200 + 75 > 60 ? 100 : 50,
                 transition:
-                  'opacity 100ms ease, stroke-dashoffset 150ms ease',
+                  'opacity 100ms ease, stroke-dashoffset 2000ms ease',
                 opacity: offset * 200 + 75 > 85 ? 0 : 1,
               }}
             />

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { uniqueId } from 'lodash'
 import { useCallback, useMemo, useState } from 'react'
@@ -8,6 +8,7 @@ import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
+import ArrowButton from './ArrowButton'
 
 const HomeMarshall = () => {
   const { home } = useStaticQuery(graphql`
@@ -39,12 +40,9 @@ const HomeMarshall = () => {
   const styles = {
     section: css`
       position: relative;
-      z-index: 2;
-      margin-top: -7vw;
-    `,
-    background: css`
-      ${absoluteFill};
-      clip-path: url(#${clipId});
+      z-index: 3;
+      margin-top: -8.5vw;
+      background-color: #333;
       background: linear-gradient(to bottom right, #555, #000);
     `,
     content: css`
@@ -74,7 +72,7 @@ const HomeMarshall = () => {
     body: css`
       grid-column: span 5 / -2;
       font-size: var(--fs-21);
-      ${mq().m} {
+      ${mq().ml} {
         grid-column-start: span 6;
       }
       ${mq().ms} {
@@ -82,13 +80,21 @@ const HomeMarshall = () => {
         margin-bottom: 2.5em;
       }
     `,
+    button: css`
+      font-size: var(--fs-16);
+      margin-top: 2.25em;
+    `,
+    background: css`
+      ${absoluteFill};
+      clip-path: inset(0 0 0 0);
+    `,
     imageWrap: css`
       position: fixed;
       bottom: 0;
       left: 0;
       width: 50vw;
       height: 100vh;
-      filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5));
+      /* filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5)); */
       ${mq().ms} {
         width: 90vw;
       }
@@ -141,6 +147,13 @@ const HomeMarshall = () => {
             dangerouslySetInnerHTML={{
               __html: home.marshallBodyNode.childMarkdownRemark.html,
             }}
+          />
+          <ArrowButton
+            as={Link}
+            to="/about"
+            text="Learn more about us"
+            style="OUTLINE"
+            css={styles.button}
           />
         </AnimateIn>
       </div>

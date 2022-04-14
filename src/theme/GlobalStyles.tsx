@@ -3,16 +3,22 @@ import '../fonts/_font-face.css'
 import { Global, css } from '@emotion/react'
 import emotionNormalize from 'emotion-normalize'
 
+import { useWindowHeight } from '../hooks/useWindowDimensions'
 import { mq } from './mixins'
 
 const GlobalStyles = () => {
+  const vh = useWindowHeight()
+
   const globalStyles = css`
     ${emotionNormalize}
 
     :root {
+      --vh: ${vh / 100 + 'px' || '1vh'};
+
       /* Font Sizes */
       --fs-108: max(4rem, 5rem + 3.333vw);
       --fs-84: max(3.5rem, 3.875rem + 2.6vw);
+      --fs-72: max(3.25rem, 3.3125rem + 2.2375vw);
       --fs-60: max(3rem, 2.75rem + 1.875vw);
       --fs-48: max(2.5rem, 2.25rem + 1.25vw);
       --fs-36: max(2.25rem, 2rem + 0.833vw);
@@ -20,7 +26,7 @@ const GlobalStyles = () => {
       --fs-24: max(1.667rem, 1.5rem + 0.417vw);
       --fs-21: max(1.5rem, 1.25rem + 0.417vw);
       --fs-18: max(1.333rem, 1rem + 0.417vw);
-      --fs-16: max(1.333rem, 0.8333rem + 0.417vw);
+      --fs-16: max(1.25rem, 0.8333rem + 0.417vw);
       --fs-15: 1.25rem;
       --fs-14: 1.167rem;
       --fs-13: 1.0888rem;
@@ -34,10 +40,6 @@ const GlobalStyles = () => {
         'Liberation Serif', Georgia, serif;
 
       /* Padding/Gutters/Margins */
-      --pd-sm: clamp(3rem, 2.5vw, 6rem);
-      --pd-md: clamp(4.5rem, 5vw, 9rem);
-      --pd-lg: clamp(6rem, 7.5vw, 12rem);
-      --pd-xl: clamp(12rem, 12.5vw, 18rem);
       --gutter-sm: max(1.25vw, 0.75rem);
       --gutter-md: max(2.5vw, 1rem);
       --gutter-mlg: max(3.333vw, 2rem);
@@ -77,6 +79,9 @@ const GlobalStyles = () => {
     p {
       line-height: 2;
       font-weight: 300;
+      ${mq().s} {
+        line-height: 1.8;
+      }
     }
     input,
     textarea,
@@ -94,6 +99,14 @@ const GlobalStyles = () => {
         transition: all 0s 99999s;
         border-radius: 0;
       }
+    }
+    button {
+      appearance: none;
+      border: none;
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+      cursor: pointer;
     }
   `
 

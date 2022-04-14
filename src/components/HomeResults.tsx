@@ -7,6 +7,8 @@ import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import AnimateIn from './AnimateIn'
+import ArrowButton from './ArrowButton'
+import SwCategoryMenu from './SwCategoryMenu'
 
 const HomeResults = () => {
   const { home } = useStaticQuery(graphql`
@@ -24,8 +26,8 @@ const HomeResults = () => {
 
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
 
-  const [sectionRef, setSectionRef] = useState(null)
-  const setRefs = useCallback(node => {
+  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const setRefs = useCallback((node: HTMLElement | null) => {
     setSectionRef(node)
   }, [])
   const { width: sectWidth, height: sectHeight } =
@@ -33,7 +35,7 @@ const HomeResults = () => {
 
   const styles = {
     section: css`
-      z-index: 2;
+      z-index: 4;
       position: relative;
       margin-top: -11.5vw;
       &:before {
@@ -77,6 +79,11 @@ const HomeResults = () => {
         line-height: 1.667;
       }
     `,
+    button: css`
+      font-size: var(--fs-16);
+      display: inline-block;
+      margin-top: 1.25em;
+    `,
   }
 
   return (
@@ -111,6 +118,15 @@ const HomeResults = () => {
                 home.resultsSubheadingNode.childMarkdownRemark.html,
             }}
           />
+          <ArrowButton
+            css={styles.button}
+            color="GOLD_DARK"
+            style="OUTLINE"
+            text="Explore our workshops"
+            to="/speakers-and-workshops/"
+          >
+            <SwCategoryMenu />
+          </ArrowButton>
         </AnimateIn>
       </div>
     </section>
