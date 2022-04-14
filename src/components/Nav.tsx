@@ -19,8 +19,10 @@ type NavProps = {
 const Nav = ({ homeNav }: NavProps) => {
   const gradientId = useMemo(() => uniqueId('gradient--'), [])
 
-  const [navRefState, setNavRefState] = useState(null)
-  const navRef = useCallback(node => {
+  const [navRefState, setNavRefState] = useState<HTMLElement | null>(
+    null
+  )
+  const navRef = useCallback((node: HTMLElement | null) => {
     setNavRefState(node)
   }, [])
   const { width: navWidth, height: navHeight } =
@@ -252,10 +254,10 @@ const Nav = ({ homeNav }: NavProps) => {
         >
           About Us
         </Link>
-        <button css={[styles.link, styles.button]}>
+        <div css={[styles.link, styles.button]}>
           Work With Us
           <ContactLightbox />
-        </button>
+        </div>
       </div>
     </nav>
   )

@@ -23,7 +23,7 @@ const ArrowButton = <E extends ElementType>({
   as,
   ...props
 }: PropTypes<E>) => {
-  const Element = as || 'button'
+  const Element = as || 'div'
   const styles = {
     button: css`
       display: block;

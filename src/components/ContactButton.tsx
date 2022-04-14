@@ -11,8 +11,8 @@ type Props = {
 }
 
 const ContactButton = ({ text }: Props) => {
-  const [textRef, setTextRef] = useState(null)
-  const textRefSetter = useCallback(node => {
+  const [textRef, setTextRef] = useState<HTMLElement | null>(null)
+  const textRefSetter = useCallback((node: HTMLElement | null) => {
     setTextRef(node)
   }, [])
 
@@ -58,7 +58,7 @@ const ContactButton = ({ text }: Props) => {
         padding-right: 0.5em;
       }
       @media (hover: hover) {
-        button:hover > & {
+        div:hover > & {
           width: ${textWidth}px;
           transition-duration: 300ms;
           transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
@@ -67,13 +67,13 @@ const ContactButton = ({ text }: Props) => {
     `,
   }
   return (
-    <button css={styles.button}>
+    <div css={styles.button}>
       <IoChatbubbleEllipses css={styles.icon} />
       <span css={styles.text}>
         <span ref={textRefSetter}>{text}</span>
       </span>
       <ContactLightbox />
-    </button>
+    </div>
   )
 }
 
