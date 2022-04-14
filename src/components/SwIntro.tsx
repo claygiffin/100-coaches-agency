@@ -36,6 +36,10 @@ const SwIntro = ({ category, allCategories }: PropTypes) => {
       return category.heroImage.vertical
     }
   }, [windowDimensions, category.heroImage])
+
+  const categoryName = (
+    category.categoryNameFull || category.categoryName
+  ).replace('/', '/&#8203;')
   const styles = {
     intro: css`
       ${baseGrid}
@@ -43,6 +47,7 @@ const SwIntro = ({ category, allCategories }: PropTypes) => {
       padding: var(--gutter-xlg) 0 calc(var(--gutter-xlg) + 7vw);
       h1 {
         grid-column: 2 / -2;
+        max-width: 100%;
         font-size: var(--fs-84);
         color: ${colors.goldTint1};
         margin: 0;
@@ -81,7 +86,7 @@ const SwIntro = ({ category, allCategories }: PropTypes) => {
         current={category.categoryName}
         theme="LIGHT"
       />
-      <h1>{category.categoryNameFull || category.categoryName}</h1>
+      <h1 dangerouslySetInnerHTML={{ __html: categoryName }} />
       <p>{category.description}</p>
     </section>
   )

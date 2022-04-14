@@ -1,7 +1,7 @@
 import { css } from '@emotion/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { uniqueId } from 'lodash'
-import { RefObject, useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { useElementRect } from '../hooks/useElementRect'
 import { absoluteFill } from '../theme/mixins'
