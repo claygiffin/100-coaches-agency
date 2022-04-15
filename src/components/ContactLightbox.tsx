@@ -44,15 +44,6 @@ const ContactLightbox = () => {
     body: css`
       font-size: var(--fs-16);
       margin-bottom: 2em;
-      a {
-        display: inline-block;
-        color: ${colors.gold};
-        font-weight: 500;
-        transition: color 200ms ease;
-        &:hover {
-          color: ${colors.goldTint2};
-        }
-      }
     `,
     form: css`
       margin-bottom: 2.5rem;

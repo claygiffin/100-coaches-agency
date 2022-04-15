@@ -5,6 +5,7 @@ import emotionNormalize from 'emotion-normalize'
 
 import { useWindowHeight } from '../hooks/useWindowDimensions'
 import { mq } from './mixins'
+import { colors } from './variables'
 
 const GlobalStyles = () => {
   const vh = useWindowHeight()
@@ -81,6 +82,15 @@ const GlobalStyles = () => {
       font-weight: 300;
       ${mq().s} {
         line-height: 1.8;
+      }
+      a {
+        display: inline-block;
+        color: ${colors.gold};
+        font-weight: 500;
+        transition: color 200ms ease;
+        &:hover {
+          color: ${colors.goldTint2};
+        }
       }
     }
     input,
