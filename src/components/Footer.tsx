@@ -6,14 +6,15 @@ import { useCallback, useMemo, useState } from 'react'
 import { useElementRect } from '../hooks/useElementRect'
 import { baseGrid } from '../theme/mixins'
 import { colors } from '../theme/variables'
+import ContactLightbox from './ContactLightbox'
 import LogoStacked from './LogoStacked'
 
 const Footer = () => {
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
   const gradientId = useMemo(() => uniqueId('gradient--'), [])
 
-  const [sectionRef, setSectionRef] = useState(null)
-  const setRefs = useCallback(node => {
+  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const setRefs = useCallback((node: HTMLElement | null) => {
     setSectionRef(node)
   }, [])
   const { width: sectWidth, height: sectHeight } =
@@ -50,6 +51,32 @@ const Footer = () => {
       svg {
         height: 100%;
         width: auto;
+      }
+    `,
+    link: css`
+      position: relative;
+      grid-column: 2 / -2;
+      font-size: var(--fs-15);
+      justify-self: center;
+      color: ${colors.goldTint1};
+      text-transform: uppercase;
+      display: block;
+      padding: 0.6em 1em;
+      margin-bottom: 1.5em;
+      line-height: 1.1;
+      cursor: pointer;
+      text-align: center;
+      border: 1px solid currentColor;
+      border-radius: 1.25em;
+      transition-property: color, border-color, background-color;
+      transition-duration: 200ms;
+      transition-timing-function: ease;
+      @media (hover: hover) {
+        &:hover {
+          background: ${colors.goldShade1};
+          border-color: ${colors.goldShade1};
+          color: #fff;
+        }
       }
     `,
     rights: css`
@@ -113,6 +140,10 @@ const Footer = () => {
         <Link to="/" css={styles.logo} aria-label="100 Coaches Agency">
           <LogoStacked />
         </Link>
+        <div css={styles.link}>
+          Work With Us
+          <ContactLightbox />
+        </div>
         <div css={styles.rights}>
           <span>100 Coaches Agency.</span>{' '}
           <span>All rights reserved.</span> <span>© {year}</span>
