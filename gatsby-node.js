@@ -90,4 +90,8 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+  createPage({
+    path: `/contact/`,
+    component: path.resolve(`./src/templates/ContactFormPage.tsx`),
+  })
 }
