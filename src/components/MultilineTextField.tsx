@@ -27,7 +27,6 @@ const MultilineTextField = ({
     }
   }
   const handleBlur = () => {
-    onChange(name, value)
     if (value.length > 0) {
       setShrink(true)
     } else {
@@ -43,6 +42,10 @@ const MultilineTextField = ({
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value)
   }
+
+  useEffect(() => {
+    onChange(name, value)
+  }, [onChange, name, value])
 
   const styles = {
     container: css`

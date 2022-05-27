@@ -21,7 +21,6 @@ const TextField = ({ label, type, onChange, required }: FieldProps) => {
     }
   }
   const handleBlur = () => {
-    onChange(name, value)
     if (value.length > 0) {
       setShrink(true)
     } else {
@@ -78,6 +77,10 @@ const TextField = ({ label, type, onChange, required }: FieldProps) => {
     }
     setValue(v)
   }
+
+  useEffect(() => {
+    onChange(name, value)
+  }, [onChange, name, value])
 
   const styles = {
     container: css`

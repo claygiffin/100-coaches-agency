@@ -1,5 +1,5 @@
 import { SerializedStyles, css, keyframes } from '@emotion/react'
-import { Fragment, SyntheticEvent, useState } from 'react'
+import { Fragment, SyntheticEvent, useCallback, useState } from 'react'
 
 import { mq } from '../theme/mixins'
 import { absoluteFill, button } from '../theme/mixins'
@@ -31,12 +31,12 @@ const Form = ({ data, ...props }: FormProps) => {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
-  const handleChange = (name: string, value: string) => {
-    setFormData({
-      ...formData,
+  const handleChange = useCallback((name: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
       [name]: value,
-    })
-  }
+    }))
+  }, [])
 
   const handleSubmit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault()
