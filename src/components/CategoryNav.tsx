@@ -18,6 +18,7 @@ type PropTypes = {
     }>
   }
   path: string
+  allLink?: boolean
   theme?: 'DARK' | 'LIGHT'
 }
 
@@ -25,6 +26,7 @@ const CategoryNav = ({
   current = '',
   categories,
   path,
+  allLink,
   theme = 'DARK',
 }: PropTypes) => {
   const [navRef, setNavRef] = useState<HTMLElement | null>(null)
@@ -183,6 +185,14 @@ const CategoryNav = ({
               {category.categoryName}
             </Link>
           ))}
+          {allLink && (
+            <Link
+              to={`${('/' + path + '/').replace(/\/\//g, '/')}all/`}
+              css={[styles.link, current === 'All' && styles.active]}
+            >
+              All
+            </Link>
+          )}
         </div>
         {collapsed && (
           <Fragment>
@@ -211,6 +221,17 @@ const CategoryNav = ({
                     )
                   }
                 })}
+                {allLink && (
+                  <Link
+                    to={`${('/' + path + '/').replace(
+                      /\/\//g,
+                      '/'
+                    )}all/`}
+                    css={styles.link}
+                  >
+                    All
+                  </Link>
+                )}
               </div>
             </div>
           </Fragment>

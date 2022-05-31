@@ -61,6 +61,10 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     })
   })
+  createPage({
+    path: `/coaches/all/`,
+    component: path.resolve(`./src/templates/AllCoachesPage.tsx`),
+  })
   data.allDatoCmsSwCategory.edges.forEach(({ node }) => {
     createPage({
       path: `/speakers-workshops/${toSlug(node.categoryName)}/`,

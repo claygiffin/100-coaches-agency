@@ -32,6 +32,7 @@ const CoachCategoryMenu = ({ backArrow }: { backArrow?: boolean }) => {
       categories={coachCategories}
       heading="Coaches dedicated to finding the right solutions to your business challenges."
       backArrow={backArrow}
+      allLink
     />
   )
 }

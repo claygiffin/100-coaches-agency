@@ -2,16 +2,15 @@ import { css } from '@emotion/react'
 import { graphql } from 'gatsby'
 
 import CategoryNav from '../components/CategoryNav'
-import CoachCategoryFeatured from '../components/CoachCategoryFeatured'
 import CoachCategoryThumbnail from '../components/CoachCategoryThumbnail'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
 import { baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
-import { CoachProps, SeoProps } from '../types/customTypes'
+import { CoachProps } from '../types/customTypes'
 
 export const data = graphql`
-  query ($categoryName: String!, $featuredCoachId: String!) {
+  query {
     categories: allDatoCmsCoachCategory(
       sort: { fields: position, order: ASC }
     ) {
@@ -19,35 +18,7 @@ export const data = graphql`
         categoryName
       }
     }
-    category: datoCmsCoachCategory(
-      categoryName: { eq: $categoryName }
-    ) {
-      categoryName
-      categoryNameFull
-      description
-      featuredCoach {
-        ...CoachFragment
-        photo {
-          large: gatsbyImageData(
-            width: 720
-            imgixParams: { q: 75, sat: -100 }
-          )
-        }
-      }
-      seo {
-        title
-        description
-      }
-    }
-    coaches: allDatoCmsCoach(
-      sort: { fields: position, order: ASC }
-      filter: {
-        coachingCategories: {
-          elemMatch: { categoryName: { eq: $categoryName } }
-        }
-        id: { ne: $featuredCoachId }
-      }
-    ) {
+    coaches: allDatoCmsCoach(sort: { fields: position, order: ASC }) {
       nodes {
         ...CoachFragment
       }
@@ -62,13 +33,6 @@ type PropTypes = {
         categoryName: string
       }[]
     }
-    category: {
-      categoryName: string
-      categoryNameFull: string
-      description: string
-      featuredCoach: CoachProps
-      seo: SeoProps
-    }
     coaches: {
       nodes: CoachProps[]
     }
@@ -76,13 +40,13 @@ type PropTypes = {
 }
 
 const CoachCategoryPage = ({ data }: PropTypes) => {
-  const { categories, category, coaches } = data
+  const { categories, coaches } = data
 
   const styles = {
     intro: css`
       ${baseGrid}
       background: #fff;
-      padding: var(--gutter-xlg) 0;
+      padding: var(--gutter-xlg) 0 0;
       h1 {
         grid-column: 2 / -2;
         font-size: var(--fs-84);
@@ -114,25 +78,16 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
   }
   return (
     <Layout>
-      <Seo
-        title={
-          category.seo?.title ||
-          category.categoryNameFull ||
-          category.categoryName
-        }
-        description={category.seo?.description || category.description}
-      />
+      <Seo title={'All Coaches'} />
       <section css={styles.intro}>
         <CategoryNav
           categories={categories}
-          current={category.categoryName}
+          current={'All'}
           path="/coaches/"
           allLink
         />
-        <h1>{category.categoryNameFull || category.categoryName}</h1>
-        <p>{category.description}</p>
+        {/* <h1>All Coaches</h1> */}
       </section>
-      <CoachCategoryFeatured featuredCoach={category.featuredCoach} />
       <section css={styles.coaches}>
         {coaches.nodes.map((coach, i: number) => (
           <CoachCategoryThumbnail coach={coach} key={i} index={i} />

@@ -25,6 +25,7 @@ type PropTypes = {
   }
   heading: string
   path: string
+  allLink?: boolean
   backArrow?: boolean
 }
 
@@ -32,6 +33,7 @@ const CategoryMenu = ({
   categories,
   heading,
   path,
+  allLink,
   backArrow,
 }: PropTypes) => {
   const isBrowser = typeof window !== `undefined`
@@ -319,6 +321,10 @@ const CategoryMenu = ({
         animation-name: ${animations.linksOut};
       `}
     `,
+    allLink: css`
+      color: ${colors.gold};
+      text-transform: uppercase;
+    `,
   }
   return (
     <Fragment>
@@ -362,6 +368,24 @@ const CategoryMenu = ({
                     </Link>
                   )
                 })}
+                {allLink && (
+                  <Link
+                    to={`${('/' + path + '/').replace(
+                      /\/\//g,
+                      '/'
+                    )}all/`}
+                    onClick={() => {
+                      ;`${('/' + path + '/').replace(
+                        /\/\//g,
+                        '/'
+                      )}all/` === window.location.pathname &&
+                        handleClose()
+                    }}
+                    css={[styles.link, styles.allLink]}
+                  >
+                    View All
+                  </Link>
+                )}
               </div>
             </div>
             <svg
