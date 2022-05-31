@@ -24,7 +24,7 @@ const HomeCoachesGrid = () => {
           photo {
             alt
             thumbnail: gatsbyImageData(
-              width: 360
+              width: 120
               aspectRatio: 1
               imgixParams: {
                 q: 40
@@ -46,11 +46,11 @@ const HomeCoachesGrid = () => {
 
   const columns = useMemo(() => {
     if (windowWidth < breakpoints.ms) {
-      return 3
-    } else if (windowWidth < breakpoints.m) {
       return 4
+    } else if (windowWidth < breakpoints.m) {
+      return 6
     } else {
-      return 5
+      return 8
     }
   }, [windowWidth])
 
