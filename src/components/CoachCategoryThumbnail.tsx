@@ -35,6 +35,7 @@ const CoachCategoryThumbnail = ({
     image: css`
       min-width: 100%;
       min-height: 100%;
+      aspect-ratio: 1;
       > div {
         max-width: 100% !important;
       }
