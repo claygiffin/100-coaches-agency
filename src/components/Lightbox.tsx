@@ -3,11 +3,13 @@ import {
   Fragment,
   ReactNode,
   useCallback,
+  useContext,
   useEffect,
   useState,
 } from 'react'
 import { createPortal } from 'react-dom'
 
+import Context from '../context/Context'
 import closeX from '../images/close-x.svg'
 import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
@@ -28,6 +30,8 @@ const Lightbox = ({
 }: LightboxProps) => {
   const isBrowser = typeof window !== `undefined`
 
+  const context = useContext(Context)
+
   const portalTarget =
     isBrowser && document.getElementById('lightbox-container')
 
@@ -39,28 +43,39 @@ const Lightbox = ({
 
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
+    context.setLightbox(url)
     setOpen(true)
     setUrl()
     onClick()
   }
 
   const [closing, setClosing] = useState(false)
-
   const handleBack = useCallback(() => {
     if (!closing) {
       window.history.back()
     }
   }, [closing])
 
-  const handleClose = () => {
+  useEffect(() => {
+    if (open) {
+      if (context.lightbox !== url) {
+        setClosing(true)
+      } else {
+        setClosing(false)
+      }
+    }
+  }, [context.lightbox, open, url])
+
+  const handleClose = useCallback(() => {
     setClosing(true)
     setTimeout(() => {
       setClosing(false)
     }, 300)
     setTimeout(() => {
       setOpen(false)
+      context.lightbox === url && context.setLightbox(null)
     }, 301)
-  }
+  }, [context, url])
 
   useEffect(() => {
     window.addEventListener('popstate', handleClose, { passive: true })

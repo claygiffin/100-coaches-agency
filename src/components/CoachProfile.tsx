@@ -7,16 +7,17 @@ import { StructuredText } from 'react-datocms'
 import { useElementRect } from '../hooks/useElementRect'
 import { mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
-import { CoachProps } from '../types/customTypes'
+import { CoachProps, TeamMemberProps } from '../types/customTypes'
 import Seo from './Seo'
 
 type CoachProfileProps = {
-  coach: CoachProps
+  coach: CoachProps | TeamMemberProps
 }
 
 const CoachProfile = ({ coach }: CoachProfileProps) => {
-  const [headerBgRefState, setHeaderBgRefState] = useState(null)
-  const headerBgRef = useCallback(node => {
+  const [headerBgRefState, setHeaderBgRefState] =
+    useState<HTMLDivElement | null>(null)
+  const headerBgRef = useCallback((node: HTMLDivElement | null) => {
     setHeaderBgRefState(node)
   }, [])
   const { width: bgWidth, height: bgHeight } =

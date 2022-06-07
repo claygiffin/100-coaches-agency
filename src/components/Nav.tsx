@@ -114,7 +114,7 @@ const Nav = ({ homeNav }: NavProps) => {
       display: flex;
       justify-self: flex-end;
       align-items: center;
-      margin-right: var(--gutter-md);
+      margin: 0 var(--gutter-md);
       z-index: 1;
       font-size: var(--fs-15);
       ${mq().ls} {
@@ -245,6 +245,15 @@ const Nav = ({ homeNav }: NavProps) => {
           Speakers & Workshops
           <SwCategoryMenu backArrow={burgerOpen} />
         </span>
+        <Link
+          css={styles.link}
+          to="/articles/"
+          onClick={() =>
+            window.location.pathname === '/articles/' && handleClose()
+          }
+        >
+          Articles
+        </Link>
         <Link
           css={styles.link}
           to="/about/"

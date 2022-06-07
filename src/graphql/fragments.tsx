@@ -154,3 +154,24 @@ export const SWMenuLinkFragment = graphql`
     linkText
   }
 `
+export const ArticleFragment = graphql`
+  fragment ArticleFragment on DatoCmsArticle {
+    id: originalId
+    __typename
+    title
+    author {
+      ... on DatoCmsCoach {
+        ...CoachFragment
+      }
+      ... on DatoCmsTeamMember {
+        ...TeamMemberFragment
+      }
+    }
+    body {
+      value
+    }
+    meta {
+      publishedAt(formatString: "MMMM D, YYYY")
+    }
+  }
+`
