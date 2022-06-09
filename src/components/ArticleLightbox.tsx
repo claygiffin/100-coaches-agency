@@ -10,7 +10,7 @@ type PropTypes = {
 const ArticleLightbox = ({ article }: PropTypes) => {
   return (
     <Lightbox slug={`articles/${toSlug(article.title)}-${article.id}`}>
-      <Article article={article} />
+      <Article article={article} lightbox />
     </Lightbox>
   )
 }

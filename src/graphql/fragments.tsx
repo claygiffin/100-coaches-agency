@@ -171,7 +171,21 @@ export const ArticleFragment = graphql`
       value
     }
     meta {
-      publishedAt(formatString: "MMMM D, YYYY")
+      date: createdAt
+      formattedDate: createdAt(formatString: "MMMM D, YYYY")
+    }
+  }
+`
+export const NewsItemFragment = graphql`
+  fragment NewsItemFragment on DatoCmsNewsItem {
+    id: originalId
+    __typename
+    title
+    publication
+    url
+    meta {
+      date: createdAt
+      formattedDate: createdAt(formatString: "MMMM D, YYYY")
     }
   }
 `

@@ -6,21 +6,14 @@ import Lightbox from './Lightbox'
 type PropTypes = {
   coach: CoachProps | TeamMemberProps
   directory?: string
-  onClick?: () => void
 }
 
 const CoachProfileLightbox = ({
   coach,
   directory = 'coaches/profiles',
-  onClick = () => {
-    return
-  },
 }: PropTypes) => {
   return (
-    <Lightbox
-      slug={`${directory}/${toSlug(coach.name)}`}
-      onClick={onClick}
-    >
+    <Lightbox slug={`${directory}/${toSlug(coach.name)}`}>
       <CoachProfile coach={coach} />
     </Lightbox>
   )

@@ -1,3 +1,4 @@
+import { css } from '@emotion/react'
 import { graphql } from 'gatsby'
 
 import Article from '../components/Article'
@@ -19,8 +20,13 @@ type Props = {
 }
 
 const ArticlePage = ({ data }: Props) => {
+  const styles = {
+    main: css`
+      padding: var(--gutter-lg) var(--margin-outer) var(--gutter-xlg);
+    `,
+  }
   return (
-    <Layout>
+    <Layout mainCss={styles.main}>
       <Article article={data.article} />
     </Layout>
   )

@@ -46,5 +46,19 @@ export type ArticleProps = {
   title: string
   author: CoachProps | TeamMemberProps
   body: IStructuredText
-  meta: { publishedAt: string }
+  meta: {
+    date: string
+    formattedDate: string
+  }
+}
+export type NewsItemProps = {
+  __typename: 'DatoCmsNewsItem'
+  id: string
+  title: string
+  url: string
+  publication: string
+  meta: {
+    date: string
+    formattedDate: string
+  }
 }

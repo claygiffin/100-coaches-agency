@@ -2,6 +2,7 @@ import { css, keyframes } from '@emotion/react'
 import {
   Fragment,
   ReactNode,
+  SyntheticEvent,
   useCallback,
   useContext,
   useEffect,
@@ -10,6 +11,7 @@ import {
 import { createPortal } from 'react-dom'
 
 import Context from '../context/Context'
+import useFocusTrap from '../hooks/useFocusTrap'
 import closeX from '../images/close-x.svg'
 import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
@@ -32,8 +34,9 @@ const Lightbox = ({
 
   const context = useContext(Context)
 
-  const portalTarget =
-    isBrowser && document.getElementById('lightbox-container')
+  const portalTarget = isBrowser
+    ? document.getElementById('lightbox-container')
+    : null
 
   const url = ('/' + slug + '/').replace('//', '/')
 
@@ -42,40 +45,34 @@ const Lightbox = ({
   }
 
   const [open, setOpen] = useState(false)
-  const handleOpen = () => {
-    context.setLightbox(url)
-    setOpen(true)
+  const handleOpen = (e: SyntheticEvent) => {
+    e.preventDefault()
     setUrl()
+    setOpen(true)
     onClick()
+    context.setLightbox(url)
   }
 
   const [closing, setClosing] = useState(false)
   const handleBack = useCallback(() => {
-    if (!closing) {
+    if (open && !closing) {
       window.history.back()
     }
-  }, [closing])
-
-  useEffect(() => {
-    if (open) {
-      if (context.lightbox !== url) {
-        setClosing(true)
-      } else {
-        setClosing(false)
-      }
-    }
-  }, [context.lightbox, open, url])
+  }, [closing, open])
 
   const handleClose = useCallback(() => {
-    setClosing(true)
-    setTimeout(() => {
-      setClosing(false)
-    }, 300)
-    setTimeout(() => {
-      setOpen(false)
+    if (open) {
+      console.log('handleClose')
+      setClosing(true)
       context.lightbox === url && context.setLightbox(null)
-    }, 301)
-  }, [context, url])
+      setTimeout(() => {
+        setClosing(false)
+      }, 300)
+      setTimeout(() => {
+        setOpen(false)
+      }, 301)
+    }
+  }, [open, context, url])
 
   useEffect(() => {
     window.addEventListener('popstate', handleClose, { passive: true })
@@ -99,6 +96,14 @@ const Lightbox = ({
       document.removeEventListener('keydown', escFunction, false)
     }
   }, [open, escFunction])
+
+  const [lightboxRef, setLightboxRef] = useState<HTMLDivElement | null>(
+    null
+  )
+  const lightboxRefSetter = useCallback((node: HTMLDivElement) => {
+    setLightboxRef(node)
+  }, [])
+  useFocusTrap(lightboxRef, open)
 
   const animations = {
     blurIn: keyframes`
@@ -180,7 +185,7 @@ const Lightbox = ({
       animation-duration: 290ms;
       animation-timing-function: east-out;
       animation-fill-mode: forwards;
-      ${closing &&
+      ${(closing || context.lightbox !== url) &&
       css`
         opacity: 1;
         animation-name: ${animations.contentOut};
@@ -215,13 +220,17 @@ const Lightbox = ({
         fill: #fff;
       }
       @media (hover: hover) {
-        display: none;
+        opacity: 0;
+        pointer-events: none;
         ${mq().ml} {
           display: block;
         }
         &:hover {
           transform: scale3d(1.25, 1.25, 1.25);
           color: ${colors.gold};
+        }
+        &:focus {
+          opacity: 1;
         }
       }
     `,
@@ -257,24 +266,30 @@ const Lightbox = ({
   }
   return (
     <Fragment>
-      <button
+      <a
         css={styles.button}
         onClick={handleOpen}
         aria-label="Open Lightbox"
-      />
+        href={url}
+      >
+        <span />
+      </a>
       {open &&
         portalTarget &&
         createPortal(
           <Fragment>
             <ScrollToggle />
             <div css={styles.background} />
-            <div css={styles.lightbox}>
+            <div css={styles.lightbox} ref={lightboxRefSetter}>
               <div
                 css={styles.backgroundClose}
                 onClick={handleBack}
                 aria-hidden
               />
-              <div css={styles.content}>{children}</div>
+              <div css={styles.content}>
+                <button aria-hidden />
+                {children}
+              </div>
               <svg
                 css={styles.closeButton}
                 aria-label="Close Lightbox"
