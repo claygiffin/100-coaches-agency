@@ -70,6 +70,7 @@ const ArticlesPage = () => {
       grid-row-gap: var(--gutter-md);
       grid-column-gap: var(--gutter-sm);
       margin: 0 calc(-1 * var(--gutter-sm)) var(--gutter-lg);
+      align-items: flex-start;
       ${mq().ml} {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -83,7 +84,6 @@ const ArticlesPage = () => {
     filter: css`
       grid-column: 2 / -2;
       margin-bottom: 2em;
-
       > div {
         display: inline-block;
         position: relative;
