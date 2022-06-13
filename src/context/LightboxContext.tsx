@@ -10,20 +10,24 @@ interface IContext {
   setLightbox: (value: string | null) => void
 }
 
-const Context = createContext<IContext>(defaultValue)
+const LightboxContext = createContext<IContext>(defaultValue)
 
-export const Provider = ({ children }: { children: ReactNode }) => {
+export const LightboxProvider = ({
+  children,
+}: {
+  children: ReactNode
+}) => {
   const [lightbox, setLightbox] = useState<string | null>(null)
   return (
-    <Context.Provider
+    <LightboxContext.Provider
       value={{
         lightbox,
         setLightbox: (value: string | null) => setLightbox(value),
       }}
     >
       {children}
-    </Context.Provider>
+    </LightboxContext.Provider>
   )
 }
 
-export default Context
+export default LightboxContext

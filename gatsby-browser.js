@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Provider } from './src/context/Context'
+import { LightboxProvider } from './src/context/LightboxContext'
 
 export const wrapRootElement = ({ element }) => (
-  <Provider>{element}</Provider>
+  <LightboxProvider>{element}</LightboxProvider>
 )

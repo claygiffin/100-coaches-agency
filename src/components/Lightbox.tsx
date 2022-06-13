@@ -10,7 +10,7 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 
-import Context from '../context/Context'
+import LightboxContext from '../context/LightboxContext'
 import useFocusTrap from '../hooks/useFocusTrap'
 import closeX from '../images/close-x.svg'
 import { absoluteFill, baseGrid, mq } from '../theme/mixins'
@@ -32,7 +32,7 @@ const Lightbox = ({
 }: LightboxProps) => {
   const isBrowser = typeof window !== `undefined`
 
-  const context = useContext(Context)
+  const context = useContext(LightboxContext)
 
   const portalTarget = isBrowser
     ? document.getElementById('lightbox-container')

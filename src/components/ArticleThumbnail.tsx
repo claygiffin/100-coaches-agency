@@ -40,28 +40,17 @@ const ArticleThumbnail = ({ article }: Props) => {
         }
       }
     `,
-    date: css`
-      font-size: var(--fs-13);
-      display: flex;
-      justify-content: space-between;
-      font-weight: 600;
-      color: #888;
-      margin: 0 0 0.5em;
-      text-transform: uppercase;
-      svg {
-        font-size: var(--fs-16);
-        margin-top: -0.1em;
-        color: #666;
-      }
-    `,
+
     title: css`
       position: relative;
       font-size: var(--fs-30);
       margin: 0;
-      padding: 0.125em 0 0.25em;
+      padding: 0.125em 0 0.2em;
       font-weight: 325;
       transition: color 300ms ease;
       color: ${colors.goldShade1};
+      display: flex;
+      justify-content: space-between;
       div:hover > & {
         color: ${colors.goldShade2};
       }
@@ -69,7 +58,7 @@ const ArticleThumbnail = ({ article }: Props) => {
     author: css`
       position: relative;
       margin: 0;
-      padding: 0.25em 0;
+      padding: 0.25em 0 0.125em;
       font-size: var(--fs-15);
       font-weight: 500;
       width: fit-content;
@@ -89,17 +78,28 @@ const ArticleThumbnail = ({ article }: Props) => {
     publication: css`
       font-style: italic;
     `,
+    date: css`
+      font-size: var(--fs-13);
+      font-weight: 400;
+      color: #888;
+      text-transform: uppercase;
+    `,
     newsLink: css`
       ${absoluteFill}
+    `,
+    external: css`
+      font-size: var(--fs-16);
+      margin-top: -0.1em;
+      color: #666;
+      flex: none;
     `,
   }
   return (
     <div css={styles.thumbnail}>
-      <span css={styles.date}>
-        {article.meta.formattedDate}
-        {!isArticle && <HiOutlineExternalLink />}
-      </span>
-      <h2 css={styles.title}>{article.title}</h2>
+      <h2 css={styles.title}>
+        {article.title}
+        {!isArticle && <HiOutlineExternalLink css={styles.external} />}
+      </h2>
       {isArticle ? (
         <ArticleLightbox article={article} />
       ) : (
@@ -125,6 +125,7 @@ const ArticleThumbnail = ({ article }: Props) => {
           />
         )}
       </h3>
+      <span css={styles.date}>{article.meta.formattedDate}</span>
     </div>
   )
 }
