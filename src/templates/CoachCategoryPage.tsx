@@ -205,7 +205,6 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
           <defs>
             <clipPath id={clipId}>
               <path
-                transform="scale(-1,1)"
                 d={`M0,${0.03 * sectWidth} C${0.3 * sectWidth},${
                   0.06 * sectWidth
                 } ${0.5 * sectWidth},${
