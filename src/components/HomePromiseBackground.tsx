@@ -231,7 +231,7 @@ const HomePromiseBackground = ({ innerCss, ...props }: Props) => {
                 strokeDasharray: 100,
                 strokeDashoffset: offset * 200 + 75 > 60 ? 100 : 50,
                 transition:
-                  'opacity 100ms ease, stroke-dashoffset 15 00ms ease',
+                  'opacity 100ms ease, stroke-dashoffset 1500ms ease',
                 opacity: offset * 200 + 75 > 85 ? 0 : 1,
               }}
             />
