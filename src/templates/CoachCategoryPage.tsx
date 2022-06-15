@@ -1,5 +1,7 @@
 import { css } from '@emotion/react'
 import { graphql } from 'gatsby'
+import { uniqueId } from 'lodash'
+import { useCallback, useMemo, useState } from 'react'
 
 import ArrowButton from '../components/ArrowButton'
 import CategoryNav from '../components/CategoryNav'
@@ -8,7 +10,8 @@ import CoachCategoryThumbnail from '../components/CoachCategoryThumbnail'
 import ContactLightbox from '../components/ContactLightbox'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
-import { baseGrid, button, mq } from '../theme/mixins'
+import { useElementRect } from '../hooks/useElementRect'
+import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps, SeoProps } from '../types/customTypes'
 
@@ -79,7 +82,13 @@ type PropTypes = {
 
 const CoachCategoryPage = ({ data }: PropTypes) => {
   const { categories, category, coaches } = data
-
+  const clipId = useMemo(() => uniqueId('clipPath--'), [])
+  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const refCallback = useCallback((node: HTMLElement | null) => {
+    setSectionRef(node)
+  }, [])
+  const { width: sectWidth, height: sectHeight } =
+    useElementRect(sectionRef)
   const styles = {
     intro: css`
       ${baseGrid}
@@ -104,8 +113,7 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
       position: relative;
       grid-template-columns: repeat(4, 1fr);
       grid-gap: var(--gutter-sm);
-      padding: var(--gutter-md) var(--gutter-md)
-        calc(var(--gutter-lg) + 5vw);
+      padding: var(--gutter-md);
       ${mq().ml} {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -133,13 +141,25 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
     `,
     conclusion: css`
       display: flex;
+      position: relative;
       flex-direction: column;
       grid-column: 1 / -1;
       text-align: center;
       align-items: center;
+      padding-bottom: calc(var(--gutter-lg) + 5vw);
+      margin-top: 2.5vw;
+      padding-top: 2.5vw;
       p {
+        position: relative;
         max-width: 70ch;
         line-height: 1.5;
+      }
+      &:before {
+        content: '';
+        ${absoluteFill}
+        background: linear-gradient(to top right, #efefef, #f8f8f8);
+        z-index: 0;
+        clip-path: url(#${clipId});
       }
     `,
     conclusionHeading: css`
@@ -179,24 +199,41 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
         {coaches.nodes.map((coach, i: number) => (
           <CoachCategoryThumbnail coach={coach} key={i} index={i} />
         ))}
-        <section css={styles.conclusion}>
-          <h2 css={[styles.coachesHeading, styles.conclusionHeading]}>
-            Interested in hiring a coach?
-          </h2>
-          <p>
-            Our unique and personalized curation process allows us to
-            intelligently pair leaders with the resources that are right
-            for their needs.
-          </p>
-          <ArrowButton
-            text="Work with us"
-            style="OUTLINE"
-            color="GOLD_DARK"
-            css={styles.button}
-          >
-            <ContactLightbox />
-          </ArrowButton>
-        </section>
+      </section>
+      <section css={styles.conclusion} ref={refCallback}>
+        <svg width="0" height="0" style={{ position: 'absolute' }}>
+          <defs>
+            <clipPath id={clipId}>
+              <path
+                transform="scale(-1,1)"
+                d={`M0,${0.03 * sectWidth} C${0.3 * sectWidth},${
+                  0.06 * sectWidth
+                } ${0.5 * sectWidth},${
+                  -0.05 * sectWidth
+                } ${sectWidth},${
+                  0.03 * sectWidth
+                } L${sectWidth},${sectHeight} L0,${sectHeight}
+              Z`}
+              />
+            </clipPath>
+          </defs>
+        </svg>
+        <h2 css={[styles.coachesHeading, styles.conclusionHeading]}>
+          Interested in hiring a coach?
+        </h2>
+        <p>
+          Our unique and personalized curation process allows us to
+          intelligently pair leaders with the resources that are right
+          for their needs.
+        </p>
+        <ArrowButton
+          text="Work with us"
+          style="OUTLINE"
+          color="GOLD_DARK"
+          css={styles.button}
+        >
+          <ContactLightbox />
+        </ArrowButton>
       </section>
     </Layout>
   )
