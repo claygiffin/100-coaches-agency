@@ -36,7 +36,8 @@ const ArticlesPage = () => {
     []
   )
   const [filter, setFilter] = useState(filters[0])
-
+  const [loadCount, setLoadCount] = useState(1)
+  const loadAmount = 36
   const allArticlesNews = useMemo(() => {
     return [...articles.nodes, ...newsItems.nodes]
       .sort((a, b) => Date.parse(a.meta.date) - Date.parse(b.meta.date))
@@ -110,6 +111,24 @@ const ArticlesPage = () => {
         cursor: pointer;
       }
     `,
+    loadButton: css`
+      grid-column: 2 / -2;
+      justify-self: center;
+      max-width: fit-content;
+      color: ${colors.goldShade1};
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.5em 1em;
+      border: 1px solid currentColor;
+      transition: all 300ms ease;
+      @media (hover: hover) {
+        &:hover {
+          color: #fff;
+          background: ${colors.gold};
+          border-color: ${colors.gold};
+        }
+      }
+    `,
   }
   return (
     <Layout mainCss={styles.main}>
@@ -135,10 +154,20 @@ const ArticlesPage = () => {
         </div>
       </div>
       <div css={styles.articles}>
-        {allArticlesNews.map((article, i) => (
-          <ArticleThumbnail key={i} article={article} />
-        ))}
+        {allArticlesNews
+          .slice(0, loadCount * loadAmount)
+          .map((article, i) => (
+            <ArticleThumbnail key={i} article={article} />
+          ))}
       </div>
+      {loadCount * loadAmount < allArticlesNews.length && (
+        <button
+          css={styles.loadButton}
+          onClick={() => setLoadCount(prev => prev + 1)}
+        >
+          Load More
+        </button>
+      )}
     </Layout>
   )
 }

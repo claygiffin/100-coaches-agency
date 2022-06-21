@@ -1,6 +1,7 @@
 import { css } from '@emotion/react'
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 
+import ArrowButton from '../components/ArrowButton'
 import Article from '../components/Article'
 import Layout from '../components/Layout'
 import { ArticleProps } from '../types/customTypes'
@@ -27,6 +28,12 @@ const ArticlePage = ({ data }: Props) => {
   }
   return (
     <Layout mainCss={styles.main}>
+      <ArrowButton
+        as={Link}
+        to="/articles/"
+        text="Back to Articles"
+        direction="LEFT"
+      />
       <Article article={data.article} />
     </Layout>
   )

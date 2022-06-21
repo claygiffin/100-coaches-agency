@@ -57,6 +57,11 @@ export const data = graphql`
         ...CoachFragment
       }
     }
+    page: datoCmsCoachCategoryPage {
+      ctaHeading
+      ctaBody
+      ctaLinkText
+    }
   }
 `
 
@@ -77,11 +82,16 @@ type PropTypes = {
     coaches: {
       nodes: CoachProps[]
     }
+    page: {
+      ctaHeading: string
+      ctaBody: string
+      ctaLinkText: string
+    }
   }
 }
 
 const CoachCategoryPage = ({ data }: PropTypes) => {
-  const { categories, category, coaches } = data
+  const { categories, category, coaches, page } = data
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
   const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
   const refCallback = useCallback((node: HTMLElement | null) => {
@@ -218,15 +228,11 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
           </defs>
         </svg>
         <h2 css={[styles.coachesHeading, styles.conclusionHeading]}>
-          Interested in hiring a coach?
+          {page.ctaHeading}
         </h2>
-        <p>
-          Our unique and personalized curation process allows us to
-          intelligently pair leaders with the resources that are right
-          for their needs.
-        </p>
+        <p>{page.ctaBody}</p>
         <ArrowButton
-          text="Work with us"
+          text={page.ctaLinkText}
           style="OUTLINE"
           color="GOLD_DARK"
           css={styles.button}

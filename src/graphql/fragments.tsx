@@ -169,6 +169,15 @@ export const ArticleFragment = graphql`
     }
     body {
       value
+      blocks {
+        id: originalId
+        __typename
+        image {
+          gatsbyImageData(width: 1440, imgixParams: { q: 60 })
+          alt
+          title
+        }
+      }
     }
     meta {
       date: createdAt

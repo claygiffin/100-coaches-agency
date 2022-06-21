@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { StructuredText } from 'react-datocms'
 
 import { colors } from '../theme/variables'
@@ -74,6 +75,16 @@ const Article = ({ article, lightbox }: PropTypes) => {
         margin: 1.5em 0 0.75em;
       }
     `,
+    fig: css`
+      margin: 2em 0 3em;
+      figcaption {
+        font-size: var(--fs-15);
+        max-width: 90ch;
+        font-style: italic;
+        margin: 0.75em 0 0;
+        color: #666;
+      }
+    `,
   }
   return (
     <article css={styles.article}>
@@ -92,7 +103,24 @@ const Article = ({ article, lightbox }: PropTypes) => {
       </h2>
       <span css={styles.date}>{article.meta.formattedDate}</span>
       <div css={styles.body}>
-        <StructuredText data={article.body} />
+        <StructuredText
+          renderBlock={({ record }) => {
+            if (record.__typename === 'DatoCmsImage') {
+              return (
+                <figure css={styles.fig}>
+                  <GatsbyImage
+                    image={record.image.gatsbyImageData}
+                    alt={record.image.alt || ''}
+                  />
+                  {record.image.title && (
+                    <figcaption>{record.image.title}</figcaption>
+                  )}
+                </figure>
+              )
+            } else return null
+          }}
+          data={article.body}
+        />
       </div>
     </article>
   )

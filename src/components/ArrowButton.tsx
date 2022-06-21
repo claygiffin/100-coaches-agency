@@ -1,6 +1,6 @@
 import { SerializedStyles, css } from '@emotion/react'
 import { ComponentProps, ElementType, ReactNode } from 'react'
-import { VscArrowRight } from 'react-icons/vsc'
+import { VscArrowLeft, VscArrowRight } from 'react-icons/vsc'
 
 import { colors } from '../theme/variables'
 
@@ -8,6 +8,7 @@ interface OwnProps<E extends ElementType = ElementType> {
   as?: E
   text: string
   children?: ReactNode
+  direction?: 'RIGHT' | 'LEFT'
   style?: 'INLINE' | 'OUTLINE' | 'FILL'
   color?: 'GOLD_LIGHT' | 'GOLD_DARK' | 'WHITE'
   css?: SerializedStyles
@@ -18,6 +19,7 @@ type PropTypes<E extends ElementType> = OwnProps<E> &
 const ArrowButton = <E extends ElementType>({
   text,
   children,
+  direction = 'RIGHT',
   style = 'INLINE',
   color = 'GOLD_LIGHT',
   as,
@@ -74,7 +76,8 @@ const ArrowButton = <E extends ElementType>({
         }
       `}
       svg {
-        margin-left: 0.25em;
+        margin-left: ${direction === 'RIGHT' && '0.25em'};
+        margin-right: ${direction === 'LEFT' && '0.25em'};
         font-size: 125%;
         transform: translate3D(0, 15%, 0);
         transition: transform 250ms ease-in-out;
@@ -82,7 +85,9 @@ const ArrowButton = <E extends ElementType>({
       @media (hover: hover) {
         &:hover {
           svg {
-            transform: translate3d(20%, 15%, 0);
+            transform: ${direction === 'RIGHT'
+              ? `translate3d(20%, 15%, 0)`
+              : `translate3d(-20%, 15%, 0)`};
           }
         }
       }
@@ -90,8 +95,9 @@ const ArrowButton = <E extends ElementType>({
   }
   return (
     <Element css={styles.button} {...props}>
+      {direction === 'LEFT' && <VscArrowLeft />}
       <span>{text}</span>
-      <VscArrowRight />
+      {direction === 'RIGHT' && <VscArrowRight />}
       {children}
     </Element>
   )

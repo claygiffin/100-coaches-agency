@@ -1,4 +1,4 @@
-import { StructuredText as IStructuredText } from 'datocms-structured-text-utils'
+import { Document, Record } from 'datocms-structured-text-utils'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 export type { StructuredText as IStructuredText } from 'datocms-structured-text-utils'
@@ -40,17 +40,29 @@ export type SeoProps = {
   }
 }
 
+interface Image extends Record {
+  __typename: 'DatoCmsImage'
+  image: {
+    gatsbyImageData: IGatsbyImageData
+    alt?: string
+    title?: string
+  }
+}
 export type ArticleProps = {
   __typename: 'DatoCmsArticle'
   id: string
   title: string
   author: CoachProps | TeamMemberProps
-  body: IStructuredText
+  body: {
+    value: Document
+    blocks: Image[]
+  }
   meta: {
     date: string
     formattedDate: string
   }
 }
+
 export type NewsItemProps = {
   __typename: 'DatoCmsNewsItem'
   id: string
