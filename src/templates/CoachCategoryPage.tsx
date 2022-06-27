@@ -16,7 +16,7 @@ import { colors } from '../theme/variables'
 import { CoachProps, SeoProps } from '../types/customTypes'
 
 export const data = graphql`
-  query ($categoryName: String!, $featuredCoachId: String!) {
+  query ($categoryName: String!) {
     categories: allDatoCmsCoachCategory(
       sort: { fields: position, order: ASC }
     ) {
