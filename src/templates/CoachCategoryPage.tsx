@@ -39,22 +39,12 @@ export const data = graphql`
           )
         }
       }
+      featuredCoaches {
+        ...CoachFragment
+      }
       seo {
         title
         description
-      }
-    }
-    coaches: allDatoCmsCoach(
-      sort: { fields: position, order: ASC }
-      filter: {
-        coachingCategories: {
-          elemMatch: { categoryName: { eq: $categoryName } }
-        }
-        id: { ne: $featuredCoachId }
-      }
-    ) {
-      nodes {
-        ...CoachFragment
       }
     }
     page: datoCmsCoachCategoryPage {
@@ -77,10 +67,8 @@ type PropTypes = {
       categoryNameFull: string
       description: string
       featuredCoach: CoachProps
+      featuredCoaches: CoachProps[]
       seo: SeoProps
-    }
-    coaches: {
-      nodes: CoachProps[]
     }
     page: {
       ctaHeading: string
@@ -91,7 +79,7 @@ type PropTypes = {
 }
 
 const CoachCategoryPage = ({ data }: PropTypes) => {
-  const { categories, category, coaches, page } = data
+  const { categories, category, page } = data
   const clipId = useMemo(() => uniqueId('clipPath--'), [])
   const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
   const refCallback = useCallback((node: HTMLElement | null) => {
@@ -206,7 +194,7 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
         <span css={styles.coachesHeading}>
           Featured {category.categoryNameFull || category.categoryName}
         </span>
-        {coaches.nodes.map((coach, i: number) => (
+        {category.featuredCoaches.map((coach, i: number) => (
           <CoachCategoryThumbnail coach={coach} key={i} index={i} />
         ))}
       </section>
