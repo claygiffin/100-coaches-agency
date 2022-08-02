@@ -93,6 +93,9 @@ export const FormFragment = graphql`
       ... on DatoCmsMultilineTextField {
         ...MultilineTextFieldFragment
       }
+      ... on DatoCmsSelectField {
+        ...SelectFieldFragment
+      }
     }
   }
 `
@@ -110,6 +113,19 @@ export const MultilineTextFieldFragment = graphql`
     __typename
     id: originalId
     label
+    required
+  }
+`
+export const SelectFieldFragment = graphql`
+  fragment SelectFieldFragment on DatoCmsSelectField {
+    __typename
+    id: originalId
+    label
+    options {
+      id: originalId
+      label
+      value
+    }
     required
   }
 `

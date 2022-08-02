@@ -5,21 +5,16 @@ import { mq } from '../theme/mixins'
 import { absoluteFill, button } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import LoadingSpinner from './LoadingSpinner'
-import MultilineTextField from './MultilineTextField'
-import TextField from './TextField'
+import MultilineTextField, {
+  IMultilineTextField,
+} from './MultilineTextField'
+import SelectField, { ISelectField } from './SelectField'
+import TextField, { ITextField } from './TextField'
 
 type FormProps = {
   data: {
     formName: string
-    formFields: [
-      {
-        __typename: string
-        id: string
-        label: string
-        fieldType: string
-        required: boolean
-      }
-    ]
+    formFields: (ITextField | IMultilineTextField | ISelectField)[]
     submitButtonText: string
     successMessageNode: { childMarkdownRemark: { html: string } }
   }
@@ -230,6 +225,15 @@ ${error}`)
               <MultilineTextField
                 label={field.label}
                 required={field.required}
+                key={i}
+                onChange={handleChange}
+              />
+            )}
+            {field.__typename === 'DatoCmsSelectField' && (
+              <SelectField
+                label={field.label}
+                required={field.required}
+                options={field.options}
                 key={i}
                 onChange={handleChange}
               />

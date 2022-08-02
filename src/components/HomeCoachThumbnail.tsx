@@ -112,10 +112,6 @@ const CoachThumbnail = ({ coach, animated }: CoachThumbnailProps) => {
         image={coach.photo.thumbnail}
         alt={coach.photo.alt || `${coach.name} — ${coach.jobTitle}`}
       />
-      {/* <div css={styles.text}>
-        <h2>{coach.name}</h2>
-        <h3>{coach.jobTitle}</h3>
-      </div> */}
     </div>
   )
 }

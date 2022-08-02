@@ -17,7 +17,7 @@ const Article = ({ article, lightbox }: PropTypes) => {
     article: css`
       pointer-events: all;
       font-size: var(--fs-18);
-      width: 100%;
+      width: 100vw;
       max-width: calc(72ch + 2 * var(--gutter-lg));
       box-sizing: border-box;
       ${lightbox &&
@@ -25,14 +25,6 @@ const Article = ({ article, lightbox }: PropTypes) => {
         background-color: #fff;
         padding: var(--gutter-md) var(--gutter-lg);
       `}
-    `,
-    date: css`
-      font-size: var(--fs-14);
-      font-weight: 600;
-      color: #888;
-      margin: 1em 0 0;
-      display: block;
-      text-transform: uppercase;
     `,
     title: css`
       position: relative;
@@ -45,6 +37,7 @@ const Article = ({ article, lightbox }: PropTypes) => {
     `,
     author: css`
       position: relative;
+      display: inline-block;
       margin: 0;
       padding: 0.25em 0;
       font-size: var(--fs-18);
@@ -61,8 +54,16 @@ const Article = ({ article, lightbox }: PropTypes) => {
         }
       }
     `,
+    date: css`
+      font-size: var(--fs-15);
+      font-weight: 500;
+      color: #888;
+      margin: 1em 0 0;
+      display: inline-block;
+      text-transform: uppercase;
+    `,
     body: css`
-      margin-top: 3em;
+      margin-top: 2em;
       margin-bottom: 3em;
       h2 {
         font-size: var(--fs-36);
@@ -85,6 +86,16 @@ const Article = ({ article, lightbox }: PropTypes) => {
         color: #666;
       }
     `,
+    pipe: css`
+      display: inline-block;
+      font-weight: 300;
+      color: #aaa;
+      margin: 0 0.5em;
+      transform: translateY(0.05em);
+      &:before {
+        content: '|';
+      }
+    `,
   }
   return (
     <article css={styles.article}>
@@ -101,6 +112,7 @@ const Article = ({ article, lightbox }: PropTypes) => {
           }
         />
       </h2>
+      <span css={styles.pipe} />
       <span css={styles.date}>{article.meta.formattedDate}</span>
       <div css={styles.body}>
         <StructuredText

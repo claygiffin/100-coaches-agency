@@ -8,6 +8,8 @@ import { useElementRect } from '../hooks/useElementRect'
 import { mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps, TeamMemberProps } from '../types/customTypes'
+import ArrowButton from './ArrowButton'
+import ContactLightbox from './ContactLightbox'
 import Seo from './Seo'
 
 type CoachProfileProps = {
@@ -93,10 +95,14 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
         font-weight: 400;
         font-style: italic;
         color: #ddd;
-        margin: 0.75em 0 2em;
+        margin: 0.75em 0 1.5em;
         ${mq().ms} {
           font-size: var(--fs-14);
         }
+      }
+      h3 {
+        font-size: var(--fs-16);
+        pointer-events: all;
       }
     `,
     photoWrap: css`
@@ -170,6 +176,9 @@ const CoachProfile = ({ coach }: CoachProfileProps) => {
         <div css={styles.headerText}>
           <h1>{coach.name}</h1>
           <h2>{coach.jobTitleExtended || coach.jobTitle}</h2>
+          <ArrowButton as="h3" style="INLINE" text="Work With Us">
+            <ContactLightbox />
+          </ArrowButton>
         </div>
         <div css={styles.photoWrap}>
           <GatsbyImage
