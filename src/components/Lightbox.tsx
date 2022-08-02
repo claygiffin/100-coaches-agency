@@ -32,7 +32,7 @@ const Lightbox = ({
 }: LightboxProps) => {
   const isBrowser = typeof window !== `undefined`
 
-  const context = useContext(LightboxContext)
+  const { lightbox, setLightbox } = useContext(LightboxContext)
 
   const portalTarget = isBrowser
     ? document.getElementById('lightbox-container')
@@ -40,54 +40,53 @@ const Lightbox = ({
 
   const url = ('/' + slug + '/').replace('//', '/')
 
-  const setUrl = () => {
-    window.history.pushState(null, '', url)
-  }
+  const [entry, setEntry] = useState<string | null>(null)
+  useEffect(() => {
+    if (!entry) {
+      setEntry(window.location.pathname)
+    }
+  }, [entry])
 
   const [open, setOpen] = useState(false)
-  const handleOpen = (e: SyntheticEvent) => {
-    e.preventDefault()
-    setUrl()
-    setOpen(true)
-    onClick()
-    context.setLightbox(url)
-  }
+
+  const handleOpen = useCallback(
+    (e: SyntheticEvent) => {
+      e.preventDefault()
+      window.history.replaceState(null, '', url)
+      setLightbox(url)
+      setOpen(true)
+      onClick()
+    },
+    [setLightbox, url, onClick]
+  )
 
   const [closing, setClosing] = useState(false)
-  const handleBack = useCallback(() => {
-    if (open && !closing) {
-      window.history.back()
-    }
-  }, [closing, open])
+
+  const animateClose = () => {
+    setClosing(true)
+    setTimeout(() => {
+      setClosing(false)
+    }, 300)
+    setTimeout(() => {
+      setOpen(false)
+    }, 301)
+  }
 
   const handleClose = useCallback(() => {
-    if (open) {
-      console.log('handleClose')
-      setClosing(true)
-      context.lightbox === url && context.setLightbox(null)
-      setTimeout(() => {
-        setClosing(false)
-      }, 300)
-      setTimeout(() => {
-        setOpen(false)
-      }, 301)
+    if (lightbox === url && !closing) {
+      window.history.replaceState(null, '', entry)
+      setLightbox(entry)
+      animateClose()
     }
-  }, [open, context, url])
-
-  useEffect(() => {
-    window.addEventListener('popstate', handleClose, { passive: true })
-    return () => {
-      window.removeEventListener('popstate', handleClose)
-    }
-  })
+  }, [closing, entry, setLightbox, lightbox, url])
 
   const escFunction = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape' || e.key === 'Esc') {
-        handleBack()
+        handleClose()
       }
     },
-    [handleBack]
+    [handleClose]
   )
 
   useEffect(() => {
@@ -100,9 +99,6 @@ const Lightbox = ({
   const [lightboxRef, setLightboxRef] = useState<HTMLDivElement | null>(
     null
   )
-  const lightboxRefSetter = useCallback((node: HTMLDivElement) => {
-    setLightboxRef(node)
-  }, [])
   useFocusTrap(lightboxRef, open)
 
   const animations = {
@@ -167,7 +163,7 @@ const Lightbox = ({
       overflow-y: scroll;
       width: 100vw;
       height: calc(var(--vh, 1vh) * 100);
-      z-index: 11;
+      z-index: 10;
     `,
     content: css`
       pointer-events: none;
@@ -185,7 +181,7 @@ const Lightbox = ({
       animation-duration: 290ms;
       animation-timing-function: east-out;
       animation-fill-mode: forwards;
-      ${(closing || context.lightbox !== url) &&
+      ${closing &&
       css`
         opacity: 1;
         animation-name: ${animations.contentOut};
@@ -280,10 +276,13 @@ const Lightbox = ({
           <Fragment>
             <ScrollToggle />
             <div css={styles.background} />
-            <div css={styles.lightbox} ref={lightboxRefSetter}>
+            <div
+              css={styles.lightbox}
+              ref={node => setLightboxRef(node)}
+            >
               <div
                 css={styles.backgroundClose}
-                onClick={handleBack}
+                onClick={handleClose}
                 aria-hidden
               />
               <div css={styles.content}>
@@ -293,8 +292,8 @@ const Lightbox = ({
               <svg
                 css={styles.closeButton}
                 aria-label="Close Lightbox"
-                onClick={handleBack}
-                onKeyPress={handleBack}
+                onClick={handleClose}
+                onKeyPress={handleClose}
                 tabIndex={0}
                 width="15px"
                 height="15px"

@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useState } from 'react'
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useState,
+} from 'react'
 
 const defaultValue = {
   lightbox: null,
@@ -7,7 +13,7 @@ const defaultValue = {
 
 interface IContext {
   lightbox: null | string
-  setLightbox: (value: string | null) => void
+  setLightbox: Dispatch<SetStateAction<string | null>>
 }
 
 const LightboxContext = createContext<IContext>(defaultValue)
@@ -17,12 +23,15 @@ export const LightboxProvider = ({
 }: {
   children: ReactNode
 }) => {
-  const [lightbox, setLightbox] = useState<string | null>(null)
+  const [lightbox, setLightbox] = useState<string | null>(
+    defaultValue.lightbox
+  )
+
   return (
     <LightboxContext.Provider
       value={{
         lightbox,
-        setLightbox: (value: string | null) => setLightbox(value),
+        setLightbox: value => setLightbox(value),
       }}
     >
       {children}
