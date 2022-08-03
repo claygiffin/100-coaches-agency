@@ -156,7 +156,7 @@ const Lightbox = ({
     `,
     lightbox: css`
       ${baseGrid}
-      grid-template-rows: var(--gutter-md) auto var(--gutter-mlg);
+      grid-template-rows: var(--gutter-sm) auto var(--gutter-md);
       position: fixed;
       top: 0;
       left: 0;
@@ -168,6 +168,7 @@ const Lightbox = ({
     content: css`
       pointer-events: none;
       position: relative;
+      display: grid;
       grid-column: 2 / -2;
       grid-row: 2 / 3;
       width: fit-content;
