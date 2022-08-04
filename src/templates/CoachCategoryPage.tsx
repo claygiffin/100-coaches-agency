@@ -1,17 +1,22 @@
 import { css } from '@emotion/react'
 import { graphql } from 'gatsby'
+import { uniqueId } from 'lodash'
+import { useCallback, useMemo, useState } from 'react'
 
+import ArrowButton from '../components/ArrowButton'
 import CategoryNav from '../components/CategoryNav'
 import CoachCategoryFeatured from '../components/CoachCategoryFeatured'
 import CoachCategoryThumbnail from '../components/CoachCategoryThumbnail'
+import ContactLightbox from '../components/ContactLightbox'
 import Layout from '../components/Layout'
 import Seo from '../components/Seo'
-import { baseGrid, mq } from '../theme/mixins'
+import { useElementRect } from '../hooks/useElementRect'
+import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { CoachProps, SeoProps } from '../types/customTypes'
 
 export const data = graphql`
-  query ($categoryName: String!, $featuredCoachId: String!) {
+  query ($categoryName: String!) {
     categories: allDatoCmsCoachCategory(
       sort: { fields: position, order: ASC }
     ) {
@@ -34,23 +39,18 @@ export const data = graphql`
           )
         }
       }
+      featuredCoaches {
+        ...CoachFragment
+      }
       seo {
         title
         description
       }
     }
-    coaches: allDatoCmsCoach(
-      sort: { fields: position, order: ASC }
-      filter: {
-        coachingCategories: {
-          elemMatch: { categoryName: { eq: $categoryName } }
-        }
-        id: { ne: $featuredCoachId }
-      }
-    ) {
-      nodes {
-        ...CoachFragment
-      }
+    page: datoCmsCoachCategoryPage {
+      ctaHeading
+      ctaBody
+      ctaLinkText
     }
   }
 `
@@ -67,17 +67,26 @@ type PropTypes = {
       categoryNameFull: string
       description: string
       featuredCoach: CoachProps
+      featuredCoaches: CoachProps[]
       seo: SeoProps
     }
-    coaches: {
-      nodes: CoachProps[]
+    page: {
+      ctaHeading: string
+      ctaBody: string
+      ctaLinkText: string
     }
   }
 }
 
 const CoachCategoryPage = ({ data }: PropTypes) => {
-  const { categories, category, coaches } = data
-
+  const { categories, category, page } = data
+  const clipId = useMemo(() => uniqueId('clipPath--'), [])
+  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const refCallback = useCallback((node: HTMLElement | null) => {
+    setSectionRef(node)
+  }, [])
+  const { width: sectWidth, height: sectHeight } =
+    useElementRect(sectionRef)
   const styles = {
     intro: css`
       ${baseGrid}
@@ -102,14 +111,62 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
       position: relative;
       grid-template-columns: repeat(4, 1fr);
       grid-gap: var(--gutter-sm);
-      padding: var(--gutter-md) var(--gutter-md)
-        calc(var(--gutter-xlg) + 5vw);
+      padding: var(--gutter-md);
       ${mq().ml} {
         grid-template-columns: repeat(3, 1fr);
       }
       ${mq().ms} {
         grid-template-columns: repeat(2, 1fr);
       }
+    `,
+    coachesHeading: css`
+      display: block;
+      position: relative;
+      font-size: var(--fs-36);
+      font-weight: 325;
+      font-family: var(--serif);
+      grid-column: 1 / -1;
+      justify-self: center;
+      text-align: center;
+      margin-top: 0.25em;
+      margin-bottom: 1em;
+      padding-bottom: 0.5em;
+      color: #333;
+      background-image: linear-gradient(${colors.gold}, ${colors.gold});
+      background-size: 1.5em 3px;
+      background-repeat: no-repeat;
+      background-position: 50% 100%;
+    `,
+    conclusion: css`
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      grid-column: 1 / -1;
+      text-align: center;
+      align-items: center;
+      padding-bottom: calc(var(--gutter-lg) + 5vw);
+      margin-top: 2.5vw;
+      padding-top: 2.5vw;
+      p {
+        position: relative;
+        max-width: 70ch;
+        line-height: 1.5;
+      }
+      &:before {
+        content: '';
+        ${absoluteFill}
+        background: linear-gradient(to top right, #efefef, #f8f8f8);
+        z-index: 0;
+        clip-path: url(#${clipId});
+      }
+    `,
+    conclusionHeading: css`
+      margin-top: 2.5em;
+      margin-bottom: 0;
+    `,
+    button: css`
+      font-size: var(--fs-16);
+      margin-top: 0.75em;
     `,
   }
   return (
@@ -134,9 +191,42 @@ const CoachCategoryPage = ({ data }: PropTypes) => {
       </section>
       <CoachCategoryFeatured featuredCoach={category.featuredCoach} />
       <section css={styles.coaches}>
-        {coaches.nodes.map((coach, i: number) => (
+        <span css={styles.coachesHeading}>
+          Featured {category.categoryNameFull || category.categoryName}
+        </span>
+        {category.featuredCoaches.map((coach, i: number) => (
           <CoachCategoryThumbnail coach={coach} key={i} index={i} />
         ))}
+      </section>
+      <section css={styles.conclusion} ref={refCallback}>
+        <svg width="0" height="0" style={{ position: 'absolute' }}>
+          <defs>
+            <clipPath id={clipId}>
+              <path
+                d={`M0,${0.03 * sectWidth} C${0.3 * sectWidth},${
+                  0.06 * sectWidth
+                } ${0.5 * sectWidth},${
+                  -0.05 * sectWidth
+                } ${sectWidth},${
+                  0.03 * sectWidth
+                } L${sectWidth},${sectHeight} L0,${sectHeight}
+              Z`}
+              />
+            </clipPath>
+          </defs>
+        </svg>
+        <h2 css={[styles.coachesHeading, styles.conclusionHeading]}>
+          {page.ctaHeading}
+        </h2>
+        <p>{page.ctaBody}</p>
+        <ArrowButton
+          text={page.ctaLinkText}
+          style="OUTLINE"
+          color="GOLD_DARK"
+          css={styles.button}
+        >
+          <ContactLightbox />
+        </ArrowButton>
       </section>
     </Layout>
   )

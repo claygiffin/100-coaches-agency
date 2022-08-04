@@ -1,10 +1,10 @@
-import { CoachProps } from '../types/customTypes'
+import { CoachProps, TeamMemberProps } from '../types/customTypes'
 import { toSlug } from '../utils/helpers'
 import CoachProfile from './CoachProfile'
 import Lightbox from './Lightbox'
 
 type PropTypes = {
-  coach: CoachProps
+  coach: CoachProps | TeamMemberProps
   directory?: string
 }
 

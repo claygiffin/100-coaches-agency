@@ -1,6 +1,6 @@
 import { css } from '@emotion/react'
-import { useCallback, useState } from 'react'
-import { IoChatbubbleEllipses } from 'react-icons/io5'
+import { useState } from 'react'
+import { IoIosMail } from 'react-icons/io'
 
 import { useElementWidth } from '../hooks/useElementRect'
 import { colors } from '../theme/variables'
@@ -12,10 +12,6 @@ type Props = {
 
 const ContactButton = ({ text }: Props) => {
   const [textRef, setTextRef] = useState<HTMLElement | null>(null)
-  const textRefSetter = useCallback((node: HTMLElement | null) => {
-    setTextRef(node)
-  }, [])
-
   const textWidth = useElementWidth(textRef)
 
   const styles = {
@@ -68,9 +64,9 @@ const ContactButton = ({ text }: Props) => {
   }
   return (
     <div css={styles.button}>
-      <IoChatbubbleEllipses css={styles.icon} />
+      <IoIosMail css={styles.icon} />
       <span css={styles.text}>
-        <span ref={textRefSetter}>{text}</span>
+        <span ref={node => setTextRef(node)}>{text}</span>
       </span>
       <ContactLightbox />
     </div>

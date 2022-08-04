@@ -22,7 +22,7 @@ const Shape = ({
   )
   const [shapeRef, setShapeRef] = useState<HTMLDivElement | null>(null)
   const setRefs = useCallback(
-    node => {
+    (node: HTMLDivElement | null) => {
       if (brighten) {
         setShapeRef(node)
       }

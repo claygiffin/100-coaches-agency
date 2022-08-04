@@ -1,51 +1,53 @@
 import { css } from '@emotion/react'
-import { ChangeEvent, Fragment, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
+import { BiChevronDown } from 'react-icons/bi'
 
-import { absoluteFill } from '../theme/mixins'
 import { colors } from '../theme/variables'
 import { toSlug } from '../utils/helpers'
 
-export interface IMultilineTextField {
-  __typename: 'DatoCmsMultilineTextField'
+export interface ISelectField {
+  __typename: 'DatoCmsSelectField'
   label: string
   required: boolean
+  options: {
+    id: string
+    label: string
+    value: string
+  }[]
 }
 
-interface FieldProps extends Omit<IMultilineTextField, '__typename'> {
+interface Props extends Omit<ISelectField, '__typename'> {
   onChange: (name: string, value: string) => void
 }
 
-const MultilineTextField = ({
+const SelectField = ({
   label,
+  options = [],
   onChange,
-  required,
-  ...props
-}: FieldProps) => {
+  required = false,
+}: Props) => {
   const name = toSlug(label)
 
   const [shrink, setShrink] = useState(false)
   const [value, setValue] = useState('')
-  const handleFocus = () => {
-    if (!shrink) {
-      setShrink(true)
-    }
-  }
-  const handleBlur = () => {
+
+  const handleShrink = () => {
     if (value.length > 0) {
       setShrink(true)
     } else {
       setShrink(false)
     }
   }
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const match = options.find(option => option.id === e.target.value)
+    const idToValue = match?.value || match?.label || ''
+    setValue(idToValue)
+  }
   useEffect(() => {
     if (value.length > 0) {
       setShrink(true)
     }
   }, [value])
-
-  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setValue(e.target.value)
-  }
 
   useEffect(() => {
     onChange(name, value)
@@ -66,39 +68,16 @@ const MultilineTextField = ({
         background-color: ${colors.goldTint1};
       }
     `,
-    inputBase: css`
-      background-color: #00000055;
-    `,
-    sizer: css`
-      display: block;
-      visibility: hidden;
-      min-height: 6em;
-    `,
-    textArea: css`
-      display: block;
-      ${absoluteFill}
-      box-sizing: border-box;
-      resize: none;
-      width: 100%;
-      height: 100%;
-      border: none;
-      background-color: transparent;
-      color: #fff;
-    `,
-    sizeArea: css`
-      padding: 1.333em 0.75em 1em;
-      line-height: 1.333;
-    `,
     label: css`
       position: absolute;
       pointer-events: none;
       z-index: 2;
-      top: 1.5835em;
+      bottom: 0;
       left: 0.75em;
       color: #ffffffcc;
-      max-width: calc(100% - 1.5em);
-      padding-right: 2px;
+      max-width: 100%;
       line-height: 1.333;
+      padding-right: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -127,34 +106,63 @@ const MultilineTextField = ({
         }
       `}
     `,
+    inputBase: css`
+      background-color: #00000055;
+    `,
+    select: css`
+      appearance: none;
+      box-sizing: border-box;
+      border: none;
+      padding: 1.25em 0.75em 0.333em;
+      line-height: 1.333;
+      width: 100%;
+      color: #fff;
+      background-color: transparent;
+      cursor: pointer;
+      ${!value &&
+      css`
+        color: transparent;
+      `}
+    `,
+    arrow: css`
+      font-size: 125%;
+      position: absolute;
+      top: 50%;
+      right: 0.5em;
+      transform: translateY(-50%);
+      pointer-events: none;
+    `,
   }
 
   return (
-    <div css={styles.container} {...props}>
+    <div css={styles.container}>
       <label htmlFor={name} css={styles.label}>
         {label}
       </label>
+      <BiChevronDown css={styles.arrow} />
       <div css={styles.inputBase}>
-        <span css={[styles.sizeArea, styles.sizer]}>
-          {value.split(/\n/g).map((text, i) => (
-            <Fragment key={i}>
-              {text}
-              <br />
-            </Fragment>
-          ))}
-        </span>
-        <textarea
-          css={[styles.sizeArea, styles.textArea]}
+        <select
+          css={styles.select}
           name={name}
           id={name}
           required={required}
           onChange={handleChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
+          onFocus={handleShrink}
+          onBlur={handleShrink}
+          defaultValue=""
+        >
+          <option value="" disabled aria-hidden>
+            {label}
+          </option>
+          {options.map((option, i) => (
+            <option key={i} value={option.id}>
+              {option.label}
+            </option>
+          ))}
+        </select>
       </div>
     </div>
   )
 }
 
-export default MultilineTextField
+export default SelectField

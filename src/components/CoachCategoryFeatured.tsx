@@ -167,7 +167,7 @@ const CoachCategoryFeatured = ({
         </svg>
       </div>
       <div css={styles.text}>
-        <span>Featured Coach</span>
+        <span>Coach Spotlight</span>
         <h2>{featuredCoach.name}</h2>
         <h3>
           {featuredCoach.jobTitleExtended || featuredCoach.jobTitle}

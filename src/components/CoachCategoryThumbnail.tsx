@@ -5,11 +5,11 @@ import { useMemo } from 'react'
 
 import { mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
-import { CoachProps } from '../types/customTypes'
+import { CoachProps, TeamMemberProps } from '../types/customTypes'
 import CoachProfileLightbox from './CoachProfileLightbox'
 
 type PropTypes = {
-  coach: CoachProps
+  coach: CoachProps | TeamMemberProps
   index: number
   directory?: string
 }

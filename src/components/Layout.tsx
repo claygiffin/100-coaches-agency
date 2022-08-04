@@ -8,7 +8,7 @@ import Nav from './Nav'
 
 type LayoutProps = {
   children: ReactNode
-  mainCss?: SerializedStyles
+  mainCss?: SerializedStyles | SerializedStyles[]
   homeNav?: boolean
 }
 

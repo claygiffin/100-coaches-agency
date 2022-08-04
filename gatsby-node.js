@@ -46,6 +46,14 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allDatoCmsArticle {
+        edges {
+          node {
+            id: originalId
+            title
+          }
+        }
+      }
     }
   `)
 
@@ -97,5 +105,14 @@ exports.createPages = async ({ graphql, actions }) => {
   createPage({
     path: `/contact/`,
     component: path.resolve(`./src/templates/ContactFormPage.tsx`),
+  })
+  data.allDatoCmsArticle.edges.forEach(({ node }) => {
+    createPage({
+      path: `/articles/${toSlug(node.title)}-${node.id}`,
+      component: path.resolve(`./src/templates/ArticlePage.tsx`),
+      context: {
+        id: node.id,
+      },
+    })
   })
 }

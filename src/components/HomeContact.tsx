@@ -57,7 +57,7 @@ const HomeContact = () => {
     `,
     heading: css`
       font-size: var(--fs-60);
-      grid-column: 2 / -2;
+      grid-column: 2 / span 7;
       h2 {
         font-size: inherit;
         margin: 0.5em 0;
@@ -66,6 +66,9 @@ const HomeContact = () => {
         display: inline-block;
         font-style: normal;
         color: ${colors.goldTint1};
+      }
+      ${mq().m} {
+        grid-column: 2 / -2;
       }
     `,
     body: css`
@@ -87,9 +90,12 @@ const HomeContact = () => {
     `,
     form: css`
       grid-column: span 5 / -2;
-      margin-top: 2.5rem;
+      grid-row: 1 / 3;
+      margin-top: 4rem;
       ${mq().m} {
+        margin-top: 2.5rem;
         grid-column: span 6 / -2;
+        grid-row: auto;
       }
       ${mq().ms} {
         grid-column: 2 / -2;

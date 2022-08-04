@@ -4,11 +4,17 @@ import { ChangeEvent, useEffect, useState } from 'react'
 import { colors } from '../theme/variables'
 import { toSlug } from '../utils/helpers'
 
-type FieldProps = {
+export interface ITextField {
+  __typename: 'DatoCmsTextField'
   label: string
-  type: string
-  onChange: (name: string, value: string) => void
+  fieldType: string
   required: boolean
+}
+
+interface FieldProps
+  extends Omit<ITextField, '__typename' | 'fieldType'> {
+  onChange: (name: string, value: string) => void
+  type: string
 }
 
 const TextField = ({ label, type, onChange, required }: FieldProps) => {

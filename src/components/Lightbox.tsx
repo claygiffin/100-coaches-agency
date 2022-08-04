@@ -2,12 +2,16 @@ import { css, keyframes } from '@emotion/react'
 import {
   Fragment,
   ReactNode,
+  SyntheticEvent,
   useCallback,
+  useContext,
   useEffect,
   useState,
 } from 'react'
 import { createPortal } from 'react-dom'
 
+import LightboxContext from '../context/LightboxContext'
+import useFocusTrap from '../hooks/useFocusTrap'
 import closeX from '../images/close-x.svg'
 import { absoluteFill, baseGrid, mq } from '../theme/mixins'
 import { colors } from '../theme/variables'
@@ -28,31 +32,37 @@ const Lightbox = ({
 }: LightboxProps) => {
   const isBrowser = typeof window !== `undefined`
 
-  const portalTarget =
-    isBrowser && document.getElementById('lightbox-container')
+  const { lightbox, setLightbox } = useContext(LightboxContext)
+
+  const portalTarget = isBrowser
+    ? document.getElementById('lightbox-container')
+    : null
 
   const url = ('/' + slug + '/').replace('//', '/')
 
-  const setUrl = () => {
-    window.history.pushState(null, '', url)
-  }
+  const [entry, setEntry] = useState<string | null>(null)
+  useEffect(() => {
+    if (!entry) {
+      setEntry(window.location.pathname)
+    }
+  }, [entry])
 
   const [open, setOpen] = useState(false)
-  const handleOpen = () => {
-    setOpen(true)
-    setUrl()
-    onClick()
-  }
+
+  const handleOpen = useCallback(
+    (e: SyntheticEvent) => {
+      e.preventDefault()
+      window.history.replaceState(null, '', url)
+      setLightbox(url)
+      setOpen(true)
+      onClick()
+    },
+    [setLightbox, url, onClick]
+  )
 
   const [closing, setClosing] = useState(false)
 
-  const handleBack = useCallback(() => {
-    if (!closing) {
-      window.history.back()
-    }
-  }, [closing])
-
-  const handleClose = () => {
+  const animateClose = () => {
     setClosing(true)
     setTimeout(() => {
       setClosing(false)
@@ -62,20 +72,21 @@ const Lightbox = ({
     }, 301)
   }
 
-  useEffect(() => {
-    window.addEventListener('popstate', handleClose, { passive: true })
-    return () => {
-      window.removeEventListener('popstate', handleClose)
+  const handleClose = useCallback(() => {
+    if (lightbox === url && !closing) {
+      window.history.replaceState(null, '', entry)
+      setLightbox(entry)
+      animateClose()
     }
-  })
+  }, [closing, entry, setLightbox, lightbox, url])
 
   const escFunction = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape' || e.key === 'Esc') {
-        handleBack()
+        handleClose()
       }
     },
-    [handleBack]
+    [handleClose]
   )
 
   useEffect(() => {
@@ -84,6 +95,11 @@ const Lightbox = ({
       document.removeEventListener('keydown', escFunction, false)
     }
   }, [open, escFunction])
+
+  const [lightboxRef, setLightboxRef] = useState<HTMLDivElement | null>(
+    null
+  )
+  useFocusTrap(lightboxRef, open)
 
   const animations = {
     blurIn: keyframes`
@@ -140,18 +156,19 @@ const Lightbox = ({
     `,
     lightbox: css`
       ${baseGrid}
-      grid-template-rows: var(--gutter-md) auto var(--gutter-mlg);
+      grid-template-rows: var(--gutter-sm) auto var(--gutter-md);
       position: fixed;
       top: 0;
       left: 0;
       overflow-y: scroll;
       width: 100vw;
       height: calc(var(--vh, 1vh) * 100);
-      z-index: 11;
+      z-index: 10;
     `,
     content: css`
       pointer-events: none;
       position: relative;
+      display: grid;
       grid-column: 2 / -2;
       grid-row: 2 / 3;
       width: fit-content;
@@ -200,13 +217,17 @@ const Lightbox = ({
         fill: #fff;
       }
       @media (hover: hover) {
-        display: none;
+        opacity: 0;
+        pointer-events: none;
         ${mq().ml} {
           display: block;
         }
         &:hover {
           transform: scale3d(1.25, 1.25, 1.25);
           color: ${colors.gold};
+        }
+        &:focus {
+          opacity: 1;
         }
       }
     `,
@@ -242,29 +263,38 @@ const Lightbox = ({
   }
   return (
     <Fragment>
-      <button
+      <a
         css={styles.button}
         onClick={handleOpen}
         aria-label="Open Lightbox"
-      />
+        href={url}
+      >
+        <span />
+      </a>
       {open &&
         portalTarget &&
         createPortal(
           <Fragment>
             <ScrollToggle />
             <div css={styles.background} />
-            <div css={styles.lightbox}>
+            <div
+              css={styles.lightbox}
+              ref={node => setLightboxRef(node)}
+            >
               <div
                 css={styles.backgroundClose}
-                onClick={handleBack}
+                onClick={handleClose}
                 aria-hidden
               />
-              <div css={styles.content}>{children}</div>
+              <div css={styles.content}>
+                <button aria-hidden />
+                {children}
+              </div>
               <svg
                 css={styles.closeButton}
                 aria-label="Close Lightbox"
-                onClick={handleBack}
-                onKeyPress={handleBack}
+                onClick={handleClose}
+                onKeyPress={handleClose}
                 tabIndex={0}
                 width="15px"
                 height="15px"

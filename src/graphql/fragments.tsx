@@ -93,6 +93,9 @@ export const FormFragment = graphql`
       ... on DatoCmsMultilineTextField {
         ...MultilineTextFieldFragment
       }
+      ... on DatoCmsSelectField {
+        ...SelectFieldFragment
+      }
     }
   }
 `
@@ -110,6 +113,19 @@ export const MultilineTextFieldFragment = graphql`
     __typename
     id: originalId
     label
+    required
+  }
+`
+export const SelectFieldFragment = graphql`
+  fragment SelectFieldFragment on DatoCmsSelectField {
+    __typename
+    id: originalId
+    label
+    options {
+      id: originalId
+      label
+      value
+    }
     required
   }
 `
@@ -152,5 +168,49 @@ export const SWMenuLinkFragment = graphql`
     id: originalId
     __typename
     linkText
+  }
+`
+export const ArticleFragment = graphql`
+  fragment ArticleFragment on DatoCmsArticle {
+    id: originalId
+    __typename
+    title
+    author {
+      ... on DatoCmsCoach {
+        ...CoachFragment
+      }
+      ... on DatoCmsTeamMember {
+        ...TeamMemberFragment
+      }
+    }
+    body {
+      value
+      blocks {
+        id: originalId
+        __typename
+        image {
+          gatsbyImageData(width: 1440, imgixParams: { q: 60 })
+          alt
+          title
+        }
+      }
+    }
+    meta {
+      date: createdAt
+      formattedDate: createdAt(formatString: "MMMM D, YYYY")
+    }
+  }
+`
+export const NewsItemFragment = graphql`
+  fragment NewsItemFragment on DatoCmsNewsItem {
+    id: originalId
+    __typename
+    title
+    publication
+    url
+    meta {
+      date: createdAt
+      formattedDate: createdAt(formatString: "MMMM D, YYYY")
+    }
   }
 `
