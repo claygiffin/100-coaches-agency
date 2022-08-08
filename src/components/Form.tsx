@@ -187,11 +187,9 @@ ${error}`)
         <div
           css={styles.submitted}
           dangerouslySetInnerHTML={{
-            __html:
-              data.successMessageNode.childMarkdownRemark.html.replace(
-                /h[13456]/g,
-                'h2'
-              ),
+            __html: data.successMessageNode.childMarkdownRemark.html
+              .replace(/h[13456]/g, 'h2')
+              .replace(/<a /g, '<a target="_blank" rel="noreferrer" '),
           }}
         />
       )}
