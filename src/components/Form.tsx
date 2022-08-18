@@ -101,6 +101,7 @@ ${error}`)
       css`
         opacity: 0;
         transform: translate3d(0, -6rem, 0);
+        pointer-events: none;
       `}
       ${mq().s} {
         grid-template-columns: 1fr;

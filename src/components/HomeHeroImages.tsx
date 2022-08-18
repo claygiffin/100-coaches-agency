@@ -57,7 +57,7 @@ const HomeHeroImages = () => {
   const windowDimensions = useWindowDimensions()
 
   const getImage = useCallback(
-    image => {
+    (image: any) => {
       if (windowDimensions.width > windowDimensions.height) {
         return image.horizontal
       } else {
