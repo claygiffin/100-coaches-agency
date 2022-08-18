@@ -90,7 +90,8 @@ const HomeContact = () => {
     `,
     form: css`
       grid-column: span 5 / -2;
-      grid-row: 1 / 3;
+      grid-row: 1 / 4;
+      align-self: flex-start;
       margin-top: 4rem;
       ${mq().m} {
         margin-top: 2.5rem;
