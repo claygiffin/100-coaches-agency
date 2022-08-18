@@ -158,6 +158,9 @@ ${error}`)
       grid-area: 1 / 1 / 2 / 2;
       animation: ${animateIn} 300ms ease-out forwards;
       align-self: flex-start;
+      border-top: 1px solid #fff;
+      padding-top: 2em;
+      margin-top: 0.5em;
       h2 {
         font-size: var(--fs-30);
         margin-top: 0;
