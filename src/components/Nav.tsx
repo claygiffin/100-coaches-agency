@@ -264,7 +264,7 @@ const Nav = ({ homeNav }: NavProps) => {
           About Us
         </Link>
         <div css={[styles.link, styles.button]}>
-          Work With Us
+          Find a Coach
           <ContactLightbox />
         </div>
       </div>

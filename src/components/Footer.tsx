@@ -141,7 +141,7 @@ const Footer = () => {
           <LogoStacked />
         </Link>
         <div css={styles.link}>
-          Work With Us
+          Find a Coach
           <ContactLightbox />
         </div>
         <div css={styles.rights}>

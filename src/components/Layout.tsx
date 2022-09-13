@@ -25,7 +25,7 @@ const Layout = ({ children, mainCss, homeNav }: LayoutProps) => {
       <Nav homeNav={homeNav} />
       <main css={[styles.main, mainCss]}>{children}</main>
       <Footer />
-      <ContactButton text="Work With Us" />
+      <ContactButton text="Find a Coach" />
       <div id="lightbox-container" />
     </Fragment>
   )
