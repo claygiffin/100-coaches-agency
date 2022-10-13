@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { colors } from '../theme/variables'
 import Form from './Form'
 import Lightbox from './Lightbox'
+import Seo from './Seo'
 
 const ContactLightbox = () => {
   const { contactForm } = useStaticQuery(graphql`
@@ -51,6 +52,7 @@ const ContactLightbox = () => {
   }
   return (
     <Lightbox slug="/contact">
+      <Seo title={contactForm.lightboxHeading.replace(/<[^>]>/g, '')} />
       <div css={styles.formContainer}>
         <h2
           css={styles.heading}

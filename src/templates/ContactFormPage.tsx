@@ -3,6 +3,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 
 import Form from '../components/Form'
 import Layout from '../components/Layout'
+import Seo from '../components/Seo'
 import { colors } from '../theme/variables'
 
 const ContactFormPage = () => {
@@ -56,6 +57,13 @@ const ContactFormPage = () => {
   }
   return (
     <Layout mainCss={styles.main}>
+      <Seo
+        title={contactForm.lightboxHeading.replace(/<[^>]>/g, '')}
+        description={contactForm.lightboxBodyNode.childMarkdownRemark.html.replace(
+          /<[^>]>/g,
+          ''
+        )}
+      />
       <div css={styles.formContainer}>
         <h2
           css={styles.heading}
