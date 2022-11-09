@@ -2,7 +2,7 @@
   "include": ["./src/**/*"],
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+    "module": "Node16",
     "lib": ["dom", "es2020"],
     "allowJs": true,
     "checkJs": true,

@@ -14,7 +14,7 @@ const SwCategoryMenu = ({ backArrow }: { backArrow?: boolean }) => {
   }
   const { categories }: QueryTypes = useStaticQuery(graphql`
     query {
-      categories: allDatoCmsSwCategory(sort: { fields: position }) {
+      categories: allDatoCmsSwCategory(sort: { position: ASC }) {
         nodes {
           categoryName
           categoryNameFull

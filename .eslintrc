@@ -18,7 +18,8 @@
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@emotion"
   ],
   "settings": {
     "react": {
@@ -33,6 +34,7 @@
     "limited-exports-page-templates": "warn",
     "prettier/prettier": "warn",
     "@typescript-eslint/ban-types": "warn",
-    "no-throw-literal": "warn"
+    "no-throw-literal": "warn",
+    "@emotion/jsx-import": "error"
   }
 }

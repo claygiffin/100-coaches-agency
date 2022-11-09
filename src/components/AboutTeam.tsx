@@ -15,9 +15,7 @@ const AboutTeam = () => {
       page: datoCmsAboutPage {
         teamHeading
       }
-      team: allDatoCmsTeamMember(
-        sort: { fields: position, order: ASC }
-      ) {
+      team: allDatoCmsTeamMember(sort: { position: ASC }) {
         nodes {
           ...TeamMemberFragment
         }

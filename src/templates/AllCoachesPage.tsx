@@ -11,14 +11,12 @@ import { CoachProps } from '../types/customTypes'
 
 export const data = graphql`
   query {
-    categories: allDatoCmsCoachCategory(
-      sort: { fields: position, order: ASC }
-    ) {
+    categories: allDatoCmsCoachCategory(sort: { position: ASC }) {
       nodes {
         categoryName
       }
     }
-    coaches: allDatoCmsCoach(sort: { fields: position, order: ASC }) {
+    coaches: allDatoCmsCoach(sort: { position: ASC }) {
       nodes {
         ...CoachFragment
       }

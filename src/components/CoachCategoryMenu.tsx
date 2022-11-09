@@ -15,7 +15,7 @@ const CoachCategoryMenu = ({ backArrow }: { backArrow?: boolean }) => {
   const { coachCategories }: QueryTypes = useStaticQuery(graphql`
     query {
       coachCategories: allDatoCmsCoachCategory(
-        sort: { fields: position }
+        sort: { position: ASC }
       ) {
         nodes {
           categoryName

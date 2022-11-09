@@ -17,9 +17,7 @@ import { CoachProps, SeoProps } from '../types/customTypes'
 
 export const data = graphql`
   query ($categoryName: String!) {
-    categories: allDatoCmsCoachCategory(
-      sort: { fields: position, order: ASC }
-    ) {
+    categories: allDatoCmsCoachCategory(sort: { position: ASC }) {
       nodes {
         categoryName
       }
