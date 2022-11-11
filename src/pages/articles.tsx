@@ -40,7 +40,7 @@ const ArticlesPage = () => {
   const loadAmount = 36
   const allArticlesNews = useMemo(() => {
     return [...articles.nodes, ...newsItems.nodes]
-      .sort((a, b) => Date.parse(a.meta.date) - Date.parse(b.meta.date))
+      .sort((a, b) => Date.parse(b.meta.date) - Date.parse(a.meta.date))
       .filter(item => {
         if (filter === filters[0]) {
           return true
