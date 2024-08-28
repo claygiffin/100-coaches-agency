@@ -263,6 +263,15 @@ const Nav = ({ homeNav }: NavProps) => {
         >
           About Us
         </Link>
+        <a
+          href={`https://community.100coaches.com/`}
+          target="_blank"
+          rel="noreferrer"
+          css={styles.link}
+          onClick={handleClose}
+        >
+          Community
+        </a>
         <div css={[styles.link, styles.button]}>
           Find a Coach
           <ContactLightbox />
