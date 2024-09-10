@@ -241,10 +241,10 @@ const Nav = ({ homeNav }: NavProps) => {
           Coaches
           <CoachCategoryMenu backArrow={burgerOpen} />
         </span>
-        <span css={styles.link}>
+        {/* <span css={styles.link}>
           Speakers & Workshops
           <SwCategoryMenu backArrow={burgerOpen} />
-        </span>
+        </span> */}
         <Link
           css={styles.link}
           to="/articles/"
