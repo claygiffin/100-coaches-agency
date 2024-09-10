@@ -34,6 +34,6 @@
     "prettier/prettier": "warn",
     "@typescript-eslint/ban-types": "warn",
     "no-throw-literal": "warn",
-    "@emotion/jsx-import": "error"
-  }
+    // "@emotion/jsx-import": "error"
+    "react/no-unknown-property": ["error", { "ignore": ["css"] }]  }
 }

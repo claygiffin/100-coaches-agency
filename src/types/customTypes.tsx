@@ -57,6 +57,11 @@ export type ArticleProps = {
     value: Document
     blocks: Image[]
   }
+  thumbnail: {
+    gatsbyImageData: IGatsbyImageData
+    alt?: string
+    title?: string
+  }
   meta: {
     date: string
     formattedDate: string

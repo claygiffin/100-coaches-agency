@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { HiOutlineExternalLink } from 'react-icons/hi'
 
 import { absoluteFill } from '../theme/mixins'
@@ -18,29 +19,39 @@ const ArticleThumbnail = ({ article }: Props) => {
       position: relative;
       padding: 1rem var(--gutter-sm);
       transition: background-color 300ms ease;
-      &:before {
-        content: '';
-        position: absolute;
-        display: block;
-        width: calc(100% - 2 * var(--gutter-sm));
-        height: 1px;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #333;
-        transition: width 150ms ease;
-      }
+      ${isArticle &&
+      article.thumbnail &&
+      css`
+        padding-top: 0;
+      `}
       @media (hover: hover) {
         &:hover,
         &:focus-within {
           background-color: #f5f5f5;
-          &:before {
-            width: 100%;
-          }
         }
       }
     `,
-
+    image: css`
+      margin-bottom: 1rem;
+      overflow: hidden;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 0;
+      padding-bottom: ${(9 / 16) * 100}%;
+      transition: width 200ms ease-out;
+      width: 100%;
+      [data-gatsby-image-wrapper] {
+        ${absoluteFill}
+        transition: transform 300ms ease-out;
+      }
+      div:hover > & {
+        width: calc(100% + 2 * var(--gutter-sm));
+        [data-gatsby-image-wrapper] {
+          transform: scale3d(1.1, 1.1, 1);
+        }
+      }
+    `,
     title: css`
       position: relative;
       font-size: var(--fs-30);
@@ -51,8 +62,31 @@ const ArticleThumbnail = ({ article }: Props) => {
       color: ${colors.goldShade1};
       display: flex;
       justify-content: space-between;
-      div:hover > & {
-        color: ${colors.goldShade2};
+      ${isArticle &&
+      !article.thumbnail &&
+      css`
+        &:before {
+          content: '';
+          position: absolute;
+          display: block;
+          width: 100%;
+          height: 1px;
+          top: calc(-1rem - 1px);
+          left: 50%;
+          transform: translateX(-50%);
+          background: #333;
+          transition: width 150ms ease;
+        }
+      `}
+      @media (hover: hover) {
+        &:hover,
+        div:hover > &,
+        div:focus-within > & {
+          color: ${colors.goldShade2};
+          &:before {
+            width: calc(100% + 2 * var(--gutter-sm));
+          }
+        }
       }
     `,
     author: css`
@@ -96,6 +130,14 @@ const ArticleThumbnail = ({ article }: Props) => {
   }
   return (
     <div css={styles.thumbnail}>
+      {isArticle && article.thumbnail && (
+        <div css={styles.image}>
+          <GatsbyImage
+            image={article.thumbnail.gatsbyImageData}
+            alt={article.thumbnail.alt || ''}
+          />
+        </div>
+      )}
       <h2 css={styles.title}>
         {article.title}
         {!isArticle && <HiOutlineExternalLink css={styles.external} />}
@@ -112,7 +154,7 @@ const ArticleThumbnail = ({ article }: Props) => {
           <span />
         </a>
       )}
-      <h3 css={[styles.author, !isArticle && styles.publication]}>
+      {/* <h3 css={[styles.author, !isArticle && styles.publication]}>
         {isArticle ? article.author.name : article.publication}
         {isArticle && (
           <CoachProfileLightbox
@@ -124,7 +166,7 @@ const ArticleThumbnail = ({ article }: Props) => {
             }
           />
         )}
-      </h3>
+      </h3> */}
       <span css={styles.date}>{article.meta.formattedDate}</span>
     </div>
   )

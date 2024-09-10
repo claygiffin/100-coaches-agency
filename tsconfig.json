@@ -6,7 +6,7 @@
     "lib": ["dom", "es2020"],
     "allowJs": true,
     "checkJs": true,
-    "moduleResolution": "node",
+    "moduleResolution": "Node16",
     "jsx": "react-jsx",
     "jsxImportSource": "@emotion/react",
     "strict": true,

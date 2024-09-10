@@ -118,7 +118,7 @@ const HomeResults = () => {
                 home.resultsSubheadingNode.childMarkdownRemark.html,
             }}
           />
-          <ArrowButton
+          {/* <ArrowButton
             css={styles.button}
             color="GOLD_DARK"
             style="OUTLINE"
@@ -126,7 +126,7 @@ const HomeResults = () => {
             to="/speakers-and-workshops/"
           >
             <SwCategoryMenu />
-          </ArrowButton>
+          </ArrowButton> */}
         </AnimateIn>
       </div>
     </section>

@@ -195,6 +195,19 @@ export const ArticleFragment = graphql`
         }
       }
     }
+    thumbnail {
+      alt
+      title
+      gatsbyImageData(
+        width: 480
+        imgixParams: {
+          ar: "16:9"
+          crop: "focalpoint"
+          fit: "crop"
+          q: 50
+        }
+      )
+    }
     meta {
       date: createdAt
       formattedDate: createdAt(formatString: "MMMM D, YYYY")

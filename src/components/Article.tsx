@@ -101,7 +101,7 @@ const Article = ({ article, lightbox }: PropTypes) => {
     <article css={styles.article}>
       <Seo title={article.title} />
       <h1 css={styles.title}>{article.title}</h1>
-      <h2 css={styles.author}>
+      {/* <h2 css={styles.author}>
         {article.author.name}
         <CoachProfileLightbox
           coach={article.author}
@@ -111,7 +111,7 @@ const Article = ({ article, lightbox }: PropTypes) => {
               : undefined
           }
         />
-      </h2>
+      </h2> */}
       <span css={styles.pipe} />
       <span css={styles.date}>{article.meta.formattedDate}</span>
       <div css={styles.body}>
