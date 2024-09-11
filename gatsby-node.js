@@ -73,17 +73,17 @@ exports.createPages = async ({ graphql, actions }) => {
     path: `/coaches/all/`,
     component: path.resolve(`./src/templates/AllCoachesPage.tsx`),
   })
-  data.allDatoCmsSwCategory.edges.forEach(({ node }) => {
-    createPage({
-      path: `/speakers-workshops/${toSlug(node.categoryName)}/`,
-      component: path.resolve(
-        `./src/templates/SpeakersWorkshopsPage.tsx`
-      ),
-      context: {
-        categoryName: node.categoryName,
-      },
-    })
-  })
+  // data.allDatoCmsSwCategory.edges.forEach(({ node }) => {
+  //   createPage({
+  //     path: `/speakers-workshops/${toSlug(node.categoryName)}/`,
+  //     component: path.resolve(
+  //       `./src/templates/SpeakersWorkshopsPage.tsx`
+  //     ),
+  //     context: {
+  //       categoryName: node.categoryName,
+  //     },
+  //   })
+  // })
   data.allDatoCmsCoach.edges.forEach(({ node }) => {
     createPage({
       path: `/coaches/profiles/${toSlug(node.name)}/`,

@@ -237,6 +237,15 @@ const Nav = ({ homeNav }: NavProps) => {
         toggleOpen={() => setBurgerOpen(prev => !prev)}
       />
       <div css={styles.navItems}>
+        <Link
+          css={styles.link}
+          to="/about/"
+          onClick={() =>
+            window.location.pathname === '/about/' && handleClose()
+          }
+        >
+          How We Work
+        </Link>
         <span css={styles.link}>
           Coaches
           <CoachCategoryMenu backArrow={burgerOpen} />
@@ -245,6 +254,24 @@ const Nav = ({ homeNav }: NavProps) => {
           Speakers & Workshops
           <SwCategoryMenu backArrow={burgerOpen} />
         </span> */}
+        <a
+          href={`https://becomingcoachable.com/`}
+          target="_blank"
+          rel="noreferrer"
+          css={styles.link}
+          onClick={handleClose}
+        >
+          Our Book
+        </a>
+        <a
+          href={`https://community.100coaches.com/`}
+          target="_blank"
+          rel="noreferrer"
+          css={styles.link}
+          onClick={handleClose}
+        >
+          Our Community
+        </a>
         <Link
           css={styles.link}
           to="/articles/"
@@ -254,24 +281,6 @@ const Nav = ({ homeNav }: NavProps) => {
         >
           Articles
         </Link>
-        <Link
-          css={styles.link}
-          to="/about/"
-          onClick={() =>
-            window.location.pathname === '/about/' && handleClose()
-          }
-        >
-          About Us
-        </Link>
-        <a
-          href={`https://community.100coaches.com/`}
-          target="_blank"
-          rel="noreferrer"
-          css={styles.link}
-          onClick={handleClose}
-        >
-          Community
-        </a>
         <div css={[styles.link, styles.button]}>
           Find a Coach
           <ContactLightbox />
