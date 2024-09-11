@@ -247,7 +247,7 @@ const Nav = ({ homeNav }: NavProps) => {
           How We Work
         </Link>
         <span css={styles.link}>
-          Coaches
+          Our Coaches
           <CoachCategoryMenu backArrow={burgerOpen} />
         </span>
         {/* <span css={styles.link}>
