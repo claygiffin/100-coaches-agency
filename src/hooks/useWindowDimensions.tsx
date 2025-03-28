@@ -1,28 +1,55 @@
-import { throttle } from 'lodash'
-import { useCallback, useLayoutEffect, useState } from 'react'
+'use client'
+
+import { debounce } from 'lodash'
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 
 export const useWindowDimensions = () => {
-  const [windowDimensions, setWindowDimensions] = useState({
-    width: 0,
-    height: 0,
+  const isBrowser = typeof window !== `undefined`
+
+  const [windowDimensions, setWindowDimensions] = useState<{
+    width: undefined | number
+    height: undefined | number
+  }>({
+    width: undefined,
+    height: undefined,
   })
 
-  const handleResize = useCallback(() => {
-    window.requestAnimationFrame(() => {
+  useLayoutEffect(() => {
+    if (isBrowser) {
       setWindowDimensions({
         width: window.innerWidth,
         height: window.innerHeight,
       })
-    })
-  }, [])
-  useLayoutEffect(handleResize, [handleResize])
-  const handleThrottledResize = throttle(handleResize, 500)
+    }
+  }, [isBrowser])
 
-  useLayoutEffect(() => {
+  const handleResize = useCallback(() => {
+    if (isBrowser) {
+      window.requestAnimationFrame(() => {
+        setWindowDimensions({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        })
+      })
+    }
+  }, [isBrowser])
+
+  const handleThrottledResize = useRef(
+    debounce(handleResize, 500)
+  ).current
+
+  useEffect(() => {
     window.addEventListener('resize', handleThrottledResize, {
       passive: true,
     })
     return () => {
+      handleThrottledResize.cancel()
       window.removeEventListener('resize', handleThrottledResize)
     }
   }, [handleThrottledResize])

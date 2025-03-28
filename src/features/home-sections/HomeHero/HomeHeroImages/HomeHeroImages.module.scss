@@ -1,0 +1,35 @@
+@use '@/theme/mixins' as *;
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(100% - 1.75vw);
+  overflow: hidden;
+  z-index: 0;
+}
+.imageWrap {
+  @extend %absolute-fill;
+  z-index: 0;
+  opacity: 0;
+  transform: scale3d(1, 1, 1);
+  transition:
+    opacity 0ms linear var(--transition-duration),
+    transform 0ms linear var(--transition-duration);
+}
+.active {
+  z-index: 1;
+  opacity: 1;
+  transition:
+    opacity var(--transition-duration) ease,
+    transform calc(var(--slide-duration) + var(--transition-duration))
+      ease-out;
+  transform: scale3d(1.05, 1.05, 1);
+}
+.image {
+  min-width: 100%;
+  min-height: 100%;
+  height: 100%;
+  width: 100%;
+}

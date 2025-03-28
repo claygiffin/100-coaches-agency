@@ -1,0 +1,9 @@
+.image {
+  img {
+    object-fit: var(--object-fit, cover);
+    object-position: var(--object-position);
+    &:nth-of-type(2)[aria-hidden='true'] {
+      height: 110% !important;
+    }
+  }
+}

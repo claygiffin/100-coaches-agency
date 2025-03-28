@@ -1,0 +1,204 @@
+@use '@/theme/mixins' as *;
+
+.container {
+  position: relative;
+  flex: 1;
+  --text-color: var(--color-navyMidLight);
+  --highlight: var(--color-copper);
+  --highlightText: var(--color-rust);
+  flex-basis: 100%;
+  &[data-width='Half'] {
+    flex-basis: calc(50% - var(--gap));
+    @include media('<ms') {
+      flex-basis: 100%;
+    }
+  }
+  &[data-width='Third'] {
+    flex-basis: calc(33.3% - var(--gap));
+    @include media('<ms') {
+      flex-basis: 100%;
+    }
+  }
+  &[data-width='Quarter'] {
+    flex-basis: calc(25% - var(--gap));
+    @include media('<ms') {
+      flex-basis: calc(50% - var(--gap));
+    }
+  }
+}
+.inputBase {
+  background-color: var(--color-gray95);
+  border-radius: 0.25em;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  overflow: hidden;
+  transition:
+    border-color 300ms ease,
+    background-color 300ms ease;
+  div:focus-within > & {
+    border-color: var(--highlight);
+  }
+}
+.input {
+  box-sizing: border-box;
+  border: none;
+  padding: 1.5em 1em 0.5em;
+  line-height: 1.333;
+  width: 100%;
+  color: var(--text-color);
+  background-color: transparent;
+  /* hide text in webkit */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: var(--text-color) !important;
+    box-shadow: 0 0 0 10em var(--color-gray95) inset !important;
+    caret-color: var(--text-color) !important;
+  }
+}
+.label {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  top: 1.5835em;
+  left: 1em;
+  color: var(--color-gray55);
+  max-width: calc(100% - 2em);
+  line-height: 1.333;
+  padding-right: 2px;
+  transform: translate3d(0, -0.5em, 0);
+  transition: transform 200ms ease;
+  transform-origin: 0 0;
+  /* font-style: italic; */
+  font-weight: 400;
+  &[data-shrink='true'] {
+    transform: translate3d(0, -1.25em, 0) scale3d(0.75, 0.75, 1);
+    font-weight: 500;
+    max-width: calc(133.333% - 2.667em);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    div:focus-within > & {
+      color: var(--highlightText);
+    }
+  }
+  &[data-required='true'] {
+    &::after {
+      content: '*';
+      display: inline-block;
+      font-size: 75%;
+      margin-left: 0.125em;
+      transform: translateY(-0.125em);
+    }
+  }
+}
+.checkbox {
+  width: 1.125em;
+  height: 1.125em;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25em;
+  background-color: var(--color-gray95);
+  border: 2px solid;
+  box-sizing: border-box;
+  margin-top: 0.1em;
+  margin-right: 0.333em;
+  &::after {
+    content: '';
+    width: 0.25em;
+    height: 0.5em;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform-origin: 75% 50%;
+    transform: rotate(45deg);
+    visibility: hidden;
+  }
+  &[data-checked='true'] {
+    background-color: var(--color-highlight);
+    &::after {
+      visibility: visible;
+    }
+  }
+  @media (hover: hover) {
+    div:hover > & {
+      background-color: var(--color-gray75);
+    }
+  }
+}
+
+// TEXT FIELD
+.textField {
+  min-height: max(3.333em, 2em + var(--label-height));
+  transition: min-height 150ms ease;
+}
+
+// SELECT FIELD
+.select {
+  appearance: none;
+  color: transparent;
+  min-height: max(
+    3.333em,
+    2em + var(--label-height),
+    var(--active-option-height)
+  );
+  transition: min-height 150ms ease;
+
+  /* hide text in webkit */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: transparent !important;
+  }
+  option {
+    color: var(--text-color);
+    &:disabled {
+      color: var(--text-color);
+      opacity: 0.67;
+    }
+  }
+}
+.inputValue {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  line-height: 1.333;
+}
+.arrow {
+  position: absolute;
+  top: 50%;
+  right: 1.5em;
+  transform: translateY(-33%);
+  pointer-events: none;
+  color: var(--color-gray60);
+  @media (hover: hover) {
+    div:hover > & {
+      color: var(--highlight);
+    }
+  }
+  div:focus-within > & {
+    background-color: var(--color-highlight);
+  }
+}
+
+// TEXT AREA
+.sizer {
+  display: block;
+  visibility: hidden;
+  padding-top: 1.75em;
+  padding-bottom: 1.5em;
+  min-height: 9em;
+  min-height: max(3.25em + var(--label-height, 1em), 9em);
+  transition: min-height 150ms ease;
+}
+.textArea {
+  @extend %absolute-fill;
+  resize: none;
+  height: 100%;
+  border: none;
+  padding-top: 1.75em;
+  padding-bottom: 1.5em;
+}

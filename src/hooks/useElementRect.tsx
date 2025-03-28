@@ -1,15 +1,21 @@
-import { useLayoutEffect, useState } from 'react'
+'use client'
+
+import { debounce } from 'lodash'
+import { useLayoutEffect, useRef, useState } from 'react'
 
 export const useElementRect = (element: HTMLElement | null) => {
-  const [rect, setRect] = useState({
-    width: 0,
-    height: 0,
+  const [rect, setRect] = useState<{
+    width: number | undefined
+    height: number | undefined
+  }>({
+    width: undefined,
+    height: undefined,
   })
 
-  useLayoutEffect(() => {
-    const resizeObserver = new ResizeObserver(entries => {
+  const entryDebouncer = useRef(
+    debounce((entries: ResizeObserverEntry[]) => {
       entries.forEach(entry => {
-        if (entry.borderBoxSize && entry.borderBoxSize.length > 0) {
+        if (entry.borderBoxSize?.length) {
           setRect({
             width: entry.borderBoxSize[0].inlineSize,
             height: entry.borderBoxSize[0].blockSize,
@@ -21,14 +27,25 @@ export const useElementRect = (element: HTMLElement | null) => {
           })
         }
       })
+    }, 500)
+  ).current
+
+  useLayoutEffect(() => {
+    setRect({
+      width: element?.getBoundingClientRect().width,
+      height: element?.getBoundingClientRect().height,
     })
+    const resizeObserver = new ResizeObserver(entries =>
+      entryDebouncer(entries)
+    )
     if (element) {
       resizeObserver.observe(element)
     }
     return () => {
+      entryDebouncer.cancel()
       resizeObserver.disconnect()
     }
-  }, [element])
+  }, [element, entryDebouncer])
 
   return rect
 }

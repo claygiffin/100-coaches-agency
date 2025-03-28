@@ -1,0 +1,32 @@
+@use '@/theme/mixins' as *;
+
+.container {
+  @include absolute-fill;
+  overflow: hidden;
+  clip-path: url(var(--clip-id));
+  background: linear-gradient(
+    to top right,
+    var(--color-goldShade3),
+    var(--color-goldShade2),
+    var(--color-goldShade1),
+    var(--color-gold)
+  );
+}
+.innerContainer {
+  padding: 0 var(--gutter-mlg);
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-gap: calc(3rem + 5vw);
+  --translate-factor: var(--translate-factor-0);
+  > div {
+    &:nth-last-of-type(odd) {
+      --translate-factor: var(--translate-factor-1);
+    }
+  }
+}
+.line {
+  z-index: 4;
+  position: absolute;
+  overflow: visible;
+}

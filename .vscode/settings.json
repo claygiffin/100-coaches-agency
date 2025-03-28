@@ -1,0 +1,84 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "workbench.editor.labelFormat": "short",
+  "replacerules.rules": {
+    "JSX.Element": {
+      "find": ": JSX.Element",
+      "replace": ""
+    },
+    "remove default export": {
+      "find": "export default \\w+",
+      "replace": ""
+    },
+    "export component": {
+      "find": "\n\\s{0}const",
+      "replace": "\nexport const"
+    },
+    "datocms query": {
+      "find": "DatoCms(\\w+) \\{",
+      "replace": "$1Record {"
+    },
+    "datocms id": {
+      "find": "id: originalId",
+      "replace": "id"
+    },
+    "graphql to gql": {
+      "find": "graphql`",
+      "replace": "gql`"
+    },
+    "gql tag": {
+      "find": "import \\{ graphql \\} from 'gatsby'",
+      "replace": "import gql from 'graphql-tag'"
+    },
+    "css to className": {
+      "find": "css=\\{",
+      "replace": "className={"
+    },
+    "component without props": {
+      "find": "ComponentPropsWith(out*)Ref",
+      "replace": "ComponentProps"
+    },
+    "interface to type": {
+      "find": "interface Props extends (ComponentProps<'\\w+'>) \\{",
+      "replace": "type Props = $1 & {"
+    },
+    "styles to scss 1": {
+      "find": "(\\w+): css`",
+      "replace": ".$1 {"
+    },
+    "styles to scss 2": {
+      "find": "`,",
+      "replace": "}"
+    },
+    "styles to scss 3": {
+      "find": "\\$\\{colors\\.(\\w+)\\}",
+      "replace": "var(--color-$1)"
+    },
+    "styles to scss 4": {
+      "find": "\\$\\{mq\\(\\)\\.(\\w+)\\} \\{",
+      "replace": "@include media('<$1') {"
+    }
+  },
+  "replacerules.rulesets": {
+    "Gatsby to Next": {
+      "rules": [
+        "JSX.Element",
+        "datocms query",
+        "datocms id",
+        "graphql to gql",
+        "gql tag",
+        "css to className",
+        "component without props",
+        "interface to type",
+        "styles to scss 1",
+        "styles to scss 2",
+        "styles to scss 3",
+        "styles to scss 4",
+        "remove default export",
+        "export component"
+      ]
+    }
+  }
+}

@@ -1,0 +1,71 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  position: relative;
+  z-index: 3;
+  margin-top: -8.5vw;
+  background-color: #333;
+  background: linear-gradient(to bottom right, #555, #000);
+}
+.content {
+  padding: calc(7vw + var(--gutter-xlg)) 0
+    calc(11.5vw + var(--gtr-72));
+  @include base-grid;
+  color: #fff;
+}
+.heading {
+  grid-column: span 6 / -2;
+  font-size: var(--fs-60);
+  align-self: flex-end;
+  justify-self: flex-start;
+  max-width: 16ch;
+  h2 {
+    font-size: inherit;
+    margin-bottom: 0.333em;
+  }
+  em {
+    font-style: normal;
+    color: var(--color-goldTint1);
+  }
+  @include media('<ms') {
+    grid-column-start: 2;
+  }
+}
+.body {
+  grid-column: span 5 / -2;
+  font-size: var(--fs-21);
+  @include media('<ml') {
+    grid-column-start: span 6;
+  }
+  @include media('<ms') {
+    grid-column-start: 2;
+    margin-bottom: 2.5em;
+  }
+}
+.button {
+  font-size: var(--fs-16);
+  margin-top: 2.25em;
+}
+.background {
+  @include absolute-fill;
+  clip-path: inset(0 0 0 0);
+  // clip-path: url(var(--clip-id));
+}
+.imageWrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 50vw;
+  height: 100vh;
+  /* filter: drop-shadow(-4rem 2rem 6rem rgba(0, 0, 0, 0.5)); */
+  @include media('<ms') {
+    width: 90vw;
+  }
+}
+.image {
+  width: 100%;
+  height: 100%;
+  @include media('<ms') {
+    filter: contrast(0.5) brightness(0.333);
+  }
+}

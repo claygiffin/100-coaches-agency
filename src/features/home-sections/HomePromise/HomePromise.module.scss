@@ -1,0 +1,39 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  position: relative;
+  z-index: 4;
+  margin-top: -10.5vw;
+}
+.content {
+  @include base-grid;
+  padding: calc(10.5vw + var(--gutter-xlg)) 0
+    calc(8.5vw + var(--gutter-xlg));
+  color: white;
+}
+.heading {
+  grid-column: 2 / span 7;
+  font-size: var(--fs-60);
+  margin-top: 0.75em;
+  @include media('<ms') {
+    grid-column-end: -2;
+  }
+  h2 {
+    font-size: inherit;
+    margin: 0 0 0.333em;
+    text-shadow: 0 0 3px var(--color-goldShade3);
+  }
+}
+.button {
+  font-size: var(--fs-16);
+  margin-top: 2.25em;
+  margin-bottom: 2em;
+}
+.body {
+  grid-column: 2 / span 8;
+  font-size: var(--fs-21);
+  text-shadow: 0 0 3px var(--color-goldShade3);
+  @include media('<ms') {
+    grid-column-end: -2;
+  }
+}

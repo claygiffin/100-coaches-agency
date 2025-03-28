@@ -1,0 +1,27 @@
+$breakpoints: (
+  l: 1440px,
+  ls: 1260px,
+  ml: 1080px,
+  m: 900px,
+  ms: 720px,
+  s: 540px,
+);
+
+$colors: (
+  'gold': #e8b24c,
+  'goldShade1': #df9b35,
+  'goldShade2': #c67c27,
+  'goldShade3': #a66427,
+  'goldTint1': #f5bd5d,
+  'goldTint2': #ffcc73,
+  'brownText': #260a03,
+  'gray97': hsl(0, 0%, 97%),
+  'gray95': hsl(0, 0%, 95%),
+  'gray90': hsl(0, 0%, 90%),
+  'gray85': hsl(0, 0%, 85%),
+  'gray75': hsl(0, 0%, 75%),
+  'gray60': hsl(0, 0%, 60%),
+  'gray40': hsl(0, 0%, 40%),
+  'gray30': hsl(0, 0%, 30%),
+  'gray20': hsl(0, 0%, 20%),
+);

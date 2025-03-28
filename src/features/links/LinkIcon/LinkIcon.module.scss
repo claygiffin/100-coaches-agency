@@ -1,0 +1,78 @@
+.container {
+  display: inline-block;
+  width: 0;
+  overflow: visible;
+}
+
+.icon {
+  display: flex;
+  height: 1em;
+  width: auto;
+  overflow: visible;
+  --stroke-width: calc(var(--stroke-weight, 400) / 250 * 1px);
+  path,
+  rect {
+    fill: transparent;
+    stroke: currentColor;
+    stroke-width: var(--stroke-width);
+    // stroke-linecap: round;
+  }
+}
+
+.arrow {
+  margin: 0 0 -0.15em 0.25em;
+  transition: transform 300ms var(--bezier-ease-out);
+  @media (hover: hover) {
+    a:hover > div > & {
+      transform: translate3d(0.15em, 0, 0);
+    }
+  }
+}
+
+.external {
+  margin: 0 0 -0.09em 0.333em;
+  path {
+    stroke-width: calc(var(--font-weight, 400) / 325);
+  }
+  g {
+    transition: transform 300ms var(--bezier-ease-out);
+    transform-origin: 50%;
+  }
+  @media (hover: hover) {
+    a:hover > div > & g {
+      transform: translate3d(0.08em, -0.08em, 0);
+    }
+  }
+}
+
+.download {
+  margin: 0 0 -0.09em 0.333em;
+  path {
+    stroke-width: calc(var(--font-weigh, 400t) / 325);
+  }
+  g {
+    transition: transform 300ms var(--bezier-ease-out);
+    transform-origin: 50%;
+  }
+  @media (hover: hover) {
+    a:hover > div > & g {
+      transform: translate3d(
+        0,
+        calc(0.18em - var(--stroke-width, 400) * 1px),
+        0
+      );
+    }
+  }
+}
+
+.videoContainer {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+.video {
+  fill: transparent;
+  stroke: currentColor;
+  height: 1.25em;
+  margin: -0.25em 0;
+}

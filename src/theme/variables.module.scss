@@ -1,0 +1,11 @@
+@use './variables' as variables;
+@use './mixins' as *;
+
+:export {
+  @each $name, $value in variables.$colors {
+    #{"color_" + $name}: $value;
+  }
+  @each $name, $value in variables.$breakpoints {
+    #{"breakpoint_" + $name}: strip-unit($value);
+  }
+}
