@@ -1,0 +1,82 @@
+@use '@/theme/mixins' as *;
+
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  // height: calc(100% - 1.75vw);
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-gray20);
+  z-index: 0;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 55ch;
+    opacity: 0.9;
+    background: linear-gradient(
+      270deg,
+      #000 21.94%,
+      rgba(0, 0, 0, 0.99) 31.15%,
+      rgba(0, 0, 0, 0.97) 38.64%,
+      rgba(0, 0, 0, 0.93) 44.67%,
+      rgba(0, 0, 0, 0.88) 49.53%,
+      rgba(0, 0, 0, 0.82) 53.46%,
+      rgba(0, 0, 0, 0.75) 56.73%,
+      rgba(0, 0, 0, 0.67) 59.6%,
+      rgba(0, 0, 0, 0.59) 62.34%,
+      rgba(0, 0, 0, 0.5) 65.22%,
+      rgba(0, 0, 0, 0.41) 68.49%,
+      rgba(0, 0, 0, 0.33) 72.42%,
+      rgba(0, 0, 0, 0.24) 77.27%,
+      rgba(0, 0, 0, 0.15) 83.31%,
+      rgba(0, 0, 0, 0.07) 90.8%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    z-index: 10;
+  }
+  @include media('<ml') {
+    &:after {
+      opacity: 0.5;
+    }
+    &:before {
+      z-index: 2;
+      content: '';
+      @include absolute-fill;
+      background: #000;
+      opacity: 0.5;
+    }
+  }
+}
+.imageWrap {
+  @include absolute-fill;
+  z-index: 0;
+  opacity: 0;
+  transform: scale3d(1, 1, 1);
+  transition:
+    opacity 0ms linear var(--transition-duration),
+    transform 0ms linear var(--transition-duration);
+}
+.active {
+  z-index: 1;
+  opacity: 1;
+  transition:
+    opacity var(--transition-duration) ease,
+    transform calc(var(--slide-duration) + var(--transition-duration))
+      ease-out;
+  transform: scale3d(1.05, 1.05, 1);
+  [data-single-image='true'] & {
+    transform: scale3d(1, 1, 1);
+  }
+}
+.image {
+  min-width: 100%;
+  min-height: 100%;
+  height: 100%;
+  width: 100%;
+}

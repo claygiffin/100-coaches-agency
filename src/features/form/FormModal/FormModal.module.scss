@@ -1,0 +1,60 @@
+@use '@/theme/mixins' as *;
+
+.article {
+  color: #fff;
+  box-sizing: border-box;
+
+  &[data-variant='PAGE'] {
+    background: linear-gradient(to top right, #222, #555);
+    margin: var(--row-72) var(--margin) calc(var(--row-144) + 5vw);
+    padding: var(--gtr-12) var(--gtr-36);
+    max-width: 65ch;
+  }
+  &[data-variant='MODAL'] {
+    max-width: 60ch;
+    pointer-events: all;
+    padding: var(--gtr-12) var(--gtr-36);
+    width: calc(100% - 1.5rem);
+    margin: 0 0.75rem;
+  }
+}
+
+.heading {
+  font-size: var(--fs-48);
+  color: var(--color-navyLight);
+  margin: 0 0 0.5em;
+  [data-variant='PAGE'] & {
+    font-size: var(--fs-72);
+    // max-width: 18ch;
+  }
+
+  // From old site
+  font-size: var(--fs-48);
+  font-weight: 325;
+  margin: 0.5em 0 0;
+  em {
+    font-style: normal;
+    color: var(--color-goldTint1);
+  }
+}
+
+.intro {
+  font-weight: 350;
+  max-width: 75ch;
+  padding-bottom: 0.5em;
+  margin-bottom: 2em;
+  border-bottom: 1px solid rgba(#000, 0.25);
+  a {
+    display: inline-block;
+    color: var(--color-goldTint1);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-goldTint3);
+      }
+    }
+  }
+
+  // from old site
+  font-size: var(--fs-16);
+  margin-bottom: 2em;
+}

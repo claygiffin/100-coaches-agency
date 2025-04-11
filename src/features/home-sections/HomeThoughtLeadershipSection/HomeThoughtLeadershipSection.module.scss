@@ -1,0 +1,48 @@
+.section {
+  position: relative;
+  display: grid;
+  min-height: min(14vw + 100svh, 70vw);
+  margin-top: -8.5vw;
+  background: #fff;
+  clip-path: var(--clip-id-url);
+  z-index: 3;
+}
+.nav {
+  display: flex;
+  gap: 4px;
+}
+.button {
+  display: flex;
+  width: 2em;
+  height: 2em;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-gray75);
+  svg {
+    width: auto;
+    height: 1.25em;
+    transition: transform 500ms var(--bezier-bounce);
+    path {
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2px;
+    }
+  }
+  &[data-back] svg {
+    transform: translate3d(-7.5%, 0, 0);
+  }
+  &[data-forward] svg {
+    transform: translate3d(7.5%, 0, 0);
+  }
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-gold);
+      &[data-back] svg {
+        transform: translate3d(-15%, 0, 0);
+      }
+      &[data-forward] svg {
+        transform: translate3d(15%, 0, 0);
+      }
+    }
+  }
+}

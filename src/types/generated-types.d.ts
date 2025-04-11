@@ -24,6 +24,24 @@ type Scalars = {
   UploadId: { input: string; output: string; }
 };
 
+type AboutPageModelAboutBodyField = {
+  __typename?: 'AboutPageModelAboutBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type AboutPageModelHowBodyField = {
+  __typename?: 'AboutPageModelHowBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type AboutPageModelHowLinkField = FormLinkRecord | PageLinkRecord;
+
 /** Record of type About Page (about_page) */
 type AboutPageRecord = RecordInterface & {
   __typename?: 'AboutPageRecord';
@@ -40,13 +58,13 @@ type AboutPageRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  aboutBody: Scalars['String']['output'];
+  aboutBody?: Maybe<AboutPageModelAboutBodyField>;
   aboutHeading: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
-  howBody?: Maybe<Scalars['String']['output']>;
+  howBody: AboutPageModelHowBodyField;
   howDetails: Array<TitleDescriptionRecord>;
   howHeading: Scalars['String']['output'];
-  howLinkText?: Maybe<Scalars['String']['output']>;
+  howLink?: Maybe<AboutPageModelHowLinkField>;
   id: Scalars['ItemId']['output'];
   seo?: Maybe<SeoField>;
   services: Array<ServiceRecord>;
@@ -62,16 +80,44 @@ type AboutPageRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+type AlertBarModelAlertTextField = {
+  __typename?: 'AlertBarModelAlertTextField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
 
-/** Record of type About Page (about_page) */
-type AboutPageRecordaboutBodyArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+type AlertBarModelLinkField = ArticleLinkRecord | DocumentLinkRecord | ExternalLinkRecord | FormLinkRecord | PageLinkRecord;
+
+/** Record of type Alert Bar (alert_bar) */
+type AlertBarRecord = RecordInterface & {
+  __typename?: 'AlertBarRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  alertText?: Maybe<AlertBarModelAlertTextField>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  isActive?: Maybe<Scalars['BooleanType']['output']>;
+  link?: Maybe<AlertBarModelLinkField>;
+  updatedAt: Scalars['DateTime']['output'];
 };
 
 
-/** Record of type About Page (about_page) */
-type AboutPageRecordhowBodyArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
+/** Record of type Alert Bar (alert_bar) */
+type AlertBarRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 type ArticleCategoryModelFilter = {
@@ -146,11 +192,39 @@ type ArticleCategoryRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-type ArticleModelAuthorField = CoachRecord | TeamMemberRecord;
+/** Block of type Article Link (article_link) */
+type ArticleLinkRecord = RecordInterface & {
+  __typename?: 'ArticleLinkRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  article: ArticleRecord;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  linkText: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Article Link (article_link) */
+type ArticleLinkRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
 
 type ArticleModelBodyField = {
   __typename?: 'ArticleModelBodyField';
   blocks: Array<ImageRecord>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -166,11 +240,12 @@ type ArticleModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  author?: InputMaybe<LinkFilter>;
   body?: InputMaybe<StructuredTextFilter>;
   category?: InputMaybe<LinkFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
   thumbnail?: InputMaybe<FileFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
@@ -219,11 +294,12 @@ type ArticleRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  author: ArticleModelAuthorField;
   body: ArticleModelBodyField;
   category: ArticleCategoryRecord;
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
+  seo?: Maybe<SeoField>;
+  slug: Scalars['String']['output'];
   thumbnail?: Maybe<ImageFileField>;
   title: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
@@ -239,6 +315,14 @@ type ArticleRecord_seoMetaTagsArgs = {
 type BooleanFilter = {
   /** Search for records with an exact match */
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
+};
+
+type CoachCategoryCtaModelCtaBodyField = {
+  __typename?: 'CoachCategoryCtaModelCtaBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
 };
 
 /** Record of type Coach Category CTA (coach_category_cta) */
@@ -258,7 +342,7 @@ type CoachCategoryCtaRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  ctaBody: Scalars['String']['output'];
+  ctaBody?: Maybe<CoachCategoryCtaModelCtaBodyField>;
   ctaHeading: Scalars['String']['output'];
   ctaLinkText?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
@@ -269,12 +353,6 @@ type CoachCategoryCtaRecord = RecordInterface & {
 /** Record of type Coach Category CTA (coach_category_cta) */
 type CoachCategoryCtaRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** Record of type Coach Category CTA (coach_category_cta) */
-type CoachCategoryCtaRecordctaBodyArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 type CoachCategoryModelFilter = {
@@ -391,7 +469,7 @@ type CoachMenuLinkRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
-  linkText?: Maybe<Scalars['String']['output']>;
+  linkText: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -404,6 +482,7 @@ type CoachMenuLinkRecord_seoMetaTagsArgs = {
 type CoachModelBioField = {
   __typename?: 'CoachModelBioField';
   blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -548,9 +627,38 @@ type ColorField = {
   red: Scalars['IntType']['output'];
 };
 
-/** Record of type Contact Form (contact_form) */
-type ContactFormRecord = RecordInterface & {
-  __typename?: 'ContactFormRecord';
+/** Block of type Companies Section (companies_section) */
+type CompaniesSectionRecord = RecordInterface & {
+  __typename?: 'CompaniesSectionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  companies: Array<CompanyRecord>;
+  createdAt: Scalars['DateTime']['output'];
+  heading?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Companies Section (companies_section) */
+type CompaniesSectionRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type Company (company) */
+type CompanyRecord = RecordInterface & {
+  __typename?: 'CompanyRecord';
   _createdAt: Scalars['DateTime']['output'];
   /** Editing URL */
   _editingUrl?: Maybe<Scalars['String']['output']>;
@@ -565,25 +673,16 @@ type ContactFormRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  form: Array<EmbeddedFormRecord>;
+  icon: FileField;
   id: Scalars['ItemId']['output'];
-  lightboxBody?: Maybe<Scalars['String']['output']>;
-  lightboxHeading: Scalars['String']['output'];
-  seo?: Maybe<SeoField>;
-  slug: Scalars['String']['output'];
+  name: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
 
-/** Record of type Contact Form (contact_form) */
-type ContactFormRecord_seoMetaTagsArgs = {
+/** Block of type Company (company) */
+type CompanyRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** Record of type Contact Form (contact_form) */
-type ContactFormRecordlightboxBodyArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Specifies how to filter by creation datetime */
@@ -604,11 +703,39 @@ type CreatedAtFilter = {
   neq?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
-type EmbeddedFormModelFormFieldsField = FormSelectFieldRecord | FormTextAreaRecord | FormTextFieldRecord;
+/** Block of type Document Link (document_link) */
+type DocumentLinkRecord = RecordInterface & {
+  __typename?: 'DocumentLinkRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  document: FileField;
+  id: Scalars['ItemId']['output'];
+  linkText: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Document Link (document_link) */
+type DocumentLinkRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
 
 type EmbeddedFormModelSuccessMessageField = {
   __typename?: 'EmbeddedFormModelSuccessMessageField';
   blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -630,8 +757,6 @@ type EmbeddedFormRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  formFields: Array<EmbeddedFormModelFormFieldsField>;
-  formName: Scalars['String']['output'];
   id: Scalars['ItemId']['output'];
   recipients: Scalars['String']['output'];
   submitButtonText: Scalars['String']['output'];
@@ -642,6 +767,35 @@ type EmbeddedFormRecord = RecordInterface & {
 
 /** Block of type Embedded Form (embedded_form) */
 type EmbeddedFormRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type External Link (external_link) */
+type ExternalLinkRecord = RecordInterface & {
+  __typename?: 'ExternalLinkRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  linkText: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  url: Scalars['String']['output'];
+};
+
+
+/** Block of type External Link (external_link) */
+type ExternalLinkRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -839,15 +993,103 @@ type FormLinkRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  form: FormRecord;
+  form: FormModalRecord;
   id: Scalars['ItemId']['output'];
-  linkText?: Maybe<Scalars['String']['output']>;
+  linkText: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
 
 /** Block of type Form Link (form_link) */
 type FormLinkRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+type FormModalModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<FormModalModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<FormModalModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  form?: InputMaybe<LinkFilter>;
+  heading?: InputMaybe<StringFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  intro?: InputMaybe<StructuredTextFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+type FormModalModelIntroField = {
+  __typename?: 'FormModalModelIntroField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+enum FormModalModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  heading_ASC = 'heading_ASC',
+  heading_DESC = 'heading_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Form Modal (form_modal) */
+type FormModalRecord = RecordInterface & {
+  __typename?: 'FormModalRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  form: FormRecord;
+  heading?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  intro?: Maybe<FormModalModelIntroField>;
+  seo?: Maybe<SeoField>;
+  slug: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Form Modal (form_modal) */
+type FormModalRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -864,12 +1106,7 @@ type FormModelFilter = {
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   formName?: InputMaybe<StringFilter>;
-  heading?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
-  intro?: InputMaybe<StructuredTextFilter>;
-  recipients?: InputMaybe<StringFilter>;
-  seo?: InputMaybe<SeoFilter>;
-  slug?: InputMaybe<SlugFilter>;
   submitButtonText?: InputMaybe<StringFilter>;
   successMessage?: InputMaybe<StructuredTextFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
@@ -877,12 +1114,7 @@ type FormModelFilter = {
 
 type FormModelFormFieldsField = FormSelectFieldRecord | FormTextAreaRecord | FormTextFieldRecord;
 
-type FormModelIntroField = {
-  __typename?: 'FormModelIntroField';
-  blocks: Array<Scalars['String']['output']>;
-  links: Array<Scalars['String']['output']>;
-  value: Scalars['JsonField']['output'];
-};
+type FormModelOnSubmitField = OpenDocumentActionRecord | SendEmailActionRecord;
 
 enum FormModelOrderBy {
   _createdAt_ASC = '_createdAt_ASC',
@@ -905,12 +1137,8 @@ enum FormModelOrderBy {
   createdAt_DESC = 'createdAt_DESC',
   formName_ASC = 'formName_ASC',
   formName_DESC = 'formName_DESC',
-  heading_ASC = 'heading_ASC',
-  heading_DESC = 'heading_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
-  recipients_ASC = 'recipients_ASC',
-  recipients_DESC = 'recipients_DESC',
   submitButtonText_ASC = 'submitButtonText_ASC',
   submitButtonText_DESC = 'submitButtonText_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
@@ -920,6 +1148,7 @@ enum FormModelOrderBy {
 type FormModelSuccessMessageField = {
   __typename?: 'FormModelSuccessMessageField';
   blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -942,13 +1171,9 @@ type FormRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
   formFields: Array<FormModelFormFieldsField>;
-  formName?: Maybe<Scalars['String']['output']>;
-  heading?: Maybe<Scalars['String']['output']>;
+  formName: Scalars['String']['output'];
   id: Scalars['ItemId']['output'];
-  intro?: Maybe<FormModelIntroField>;
-  recipients: Scalars['String']['output'];
-  seo?: Maybe<SeoField>;
-  slug: Scalars['String']['output'];
+  onSubmit: Array<FormModelOnSubmitField>;
   submitButtonText: Scalars['String']['output'];
   successMessage: FormModelSuccessMessageField;
   updatedAt: Scalars['DateTime']['output'];
@@ -1009,9 +1234,8 @@ type FormSelectOptionRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
-  label: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
-  value?: Maybe<Scalars['String']['output']>;
+  value: Scalars['String']['output'];
 };
 
 
@@ -1089,6 +1313,83 @@ type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']['output']>;
 };
 
+type HomeCoachesSectionModelBodyField = {
+  __typename?: 'HomeCoachesSectionModelBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type HomeCoachesSectionModelCtaField = CoachMenuLinkRecord | FormLinkRecord | PageLinkRecord;
+
+/** Block of type Home Coaches Section (home_coaches_section) */
+type HomeCoachesSectionRecord = RecordInterface & {
+  __typename?: 'HomeCoachesSectionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  backgroundImages: Array<ImageFileField>;
+  body?: Maybe<HomeCoachesSectionModelBodyField>;
+  createdAt: Scalars['DateTime']['output'];
+  cta?: Maybe<HomeCoachesSectionModelCtaField>;
+  heading?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Home Coaches Section (home_coaches_section) */
+type HomeCoachesSectionRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+type HomePageModelContactBodyField = {
+  __typename?: 'HomePageModelContactBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type HomePageModelMarshallBodyField = {
+  __typename?: 'HomePageModelMarshallBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type HomePageModelMarshallCtaField = CoachMenuLinkRecord | FormLinkRecord | PageLinkRecord;
+
+type HomePageModelPromiseBodyField = {
+  __typename?: 'HomePageModelPromiseBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type HomePageModelPromiseCtaField = CoachMenuLinkRecord | FormLinkRecord | PageLinkRecord;
+
+type HomePageModelResultsBodyField = {
+  __typename?: 'HomePageModelResultsBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
 /** Record of type Home Page (home_page) */
 type HomePageRecord = RecordInterface & {
   __typename?: 'HomePageRecord';
@@ -1105,8 +1406,10 @@ type HomePageRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
-  contactBody?: Maybe<Scalars['String']['output']>;
-  contactForm: EmbeddedFormRecord;
+  coachesSection: HomeCoachesSectionRecord;
+  companiesSection: CompaniesSectionRecord;
+  contactBody?: Maybe<HomePageModelContactBodyField>;
+  contactForm: FormRecord;
   contactHeading?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['DateTime']['output'];
   heroHeading1: Scalars['String']['output'];
@@ -1114,15 +1417,19 @@ type HomePageRecord = RecordInterface & {
   heroImages: Array<FileField>;
   id: Scalars['ItemId']['output'];
   introHeading?: Maybe<Scalars['String']['output']>;
-  marshallBody?: Maybe<Scalars['String']['output']>;
+  marshallBody?: Maybe<HomePageModelMarshallBodyField>;
+  marshallCta?: Maybe<HomePageModelMarshallCtaField>;
   marshallHeading?: Maybe<Scalars['String']['output']>;
   marshallImage?: Maybe<FileField>;
-  promiseBody?: Maybe<Scalars['String']['output']>;
+  marshallQuote?: Maybe<QuoteRecord>;
+  promiseBody?: Maybe<HomePageModelPromiseBodyField>;
+  promiseCta: HomePageModelPromiseCtaField;
   promiseHeading: Scalars['String']['output'];
+  resultsBody?: Maybe<HomePageModelResultsBodyField>;
   resultsHeading?: Maybe<Scalars['String']['output']>;
-  resultsSubheading?: Maybe<Scalars['String']['output']>;
   seo?: Maybe<SeoField>;
   slug?: Maybe<Scalars['String']['output']>;
+  thoughtLeadershipItems: Array<ThoughtLeadershipItemRecord>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -1134,55 +1441,7 @@ type HomePageRecord_seoMetaTagsArgs = {
 
 
 /** Record of type Home Page (home_page) */
-type HomePageRecordcontactBodyArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Home Page (home_page) */
 type HomePageRecordcontactHeadingArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Home Page (home_page) */
-type HomePageRecordintroHeadingArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Home Page (home_page) */
-type HomePageRecordmarshallBodyArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Home Page (home_page) */
-type HomePageRecordmarshallHeadingArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Home Page (home_page) */
-type HomePageRecordpromiseBodyArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Home Page (home_page) */
-type HomePageRecordpromiseHeadingArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Home Page (home_page) */
-type HomePageRecordresultsHeadingArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** Record of type Home Page (home_page) */
-type HomePageRecordresultsSubheadingArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -3093,35 +3352,6 @@ type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
-/** Block of type Internal Link (internal_link) */
-type InternalLinkRecord = RecordInterface & {
-  __typename?: 'InternalLinkRecord';
-  _createdAt: Scalars['DateTime']['output'];
-  /** Editing URL */
-  _editingUrl?: Maybe<Scalars['String']['output']>;
-  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
-  _isValid: Scalars['BooleanType']['output'];
-  _modelApiKey: Scalars['String']['output'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
-  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Generates SEO and Social card meta tags to be used in your frontend */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
-  _updatedAt: Scalars['DateTime']['output'];
-  createdAt: Scalars['DateTime']['output'];
-  id: Scalars['ItemId']['output'];
-  linkText: Scalars['String']['output'];
-  updatedAt: Scalars['DateTime']['output'];
-  url: Scalars['String']['output'];
-};
-
-
-/** Block of type Internal Link (internal_link) */
-type InternalLinkRecord_seoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
-
 /** Specifies how to filter by ID */
 type ItemIdFilter = {
   /** Search the record with the specified ID */
@@ -3173,6 +3403,39 @@ enum MuxThumbnailFormatType {
   jpg = 'jpg',
   png = 'png'
 }
+
+type NavModelButtonField = ArticleLinkRecord | CoachMenuLinkRecord | DocumentLinkRecord | ExternalLinkRecord | FormLinkRecord | PageLinkRecord;
+
+type NavModelLinksField = CoachMenuLinkRecord | ExternalLinkRecord | FormLinkRecord | PageLinkRecord;
+
+/** Record of type Nav (nav) */
+type NavRecord = RecordInterface & {
+  __typename?: 'NavRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  button?: Maybe<NavModelButtonField>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  links: Array<NavModelLinksField>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Nav (nav) */
+type NavRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
 
 type NewsItemModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<NewsItemModelFilter>>>;
@@ -3256,6 +3519,34 @@ type NewsItemRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+/** Block of type Open Document (open_document_action) */
+type OpenDocumentActionRecord = RecordInterface & {
+  __typename?: 'OpenDocumentActionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  document: FileField;
+  id: Scalars['ItemId']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Open Document (open_document_action) */
+type OpenDocumentActionRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by image orientation */
 type OrientationFilter = {
   /** Search uploads with the specified orientation */
@@ -3264,7 +3555,7 @@ type OrientationFilter = {
   neq?: InputMaybe<UploadOrientation>;
 };
 
-type PageLinkModelPageField = AboutPageRecord | CoachCategoryRecord | HomePageRecord;
+type PageLinkModelPageField = AboutPageRecord | CoachCategoryRecord | HomePageRecord | ThoughtLeadershipPageRecord;
 
 /** Block of type Page Link (page_link) */
 type PageLinkRecord = RecordInterface & {
@@ -3341,6 +3632,8 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allCoachesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allFormModalsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allFormsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allNewsItemsMeta: CollectionMetadata;
@@ -3354,6 +3647,8 @@ type Query = {
   _site: Site;
   /** Returns the single instance record */
   aboutPage?: Maybe<AboutPageRecord>;
+  /** Returns the single instance record */
+  alertBar?: Maybe<AlertBarRecord>;
   /** Returns a collection of records */
   allArticleCategories: Array<ArticleCategoryRecord>;
   /** Returns a collection of records */
@@ -3362,6 +3657,8 @@ type Query = {
   allCoachCategories: Array<CoachCategoryRecord>;
   /** Returns a collection of records */
   allCoaches: Array<CoachRecord>;
+  /** Returns a collection of records */
+  allFormModals: Array<FormModalRecord>;
   /** Returns a collection of records */
   allForms: Array<FormRecord>;
   /** Returns a collection of records */
@@ -3382,18 +3679,22 @@ type Query = {
   coachCategory?: Maybe<CoachCategoryRecord>;
   /** Returns the single instance record */
   coachCategoryCta?: Maybe<CoachCategoryCtaRecord>;
-  /** Returns the single instance record */
-  contactForm?: Maybe<ContactFormRecord>;
   /** Returns a specific record */
   form?: Maybe<FormRecord>;
+  /** Returns a specific record */
+  formModal?: Maybe<FormModalRecord>;
   /** Returns the single instance record */
   homePage?: Maybe<HomePageRecord>;
+  /** Returns the single instance record */
+  nav?: Maybe<NavRecord>;
   /** Returns a specific record */
   newsItem?: Maybe<NewsItemRecord>;
   /** Returns a specific record */
   sWCategory?: Maybe<SWCategoryRecord>;
   /** Returns a specific record */
   teamMember?: Maybe<TeamMemberRecord>;
+  /** Returns the single instance record */
+  thoughtLeadershipPage?: Maybe<ThoughtLeadershipPageRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
 };
@@ -3427,6 +3728,14 @@ type Query_allCoachCategoriesMetaArgs = {
 type Query_allCoachesMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<CoachModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allFormModalsMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<FormModalModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3485,6 +3794,13 @@ type QueryaboutPageArgs = {
 
 
 /** The query root for this schema */
+type QueryalertBarArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 type QueryallArticleCategoriesArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ArticleCategoryModelFilter>;
@@ -3524,6 +3840,17 @@ type QueryallCoachesArgs = {
   first?: InputMaybe<Scalars['IntType']['input']>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<CoachModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
+type QueryallFormModalsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<FormModalModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<FormModalModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
 
@@ -3627,13 +3954,6 @@ type QuerycoachCategoryCtaArgs = {
 
 
 /** The query root for this schema */
-type QuerycontactFormArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** The query root for this schema */
 type QueryformArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<FormModelFilter>;
@@ -3643,7 +3963,23 @@ type QueryformArgs = {
 
 
 /** The query root for this schema */
+type QueryformModalArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<FormModalModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<FormModalModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
 type QueryhomePageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type QuerynavArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -3677,11 +4013,55 @@ type QueryteamMemberArgs = {
 
 
 /** The query root for this schema */
+type QuerythoughtLeadershipPageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 type QueryuploadArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
+};
+
+type QuoteModelQuoteField = {
+  __typename?: 'QuoteModelQuoteField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Block of type Quote (quote) */
+type QuoteRecord = RecordInterface & {
+  __typename?: 'QuoteRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  attribution?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  quote?: Maybe<QuoteModelQuoteField>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Quote (quote) */
+type QuoteRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 type RecordInterface = {
@@ -3833,9 +4213,9 @@ type SWCategoryRecorddescriptionArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-/** Block of type S&W Menu Link (s_w_menu_link) */
-type SWMenuLinkRecord = RecordInterface & {
-  __typename?: 'SWMenuLinkRecord';
+/** Block of type Send Email (send_email_action) */
+type SendEmailActionRecord = RecordInterface & {
+  __typename?: 'SendEmailActionRecord';
   _createdAt: Scalars['DateTime']['output'];
   /** Editing URL */
   _editingUrl?: Maybe<Scalars['String']['output']>;
@@ -3851,13 +4231,13 @@ type SWMenuLinkRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
   id: Scalars['ItemId']['output'];
-  linkText?: Maybe<Scalars['String']['output']>;
+  recipients: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
 
-/** Block of type S&W Menu Link (s_w_menu_link) */
-type SWMenuLinkRecord_seoMetaTagsArgs = {
+/** Block of type Send Email (send_email_action) */
+type SendEmailActionRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3876,7 +4256,15 @@ type SeoFilter = {
   exists?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
-type ServiceModelLinkField = CoachMenuLinkRecord | InternalLinkRecord | SWMenuLinkRecord;
+type ServiceModelDescriptionField = {
+  __typename?: 'ServiceModelDescriptionField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type ServiceModelLinkField = CoachMenuLinkRecord | PageLinkRecord;
 
 /** Block of type Service (service) */
 type ServiceRecord = RecordInterface & {
@@ -3895,10 +4283,10 @@ type ServiceRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  description?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<ServiceModelDescriptionField>;
   id: Scalars['ItemId']['output'];
   link: Array<ServiceModelLinkField>;
-  title: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -3906,12 +4294,6 @@ type ServiceRecord = RecordInterface & {
 /** Block of type Service (service) */
 type ServiceRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** Block of type Service (service) */
-type ServiceRecorddescriptionArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 type Site = {
@@ -4014,6 +4396,7 @@ type Tag = {
 type TeamMemberModelBioField = {
   __typename?: 'TeamMemberModelBioField';
   blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
   links: Array<Scalars['String']['output']>;
   value: Scalars['JsonField']['output'];
 };
@@ -4039,6 +4422,7 @@ type TeamMemberModelFilter = {
   photoAlignment?: InputMaybe<StringFilter>;
   position?: InputMaybe<PositionFilter>;
   seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
 
@@ -4101,6 +4485,7 @@ type TeamMemberRecord = RecordInterface & {
   photoAlignment: Scalars['String']['output'];
   position?: Maybe<Scalars['IntType']['output']>;
   seo?: Maybe<SeoField>;
+  slug: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -4130,6 +4515,85 @@ type TextFilter = {
   notMatches?: InputMaybe<StringMatchesFilter>;
 };
 
+type ThoughtLeadershipItemModelBodyField = {
+  __typename?: 'ThoughtLeadershipItemModelBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type ThoughtLeadershipItemModelLinkField = ArticleLinkRecord | DocumentLinkRecord | ExternalLinkRecord | FormLinkRecord | PageLinkRecord;
+
+/** Block of type Thought Leadership Item (thought_leadership_item) */
+type ThoughtLeadershipItemRecord = RecordInterface & {
+  __typename?: 'ThoughtLeadershipItemRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  body?: Maybe<ThoughtLeadershipItemModelBodyField>;
+  createdAt: Scalars['DateTime']['output'];
+  heading: Scalars['String']['output'];
+  id: Scalars['ItemId']['output'];
+  image?: Maybe<ImageFileField>;
+  link?: Maybe<ThoughtLeadershipItemModelLinkField>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Thought Leadership Item (thought_leadership_item) */
+type ThoughtLeadershipItemRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Record of type Thought Leadership Page (thought_leadership_page) */
+type ThoughtLeadershipPageRecord = RecordInterface & {
+  __typename?: 'ThoughtLeadershipPageRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  pageHeading?: Maybe<Scalars['String']['output']>;
+  seo?: Maybe<SeoField>;
+  slug: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Thought Leadership Page (thought_leadership_page) */
+type ThoughtLeadershipPageRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+type TitleDescriptionModelDescriptionField = {
+  __typename?: 'TitleDescriptionModelDescriptionField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
 /** Block of type Title + Description (title_description) */
 type TitleDescriptionRecord = RecordInterface & {
   __typename?: 'TitleDescriptionRecord';
@@ -4147,7 +4611,7 @@ type TitleDescriptionRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  description?: Maybe<Scalars['String']['output']>;
+  description: TitleDescriptionModelDescriptionField;
   id: Scalars['ItemId']['output'];
   title: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
@@ -4157,12 +4621,6 @@ type TitleDescriptionRecord = RecordInterface & {
 /** Block of type Title + Description (title_description) */
 type TitleDescriptionRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** Block of type Title + Description (title_description) */
-type TitleDescriptionRecorddescriptionArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 /** Block of type Topic (topic) */
@@ -4603,28 +5061,141 @@ type focalPoint = {
 type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, introHeading?: string | null, promiseHeading: string, promiseBody?: string | null, resultsHeading?: string | null, resultsSubheading?: string | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }> } | null, allCoachCategories: Array<{ __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string }> };
+type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, introHeading?: string | null, promiseHeading: string, marshallHeading?: string | null, resultsHeading?: string | null, contactHeading?: string | null, companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, coachesSection: { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> }, thoughtLeadershipItems: Array<{ __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }>, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }>, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }, marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, resultsBody?: { __typename?: 'HomePageModelResultsBodyField', value: unknown } | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename?: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename?: 'SendEmailActionRecord', recipients: string }> } } | null };
+
+type AllArticleModalQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllArticleModalQuery = { __typename?: 'Query', allArticles: Array<{ __typename?: 'ArticleRecord', slug: string }> };
+
+type ArticleModalQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+type ArticleModalQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }, thumbnail?: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } | null } | null };
+
+type AllCoachProfileModalQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllCoachProfileModalQuery = { __typename?: 'Query', allCoaches: Array<{ __typename?: 'CoachRecord', slug: string }> };
+
+type CoachProfileModalQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+type CoachProfileModalQuery = { __typename?: 'Query', coach?: { __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null };
+
+type AllFormModalQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllFormModalQuery = { __typename?: 'Query', allFormModals: Array<{ __typename?: 'FormModalRecord', slug: string }> };
+
+type FormModalQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+type FormModalQuery = { __typename?: 'Query', formModal?: { __typename: 'FormModalRecord', id: string, heading?: string | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename?: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename?: 'SendEmailActionRecord', recipients: string }> } } | null };
+
+type AllTeamMemberModalQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllTeamMemberModalQuery = { __typename?: 'Query', allTeamMembers: Array<{ __typename?: 'TeamMemberRecord', slug: string }> };
+
+type TeamMemberModalQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+type TeamMemberModalQuery = { __typename?: 'Query', teamMember?: { __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null };
+
+type AboutPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename: 'AboutPageRecord', aboutHeading: string, teamHeading: string, slug: string, servicesHeading: string, id: string, howHeading: string, aboutBody?: { __typename?: 'AboutPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }>, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null } | null, allTeamMembers: Array<{ __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }> };
+
+type AllArticlePageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllArticlePageQuery = { __typename?: 'Query', allArticles: Array<{ __typename?: 'ArticleRecord', slug: string }> };
+
+type ArticlePageQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+type ArticlePageQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }, thumbnail?: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } | null } | null };
+
+type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ArticlesPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __typename?: 'ThoughtLeadershipPageRecord', pageHeading?: string | null, slug: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, articles: Array<{ __typename: 'ArticleRecord', id: string, title: string, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }, thumbnail?: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, newsItems: Array<{ __typename: 'NewsItemRecord', id: string, title: string, publication: string, url?: string | null, createdAt: string }> };
+
+type AllCoachCategoryPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllCoachCategoryPageQuery = { __typename?: 'Query', allCoachCategories: Array<{ __typename?: 'CoachCategoryRecord', categorySlug: string }> };
+
+type CoachCategoryPageQueryVariables = Exact<{
+  categorySlug: Scalars['String']['input'];
+}>;
+
+
+type CoachCategoryPageQuery = { __typename?: 'Query', coachCategory?: { __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string, featuredCoach: { __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }, featuredCoaches: Array<{ __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }>, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, allCoachCategories: Array<{ __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string }>, coachCategoryCta?: { __typename: 'CoachCategoryCtaRecord', id: string, ctaHeading: string, ctaLinkText?: string | null, ctaBody?: { __typename?: 'CoachCategoryCtaModelCtaBodyField', value: unknown } | null } | null };
+
+type AllCoachesPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllCoachesPageQuery = { __typename?: 'Query', allCoaches: Array<{ __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }>, allCoachCategories: Array<{ __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string }> };
+
+type AllFormPagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllFormPagesQuery = { __typename?: 'Query', allFormModals: Array<{ __typename?: 'FormModalRecord', slug: string }> };
+
+type FormPageQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+type FormPageQuery = { __typename?: 'Query', formModal?: { __typename: 'FormModalRecord', id: string, heading?: string | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename?: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename?: 'SendEmailActionRecord', recipients: string }> } } | null };
 
 type RootLayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type RootLayoutQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageRecord', heroHeading1: string } | null };
+type RootLayoutQuery = { __typename?: 'Query', alertBar?: { __typename: 'AlertBarRecord', id: string, isActive?: boolean | null, alertText?: { __typename?: 'AlertBarModelAlertTextField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null } | null, nav?: { __typename: 'NavRecord', id: string, links: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }>, button?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null } | null, allCoachCategories: Array<{ __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string }> };
+
+type AlertBarFragment = { __typename: 'AlertBarRecord', id: string, isActive?: boolean | null, alertText?: { __typename?: 'AlertBarModelAlertTextField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
+
+type ArticleFragment = { __typename: 'ArticleRecord', id: string, title: string, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }, thumbnail?: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
+
+type NewsItemFragment = { __typename: 'NewsItemRecord', id: string, title: string, publication: string, url?: string | null, createdAt: string };
+
+type CoachProfileFragment = { __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> };
+
+type TeamMemberFragment = { __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> };
 
 type ResponsiveImageFragment = { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null };
 
-type FormFragment = { __typename: 'FormRecord', id: string, formName?: string | null, heading?: string | null, submitButtonText: string, recipients: string, intro?: { __typename?: 'FormModelIntroField', value: unknown } | null, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value?: string | null }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown } };
+type FormFragment = { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename?: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename?: 'SendEmailActionRecord', recipients: string }> };
 
-type EmbeddedFormFragment = { __typename: 'EmbeddedFormRecord', id: string, formName: string, submitButtonText: string, recipients: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value?: string | null }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage?: { __typename?: 'EmbeddedFormModelSuccessMessageField', value: unknown } | null };
-
-type FormSelectFieldFragment = { __typename?: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value?: string | null }> };
-
-type FormSelectOptionFragment = { __typename?: 'FormSelectOptionRecord', id: string, value?: string | null };
+type FormSelectFieldFragment = { __typename?: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> };
 
 type FormTextAreaFragment = { __typename?: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null };
 
 type FormTextFieldFragment = { __typename?: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null };
 
-type HomeContactFragment = { __typename?: 'HomePageRecord', contactHeading?: string | null, contactBody?: string | null, contactForm: { __typename: 'EmbeddedFormRecord', id: string, formName: string, submitButtonText: string, recipients: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value?: string | null }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage?: { __typename?: 'EmbeddedFormModelSuccessMessageField', value: unknown } | null } };
+type FormModalFragment = { __typename: 'FormModalRecord', id: string, heading?: string | null, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename?: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename?: 'SendEmailActionRecord', recipients: string }> } };
+
+type CompaniesSectionFragment = { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
+
+type CompanyFragment = { __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } };
+
+type HomeCoachesSectionFragment = { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> };
+
+type HomeContactFragment = { __typename?: 'HomePageRecord', contactHeading?: string | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename?: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename?: 'SendEmailActionRecord', recipients: string }> } };
 
 type HomeHeroFragment = { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }> };
 
@@ -4632,16 +5203,34 @@ type HomeHeroImagesFragment = { __typename?: 'FileField', horizontal?: { __typen
 
 type HomeIntroFragment = { __typename?: 'HomePageRecord', introHeading?: string | null };
 
-type HomeMarshallFragment = { __typename?: 'HomePageRecord', marshallHeading?: string | null, marshallBody?: string | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null };
+type HomeMarshallFragment = { __typename?: 'HomePageRecord', marshallHeading?: string | null, marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null };
 
-type HomePromiseFragment = { __typename?: 'HomePageRecord', promiseHeading: string, promiseBody?: string | null };
+type HomePromiseFragment = { __typename?: 'HomePageRecord', promiseHeading: string, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } };
 
-type HomeResultsFragment = { __typename?: 'HomePageRecord', resultsHeading?: string | null, resultsSubheading?: string | null };
+type HomeResultsFragment = { __typename?: 'HomePageRecord', resultsHeading?: string | null, resultsBody?: { __typename?: 'HomePageModelResultsBodyField', value: unknown } | null };
 
-type FormLinkFragment = { __typename: 'FormLinkRecord', id: string, linkText?: string | null, form: { __typename: 'FormRecord', slug: string } };
-
-type PageLinkFragment = { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } };
+type ThoughtLeadershipItemFragment = { __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null };
 
 type CoachCategoryMenuFragment = { __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string };
+
+type NavFragment = { __typename: 'NavRecord', id: string, links: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }>, button?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
+
+type ArticleLinkFragment = { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } };
+
+type CoachMenuLinkFragment = { __typename: 'CoachMenuLinkRecord', id: string, linkText: string };
+
+type DocumentLinkFragment = { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } };
+
+type ExternalLinkFragment = { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string };
+
+type FormLinkFragment = { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } };
+
+type PageLinkFragment = { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } };
+
+type AboutHowFragment = { __typename: 'AboutPageRecord', id: string, howHeading: string, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
+
+type AboutServicesFragment = { __typename?: 'AboutPageRecord', servicesHeading: string, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }> };
+
+type CoachCategoryCtaFragment = { __typename: 'CoachCategoryCtaRecord', id: string, ctaHeading: string, ctaLinkText?: string | null, ctaBody?: { __typename?: 'CoachCategoryCtaModelCtaBodyField', value: unknown } | null };
 
 }

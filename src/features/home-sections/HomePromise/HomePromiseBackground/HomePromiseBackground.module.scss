@@ -3,7 +3,7 @@
 .container {
   @include absolute-fill;
   overflow: hidden;
-  clip-path: url(var(--clip-id));
+  clip-path: var(--clip-id-url);
   background: linear-gradient(
     to top right,
     var(--color-goldShade3),
@@ -13,7 +13,7 @@
   );
 }
 .innerContainer {
-  padding: 0 var(--gutter-mlg);
+  padding: 0 var(--gtr-54);
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);

@@ -1,6 +1,5 @@
 'use client'
 
-import { clamp } from 'lodash'
 import {
   type ComponentProps,
   useCallback,
@@ -9,13 +8,15 @@ import {
   useState,
 } from 'react'
 
+import { MarkdownHeading } from '@/features/ui'
+
 import styles from './HomeIntro.module.scss'
 
 type Props = ComponentProps<'section'> & {
   data: Queries.HomeIntroFragment | null | undefined
 }
 
-export const HomeIntro = ({ data, ...props }: Props) => {
+export const HomeIntro = ({ data }: Props) => {
   const parallaxWrapRef = useRef<HTMLDivElement | null>(null)
   const [inView, setInView] = useState(false)
 
@@ -80,15 +81,15 @@ export const HomeIntro = ({ data, ...props }: Props) => {
               transform: `translate3d(0, calc(${offset * 200}px), 0)}`,
             }}
           >
-            <h2
-              dangerouslySetInnerHTML={{
-                __html: data?.introHeading || '',
-              }}
+            <MarkdownHeading
               className={styles.heading}
-              style={
-                inView ? { opacity: clamp(1.2 + offset * 2, 0, 1) } : {}
-              }
-            />
+              as="h2"
+              // style={
+              //   inView ? { opacity: clamp(1.2 + offset * 2, 0, 1) } : {}
+              // }
+            >
+              {data?.introHeading || ''}
+            </MarkdownHeading>
           </div>
         </div>
       </div>

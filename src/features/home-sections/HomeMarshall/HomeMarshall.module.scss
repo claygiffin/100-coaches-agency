@@ -2,14 +2,14 @@
 
 .section {
   position: relative;
-  z-index: 3;
-  margin-top: -8.5vw;
+  z-index: 2;
+  margin-top: -5.75vw;
   background-color: #333;
   background: linear-gradient(to bottom right, #555, #000);
+  overflow: hidden;
 }
 .content {
-  padding: calc(7vw + var(--gutter-xlg)) 0
-    calc(11.5vw + var(--gtr-72));
+  padding: calc(7vw + var(--gtr-108)) 0 calc(11.5vw + var(--gtr-72));
   @include base-grid;
   color: #fff;
 }
@@ -32,7 +32,7 @@
   }
 }
 .body {
-  grid-column: span 5 / -2;
+  grid-column: span 6 / -2;
   font-size: var(--fs-21);
   @include media('<ml') {
     grid-column-start: span 6;
@@ -43,13 +43,28 @@
   }
 }
 .button {
-  font-size: var(--fs-16);
-  margin-top: 2.25em;
+  background: linear-gradient(
+    to right,
+    var(--color-goldTint1),
+    var(--color-gold),
+    var(--color-goldShade2)
+  );
+  font-size: var(--fs-21);
+  margin-top: 2em;
+  background-position: 100% 50%;
+  background-size: 200%;
+  color: #fff;
+  @media (hover: hover) {
+    &:hover {
+      background-position: 0% 50%;
+      color: #000;
+    }
+  }
 }
 .background {
   @include absolute-fill;
   clip-path: inset(0 0 0 0);
-  // clip-path: url(var(--clip-id));
+  // clip-path: var(--clip-id-url);
 }
 .imageWrap {
   position: fixed;
@@ -67,5 +82,75 @@
   height: 100%;
   @include media('<ms') {
     filter: contrast(0.5) brightness(0.333);
+  }
+}
+
+.quote {
+  grid-column: span 7 / -1;
+  font-size: var(--fs-16);
+  color: #ffffffcc;
+  margin-top: 3em;
+
+  figure {
+    padding: 1.5em var(--margin) 2em 3em;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.01) 100%
+    );
+    margin: 0;
+  }
+  blockquote {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    font-style: italic;
+    font-family: var(--ff-display);
+    :first-child {
+      margin-top: 0;
+    }
+    &:before {
+      content: '“';
+      display: block;
+      font-weight: 600;
+      font-size: 3.125em;
+      line-height: 0;
+      font-style: normal;
+      position: absolute;
+      top: 0.55em;
+      left: -0.55em;
+      opacity: 0.25;
+    }
+    :last-child {
+      &:after {
+        content: '”';
+        display: inline-block;
+        font-weight: 600;
+        font-size: 3em;
+        line-height: 0;
+        font-style: normal;
+        transform: translate(0.125em, 0.375em);
+        opacity: 0.25;
+      }
+    }
+  }
+  p {
+    font-weight: 400;
+  }
+  figcaption {
+    text-transform: uppercase;
+    font-size: var(--fs-14);
+    opacity: 0.75;
+    &:before {
+      content: '–';
+      display: inline-block;
+    }
+  }
+  @include media('<ml') {
+    grid-column-start: span 6;
+  }
+  @include media('<ms') {
+    grid-column-start: 2;
+    margin-bottom: 2.5em;
   }
 }

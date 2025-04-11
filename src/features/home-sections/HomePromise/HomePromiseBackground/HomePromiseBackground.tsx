@@ -36,7 +36,7 @@ export const HomePromiseBackground = ({
   const containerWidth = useElementWidth(containerRef) || 0
   const containerHeight = useElementHeight(containerRef) || 0
 
-  const columns = () => {
+  const columns = useMemo(() => {
     if (containerWidth < Number(variables.breakpoint_ms)) {
       return 3
     }
@@ -45,11 +45,11 @@ export const HomePromiseBackground = ({
     } else {
       return 5
     }
-  }
+  }, [containerWidth])
 
   const rows = useMemo(() => {
     const ar = containerHeight / containerWidth || 0
-    return Math.ceil(ar * columns() * 2)
+    return Math.ceil(ar * columns * 2)
   }, [containerHeight, containerWidth, columns])
 
   const [offset, setOffset] = useState(0)
@@ -104,6 +104,19 @@ export const HomePromiseBackground = ({
     two: 0,
   })
 
+  const handleUpdateColumnPositionOne = useCallback(
+    (position: number) => {
+      setColumnPosition(prev => ({ ...prev, one: position }))
+    },
+    []
+  )
+  const handleUpdateColumnPositionTwo = useCallback(
+    (position: number) => {
+      setColumnPosition(prev => ({ ...prev, two: position }))
+    },
+    []
+  )
+
   const translateFactors = () => {
     if (containerWidth < Number(variables.breakpoint_ms)) {
       return [100, 50]
@@ -123,9 +136,10 @@ export const HomePromiseBackground = ({
         setContainerRef(node)
         parallaxRef.current = node
       }}
+      data-brighten-position={`top: ${brightenPosition.top}, left: ${brightenPosition.left}`}
       style={{
-        '--clip-id': `#${clipId}`,
-        '--columns': columns(),
+        '--clip-id-url': `url(#${clipId})`,
+        '--columns': columns,
         '--translate-factor-0': translateFactors()[0],
         '--translate-factor-1': translateFactors()[1],
       }}
@@ -157,7 +171,7 @@ export const HomePromiseBackground = ({
         </defs>
       </svg>
       <div className={classes(styles.innerContainer, innerClassName)}>
-        {[...Array(columns() - 2)].map((_, i) => (
+        {[...Array(columns - 2)].map((_, i) => (
           <ShapeColumn
             key={i}
             rows={rows}
@@ -171,14 +185,7 @@ export const HomePromiseBackground = ({
           brightCircle={
             containerWidth >= Number(variables.breakpoint_ms)
           }
-          columnPosition={useCallback(
-            (pos: number) =>
-              setColumnPosition(prevState => ({
-                ...prevState,
-                one: pos,
-              })),
-            []
-          )}
+          setColumnPosition={handleUpdateColumnPositionOne}
         />
         <ShapeColumn
           rows={rows}
@@ -186,25 +193,16 @@ export const HomePromiseBackground = ({
           brightCircle={
             containerWidth >= Number(variables.breakpoint_ms)
           }
-          brightenPosition={useCallback(
-            (position: { top: number; left: number }) =>
-              setBrightenPosition(position),
-            []
-          )}
-          columnPosition={useCallback(
-            (pos: number) =>
-              setColumnPosition(prevState => ({
-                ...prevState,
-                two: pos,
-              })),
-            []
-          )}
+          setBrightenPosition={setBrightenPosition}
+          setColumnPosition={handleUpdateColumnPositionTwo}
         />
 
         {containerWidth >= Number(variables.breakpoint_ms) && (
           <svg
             viewBox={`0 0 ${lineWidth} ${lineHeight}`}
             className={styles.line}
+            data-column-one={columnPosition.one}
+            data-column-two={columnPosition.two}
             style={{
               top: `${brightenPosition.top}px`,
               left: `${columnPosition.one + brightenPosition.left}px`,
@@ -212,7 +210,7 @@ export const HomePromiseBackground = ({
               height: `${lineHeight}px`,
               transform: `translate3d(0, calc(${
                 offset - 1
-              }px * var(--translate-factor)), 0) }`,
+              }px * var(--translate-factor)), 0)`,
             }}
           >
             <polygon

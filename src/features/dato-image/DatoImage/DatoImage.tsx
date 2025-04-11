@@ -1,4 +1,3 @@
-import { gql } from 'graphql-tag'
 import { type ComponentProps } from 'react'
 import {
   Image as CSRImage,
@@ -14,24 +13,12 @@ export type DatoImagePropTypes = ComponentProps<'div'> &
   Omit<ImagePropTypes, 'data'> & {
     data: ResponsiveImageType | undefined | null
     breakpoints?: number[]
+    alt?: string | null
   }
-
-export const ResponsiveImageFragment = gql`
-  fragment ResponsiveImage on ResponsiveImage {
-    __typename
-    sizes
-    src
-    width
-    height
-    aspectRatio
-    alt
-    title
-    base64
-  }
-`
 
 export const DatoImage = ({
   data,
+  alt,
   className,
   breakpoints = [1440, 1260, 1080, 720, 540, 360, 180],
   ref,
@@ -42,7 +29,7 @@ export const DatoImage = ({
     return (
       <CSRImage
         ref={ref}
-        data={data}
+        data={{ ...data, alt: alt || data.alt }}
         className={classes(styles.image, className)}
         layout="responsive"
         srcSetCandidates={srcSetCandidates}

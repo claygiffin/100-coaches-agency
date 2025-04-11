@@ -1,10 +1,9 @@
 'use client'
 
-import { uniqueId } from 'lodash'
-import { type ComponentProps, useId, useMemo, useState } from 'react'
+import { type ComponentProps, useId, useState } from 'react'
 
-import { AnimateIn } from '@/features/common'
 import { LogoStacked } from '@/features/logo'
+import { AnimateIn } from '@/features/ui'
 import {
   useElementHeight,
   useElementWidth,
@@ -30,7 +29,7 @@ export const HomeHero = ({ data, ...props }: Props) => {
     <section
       className={styles.section}
       ref={node => setSectionRef(node)}
-      style={{ '--clip-id': `#${clipId}` }}
+      style={{ '--clip-id-url': `url(#${clipId})` }}
       {...props}
     >
       <svg

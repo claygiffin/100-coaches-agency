@@ -63,20 +63,6 @@
   --row-108: calc(3rem + 1.25vw + var(--gtr-54));
   --row-144: calc(4rem + 1.67vw + var(--gtr-72));
 
-  // Nav Height
-  --nav-height-max: calc(1.5em + 8rem);
-  --nav-height-min: var(--nav-height-max);
-  --nav-height-flex: var(--nav-height-max);
-  @include media('<ml') {
-    --nav-height-max: calc(1.5em + 6rem);
-  }
-  @include media('<ms') {
-    --nav-height-max: calc(1.5em + 5rem);
-  }
-  html:has([data-nav-observer-inview='false']) {
-    --nav-height-flex: var(--nav-height-min);
-  }
-
   --grid-w: 100vw;
   --col-w: calc(
     (var(--grid-w) - 2 * var(--margin) - 11 * var(--gtr-36)) / 12
@@ -95,6 +81,8 @@
 
 html {
   font-size: 12px;
+  background-color: #000;
+  font-family: var(--sans-serif);
   @include media('>l') {
     font-size: calc(9px + 0.21vw);
   }
@@ -105,13 +93,18 @@ html {
 }
 
 body {
-  background: #fff;
   font-family: var(--ff-body);
   font-size: var(--fs-18);
+  font-weight: 300;
   line-height: 1.5;
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr;
+
+  > main {
+    position: relative;
+    background-color: #fff;
+  }
 
   &:after {
     content: '';
@@ -134,7 +127,7 @@ body {
   &:has(dialog[open]) {
     overflow: hidden;
     &:after {
-      background-color: rgba(getColor(tealExtraDark), 0.9);
+      background-color: rgba(#000, 0.9);
       transition-duration: 600ms;
     }
   }
@@ -146,21 +139,38 @@ body {
 }
 
 h1,
-h2,
-h3 {
+h2 {
   font-family: var(--ff-display);
-  font-weight: 400;
-  line-height: 1;
+  font-weight: 225;
+  line-height: 1.1;
 }
+
+h2 {
+  line-height: 1.125;
+}
+h3,
 h4,
 h5,
 h6 {
   font-family: var(--ff-display);
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.125;
 }
 p {
-  line-height: inherit;
+  line-height: 2;
+  font-weight: 300;
+  @include media('<s') {
+    line-height: 1.8;
+  }
+  a {
+    display: inline-block;
+    color: var(--color-gold);
+    font-weight: 400;
+    transition: color 200ms ease;
+    &:hover {
+      color: var(--color-goldTint2);
+    }
+  }
 }
 a {
   transition: color 300ms ease;

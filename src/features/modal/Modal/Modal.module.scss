@@ -1,0 +1,139 @@
+@use '@/theme/mixins' as *;
+
+.modal {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  height: 100vh;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
+  background: transparent;
+  overflow: scroll;
+  &::backdrop {
+    display: none;
+  }
+}
+
+.backdrop {
+  position: absolute;
+  grid-area: 1 / 1 / 2 / 2;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  transition: opacity var(--close-duration, 1000ms) ease;
+  opacity: 0;
+  [data-animating='OPEN'] & {
+    opacity: 1;
+    transition-duration: var(--open-duration, 500ms);
+  }
+}
+
+.contentWrapper {
+  grid-area: 1 / 1 / 2 / 2;
+  position: relative;
+  margin: 1rem var(--margin);
+  display: grid;
+  opacity: 0;
+  transform: translate3d(0, 12rem, 0);
+  transition:
+    opacity var(--close-duration, 1000ms) ease,
+    transform var(--close-duration, 1000ms) var(--bezier-ease-out);
+  [data-animating='OPEN'] & {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition-duration: var(--open-duration, 500ms);
+  }
+  [data-animating='CLOSING'] & {
+    transform: translate3d(0, -12rem, 0);
+  }
+  @include media('<s') {
+    margin: 0.5rem;
+  }
+  [data-variant='ARTICLE'] & {
+    margin: 0;
+    justify-self: flex-start;
+    width: var(--grid-w);
+    --grid-margin: var(--margin);
+    --grid-w: calc(
+      var(--margin) +
+        #{widthInCols(
+          $count: 11,
+          $gridWidth: 100vw,
+          $gutter: var(--gtr-36)
+        )}
+    );
+
+    @include media('<ml') {
+      --grid-w: calc(100vw - var(--margin));
+    }
+  }
+}
+
+.content {
+  grid-area: 1 / 1 / 2 / 2;
+  position: relative;
+  background: #fff;
+  box-sizing: border-box;
+  display: grid;
+  [data-variant='PROFILE'] & {
+    background: transparent;
+  }
+  [data-variant='FORM'] & {
+    background: linear-gradient(to top right, #222, #555);
+  }
+}
+
+.closeButton {
+  grid-area: 1 / 1 / 2 / 2;
+  z-index: 10;
+  justify-self: flex-end;
+  align-self: flex-start;
+  position: sticky;
+  top: 1rem;
+  margin: 1rem;
+  width: 4rem;
+  height: 4rem;
+  padding: 1rem;
+  background-color: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 2rem; /* Adjust font size as needed */
+  color: #000;
+  [data-variant='PROFILE'] & {
+    color: #fff;
+    background: var(--color-gold);
+    border-radius: 50%;
+  }
+  [data-variant='FORM'] & {
+    color: #ffffffcc;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+    transition: transform 600ms var(--bezier-bounce);
+    path {
+      stroke-width: 1.75px;
+      stroke: currentColor;
+    }
+  }
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-gold);
+      [data-variant='PROFILE'] & {
+        color: #fff;
+        background-color: var(--color-goldShade1);
+      }
+      svg {
+        transform: scale3d(1.2, 1.2, 1);
+      }
+    }
+  }
+}

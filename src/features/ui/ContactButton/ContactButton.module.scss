@@ -1,0 +1,50 @@
+@use '@/theme/mixins' as *;
+
+.button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 5;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: linear-gradient(
+    45deg,
+    var(--color-goldShade2),
+    var(--color-goldShade1),
+    var(--color-gold)
+  );
+  font-size: var(--fs-15);
+  font-weight: 400;
+  padding: 0.75em;
+  border-radius: 1.75em;
+}
+
+.icon {
+  display: block;
+  font-size: 175%;
+}
+
+.text {
+  width: 0;
+  box-sizing: content-box;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: width 300ms ease;
+  > span {
+    display: inline-block;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+  @media (hover: hover) {
+    div:hover > & {
+      width: var(--text-width);
+      transition-duration: 300ms;
+      transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+    }
+  }
+}

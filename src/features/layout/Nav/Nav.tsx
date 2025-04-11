@@ -1,0 +1,98 @@
+'use client'
+
+import Link from 'next/link'
+import {
+  type ComponentProps,
+  Fragment,
+  useEffect,
+  useState,
+} from 'react'
+import { useInView } from 'react-intersection-observer'
+
+import { DatoLink } from '@/features/links'
+import { LogoHorizontal } from '@/features/logo'
+import { BurgerIcon } from '@/features/ui'
+import { useElementHeight } from '@/hooks/useElementRect'
+import { useEscKeyFunction } from '@/hooks/useEscKeyFunction'
+import { classes } from '@/utils/css'
+
+import styles from './Nav.module.scss'
+
+type Props = ComponentProps<'div'> & {
+  data: Queries.NavFragment | null | undefined
+}
+
+export const Nav = ({ data, className, ...props }: Props) => {
+  const { inView: spacerInView, ref: spacerRef } = useInView()
+
+  const [navRef, setNavRef] = useState<HTMLElement | null>(null)
+
+  const navHeight = useElementHeight(navRef) || 0
+
+  const [burgerOpen, setBurgerOpen] = useState(false)
+  const handleClose = () => {
+    setBurgerOpen(false)
+  }
+
+  useEscKeyFunction(() => setBurgerOpen(false))
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--nav-height',
+      navHeight + 'px'
+    )
+    return () => {
+      document.documentElement.style.removeProperty('--nav-height')
+    }
+  }, [navHeight])
+
+  return (
+    <Fragment>
+      <div
+        data-burger-open={burgerOpen}
+        data-scrolled={!spacerInView}
+        className={classes(styles.container, className)}
+        {...props}
+      >
+        <nav
+          className={styles.nav}
+          ref={node => setNavRef(node)}
+        >
+          <Link
+            href="/"
+            className={styles.logoWrap}
+            aria-label="100 Coaches Agency"
+          >
+            <LogoHorizontal />
+          </Link>
+          <BurgerIcon
+            open={burgerOpen}
+            toggleOpen={() => setBurgerOpen(prev => !prev)}
+          />
+          <div className={styles.navItems}>
+            {data?.links.map(link => (
+              <DatoLink
+                key={link.id}
+                data={link}
+                onClick={
+                  link.__typename !== 'CoachMenuLinkRecord'
+                    ? handleClose
+                    : undefined
+                }
+                className={styles.link}
+              />
+            ))}
+            <DatoLink
+              data={data?.button}
+              className={classes(styles.link, styles.button)}
+            />
+          </div>
+        </nav>
+      </div>
+      <div
+        className={styles.spacer}
+        ref={spacerRef}
+      />
+    </Fragment>
+  )
+}

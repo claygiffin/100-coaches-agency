@@ -1,0 +1,136 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  @include base-grid;
+  background-color: white;
+  padding: 7.5vw 0 5vw;
+  min-height: 25vw;
+}
+
+.text {
+  z-index: 1;
+  color: white;
+  align-self: center;
+  position: relative;
+  [data-photo-alignment='Right'] & {
+    grid-column: 2 / span 7;
+    @include media('<m') {
+      grid-column-end: span 6;
+    }
+  }
+  [data-photo-alignment='Left'] & {
+    grid-column: span 7 / -2;
+    @include media('<m') {
+      grid-column-start: span 6;
+    }
+  }
+  > span {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gold);
+    font-weight: 400;
+    font-size: var(--fs-14);
+    margin-bottom: 0.5em;
+    margin-top: 2em;
+  }
+  h2 {
+    font-size: var(--fs-48);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 325;
+    margin: 0;
+    transition: color 300ms ease;
+    @include media('<s') {
+      font-size: var(--fs-30);
+    }
+  }
+  // @media (hover: hover) {
+  //   &:hover h2 {
+  //     color: var(--color-goldTint2);
+  //   }
+  // }
+  h3 {
+    font-size: var(--fs-16);
+    font-weight: 400;
+    font-style: italic;
+    color: #aaa;
+    margin: 0.75em 0 1.5em;
+    @include media('<s') {
+      font-size: var(--fs-14);
+      margin-bottom: 1em;
+    }
+  }
+  p {
+    font-size: var(--fs-16);
+    max-width: 75ch;
+    @include media('<ms') {
+      display: none;
+    }
+  }
+}
+
+.photo {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  min-height: 100%;
+  max-height: 110%;
+  [data-photo-alignment='Right'] & {
+    grid-column: span 6 / -1;
+    @include media('<m') {
+      grid-column-start: span 8;
+    }
+    @include media('<s') {
+      grid-column-start: span 9;
+    }
+  }
+  [data-photo-alignment='Left'] & {
+    grid-column: 1 / span 6;
+    @include media('<m') {
+      grid-column-end: span 8;
+    }
+    @include media('<s') {
+      grid-column-end: span 9;
+    }
+  }
+  > div {
+    width: 100%;
+    > div {
+      max-width: none !important;
+    }
+  }
+}
+
+.button {
+  margin-bottom: 2.25em;
+  position: static;
+  font-size: var(--fs-16);
+}
+
+.background {
+  @include absolute-fill;
+  background: linear-gradient(to top right, #111, #444);
+  z-index: 0;
+}
+
+.topCurve {
+  margin-top: -1px;
+  width: 100%;
+  height: auto;
+  [data-photo-alignment='Left'] & {
+    transform: scaleX(-1);
+  }
+}
+
+.bottomCurve {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  [data-photo-alignment='Left'] & {
+    transform: scaleX(-1);
+  }
+}

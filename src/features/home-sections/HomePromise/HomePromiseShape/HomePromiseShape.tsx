@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+'use client'
+
+import { useEffect, useMemo, useRef } from 'react'
 
 import { useElementRect } from '@/hooks/useElementRect'
 
@@ -7,13 +9,13 @@ import styles from './HomePromiseShape.module.scss'
 type ShapeProps = {
   shape?: string
   brighten?: null | number
-  position?: (arg: { top: number; left: number }) => void
+  setBrightenPosition?: (arg: { top: number; left: number }) => void
 }
 
 export const Shape = ({
   shape = 'square',
   brighten,
-  position,
+  setBrightenPosition,
   ...props
 }: ShapeProps) => {
   const animationDelay = useMemo(() => Math.random() * -4000, [])
@@ -21,37 +23,31 @@ export const Shape = ({
     () => Math.floor(Math.random() * 4) * 90,
     []
   )
-  const [shapeRef, setShapeRef] = useState<HTMLDivElement | null>(null)
-  const setRefs = useCallback(
-    (node: HTMLDivElement | null) => {
-      if (brighten) {
-        setShapeRef(node)
-      }
-    },
-    [brighten]
-  )
-  const size = useElementRect(shapeRef)
+  const shapeRef = useRef<HTMLDivElement>(null)
+  // const [shapeRef, setShapeRef] = useState<HTMLDivElement | null>(null)
+
+  const size = useElementRect(shapeRef.current)
   const width = size.width || 0
   const height = size.height || 0
 
   useEffect(() => {
-    if (brighten && shapeRef && position) {
-      position({
-        top: shapeRef.offsetTop + height / 2,
-        left: shapeRef.offsetLeft + width / 2,
+    if (brighten && shapeRef && setBrightenPosition) {
+      setBrightenPosition({
+        top: (shapeRef.current?.offsetTop || 0) + height / 2,
+        left: (shapeRef.current?.offsetLeft || 0) + width / 2,
       })
     }
-  }, [shapeRef, size, brighten, position])
+  }, [shapeRef, brighten, setBrightenPosition, height, width])
 
   return (
     <div
-      ref={setRefs}
+      ref={shapeRef}
       style={{
         display: 'flex',
         '--triangle-rotation': triangleRotation + 'deg',
         '--animation-delay': animationDelay + 'ms',
       }}
-      data-brighten={brighten}
+      data-brighten={brighten || false}
     >
       <svg
         className={styles.shape}

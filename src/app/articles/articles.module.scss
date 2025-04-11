@@ -1,0 +1,14 @@
+@use '@/theme/mixins' as *;
+
+.main {
+  @include base-grid;
+  background-color: #fff;
+  padding: var(--gtr-108) 0;
+}
+
+.heading {
+  grid-column: 2 / -2;
+  font-size: var(--fs-84);
+  color: var(--color-goldShade1);
+  margin: 0 0 0.5em;
+}

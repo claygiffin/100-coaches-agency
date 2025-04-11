@@ -1,0 +1,111 @@
+@use '@/theme/mixins' as *;
+
+.article {
+  font-size: var(--fs-18);
+  max-width: calc(72ch + 2 * var(--gtr-72));
+  width: 100%;
+}
+
+.header {
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  [data-photo-alignment='Right'] & {
+    grid-template-columns: 3fr 2fr;
+    @include media('<ms') {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  [data-photo-alignment='Left'] & {
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+.headerBg {
+  background: linear-gradient(to top right, #222, #555);
+  grid-row: 2 / 3;
+  grid-column: 1 / 3;
+  clip-path: var(--clip-id-url);
+  pointer-events: all;
+
+  [data-photo-alignment='Left'] & {
+    transform: scaleX(-1);
+    background: linear-gradient(to top left, #222, #555);
+  }
+}
+
+.headerText {
+  position: relative;
+  color: white;
+  padding: calc(var(--gtr-36) + 10%) var(--gtr-12) var(--gtr-36)
+    var(--gtr-72);
+  grid-row: 2 / 3;
+
+  [data-photo-alignment='Right'] & {
+    grid-column: 1 / 2;
+  }
+
+  [data-photo-alignment='Left'] & {
+    grid-column: 2 / 3;
+  }
+  @include media('<ms') {
+    padding-top: calc(var(--gtr-36) + 12%);
+    padding-left: var(--gtr-36);
+  }
+  h1 {
+    font-size: var(--fs-48);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 325;
+    margin: 0.333em 0 0;
+    @include media('<ms') {
+      font-size: var(--fs-30);
+    }
+  }
+  h2 {
+    font-family: var(--sans-serif);
+    font-size: var(--fs-16);
+    font-weight: 400;
+    font-style: italic;
+    color: #ddd;
+    margin: 0.75em 0 1.5em;
+    @include media('<ms') {
+      font-size: var(--fs-14);
+    }
+  }
+  h3 {
+    font-size: var(--fs-16);
+    pointer-events: all;
+  }
+}
+
+.photoWrap {
+  grid-row: 1 / 3;
+  display: flex;
+
+  [data-photo-alignment='Right'] & {
+    grid-column: 2 / 3;
+  }
+
+  [data-photo-alignment='Left'] & {
+    grid-column: 1 / 2;
+  }
+  > div {
+    width: 100%;
+    > div {
+      max-width: none !important;
+    }
+  }
+}
+
+.body {
+  background-color: #fff;
+  color: #555;
+  padding: var(--gtr-36) var(--gtr-72) var(--gtr-72);
+  pointer-events: all;
+  @include media('<ms') {
+    padding-left: var(--gtr-36);
+    padding-right: var(--gtr-36);
+  }
+}

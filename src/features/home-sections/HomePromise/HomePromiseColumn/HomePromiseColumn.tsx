@@ -1,15 +1,17 @@
+'use client'
+
 import { clamp } from 'lodash'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useElementRect } from '@/hooks/useElementRect'
 
-import styles from './HomePromiseColumn.module.scss'
 import { Shape } from '../HomePromiseShape/HomePromiseShape'
+import styles from './HomePromiseColumn.module.scss'
 
 type ShapeProps = {
   brightCircle?: boolean
-  brightenPosition?: (arg: { top: number; left: number }) => void
-  columnPosition?: (arg: number) => void
+  setBrightenPosition?: (arg: { top: number; left: number }) => void
+  setColumnPosition?: (arg: number) => void
   startingIndex?: number
   offset?: number
   rows?: number
@@ -17,28 +19,21 @@ type ShapeProps = {
 
 export const ShapeColumn = ({
   brightCircle = false,
-  brightenPosition,
-  columnPosition,
+  setBrightenPosition,
+  setColumnPosition,
   startingIndex = 0,
   offset = 0,
   rows = 0,
   ...props
 }: ShapeProps) => {
   const [colRef, setColRef] = useState<HTMLElement | null>(null)
-  const setRefs = useCallback(
-    (node: HTMLElement | null) => {
-      if (columnPosition) {
-        setColRef(node)
-      }
-    },
-    [columnPosition]
-  )
+  // const colRef = useRef<HTMLDivElement>(null)
   const size = useElementRect(colRef)
   useEffect(() => {
-    if (columnPosition && colRef) {
-      columnPosition(colRef.offsetLeft)
+    if (setColumnPosition && colRef && size) {
+      setColumnPosition(colRef.offsetLeft || 0)
     }
-  }, [colRef, size, columnPosition])
+  }, [colRef, size, setColumnPosition])
 
   return (
     <div
@@ -46,16 +41,17 @@ export const ShapeColumn = ({
       style={{
         transform: `translate3d(0, calc(${
           offset - 1
-        }px * var(--translate-factor, 100)), 0)}`,
+        }px * var(--translate-factor, 100)), 0)`,
       }}
-      ref={setRefs}
+      ref={node => setColRef(node)}
+      data-offset-left={colRef?.offsetLeft}
       {...props}
     >
       {[...Array(rows)].map((_, i) => {
         const shapeIndex = i + startingIndex
         return (
           <Shape
-            position={brightenPosition}
+            setBrightenPosition={setBrightenPosition}
             key={i}
             shape={
               shapeIndex % 3 === 0

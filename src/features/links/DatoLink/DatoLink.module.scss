@@ -1,0 +1,63 @@
+@use '@/theme/mixins' as *;
+
+.link {
+  transition:
+    color 300ms ease,
+    background 300ms ease;
+
+  svg {
+    font-size: 125%;
+    transform: translate3D(0, 5%, 0);
+    transition: transform 250ms ease-in-out;
+  }
+  &[data-direction='RIGHT'] {
+    svg {
+      margin-left: 0.25em;
+    }
+    @media (hover: hover) {
+      &:hover {
+        svg {
+          transform: translate3d(20%, 5%, 0);
+        }
+      }
+    }
+  }
+  &[data-direction='LEFT'] {
+    svg {
+      margin-right: 0.25em;
+    }
+    @media (hover: hover) {
+      &:hover {
+        svg {
+          transform: translate3d(-20%, 5%, 0);
+        }
+      }
+    }
+  }
+}
+.button {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  line-height: 1.25;
+  font-weight: 500;
+  padding: 0.75em 1.25em 0.875em;
+  position: relative;
+  transition:
+    color 300ms ease,
+    background 300ms ease;
+  &[data-border-style='ROUNDED'] {
+    border-radius: 2em;
+  }
+  &:has(svg) {
+    svg {
+      padding-top: 0.1em;
+    }
+    &[data-direction='RIGHT'] {
+      padding-right: 2.5em;
+    }
+  }
+}

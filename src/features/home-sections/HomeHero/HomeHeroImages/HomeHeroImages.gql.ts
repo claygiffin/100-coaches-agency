@@ -1,5 +1,6 @@
-import { ResponsiveImageFragment } from "@/features/dato-image";
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
+
+import { ResponsiveImageFragment } from '@/features/dato-image'
 
 export const HomeHeroImagesFragment = gql`
   fragment HomeHeroImages on FileField {

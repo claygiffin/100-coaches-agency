@@ -1,13 +1,17 @@
-import { uniqueId } from 'lodash'
-import Link from 'next/link'
-import { type ComponentProps, useId, useMemo, useState } from 'react'
+'use client'
 
-import { AnimateIn, ArrowButton } from '@/features/common'
+import { type ComponentProps, useId, useState } from 'react'
+
 import { DatoImage } from '@/features/dato-image'
+import { DatoStructuredText } from '@/features/dato-structured-text'
+import { DatoLink } from '@/features/links'
+import { MarkdownHeading } from '@/features/ui'
+import { AnimateIn } from '@/features/ui'
 import {
   useElementHeight,
   useElementWidth,
 } from '@/hooks/useElementRect'
+import variables from '@/theme/variables.module.scss'
 
 import styles from './HomeMarshall.module.scss'
 
@@ -29,7 +33,7 @@ export const HomeMarshall = ({ data, ...props }: Props) => {
       ref={node => {
         setSectionRef(node)
       }}
-      style={{ '--clip-id': `#${clipId}` }}
+      style={{ '--clip-id-url': `url(#${clipId})` }}
       {...props}
     >
       <svg
@@ -59,6 +63,7 @@ export const HomeMarshall = ({ data, ...props }: Props) => {
             className={styles.image}
             data={data?.marshallImage?.responsiveImage}
             objectPosition="100% 20%"
+            sizes={`(max-width: ${variables.breakpoint_ms}px) 90vw, 50vw`}
           />
         </div>
       </div>
@@ -67,29 +72,34 @@ export const HomeMarshall = ({ data, ...props }: Props) => {
           fromBack
           className={styles.heading}
         >
-          <h2
-            dangerouslySetInnerHTML={{
-              __html: data?.marshallHeading || '',
-            }}
-          />
+          <MarkdownHeading as="h2">
+            {data?.marshallHeading || ''}
+          </MarkdownHeading>
         </AnimateIn>
         <AnimateIn
           fromBack
           className={styles.body}
         >
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data?.marshallBody || '',
-            }}
-          />
-          <ArrowButton
-            as={Link}
-            href="/about/"
-            text="Learn more about us"
-            style="OUTLINE"
+          <DatoStructuredText data={data?.marshallBody} />
+          <DatoLink
+            data={data?.marshallCta}
+            isButton
+            borderVariant={'ROUNDED'}
             className={styles.button}
           />
         </AnimateIn>
+        {data?.marshallQuote && (
+          <AnimateIn
+            fromBack
+            innerAs="figure"
+            className={styles.quote}
+          >
+            <blockquote>
+              <DatoStructuredText data={data.marshallQuote.quote} />
+            </blockquote>
+            <figcaption>{data.marshallQuote.attribution}</figcaption>
+          </AnimateIn>
+        )}
       </div>
     </section>
   )

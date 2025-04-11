@@ -4,5 +4,5 @@
 
 export * from './CoachCategoryFeatured/CoachCategoryFeatured'
 export * from './CoachCategoryThumbnail/CoachCategoryThumbnail'
+export * from './CoachProfile/CoachProfile.gql'
 export * from './CoachProfile/CoachProfile'
-export * from './HomeCoachThumbnail/HomeCoachThumbnail'

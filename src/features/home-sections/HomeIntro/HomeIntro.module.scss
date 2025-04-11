@@ -3,7 +3,7 @@
 .section {
   display: grid;
   background-color: #fff;
-  grid-template-rows: 120vh 40vmax;
+  grid-template-rows: 100vh;
   grid-template-columns: 1fr;
   margin-top: -15vw;
   padding-top: 15vw;
@@ -37,10 +37,16 @@
 .heading {
   color: #555;
   font-size: var(--fs-60);
+  line-height: 1.25;
   grid-column: 2 / -2;
-  max-width: 25ch;
+  max-width: 30ch;
   text-align: center;
   justify-self: center;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  [data-in-view='true'] & {
+    opacity: 1;
+  }
   em {
     display: inline-block;
     font-style: normal;

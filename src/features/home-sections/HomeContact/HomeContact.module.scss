@@ -1,18 +1,20 @@
+@use '@/theme/mixins' as *;
+
 .section {
   position: relative;
   z-index: 4;
   margin-top: -7vw;
   &:before {
     content: '';
-    ${absoluteFill}
-    clip-path: url(#${clipId});
+    @include absolute-fill;
+    clip-path: var(--clip-id-url);
     background: linear-gradient(to bottom right, #555, #000);
   }
 }
 .content {
-  ${baseGrid}
-  padding: calc(7vw + var(--gutter-lg)) 0
-  calc(5vw + var(--gutter-xlg) + var(--gutter-mlg));
+  @include base-grid;
+  padding: calc(7vw + var(--gtr-72)) 0
+    calc(5vw + var(--gtr-108) + var(--gtr-54));
   color: #fff;
 }
 .heading {
@@ -34,13 +36,7 @@
 .body {
   grid-column: 2 / span 7;
   font-size: var(--fs-21);
-  padding-right: var(--gutter-md);
-  em {
-    display: inline-block;
-    font-style: normal;
-    font-weight: 400;
-    color: var(--color-goldTint1);
-  }
+  padding-right: var(--gtr-36);
   @include media('<m') {
     grid-column: 2 / span 6;
   }

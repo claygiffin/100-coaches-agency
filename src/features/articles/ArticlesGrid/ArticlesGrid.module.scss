@@ -1,0 +1,72 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  grid-column: 2 / -2;
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-row-gap: var(--gtr-36);
+  grid-column-gap: var(--gtr-12);
+  margin: 0 calc(-1 * var(--gtr-12)) var(--gtr-72);
+  align-items: flex-start;
+  @include media('<ml') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include media('<ms') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include media('<s') {
+    grid-template-columns: 1fr;
+    row-gap: 1.5em;
+  }
+}
+
+.filter {
+  margin-bottom: 2em;
+  > div {
+    display: inline-block;
+    position: relative;
+    transition: color 200ms ease;
+    font-weight: 400;
+    &:hover,
+    &:focus-within {
+      color: var(--color-goldShade1);
+    }
+    > span > svg {
+      transform: translateY(0.2em);
+    }
+  }
+  > span {
+    color: #555;
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+  select {
+    @include absolute-fill;
+    appearance: none;
+    border: none;
+    color: transparent;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.loadButton {
+  justify-self: center;
+  max-width: fit-content;
+  color: var(--color-goldShade1);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5em 1em;
+  border: 1px solid currentColor;
+  transition: all 300ms ease;
+  @media (hover: hover) {
+    &:hover {
+      color: #fff;
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+    }
+  }
+}

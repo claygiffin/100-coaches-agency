@@ -2,9 +2,9 @@
 
 import { type ComponentProps, useId, useState } from 'react'
 
-import { AnimateIn } from '@/features/common'
+import { DatoStructuredText } from '@/features/dato-structured-text'
 import { Form } from '@/features/form'
-import { FormLink } from '@/features/links'
+import { AnimateIn, MarkdownHeading } from '@/features/ui'
 import {
   useElementHeight,
   useElementWidth,
@@ -26,6 +26,7 @@ export const HomeContact = ({ data, ...props }: Props) => {
     <section
       className={styles.section}
       ref={node => setSectionRef(node)}
+      style={{ '--clip-id-url': `url(#${clipId})` }}
       id="work-with-us"
       {...props}
     >
@@ -55,30 +56,21 @@ export const HomeContact = ({ data, ...props }: Props) => {
           className={styles.heading}
           fromBack
         >
-          <h2
-            dangerouslySetInnerHTML={{
-              __html: data?.contactHeading || '',
-            }}
-          />
+          <MarkdownHeading as="h2">
+            {data?.contactHeading || ''}
+          </MarkdownHeading>
         </AnimateIn>
         <AnimateIn
           className={styles.body}
           fromBack
         >
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data?.contactBody || '',
-            }}
-          />
+          <DatoStructuredText data={data?.contactBody} />
         </AnimateIn>
         <AnimateIn
           className={styles.form}
           fromBack
         >
-          <Form
-            data={data?.contactForm}
-            variant={'EMBED'}
-          />
+          <Form data={data?.contactForm} />
         </AnimateIn>
       </div>
     </section>

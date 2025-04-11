@@ -2,6 +2,7 @@ import { fixupPluginRules } from '@eslint/compat'
 import { FlatCompat } from '@eslint/eslintrc'
 import js from '@eslint/js'
 import prettier from 'eslint-plugin-prettier/recommended'
+import unusedImports from 'eslint-plugin-unused-imports'
 import globals from 'globals'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -15,12 +16,7 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 })
 
-const pluginsToPatch = [
-  '@next/next',
-  'react-hooks',
-  // Other plugins to patch, example :
-  // "react-hooks",
-]
+const pluginsToPatch = ['@next/next', 'react-hooks']
 
 const compatConfig = [...compat.extends('next/core-web-vitals')]
 
@@ -55,9 +51,11 @@ export default tseslint.config(
         ...globals.node,
       },
     },
+    plugins: {
+      'unused-imports': unusedImports,
+    },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/consistent-type-imports': 'warn',
       'no-restricted-imports': [
         'error',
@@ -66,6 +64,17 @@ export default tseslint.config(
         },
       ],
       'prettier/prettier': 'warn',
+      '@typescript-eslint/no-unused-vars': 'off',
+      'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
     },
   }
 )

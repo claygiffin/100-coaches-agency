@@ -7,14 +7,13 @@
   &:before {
     content: '';
     @include absolute-fill;
-    clip-path: url(var(--clip-id));
+    clip-path: var(--clip-id-url);
     background: #fff;
   }
 }
 .content {
-  @include base-fill;
-  padding: calc(11.5vw + var(--gtr-72)) 0
-    calc(7vw + var(--gtr-72));
+  @include base-grid;
+  padding: calc(11.5vw + var(--row-36)) 0 calc(7vw + var(--row-72));
   color: #555;
 }
 .text {

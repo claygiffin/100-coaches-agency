@@ -1,0 +1,35 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  @include base-grid;
+  padding: calc(var(--gtr-72) + 3.5vw) 0 calc(var(--gtr-108) + 5vw);
+  margin-top: -3.5vw;
+  &:before {
+    content: '';
+    @include absolute-fill;
+    background: #fff;
+    z-index: 0;
+    clip-path: var(--clip-id-url);
+  }
+}
+
+.heading {
+  grid-column: 2 / -2;
+  color: var(--color-goldShade1);
+  font-size: var(--fs-60);
+  margin: 0.5em 0;
+  position: relative;
+}
+
+.teamMembers {
+  grid-column: 2 / -2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: var(--gtr-12);
+  @include media('<ml') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include media('<ms') {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

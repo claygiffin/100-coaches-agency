@@ -1,0 +1,143 @@
+'use client'
+
+import Link from 'next/link'
+import { Fragment, useState } from 'react'
+import { FiChevronDown } from 'react-icons/fi'
+
+import {
+  useElementHeight,
+  useElementWidth,
+} from '@/hooks/useElementRect'
+import { classes } from '@/utils/css'
+
+import styles from './CategoryNav.module.scss'
+
+type PropTypes = {
+  current: string | null | undefined
+  categories: Queries.CoachCategoryMenuFragment[] | null | undefined
+  path: string
+  allLink?: boolean
+  theme?: 'DARK' | 'LIGHT'
+}
+
+export const CategoryNav = ({
+  current = '',
+  categories,
+  path,
+  allLink,
+  theme = 'DARK',
+}: PropTypes) => {
+  const [navRef, setNavRef] = useState<HTMLElement | null>(null)
+
+  const navWidth = useElementWidth(navRef)
+
+  const [widthRef, setWidthRef] = useState<HTMLElement | null>(null)
+
+  const containerWidth = useElementWidth(widthRef)
+
+  const [collapsedContainerRef, setCollapsedContainerRef] =
+    useState<HTMLElement | null>(null)
+
+  const collapsedContainerHeight =
+    useElementHeight(collapsedContainerRef) || 0
+
+  const collapsed =
+    navWidth && containerWidth ? navWidth >= containerWidth : false
+
+  const [open, setOpen] = useState(false)
+  const toggleOpen = () => {
+    setOpen(prev => !prev)
+  }
+
+  return (
+    <Fragment>
+      <div
+        className={styles.widthCheck}
+        ref={node => setWidthRef(node)}
+        data-collapsed={collapsed}
+        data-open={open}
+        data-theme={theme}
+        style={{
+          '--container-width': containerWidth + 'px',
+          '--nav-width': navWidth + 'px',
+          '--collapsed-container-height':
+            collapsedContainerHeight + 'px',
+        }}
+      />
+      <nav className={styles.nav}>
+        <div
+          className={styles.navItems}
+          ref={node => setNavRef(node)}
+        >
+          {categories?.map((category: any, i: number) => (
+            <Link
+              href={`${('/' + path + '/').replace(/\/\//g, '/')}${
+                category.categorySlug
+              }/`}
+              className={classes(
+                styles.link,
+                category.categoryName === current && styles.active
+              )}
+              key={i}
+            >
+              {category.categoryName}
+            </Link>
+          ))}
+          {allLink && (
+            <Link
+              href={`${('/' + path + '/').replace(/\/\//g, '/')}all/`}
+              className={classes(
+                styles.link,
+                current === 'All' && styles.active
+              )}
+            >
+              All
+            </Link>
+          )}
+        </div>
+        {collapsed && (
+          <Fragment>
+            <button
+              className={classes(styles.link, styles.button)}
+              onClick={toggleOpen}
+            >
+              {current}
+              <FiChevronDown />
+            </button>
+            <div className={styles.navItemsCollapsed}>
+              <div ref={node => setCollapsedContainerRef(node)}>
+                {categories?.map((category: any, i: number) => {
+                  if (category.categoryName !== current) {
+                    return (
+                      <Link
+                        href={`${('/' + path + '/').replace(
+                          /\/\//g,
+                          '/'
+                        )}${category.categorySlug}/`}
+                        className={styles.link}
+                        key={i}
+                      >
+                        {category.categoryName}
+                      </Link>
+                    )
+                  }
+                })}
+                {allLink && (
+                  <Link
+                    href={`${('/' + path + '/').replace(
+                      /\/\//g,
+                      '/'
+                    )}all/`}
+                    className={styles.link}
+                  >
+                    All
+                  </Link>
+                )}
+              </div>
+            </div>
+          </Fragment>
+        )}
+      </nav>
+    </Fragment>
+  )
+}

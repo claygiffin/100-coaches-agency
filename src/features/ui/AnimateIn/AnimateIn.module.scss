@@ -1,0 +1,33 @@
+@use '@/theme/mixins' as *;
+
+.outer {
+  position: relative;
+}
+.inner {
+  position: relative;
+  display: block;
+  opacity: 0;
+  transform: scale3D(1.125, 1.125, 1);
+  transition-property: opacity, transform;
+  transition-duration: var(--transition-duration);
+  transition-timing-function: cubic-bezier(0.25, 0.75, 0.25, 1);
+  transition-delay: 100ms;
+  [data-from-back='true'] & {
+    transform: scale3D(0.875, 0.875, 1);
+  }
+  [data-in-view='true'] & {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+  @media (prefers-reduced-motion) {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+  @include media('<s') {
+    transform: scale3d(1, 1, 1);
+  }
+}
+.sizer {
+  @include absolute-fill;
+  pointer-events: none;
+}

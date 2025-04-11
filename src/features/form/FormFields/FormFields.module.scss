@@ -3,9 +3,10 @@
 .container {
   position: relative;
   flex: 1;
-  --text-color: var(--color-navyMidLight);
-  --highlight: var(--color-copper);
-  --highlightText: var(--color-rust);
+  --text-color: #fff;
+  --label-color: var(--color-gray75);
+  --highlight: var(--color-gold);
+  --highlightText: var(--color-goldTint1);
   flex-basis: 100%;
   &[data-width='Half'] {
     flex-basis: calc(50% - var(--gap));
@@ -27,8 +28,8 @@
   }
 }
 .inputBase {
-  background-color: var(--color-gray95);
-  border-radius: 0.25em;
+  background-color: rgba(#000, 0.25);
+  // border-radius: 0.25em;
   border: 1px solid transparent;
   box-sizing: border-box;
   overflow: hidden;
@@ -63,18 +64,20 @@
   z-index: 2;
   top: 1.5835em;
   left: 1em;
-  color: var(--color-gray55);
+  color: var(--label-color);
   max-width: calc(100% - 2em);
   line-height: 1.333;
   padding-right: 2px;
   transform: translate3d(0, -0.5em, 0);
-  transition: transform 200ms ease;
+  transition:
+    transform 200ms ease,
+    font-weight 200ms ease;
   transform-origin: 0 0;
   /* font-style: italic; */
-  font-weight: 400;
+  font-weight: 300;
   &[data-shrink='true'] {
     transform: translate3d(0, -1.25em, 0) scale3d(0.75, 0.75, 1);
-    font-weight: 500;
+    font-weight: 400;
     max-width: calc(133.333% - 2.667em);
     white-space: nowrap;
     overflow: hidden;

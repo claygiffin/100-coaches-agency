@@ -1,0 +1,84 @@
+'use client'
+
+import { type ComponentProps, useId, useState } from 'react'
+
+import { MarkdownHeading } from '@/features/ui'
+import {
+  useElementHeight,
+  useElementWidth,
+} from '@/hooks/useElementRect'
+
+import styles from './CompaniesSection.module.scss'
+import { Company } from './Company/Company'
+
+type Props = ComponentProps<'section'> & {
+  data: Queries.CompaniesSectionFragment | null | undefined
+}
+
+export const CompaniesSection = ({ data, ...props }: Props) => {
+  const clipId = useId()
+  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const sectWidth = useElementWidth(sectionRef) || 0
+  const sectHeight = useElementHeight(sectionRef) || 0
+
+  return (
+    <section
+      className={styles.section}
+      ref={node => setSectionRef(node)}
+      style={{
+        '--clip-id-url': `url(#${clipId})`,
+        '--count': data?.companies.length,
+      }}
+      {...props}
+    >
+      <svg
+        width="0"
+        height="0"
+        style={{ position: 'absolute' }}
+      >
+        <defs>
+          <clipPath id={clipId}>
+            <path
+              d={`M0,${0.02 * sectWidth} 
+              C${0.17 * sectWidth},${-0.04 * sectWidth} 
+              ${0.62 * sectWidth},${0.07 * sectWidth} 
+              ${sectWidth},${0.01 * sectWidth} 
+              L${sectWidth},${sectHeight} 
+              L0,${sectHeight}
+              Z`}
+            />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <MarkdownHeading
+        className={styles.heading}
+        as="h2"
+      >
+        {data?.heading || ''}
+      </MarkdownHeading>
+      <div className={styles.companies}>
+        <div>
+          {data?.companies.map(icon => {
+            return (
+              <Company
+                data={icon}
+                key={icon.id}
+              />
+            )
+          })}
+
+          {data?.companies.map(icon => {
+            // Map again to create infinite loop
+            return (
+              <Company
+                data={icon}
+                key={icon.id}
+              />
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}

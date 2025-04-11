@@ -67,12 +67,13 @@ export const HomeHeroImages = ({ data, ...props }: Props) => {
 
   return (
     <div
-      className={styles.container}
       style={{
         '--slide-duration': slideDuration + 'ms',
         '--transition-duration': transitionDuration + 'ms',
       }}
       ref={inViewRef}
+      {...props}
+      className={classes(styles.container, props.className)}
     >
       {data?.map((image: any, i: number) => (
         <div

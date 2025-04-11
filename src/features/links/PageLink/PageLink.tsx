@@ -1,17 +1,16 @@
-import { gql } from 'graphql-tag'
 import Link from 'next/link'
 import type { ComponentProps } from 'react'
 
-import DatoLinkIcon from '../LinkIcon/LinkIcon'
+import DatoLinkIcon, { type IconType } from '../LinkIcon/LinkIcon'
 
 export type PageLinkProps = ComponentProps<'a'> & {
   data: Queries.PageLinkFragment | null | undefined
-  showIcon?: boolean
+  iconType?: IconType
 }
 
 export const PageLink = ({
   data,
-  showIcon,
+  iconType,
   ...props
 }: PageLinkProps) => {
   const getSlug = () => {
@@ -30,25 +29,13 @@ export const PageLink = ({
       scroll={true}
       {...props}
     >
+      {iconType === 'ARROW_LEFT' && (
+        <DatoLinkIcon iconType="ARROW_LEFT" />
+      )}
       <span>{data?.linkText}</span>
-      {showIcon && <DatoLinkIcon iconType="ARROW" />}
+      {iconType && iconType !== 'ARROW_LEFT' && (
+        <DatoLinkIcon iconType={iconType} />
+      )}
     </Link>
   )
 }
-
-export const PageLinkFragment = gql`
-  fragment PageLink on PageLinkRecord {
-    __typename
-    id
-    linkText
-    page {
-      __typename
-      ... on AboutPageRecord {
-        slug
-      }
-      ... on CoachCategoryRecord {
-        slug: categorySlug
-      }
-    }
-  }
-`

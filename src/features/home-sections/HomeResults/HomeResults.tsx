@@ -2,7 +2,9 @@
 
 import { type ComponentProps, useId, useState } from 'react'
 
-import { AnimateIn } from '@/features/common'
+import { DatoStructuredText } from '@/features/dato-structured-text'
+import { MarkdownHeading } from '@/features/ui'
+import { AnimateIn } from '@/features/ui'
 import {
   useElementHeight,
   useElementWidth,
@@ -26,7 +28,7 @@ export const HomeResults = ({ data, ...props }: Props) => {
     <section
       className={styles.section}
       ref={node => setSectionRef(node)}
-      style={{ '--clip-id': `#${clipId}` }}
+      style={{ '--clip-id-url': `url(#${clipId})` }}
       {...props}
     >
       <svg
@@ -52,18 +54,15 @@ export const HomeResults = ({ data, ...props }: Props) => {
       </svg>
       <div className={styles.content}>
         <AnimateIn className={styles.text}>
-          <h2
+          <MarkdownHeading
             className={styles.heading}
-            dangerouslySetInnerHTML={{
-              __html: data?.resultsHeading || '',
-            }}
-          />
-          <div
-            className={styles.body}
-            dangerouslySetInnerHTML={{
-              __html: data?.resultsSubheading || '',
-            }}
-          />
+            as="h2"
+          >
+            {data?.resultsHeading || ''}
+          </MarkdownHeading>
+          <div className={styles.body}>
+            <DatoStructuredText data={data?.resultsBody} />
+          </div>
         </AnimateIn>
       </div>
     </section>

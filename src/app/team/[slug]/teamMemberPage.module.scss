@@ -1,0 +1,8 @@
+@use '@/theme/mixins' as *;
+
+.layout {
+  background: linear-gradient(to top right, #ddd, #fff);
+  display: flex;
+  justify-content: center;
+  padding: calc(var(--gtr-36) + 1.4vw) 0 calc(var(--gtr-72) + 5vw);
+}

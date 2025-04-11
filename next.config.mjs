@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // experimental: {
+  //   staticGenerationMaxConcurrency: 1,
+  //   staticGenerationRetryCount: 3,
+  // },
   eslint: {
     dirs: ['src'],
   },
@@ -24,33 +28,7 @@ const nextConfig = {
       'legacy-js-api',
     ],
   },
-  redirects: async () => [
-    {
-      source: '/what-we-make',
-      destination: '/capabilities',
-      permanent: true,
-    },
-    {
-      source: '/who-we-are',
-      destination: '/about',
-      permanent: true,
-    },
-    {
-      source: '/our-process',
-      destination: '/process',
-      permanent: true,
-    },
-    {
-      source: '/join-our-team',
-      destination: '/careers',
-      permanent: true,
-    },
-    {
-      source: '/articles/:path',
-      destination: '/news/:path',
-      permanent: true,
-    },
-  ],
+  redirects: async () => [],
 }
 
 export default nextConfig

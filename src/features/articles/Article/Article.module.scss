@@ -1,0 +1,89 @@
+@use '@/theme/mixins' as *;
+
+.article {
+  pointer-events: all;
+  font-size: var(--fs-18);
+  width: 100vw;
+  max-width: calc(72ch + 2 * var(--gtr-72));
+  box-sizing: border-box;
+  &[data-layout='MODAL'] {
+    background-color: #fff;
+    padding: var(--gtr-36) var(--gtr-72);
+  }
+}
+
+.title {
+  position: relative;
+  font-size: var(--fs-30);
+  margin: 0.5em 0 0.25em;
+  font-weight: 300;
+  transition: color 300ms ease;
+  color: #000;
+  font-size: var(--fs-60);
+}
+
+.author {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  padding: 0.25em 0;
+  font-size: var(--fs-18);
+  font-family: var(--sans-serif);
+  font-weight: 500;
+  width: fit-content;
+  color: var(--color-goldShade1);
+  transition: color 300ms ease;
+  @media (hover: hover) {
+    &:hover,
+    &:focus-within {
+      color: var(--color-goldShade2);
+      text-decoration: underline;
+    }
+  }
+}
+
+.date {
+  font-size: var(--fs-15);
+  font-weight: 500;
+  color: #888;
+  margin: 1em 0 0;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+.body {
+  margin-top: 2em;
+  margin-bottom: 3em;
+  h2 {
+    font-size: var(--fs-36);
+    font-weight: 350;
+    margin: 1em 0 0.5em;
+  }
+  h3 {
+    font-size: var(--fs-21);
+    font-weight: 500;
+    margin: 1.5em 0 0.75em;
+  }
+}
+
+.fig {
+  margin: 2em 0 3em;
+  figcaption {
+    font-size: var(--fs-15);
+    max-width: 90ch;
+    font-style: italic;
+    margin: 0.75em 0 0;
+    color: #666;
+  }
+}
+
+.pipe {
+  display: inline-block;
+  font-weight: 300;
+  color: #aaa;
+  margin: 0 0.5em;
+  transform: translateY(0.05em);
+  &:before {
+    content: '|';
+  }
+}

@@ -8,6 +8,7 @@
   height: calc(100% - 1.75vw);
   overflow: hidden;
   z-index: 0;
+  pointer-events: none;
 }
 .imageWrap {
   @extend %absolute-fill;

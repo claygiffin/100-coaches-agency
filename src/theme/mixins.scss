@@ -60,7 +60,7 @@
   background: linear-gradient($direction, $stops);
 }
 
-@mixin aspectRatio($ar) {
+@mixin aspect-ratio($ar) {
   aspect-ratio: $ar;
   @supports not (aspect-ratio: $ar) {
     &::before {

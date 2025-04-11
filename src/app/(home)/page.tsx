@@ -1,19 +1,27 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
-import { toNextMetadata } from 'react-datocms'
 
 import {
+  CompaniesSection,
+  CompaniesSectionFragment,
+  HomeCoachesSection,
+  HomeCoachesSectionFragment,
+  HomeContact,
+  HomeContactFragment,
   HomeHero,
   HomeHeroFragment,
   HomeIntro,
   HomeIntroFragment,
   HomeMarshall,
+  HomeMarshallFragment,
   HomePromise,
   HomePromiseFragment,
   HomeResults,
   HomeResultsFragment,
+  HomeThoughtLeadershipSection,
+  ThoughtLeadershipItemFragment,
 } from '@/features/home-sections'
-import { CoachCategoryMenuFragment } from '@/features/nav'
+import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
 export const dynamic = 'force-static'
@@ -23,23 +31,35 @@ const query = gql`
     homePage {
       ...HomeHero
       ...HomeIntro
+      companiesSection {
+        ...CompaniesSection
+      }
+      coachesSection {
+        ...HomeCoachesSection
+      }
+      thoughtLeadershipItems {
+        ...ThoughtLeadershipItem
+      }
       ...HomePromise
+      ...HomeMarshall
       ...HomeResults
+      ...HomeContact
       _seoMetaTags {
         attributes
         content
         tag
       }
     }
-    allCoachCategories {
-      ...CoachCategoryMenu
-    }
   }
   ${HomeHeroFragment}
   ${HomeIntroFragment}
+  ${CompaniesSectionFragment}
+  ${HomeCoachesSectionFragment}
   ${HomePromiseFragment}
+  ${ThoughtLeadershipItemFragment}
+  ${HomeMarshallFragment}
   ${HomeResultsFragment}
-  ${CoachCategoryMenuFragment}
+  ${HomeContactFragment}
 `
 
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -48,26 +68,30 @@ export const generateMetadata = async (): Promise<Metadata> => {
   } = await datoRequest<Queries.HomePageQuery>({
     query,
   })
-  return toNextMetadata(homePage?._seoMetaTags || [])
+  return generateDatoCmsMetadata(homePage?._seoMetaTags || [], {
+    canonicalSlug: '',
+  })
 }
 
 const HomePage: NextPage = async () => {
   const {
-    data: { homePage, allCoachCategories },
+    data: { homePage },
   } = await datoRequest<Queries.HomePageQuery>({
     query,
   })
   return (
-    <main>
+    <main data-home>
       <HomeHero data={homePage} />
       <HomeIntro data={homePage} />
-      <HomePromise
-        data={homePage}
-        allCoachCategories={allCoachCategories}
+      <CompaniesSection data={homePage?.companiesSection} />
+      <HomeCoachesSection data={homePage?.coachesSection} />
+      <HomePromise data={homePage} />
+      <HomeThoughtLeadershipSection
+        data={homePage?.thoughtLeadershipItems}
       />
       <HomeMarshall data={homePage} />
       <HomeResults data={homePage} />
-      <HomeContact />
+      <HomeContact data={homePage} />
     </main>
   )
 }

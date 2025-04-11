@@ -7,14 +7,14 @@
 }
 .content {
   @include base-grid;
-  padding: calc(10.5vw + var(--gutter-xlg)) 0
-    calc(8.5vw + var(--gutter-xlg));
+  padding: calc(10.5vw + var(--gtr-108)) 0 calc(8.5vw + var(--gtr-108));
   color: white;
 }
 .heading {
-  grid-column: 2 / span 7;
+  grid-column: 2 / span 8;
   font-size: var(--fs-60);
   margin-top: 0.75em;
+  max-width: 21ch;
   @include media('<ms') {
     grid-column-end: -2;
   }
@@ -25,14 +25,24 @@
   }
 }
 .button {
-  font-size: var(--fs-16);
   margin-top: 2.25em;
   margin-bottom: 2em;
+  text-shadow: none;
+  font-size: var(--fs-21);
+  background: #fff;
+  color: var(--color-goldShade2);
+  @media (hover: hover) {
+    &:hover {
+      background: #000;
+      color: var(--color-goldTint1);
+    }
+  }
 }
 .body {
   grid-column: 2 / span 8;
   font-size: var(--fs-21);
   text-shadow: 0 0 3px var(--color-goldShade3);
+  max-width: 54ch;
   @include media('<ms') {
     grid-column-end: -2;
   }

@@ -1,25 +1,19 @@
-import { gql } from 'graphql-tag'
+'use client'
+
 import type { ComponentProps } from 'react'
 
-import { AnimateIn, ArrowButton } from '@/features/common'
-import { CoachCategoryMenu } from '@/features/nav'
+import { DatoStructuredText } from '@/features/dato-structured-text'
+import { DatoLink } from '@/features/links'
+import { AnimateIn } from '@/features/ui'
 
 import styles from './HomePromise.module.scss'
 import { HomePromiseBackground } from './HomePromiseBackground/HomePromiseBackground'
 
 type Props = ComponentProps<'section'> & {
   data: Queries.HomePromiseFragment | null | undefined
-  allCoachCategories:
-    | Queries.CoachCategoryMenuFragment[]
-    | null
-    | undefined
 }
 
-export const HomePromise = ({
-  data,
-  allCoachCategories,
-  ...props
-}: Props) => {
+export const HomePromise = ({ data, ...props }: Props) => {
   return (
     <section
       className={styles.section}
@@ -31,33 +25,15 @@ export const HomePromise = ({
           <h2>{data?.promiseHeading}</h2>
         </AnimateIn>
         <AnimateIn className={styles.body}>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: data?.promiseBody || '',
-            }}
-          />
-          <ArrowButton
-            text="See our coaches"
-            style="OUTLINE"
-            color="WHITE"
+          <DatoStructuredText data={data?.promiseBody} />
+          <DatoLink
+            data={data?.promiseCta}
+            borderVariant="ROUNDED"
             className={styles.button}
-          >
-            <CoachCategoryMenu coachCategories={allCoachCategories} />
-          </ArrowButton>
+            isButton
+          />
         </AnimateIn>
       </div>
     </section>
   )
 }
-
-export const HomePromiseFragment = gql`
-  fragment HomePromise on HomePageRecord {
-    promiseHeading
-    promiseBody(markdown: true)
-    # promiseBodyNode {
-    #   childMarkdownRemark {
-    #     html
-    #   }
-    # }
-  }
-`

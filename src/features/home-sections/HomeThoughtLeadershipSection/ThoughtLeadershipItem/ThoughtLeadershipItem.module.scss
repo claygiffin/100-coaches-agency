@@ -1,0 +1,81 @@
+@use '@/theme/mixins' as *;
+
+.article {
+  position: relative;
+  grid-area: 1 / 1 / 2 / 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  z-index: 1;
+  &[data-is-active='true'] {
+    z-index: 2;
+  }
+  @include media('<m') {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+}
+.image {
+  position: relative;
+  align-self: stretch;
+  --position: absolute;
+  --duration: 500ms;
+  opacity: 0;
+  transition: opacity var(--duration) linear 0ms;
+  > div {
+    height: 100%;
+    width: 100%;
+  }
+  [data-is-active='true'] & {
+    opacity: 1;
+  }
+  @include media('<m') {
+    --position: relative;
+    aspect-ratio: 1.125;
+  }
+}
+.content {
+  align-self: center;
+  margin: calc(8.5vw + var(--row-36)) var(--margin)
+    calc(var(--row-54) + 5.75vw) var(--gtr-54);
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+  [data-is-active='true'] & {
+    opacity: 1;
+  }
+  @include media('<m') {
+    margin-top: 1em;
+    align-self: flex-start;
+  }
+}
+.contentInner {
+}
+.heading {
+  font-size: var(--fs-48);
+  margin: 1em 0 0.25em;
+  em {
+    font-style: normal;
+    color: var(--color-goldShade1);
+  }
+}
+.body {
+  color: var(--color-gray40);
+}
+.link {
+  color: #fff;
+  background: linear-gradient(
+    to right,
+    var(--color-goldTint1),
+    var(--color-gold),
+    var(--color-goldShade2)
+  );
+  font-size: var(--fs-21);
+  margin-top: 2em;
+  background-position: 100% 50%;
+  background-size: 200%;
+  @media (hover: hover) {
+    &:hover {
+      background-position: 0% 50%;
+      color: #000;
+    }
+  }
+}

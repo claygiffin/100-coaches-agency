@@ -1,0 +1,73 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  color: #fff;
+  position: relative;
+  margin-top: -4vw;
+  &:before {
+    content: '';
+    @include absolute-fill;
+    background: linear-gradient(to top right, #222, #555);
+    z-index: 0;
+    clip-path: var(--clip-id-url);
+  }
+}
+
+.content {
+  position: relative;
+  display: grid;
+  width: 100%;
+  box-sizing: border-box;
+  padding: calc(var(--gtr-72) + 4vw) var(--margin);
+  > * {
+    position: relative;
+  }
+}
+
+.heading {
+  font-size: var(--fs-60);
+  margin: 0.5em 0 0;
+  color: var(--color-goldTint1);
+}
+
+.body {
+  font-size: var(--fs-21);
+  margin-bottom: 2em;
+  max-width: 72ch;
+}
+
+.title {
+  font-family: var(--ff-body);
+  font-size: var(--fs-21);
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 0.75em 0;
+  letter-spacing: 0.05em;
+  color: var(--color-goldTint1);
+}
+
+.description {
+  font-size: var(--fs-18);
+  font-weight: 600;
+  max-width: 80ch;
+  margin-bottom: 2em;
+}
+
+.button {
+  background: linear-gradient(
+    to right,
+    var(--color-goldTint1),
+    var(--color-gold),
+    var(--color-goldShade2)
+  );
+  // margin-top: 2em;
+  background-position: 100% 50%;
+  background-size: 200%;
+  color: #fff;
+  @media (hover: hover) {
+    &:hover {
+      background-position: 0% 50%;
+      color: #000;
+    }
+  }
+}

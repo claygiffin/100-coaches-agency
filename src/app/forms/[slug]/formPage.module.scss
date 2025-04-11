@@ -1,0 +1,9 @@
+@use '@/theme/mixins' as *;
+
+.main {
+  background: linear-gradient(to top right, #000, #222);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // padding: var(--gtr-72) var(--margin);
+}

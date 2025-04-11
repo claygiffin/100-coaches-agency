@@ -1,17 +1,16 @@
-import { gql } from 'graphql-tag'
 import Link from 'next/link'
 import type { ComponentProps } from 'react'
 
-import DatoLinkIcon from '../LinkIcon/LinkIcon'
+import DatoLinkIcon, { type IconType } from '../LinkIcon/LinkIcon'
 
 export type FormLinkProps = ComponentProps<'a'> & {
   data: Queries.FormLinkFragment | null | undefined
-  showIcon?: boolean
+  iconType?: IconType
 }
 
 export const FormLink = ({
   data,
-  showIcon,
+  iconType,
   ...props
 }: FormLinkProps) => {
   return (
@@ -20,22 +19,13 @@ export const FormLink = ({
       scroll={false}
       {...props}
     >
+      {iconType === 'ARROW_LEFT' && (
+        <DatoLinkIcon iconType="ARROW_LEFT" />
+      )}
       <span>{data?.linkText}</span>
-      {showIcon && <DatoLinkIcon iconType="ARROW" />}
+      {iconType === 'ARROW_RIGHT' && (
+        <DatoLinkIcon iconType="ARROW_RIGHT" />
+      )}
     </Link>
   )
 }
-
-export const FormLinkFragment = gql`
-  fragment FormLink on FormLinkRecord {
-    __typename
-    id
-    linkText
-    form {
-      __typename
-      ... on FormRecord {
-        slug
-      }
-    }
-  }
-`
