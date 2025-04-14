@@ -76,7 +76,7 @@ export const Form = ({ data, ...props }: Props) => {
         alert(
           `There was a problem with your submission. Please try again.`
         )
-      } 
+      }
     } catch (error) {
       alert(error)
     }
