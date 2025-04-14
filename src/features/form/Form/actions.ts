@@ -18,7 +18,7 @@ export const submitForm = async ({
   recipients,
   botField,
   createActiveCampaignContact,
-  updateACContactFields
+  updateACContactFields,
 }: submitFormProps) => {
   try {
     const response = await fetch(
