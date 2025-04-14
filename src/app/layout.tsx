@@ -49,7 +49,9 @@ const RootLayout = async ({
         className={classes(bitter.variable, brother1816.variable)}
       >
         <head>
-          <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID || ''} />
+          <GoogleTagManager
+            gtmId={process.env.NEXT_PUBLIC_GTM_ID || ''}
+          />
         </head>
         <body>
           <AlertBar data={data.alertBar} />

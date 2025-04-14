@@ -58,6 +58,23 @@ export const Form = ({ data, ...props }: Props) => {
             )
             .join(', ') || '',
         botField: botField.checked,
+        createActiveCampaignContact:
+          data?.onSubmit.find(
+            action =>
+              action.__typename ===
+              'CreateActiveCampaignContactActionRecord'
+          ) && true,
+        updateACContactFields:
+          (
+            data?.onSubmit.find(
+              action =>
+                action.__typename ===
+                'CreateActiveCampaignContactActionRecord'
+            ) as Pick<
+              Queries.CreateActiveCampaignContactActionRecord,
+              'updateIfExists'
+            >
+          )?.updateIfExists || undefined,
       })
       if (response?.statusCode === 200) {
         setSubmitting(false)
@@ -94,7 +111,10 @@ export const Form = ({ data, ...props }: Props) => {
         submitted ? true : submitting ? 'submitting' : false
       }
     >
-      <LoadingSpinner className={styles.spinner} />
+      <LoadingSpinner
+        className={styles.spinner}
+        color={'#fff'}
+      />
 
       <div
         ref={node => setSuccessRef(node)}

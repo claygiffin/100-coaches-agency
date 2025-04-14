@@ -7,6 +7,8 @@ type submitFormProps = {
   data: { [key: string]: string | null }
   recipients: string
   botField: boolean
+  createActiveCampaignContact?: boolean
+  updateACContactFields?: boolean
 }
 export const submitForm = async ({
   siteName,
@@ -15,6 +17,8 @@ export const submitForm = async ({
   data,
   recipients,
   botField,
+  createActiveCampaignContact,
+  updateACContactFields
 }: submitFormProps) => {
   try {
     const response = await fetch(
@@ -31,6 +35,8 @@ export const submitForm = async ({
           ...data,
           recipients,
           botField,
+          createActiveCampaignContact,
+          updateACContactFields,
         }),
       }
     )
