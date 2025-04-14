@@ -42,6 +42,7 @@ export const Form = ({ data, ...props }: Props) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = async e => {
     e.preventDefault()
     setSubmitting(true)
+    console.log(data)
     const botField = e.currentTarget[
       'feed_after_midnight'
     ] as HTMLInputElement
