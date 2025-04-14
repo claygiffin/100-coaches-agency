@@ -24,6 +24,7 @@ export const FormFragment = gql`
       value
     }
     onSubmit {
+      __typename
       ... on SendEmailActionRecord {
         recipients
       }
