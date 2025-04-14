@@ -2,6 +2,7 @@
 
 type submitFormProps = {
   siteName: string
+  n8nId?: string
   formName: string
   data: { [key: string]: string | null }
   recipients: string
@@ -10,6 +11,7 @@ type submitFormProps = {
 export const submitForm = async ({
   siteName,
   formName,
+  n8nId,
   data,
   recipients,
   botField,
@@ -25,6 +27,7 @@ export const submitForm = async ({
         body: JSON.stringify({
           'site-name': siteName,
           'form-name': formName,
+          'n8n-id': n8nId,
           ...data,
           recipients,
           botField,

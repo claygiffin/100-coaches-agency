@@ -47,7 +47,8 @@ export const Form = ({ data, ...props }: Props) => {
     ] as HTMLInputElement
     try {
       const response = await submitForm({
-        siteName: 'C-Suite Strategies',
+        siteName: '100 Coaches',
+        n8nId: 'ecUJcWZ6EW2RZDsJ',
         formName: data?.formName || '',
         data: formData.current,
         recipients:
