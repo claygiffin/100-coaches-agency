@@ -54,9 +54,12 @@ export const Form = ({ data, ...props }: Props) => {
         data: formData.current,
         recipients:
           data?.onSubmit
-            .filter(
-              action => action.__typename === 'SendEmailActionRecord'
-            )
+            .reduce((acc, val) => {
+              if (val.__typename === 'SendEmailActionRecord') {
+                acc.push(val.recipients)
+              }
+              return acc
+            }, [] as string[])
             .join(', ') || '',
         botField: botField.checked,
         createActiveCampaignContact:
