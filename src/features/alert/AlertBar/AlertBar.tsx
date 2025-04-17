@@ -32,7 +32,7 @@ export const AlertBar = ({ data, ...props }: Props) => {
       const currentScroll = window.scrollY
       const scrollDiff = currentScroll - prevPos.current
 
-      const thresholdTop = 200
+      const thresholdTop = 100
       const thresholdScroll = 100
       if (currentScroll < thresholdTop) {
         setScrolledUp(true)
