@@ -11,6 +11,7 @@ import {
   Nav,
   NavFragment,
 } from '@/features/layout'
+import { ActiveCampaign } from '@/features/tracking'
 import { datoRequest } from '@/lib/datocms-fetch'
 import { bitter, brother1816 } from '@/theme/fonts/fontface'
 import '@/theme/globals.scss'
@@ -52,6 +53,7 @@ const RootLayout = async ({
           <GoogleTagManager
             gtmId={process.env.NEXT_PUBLIC_GTM_ID || ''}
           />
+          <ActiveCampaign accountId={'69558792'} />
         </head>
         <body>
           <AlertBar data={data.alertBar} />
