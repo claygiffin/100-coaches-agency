@@ -1,6 +1,7 @@
 @use '@/theme/mixins' as *;
 
 .section {
+  position: relative;
   @include base-grid;
   grid-template-rows: var(--nav-height) auto auto 18vw;
   min-height: 101vh;

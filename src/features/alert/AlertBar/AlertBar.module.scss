@@ -1,6 +1,16 @@
+@use '@/theme/mixins' as *;
+
 .container {
-  display: grid;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 11;
+  overflow: hidden;
+}
+
+.inner {
+  position: relative;
   background: linear-gradient(
     to right,
     var(--color-goldShade1),
@@ -8,14 +18,24 @@
     var(--color-goldTint1),
     var(--color-goldTint2)
   );
+  display: grid;
+  transition: transform 300ms ease;
+  [data-ready='true'][data-scrolled-up='false'] & {
+    transform: translate3d(0, -100%, 0);
+  }
+  [data-ready='true'][data-scrolled-up='true'] & {
+    transform: translate3d(0, 0, 0);
+  }
 }
+
 .text {
+  position: relative;
+  font-size: var(--fs-16);
+  margin: 0.5em var(--gtr-36);
   justify-self: center;
   align-self: center;
   text-align: center;
-  font-size: var(--fs-16);
   color: #000;
-  margin: 0.5em var(--gtr-36);
   line-height: 1.25;
   p {
     font-weight: 400;

@@ -36,6 +36,9 @@ export const Company = ({ data, ...props }: Props) => {
   return (
     <div
       className={styles.company}
+      style={{
+        '--ar': (data?.icon.width || 0) / (data?.icon.height || 0),
+      }}
       {...props}
     >
       {renderIcon()}

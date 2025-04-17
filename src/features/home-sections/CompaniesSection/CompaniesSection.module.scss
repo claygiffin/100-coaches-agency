@@ -52,5 +52,8 @@
     animation-iteration-count: infinite;
     animation-fill-mode: forwards;
     animation-timing-function: linear;
+    @include media('<s') {
+      gap: 1rem;
+    }
   }
 }

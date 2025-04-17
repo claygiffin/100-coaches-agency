@@ -1467,12 +1467,6 @@ type HomePageRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-
-/** Record of type Home Page (home_page) */
-type HomePageRecordcontactHeadingArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
 type ImageFileField = FileFieldInterface & {
   __typename?: 'ImageFileField';
   _createdAt: Scalars['DateTime']['output'];
