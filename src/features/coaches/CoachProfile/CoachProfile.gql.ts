@@ -15,6 +15,7 @@ export const CoachProfileFragment = gql`
           ar: "1:1"
           fit: crop
           crop: focalpoint
+          auto: format
         }
       ) {
         ...ResponsiveImage
@@ -49,6 +50,7 @@ export const TeamMemberFragment = gql`
           ar: "1:1"
           fit: crop
           crop: focalpoint
+          auto: format
         }
       ) {
         ...ResponsiveImage

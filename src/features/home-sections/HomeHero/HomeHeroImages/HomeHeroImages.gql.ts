@@ -12,6 +12,7 @@ export const HomeHeroImagesFragment = gql`
         con: -75
         ar: "16:10"
         fit: crop
+        auto: format
       }
     ) {
       ...ResponsiveImage
@@ -24,6 +25,7 @@ export const HomeHeroImagesFragment = gql`
         con: -75
         ar: "2:3"
         fit: crop
+        auto: format
       }
     ) {
       ...ResponsiveImage
