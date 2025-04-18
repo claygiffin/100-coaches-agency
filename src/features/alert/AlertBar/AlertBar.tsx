@@ -47,12 +47,11 @@ export const AlertBar = ({ data, ...props }: Props) => {
   }, [])
 
   useEffect(() => {
-    handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [handleScroll])
 
   useLayoutEffect(() => {
     document.documentElement.style.setProperty(

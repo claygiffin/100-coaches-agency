@@ -53,6 +53,6 @@ export const ActiveCampaign = ({ accountId }: Props) => {
     return () => {
       document.querySelector(`script[src="${scriptSrc}"]`)?.remove()
     }
-  }, [])
+  }, [accountId])
   return null
 }
