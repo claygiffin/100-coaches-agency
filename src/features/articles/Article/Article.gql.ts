@@ -25,7 +25,13 @@ export const ArticleFragment = gql`
       alt
       title
       responsiveImage(
-        imgixParams: { ar: "16:9", crop: focalpoint, fit: crop, q: 50, auto: format }
+        imgixParams: {
+          ar: "16:9"
+          crop: focalpoint
+          fit: crop
+          q: 50
+          auto: format
+        }
       ) {
         ...ResponsiveImage
       }
