@@ -22,7 +22,6 @@ import {
   deleteQueries,
   queriesReferencingCacheTags,
 } from '@/lib/datocms-database'
-import { docsToPublic } from '@/lib/docs-to-public'
 
 export const dynamic = 'force-dynamic' // defaults to auto
 
