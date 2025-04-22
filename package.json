@@ -21,8 +21,8 @@
   "dependencies": {
     "@datocms/cda-client": "^0.2.7",
     "@gsap/react": "^2.1.2",
-    "@libsql/client": "^0.15.3",
-    "@next/third-parties": "^15.3.0",
+    "@libsql/client": "^0.15.4",
+    "@next/third-parties": "^15.3.1",
     "date-fns": "^4.1.0",
     "datocms-structured-text-utils": "^5.0.0",
     "graphql-tag": "^2.12.6",
@@ -30,7 +30,7 @@
     "include-media": "^2.0.0",
     "lodash": "^4.17.21",
     "markdown-to-jsx": "^7.7.4",
-    "next": "15.3.0",
+    "next": "15.3.1",
     "next-sitemap": "^4.2.3",
     "node-downloader-helper": "^2.1.9",
     "normalize.css": "^8.0.1",
@@ -41,13 +41,13 @@
     "react-inlinesvg": "^4",
     "react-intersection-observer": "^9.16.0",
     "react-player": "^2.16.0",
-    "sass": "^1.86.3",
+    "sass": "^1.87.0",
     "smoothscroll-polyfill": "^0.4.4"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.8",
     "@eslint/eslintrc": "^3.3.1",
-    "@eslint/js": "^9.24.0",
+    "@eslint/js": "^9.25.1",
     "@graphql-codegen/add": "^5.0.3",
     "@graphql-codegen/cli": "^5.0.5",
     "@graphql-codegen/near-operation-file-preset": "^3.0.0",
@@ -65,7 +65,7 @@
     "concurrently": "^9.1.2",
     "dotenv": "^16.5.0",
     "eslint": "^9",
-    "eslint-config-next": "^15.3.0",
+    "eslint-config-next": "^15.3.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-prettier": "^5.2.6",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -79,6 +79,6 @@
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
     "typescript": "^5",
-    "typescript-eslint": "^8.29.1"
+    "typescript-eslint": "^8.31.0"
   }
 }
