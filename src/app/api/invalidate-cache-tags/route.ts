@@ -54,7 +54,7 @@ export async function POST(request: Request) {
   }
 
   // Run script to download documents to public folder
-  await docsToPublic().catch(console.error)
+  // await docsToPublic().catch(console.error)
 
   const data = (await request.json()) as CdaCacheTagsInvalidateWebhook
 
