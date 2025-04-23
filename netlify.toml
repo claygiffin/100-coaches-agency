@@ -3,3 +3,9 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "https://agency.100coaches.com/*"
+  to = "https://www.100coaches.com/:splat"
+  status = 301
+  
