@@ -30,7 +30,7 @@ export const HomeMarshallFragment = gql`
       attribution
     }
     marshallImage {
-      responsiveImage(imgixParams: { q: 75, sat: -100, auto: format }) {
+      responsiveImage(imgixParams: { q: 75, sat: -100, auto: [format, compress] }) {
         ...ResponsiveImage
       }
     }

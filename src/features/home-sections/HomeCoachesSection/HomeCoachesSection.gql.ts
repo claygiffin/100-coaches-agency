@@ -29,7 +29,7 @@ export const HomeCoachesSectionFragment = gql`
           sat: -100
           ar: "16:10"
           fit: crop
-          auto: format
+          auto: [format, compress]
         }
       ) {
         ...ResponsiveImage
@@ -40,7 +40,7 @@ export const HomeCoachesSectionFragment = gql`
           sat: -100
           ar: "2:3"
           fit: crop
-          auto: format
+          auto: [format, compress]
         }
       ) {
         ...ResponsiveImage

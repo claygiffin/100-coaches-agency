@@ -13,7 +13,7 @@ export const ArticleFragment = gql`
         id
         __typename
         image {
-          responsiveImage(imgixParams: { q: 60, auto: format }) {
+          responsiveImage(imgixParams: { q: 60, auto: [format, compress] }) {
             ...ResponsiveImage
           }
           alt
@@ -30,7 +30,7 @@ export const ArticleFragment = gql`
           crop: focalpoint
           fit: crop
           q: 50
-          auto: format
+          auto: [format, compress]
         }
       ) {
         ...ResponsiveImage
