@@ -139,7 +139,7 @@ export const Form = ({ data, ...props }: Props) => {
               return (
                 <FormTextField
                   data={field}
-                  onChange={handleChange}
+                  onChangeAction={handleChange}
                   key={field.id}
                 />
               )
@@ -147,7 +147,7 @@ export const Form = ({ data, ...props }: Props) => {
               return (
                 <FormTextArea
                   data={field}
-                  onChange={handleChange}
+                  onChangeAction={handleChange}
                   key={field.id}
                 />
               )
@@ -155,7 +155,7 @@ export const Form = ({ data, ...props }: Props) => {
               return (
                 <FormSelectField
                   data={field}
-                  onChange={handleChange}
+                  onChangeAction={handleChange}
                   key={field.id}
                 />
               )

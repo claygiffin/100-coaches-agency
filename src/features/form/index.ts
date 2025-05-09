@@ -5,6 +5,7 @@
 export * from './Form/Form.gql'
 export * from './Form/Form'
 export * from './Form/actions'
+export * from './FormFields/FormCountryCodeSelect'
 export * from './FormFields/FormFields.gql'
 export * from './FormFields/FormSelectField'
 export * from './FormFields/FormTextArea'

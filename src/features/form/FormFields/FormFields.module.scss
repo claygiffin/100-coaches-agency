@@ -29,6 +29,7 @@
   }
 }
 .inputBase {
+  display: flex;
   background-color: var(--bg-color);
   // border-radius: 0.25em;
   border: 1px solid transparent;
@@ -57,6 +58,9 @@
     -webkit-text-fill-color: var(--text-color) !important;
     box-shadow: 0 0 0 10em var(--bg-color) inset !important;
     caret-color: var(--text-color) !important;
+  }
+  .countryCodeSelect ~ & {
+    padding-left: 0.75em;
   }
 }
 .label {
@@ -184,7 +188,7 @@
     }
   }
   div:focus-within > & {
-    background-color: var(--color-highlight);
+    background-color: var(--highlight);
   }
 }
 
@@ -205,4 +209,27 @@
   border: none;
   padding-top: 1.75em;
   padding-bottom: 1.5em;
+}
+.countryCodeSelect {
+  // display: inline-block;
+  position: relative;
+  width: fit-content;
+  flex: none;
+  flex-basis: auto;
+  align-self: center;
+  opacity: 0;
+  div:has([data-shrink='true']) & {
+    opacity: 1;
+  }
+  .inputValue {
+    position: relative;
+  }
+  .arrow {
+    right: 0;
+    top: calc(50% + 0.75em);
+    transform: translateY(-33%) scale(0.75, 0.75);
+  }
+  .select {
+    @include absolute-fill;
+  }
 }

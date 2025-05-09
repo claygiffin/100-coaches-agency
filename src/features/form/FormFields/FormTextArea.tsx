@@ -17,10 +17,10 @@ import styles from './FormFields.module.scss'
 
 type Props = {
   data: Queries.FormTextAreaFragment | null
-  onChange: (name: string | undefined, value: string) => void
+  onChangeAction: (name: string | undefined, value: string) => void
 }
 
-export const FormTextArea = ({ data, onChange }: Props) => {
+export const FormTextArea = ({ data, onChangeAction }: Props) => {
   const name = data?.label ? kebabCase(data?.label) : undefined
 
   const [shrink, setShrink] = useState(false)
@@ -46,9 +46,9 @@ export const FormTextArea = ({ data, onChange }: Props) => {
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
       setValue(e.target.value)
-      onChange(name, e.target.value)
+      onChangeAction(name, e.target.value)
     },
-    [name, onChange]
+    [name, onChangeAction]
   )
 
   const uniqueId = useId()

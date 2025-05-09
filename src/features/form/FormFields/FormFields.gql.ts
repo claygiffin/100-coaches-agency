@@ -20,6 +20,7 @@ export const FormFieldFragments = gql`
     id
     label
     fieldType
+    isInternational
     width
     required
   }

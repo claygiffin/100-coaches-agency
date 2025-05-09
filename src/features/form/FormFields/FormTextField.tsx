@@ -1,5 +1,6 @@
 'use client'
 
+import { AsYouType, type CountryCode } from 'libphonenumber-js/max'
 import { kebabCase } from 'lodash'
 import {
   type ChangeEvent,
@@ -12,17 +13,20 @@ import {
 import { useElementHeight } from '@/hooks/useElementRect'
 import { classes } from '@/utils/css'
 
+import { FormCountryCodeSelect } from './FormCountryCodeSelect'
 import styles from './FormFields.module.scss'
 
 type Props = {
   data: Queries.FormTextFieldFragment | null
-  onChange: (name: string | undefined, value: string) => void
+  onChangeAction: (name: string | undefined, value: string) => void
 }
 
-export const FormTextField = ({ data, onChange }: Props) => {
+export const FormTextField = ({ data, onChangeAction }: Props) => {
   const name = data?.label ? kebabCase(data.label) : undefined
   const [shrink, setShrink] = useState(false)
   const [value, setValue] = useState('')
+  const [countryCodeValue, setCountryCodeValue] =
+    useState<CountryCode>('US')
   const handleFocus = () => {
     if (!shrink) {
       setShrink(true)
@@ -44,51 +48,26 @@ export const FormTextField = ({ data, onChange }: Props) => {
   const handleChangeText = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value)
-      onChange(name, e.target.value)
+      onChangeAction(name, e.target.value)
     },
-    [name, onChange]
+    [name, onChangeAction]
   )
 
+  // const formatter = useMemo(() => {
+  //   return new AsYouType(countryCodeValue)
+  // }, [countryCodeValue])
+
   const handleChangePhone = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      const getFormattedPhoneNum = (e: any) => {
-        let output = ''
-        const inputType = e.nativeEvent.inputType
-        const input = e.target.value
-        input.replace(
-          /^\D*(\d{0,3})\D*(\d{0,3})\D*(\d{0,4})/,
-          (_: string, g1: string, g2: string, g3: string) => {
-            if (g1.length) {
-              output += '(' + g1
-              if (g1.length === 3) {
-                output += ')'
-                if (g2.length) {
-                  output += ' ' + g2
-                  if (g2.length === 3) {
-                    output += '-'
-                    if (g3.length) {
-                      output += g3
-                    }
-                  }
-                }
-              }
-            }
-            if (inputType === 'deleteContentBackward') {
-              if (input.length === 4 || input.length === 9) {
-                output = output.slice(0, -2)
-              }
-              if (input.length === 6 || input.length === 10) {
-                output = output.slice(0, -1)
-              }
-            }
-          }
-        )
-        return output
-      }
-      setValue(() => getFormattedPhoneNum(e))
-      onChange(name, getFormattedPhoneNum(e))
+    (input: string, countryCode: CountryCode) => {
+      const formatter = new AsYouType(countryCode)
+      const formattedInput = formatter.input(input)
+      setValue(formattedInput)
+
+      // Combine country code and national number for full E.164 format
+      const fullNumber = formatter.getNumber()?.number || ''
+      onChangeAction(name, fullNumber)
     },
-    [name, onChange]
+    [name, onChangeAction, countryCodeValue]
   )
 
   const uniqueId = useId()
@@ -100,6 +79,7 @@ export const FormTextField = ({ data, onChange }: Props) => {
     <div
       className={styles.container}
       data-width={data?.width}
+      data-is-i18l={data?.fieldType === 'tel' && data?.isInternational}
     >
       <label
         htmlFor={name + uniqueId}
@@ -111,6 +91,17 @@ export const FormTextField = ({ data, onChange }: Props) => {
         {data?.label}
       </label>
       <div className={styles.inputBase}>
+        {data?.fieldType === 'tel' && data?.isInternational && (
+          <FormCountryCodeSelect
+            label={'Country Code'}
+            required={data.required}
+            onChangeAction={countryCode => {
+              setCountryCodeValue(countryCode)
+              handleChangePhone(value, countryCode)
+            }}
+            onFocusAction={() => setShrink(true)}
+          />
+        )}
         <input
           className={classes(styles.input, styles.textField)}
           style={
@@ -127,7 +118,7 @@ export const FormTextField = ({ data, onChange }: Props) => {
           required={data?.required || undefined}
           onChange={
             data?.fieldType === 'tel'
-              ? handleChangePhone
+              ? e => handleChangePhone(e.target.value, countryCodeValue)
               : handleChangeText
           }
           onFocus={handleFocus}

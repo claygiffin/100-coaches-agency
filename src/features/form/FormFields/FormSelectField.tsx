@@ -17,10 +17,10 @@ import styles from './FormFields.module.scss'
 
 type Props = {
   data: Queries.FormSelectFieldFragment | null
-  onChange: (name: string | undefined, value: string) => void
+  onChangeAction: (name: string | undefined, value: string) => void
 }
 
-export const FormSelectField = ({ data, onChange }: Props) => {
+export const FormSelectField = ({ data, onChangeAction }: Props) => {
   const name = data?.label ? kebabCase(data?.label) : undefined
 
   const [shrink, setShrink] = useState(false)
@@ -46,9 +46,9 @@ export const FormSelectField = ({ data, onChange }: Props) => {
         option => option?.id === e.target.value
       )
       setValue(idToOptionObject?.value || '')
-      onChange(name, idToOptionObject?.value || '')
+      onChangeAction(name, idToOptionObject?.value || '')
     },
-    [name, onChange, data?.options]
+    [name, onChangeAction, data?.options]
   )
 
   const uniqueId = useId()
