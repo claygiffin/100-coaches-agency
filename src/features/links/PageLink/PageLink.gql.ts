@@ -16,6 +16,9 @@ export const PageLinkFragment = gql`
       ... on ThoughtLeadershipPageRecord {
         slug
       }
+      ... on ContactPageRecord {
+        slug
+      }
     }
   }
 `
