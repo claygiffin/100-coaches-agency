@@ -169,7 +169,10 @@ export const Form = ({
               )
           }
         })}
-        <div className={styles.buttonWrap} data-submit>
+        <div
+          className={styles.buttonWrap}
+          data-submit
+        >
           <div className={styles.button}>
             {/* Honeypot */}
             <input

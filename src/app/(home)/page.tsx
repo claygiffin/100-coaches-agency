@@ -19,8 +19,10 @@ import {
   HomeThoughtLeadershipSection,
   ThoughtLeadershipItemFragment,
 } from '@/features/home-sections'
-import { CompaniesSection } from '@/features/page-sections/CompaniesSection/CompaniesSection'
-import { CompaniesSectionFragment } from '@/features/page-sections/CompaniesSection/CompaniesSection.gql'
+import {
+  CompaniesSection,
+  CompaniesSectionFragment,
+} from '@/features/page-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 

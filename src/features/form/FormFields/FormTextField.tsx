@@ -53,10 +53,6 @@ export const FormTextField = ({ data, onChangeAction }: Props) => {
     [name, onChangeAction]
   )
 
-  // const formatter = useMemo(() => {
-  //   return new AsYouType(countryCodeValue)
-  // }, [countryCodeValue])
-
   const handleChangePhone = useCallback(
     (input: string, countryCode: CountryCode) => {
       const formatter = new AsYouType(countryCode)
@@ -67,7 +63,7 @@ export const FormTextField = ({ data, onChangeAction }: Props) => {
       const fullNumber = formatter.getNumber()?.number || ''
       onChangeAction(name, fullNumber)
     },
-    [name, onChangeAction, countryCodeValue]
+    [name, onChangeAction]
   )
 
   const uniqueId = useId()
