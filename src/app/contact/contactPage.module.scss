@@ -1,0 +1,31 @@
+.content {
+  display: grid;
+  justify-items: center;
+  padding: var(--row-108) var(--margin);
+}
+.heading {
+  text-align: center;
+  font-size: var(--fs-60);
+  margin: 0 0 0.5em;
+  em {
+    font-style: normal;
+    color: var(--color-goldShade1);
+  }
+}
+.intro {
+  max-width: 72ch;
+  > * {
+    font-size: var(--fs-21);
+    line-height: 1.75;
+  }
+  color: var(--color-gray40);
+  margin-bottom: 2em;
+}
+.form {
+  .content & {
+    max-width: 72ch;
+  }
+  [data-submit] {
+    justify-content: center;
+  }
+}

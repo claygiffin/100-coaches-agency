@@ -27,6 +27,13 @@
       flex-basis: calc(50% - var(--gap));
     }
   }
+  [data-variant='LIGHT'] & {
+    --text-color: var(--color-gray30);
+    --bg-color: rgba(0, 0, 0, 0.075);
+    --label-color: var(--color-gray50);
+    --highlight: var(--color-goldShade1);
+    --highlightText: var(--color-goldShade2);
+  }
 }
 .inputBase {
   display: flex;
@@ -218,6 +225,7 @@
   flex-basis: auto;
   align-self: center;
   opacity: 0;
+  font-weight: 400;
   div:has([data-shrink='true']) > div > & {
     opacity: 1;
   }

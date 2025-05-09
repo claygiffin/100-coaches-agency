@@ -13,9 +13,14 @@ import { Company } from './Company/Company'
 
 type Props = ComponentProps<'section'> & {
   data: Queries.CompaniesSectionFragment | null | undefined
+  variant?: 'DEFAULT' | 'ALT1'
 }
 
-export const CompaniesSection = ({ data, ...props }: Props) => {
+export const CompaniesSection = ({
+  data,
+  variant = 'DEFAULT',
+  ...props
+}: Props) => {
   const clipId = useId()
   const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
   const sectWidth = useElementWidth(sectionRef) || 0
@@ -29,6 +34,7 @@ export const CompaniesSection = ({ data, ...props }: Props) => {
         '--clip-id-url': `url(#${clipId})`,
         '--count': data?.companies.length,
       }}
+      data-variant={variant}
       {...props}
     >
       <svg
@@ -50,6 +56,7 @@ export const CompaniesSection = ({ data, ...props }: Props) => {
           </clipPath>
         </defs>
       </svg>
+      <div className={styles.background} />
 
       <MarkdownHeading
         className={styles.heading}

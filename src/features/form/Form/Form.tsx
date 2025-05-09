@@ -10,6 +10,7 @@ import {
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { LoadingSpinner } from '@/features/ui'
 import { useElementRect } from '@/hooks/useElementRect'
+import { classes } from '@/utils/css'
 
 import { FormSelectField } from '../FormFields/FormSelectField'
 import { FormTextArea } from '../FormFields/FormTextArea'
@@ -19,9 +20,15 @@ import { submitForm } from './actions'
 
 type Props = ComponentPropsWithoutRef<'section'> & {
   data: Queries.FormFragment | null | undefined
+  variant?: 'DARK' | 'LIGHT'
 }
 
-export const Form = ({ data, ...props }: Props) => {
+export const Form = ({
+  data,
+  variant = 'DARK',
+  className,
+  ...props
+}: Props) => {
   const [formRef, setFormRef] = useState<HTMLFormElement | null>(null)
   const [successRef, setSuccessRef] = useState<HTMLElement | null>(null)
 
@@ -104,7 +111,7 @@ export const Form = ({ data, ...props }: Props) => {
 
   return (
     <section
-      className={styles.wrapper}
+      className={classes(styles.wrapper, className)}
       {...props}
       style={{
         '--success-height': successHeight + 'px',
@@ -113,6 +120,7 @@ export const Form = ({ data, ...props }: Props) => {
       data-submitted={
         submitted ? true : submitting ? 'submitting' : false
       }
+      data-variant={variant}
     >
       <LoadingSpinner
         className={styles.spinner}
@@ -161,7 +169,7 @@ export const Form = ({ data, ...props }: Props) => {
               )
           }
         })}
-        <div className={styles.buttonWrap}>
+        <div className={styles.buttonWrap} data-submit>
           <div className={styles.button}>
             {/* Honeypot */}
             <input

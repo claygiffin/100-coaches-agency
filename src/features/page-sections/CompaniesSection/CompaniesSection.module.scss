@@ -6,12 +6,18 @@
   margin-top: -4vw;
   display: grid;
   justify-items: center;
+}
+.background {
+  @include absolute-fill;
   &:before {
     content: '';
     @include absolute-fill;
     background: linear-gradient(to bottom, var(--color-gray95), #fff);
     z-index: 0;
     clip-path: var(--clip-id-url);
+  }
+  [data-variant='ALT1'] & {
+    transform: scaleX(-1);
   }
 }
 .heading {

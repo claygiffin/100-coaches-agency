@@ -2,8 +2,6 @@ import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 
 import {
-  CompaniesSection,
-  CompaniesSectionFragment,
   HomeCoachesSection,
   HomeCoachesSectionFragment,
   HomeContact,
@@ -21,6 +19,8 @@ import {
   HomeThoughtLeadershipSection,
   ThoughtLeadershipItemFragment,
 } from '@/features/home-sections'
+import { CompaniesSection } from '@/features/page-sections/CompaniesSection/CompaniesSection'
+import { CompaniesSectionFragment } from '@/features/page-sections/CompaniesSection/CompaniesSection.gql'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 

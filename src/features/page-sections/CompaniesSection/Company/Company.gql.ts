@@ -1,3 +1,4 @@
+import { ResponsiveImageFragment } from '@/features/dato-image'
 import { gql } from 'graphql-tag'
 
 export const CompanyFragment = gql`
@@ -16,4 +17,5 @@ export const CompanyFragment = gql`
       alt
     }
   }
+  ${ResponsiveImageFragment}
 `
