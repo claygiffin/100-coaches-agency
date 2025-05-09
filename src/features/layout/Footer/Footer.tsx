@@ -98,7 +98,7 @@ export const Footer = () => {
         </Link>
         <Link
           className={styles.link}
-          href="/forms/contact"
+          href="/contact"
         >
           Find a Coach
         </Link>
