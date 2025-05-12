@@ -87,14 +87,14 @@ export const FormSelectField = ({ data, onChangeAction }: Props) => {
       <div className={styles.inputBase}>
         <select
           className={classes(styles.input, styles.select)}
-          style={
-            labelHeight && activeOptionHeight
-              ? {
-                  '--label-height': labelHeight + 'px',
-                  '--active-option-height': activeOptionHeight + 'px',
-                }
-              : {}
-          }
+          style={{
+            '--label-height': labelHeight
+              ? labelHeight + 'px'
+              : undefined,
+            '--active-option-height': activeOptionHeight
+              ? activeOptionHeight + 'px'
+              : undefined,
+          }}
           name={name}
           id={name + uniqueId}
           required={data?.required || undefined}

@@ -100,13 +100,11 @@ export const FormTextField = ({ data, onChangeAction }: Props) => {
         )}
         <input
           className={classes(styles.input, styles.textField)}
-          style={
-            labelHeight
-              ? {
-                  '--label-height': labelHeight + 'px',
-                }
-              : {}
-          }
+          style={{
+            '--label-height': labelHeight
+              ? labelHeight + 'px'
+              : undefined,
+          }}
           value={value}
           name={name}
           id={name + uniqueId}

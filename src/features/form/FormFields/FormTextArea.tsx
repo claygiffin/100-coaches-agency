@@ -59,13 +59,9 @@ export const FormTextArea = ({ data, onChangeAction }: Props) => {
   return (
     <div
       className={styles.container}
-      style={
-        labelHeight
-          ? {
-              '--label-height': labelHeight + 'px',
-            }
-          : {}
-      }
+      style={{
+        '--label-height': labelHeight ? labelHeight + 'px' : undefined,
+      }}
     >
       <label
         htmlFor={name + uniqueId}

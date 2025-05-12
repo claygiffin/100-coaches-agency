@@ -87,6 +87,9 @@
   transform-origin: 0 0;
   /* font-style: italic; */
   font-weight: 300;
+  .container:has(.select) & {
+    padding-right: 2em;
+  }
   &[data-shrink='true'] {
     transform: translate3d(0, -1.25em, 0) scale3d(0.75, 0.75, 1);
     font-weight: 400;
@@ -157,7 +160,7 @@
   min-height: max(
     3.333em,
     2em + var(--label-height),
-    var(--active-option-height)
+    var(--active-option-height, 0px)
   );
   transition: min-height 150ms ease;
 
