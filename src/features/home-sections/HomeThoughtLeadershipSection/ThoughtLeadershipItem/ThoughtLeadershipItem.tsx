@@ -30,7 +30,7 @@ export const ThoughtLeadershipItem = ({
         <DatoImageFocused
           data={data?.image?.responsiveImage}
           focalPoint={data?.image?.focalPoint}
-          sizes={`(max-width: ${variables.breakpoint_ml}) 90vw, 50vw`}
+          sizes={`(max-width: ${variables.breakpoint_ml}px) 90vw, 50vw`}
         />
       </div>
       <div className={styles.content}>
