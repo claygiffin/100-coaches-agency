@@ -28,9 +28,6 @@ export const FormFragment = gql`
       ... on SendEmailActionRecord {
         recipients
       }
-      ... on CreateActiveCampaignContactActionRecord {
-        updateIfExists
-      }
       ... on OpenDocumentActionRecord {
         document {
           filename

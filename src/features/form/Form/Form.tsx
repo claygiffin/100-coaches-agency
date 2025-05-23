@@ -71,26 +71,8 @@ export const Form = ({
         createHubspotContact:
           data?.onSubmit.find(
             action =>
-              action.__typename ===
-              'CreateHubspotContactRecord'
+              action.__typename === 'CreateHubspotContactActionRecord'
           ) && true,
-        createActiveCampaignContact:
-          data?.onSubmit.find(
-            action =>
-              action.__typename ===
-              'CreateActiveCampaignContactActionRecord'
-          ) && true,
-        updateACContactFields:
-          (
-            data?.onSubmit.find(
-              action =>
-                action.__typename ===
-                'CreateActiveCampaignContactActionRecord'
-            ) as Pick<
-              Queries.CreateActiveCampaignContactActionRecord,
-              'updateIfExists'
-            >
-          )?.updateIfExists || undefined,
       })
       if (response?.statusCode === 200) {
         setSubmitting(false)
