@@ -68,6 +68,12 @@ export const Form = ({
             }, [] as string[])
             .join(', ') || '',
         botField: botField.checked,
+        createHubspotContact:
+          data?.onSubmit.find(
+            action =>
+              action.__typename ===
+              'CreateHubspotContactRecord'
+          ) && true,
         createActiveCampaignContact:
           data?.onSubmit.find(
             action =>

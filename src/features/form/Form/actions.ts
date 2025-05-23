@@ -5,20 +5,14 @@ type submitFormProps = {
   n8nId?: string
   formName: string
   data: { [key: string]: string | null }
-  recipients: string
-  botField: boolean
-  createActiveCampaignContact?: boolean
-  updateACContactFields?: boolean
-}
+} & Record<string, unknown>
+
 export const submitForm = async ({
   siteName,
   formName,
   n8nId,
   data,
-  recipients,
-  botField,
-  createActiveCampaignContact,
-  updateACContactFields,
+  ...fields
 }: submitFormProps) => {
   try {
     const response = await fetch(
@@ -33,10 +27,7 @@ export const submitForm = async ({
           'form-name': formName,
           'n8n-id': n8nId,
           ...data,
-          recipients,
-          botField,
-          createActiveCampaignContact,
-          updateACContactFields,
+          ...fields,
         }),
       }
     )
