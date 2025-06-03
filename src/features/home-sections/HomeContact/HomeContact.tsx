@@ -3,7 +3,6 @@
 import { type ComponentProps, useId, useState } from 'react'
 
 import { DatoStructuredText } from '@/features/dato-structured-text'
-import { Form } from '@/features/form'
 import { DatoLink } from '@/features/links'
 import { AnimateIn, MarkdownHeading } from '@/features/ui'
 import {
