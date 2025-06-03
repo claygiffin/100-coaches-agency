@@ -4,6 +4,7 @@ import { type ComponentProps, useId, useState } from 'react'
 
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { Form } from '@/features/form'
+import { DatoLink } from '@/features/links'
 import { AnimateIn, MarkdownHeading } from '@/features/ui'
 import {
   useElementHeight,
@@ -67,11 +68,21 @@ export const HomeContact = ({ data, ...props }: Props) => {
           <DatoStructuredText data={data?.contactBody} />
         </AnimateIn>
         <AnimateIn
+          className={styles.cta}
+          fromBack
+        >
+          <DatoLink
+            isButton
+            data={data?.contactLink}
+            borderVariant={'ROUNDED'}
+          />
+        </AnimateIn>
+        {/* <AnimateIn
           className={styles.form}
           fromBack
         >
           <Form data={data?.contactForm} />
-        </AnimateIn>
+        </AnimateIn> */}
       </div>
     </section>
   )

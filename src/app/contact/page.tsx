@@ -3,7 +3,12 @@ import type { Metadata, NextPage } from 'next'
 import { toNextMetadata } from 'react-datocms'
 
 import { DatoStructuredText } from '@/features/dato-structured-text'
-import { Form, FormFragment } from '@/features/form'
+import {
+  Form,
+  FormFragment,
+  HubspotFormEmbed,
+  HubspotFormEmbedFragment,
+} from '@/features/form'
 import {
   CompaniesSection,
   CompaniesSectionFragment,
@@ -23,7 +28,12 @@ const query = gql`
         value
       }
       form {
-        ...Form
+        ... on FormRecord {
+          ...Form
+        }
+        ... on HubspotFormEmbedRecord {
+          ...HubspotFormEmbed
+        }
       }
       companiesSection {
         ...CompaniesSection
@@ -36,6 +46,7 @@ const query = gql`
     }
   }
   ${FormFragment}
+  ${HubspotFormEmbedFragment}
   ${CompaniesSectionFragment}
 `
 
@@ -54,6 +65,27 @@ const ContactPage: NextPage = async () => {
   } = await datoRequest<Queries.ContactPageQuery>({
     query,
   })
+  const getForm = () => {
+    switch (contactPage?.form.__typename) {
+      case 'FormRecord': {
+        return (
+          <Form
+            className={styles.form}
+            data={contactPage?.form}
+            variant={'LIGHT'}
+          />
+        )
+      }
+      case 'HubspotFormEmbedRecord': {
+        return (
+          <HubspotFormEmbed
+            className={styles.hubspot}
+            data={contactPage.form}
+          />
+        )
+      }
+    }
+  }
   return (
     <main>
       <section className={styles.content}>
@@ -66,11 +98,7 @@ const ContactPage: NextPage = async () => {
         <div className={styles.intro}>
           <DatoStructuredText data={contactPage?.intro} />
         </div>
-        <Form
-          className={styles.form}
-          data={contactPage?.form}
-          variant={'LIGHT'}
-        />
+        {getForm()}
       </section>
       <CompaniesSection
         data={contactPage?.companiesSection}

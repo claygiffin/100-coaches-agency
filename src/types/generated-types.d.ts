@@ -685,6 +685,8 @@ type CompanyRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+type ContactPageModelFormField = FormRecord | HubspotFormEmbedRecord;
+
 type ContactPageModelIntroField = {
   __typename?: 'ContactPageModelIntroField';
   blocks: Array<Scalars['String']['output']>;
@@ -711,7 +713,7 @@ type ContactPageRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime']['output'];
   companiesSection: CompaniesSectionRecord;
   createdAt: Scalars['DateTime']['output'];
-  form: FormRecord;
+  form: ContactPageModelFormField;
   heading?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   intro?: Maybe<ContactPageModelIntroField>;
@@ -1508,6 +1510,7 @@ type HomePageRecord = RecordInterface & {
   contactBody?: Maybe<HomePageModelContactBodyField>;
   contactForm: FormRecord;
   contactHeading?: Maybe<Scalars['String']['output']>;
+  contactLink?: Maybe<PageLinkRecord>;
   createdAt: Scalars['DateTime']['output'];
   heroHeading1: Scalars['String']['output'];
   heroHeading2: Scalars['String']['output'];
@@ -1533,6 +1536,90 @@ type HomePageRecord = RecordInterface & {
 
 /** Record of type Home Page (home_page) */
 type HomePageRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+type HubspotFormEmbedModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<HubspotFormEmbedModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<HubspotFormEmbedModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  formId?: InputMaybe<StringFilter>;
+  formName?: InputMaybe<StringFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  portalId?: InputMaybe<StringFilter>;
+  region?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum HubspotFormEmbedModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  formId_ASC = 'formId_ASC',
+  formId_DESC = 'formId_DESC',
+  formName_ASC = 'formName_ASC',
+  formName_DESC = 'formName_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  portalId_ASC = 'portalId_ASC',
+  portalId_DESC = 'portalId_DESC',
+  region_ASC = 'region_ASC',
+  region_DESC = 'region_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Hubspot Form Embed (hubspot_form_embed) */
+type HubspotFormEmbedRecord = RecordInterface & {
+  __typename?: 'HubspotFormEmbedRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  formId: Scalars['String']['output'];
+  formName?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  portalId: Scalars['String']['output'];
+  region: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Hubspot Form Embed (hubspot_form_embed) */
+type HubspotFormEmbedRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3727,6 +3814,8 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allFormsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allHubspotFormEmbedsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allNewsItemsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allSWCategoriesMeta: CollectionMetadata;
@@ -3753,6 +3842,8 @@ type Query = {
   /** Returns a collection of records */
   allForms: Array<FormRecord>;
   /** Returns a collection of records */
+  allHubspotFormEmbeds: Array<HubspotFormEmbedRecord>;
+  /** Returns a collection of records */
   allNewsItems: Array<NewsItemRecord>;
   /** Returns a collection of records */
   allSWCategories: Array<SWCategoryRecord>;
@@ -3778,6 +3869,8 @@ type Query = {
   formModal?: Maybe<FormModalRecord>;
   /** Returns the single instance record */
   homePage?: Maybe<HomePageRecord>;
+  /** Returns a specific record */
+  hubspotFormEmbed?: Maybe<HubspotFormEmbedRecord>;
   /** Returns the single instance record */
   nav?: Maybe<NavRecord>;
   /** Returns a specific record */
@@ -3837,6 +3930,14 @@ type Query_allFormModalsMetaArgs = {
 type Query_allFormsMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<FormModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allHubspotFormEmbedsMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HubspotFormEmbedModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3960,6 +4061,17 @@ type QueryallFormsArgs = {
 
 
 /** The query root for this schema */
+type QueryallHubspotFormEmbedsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HubspotFormEmbedModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HubspotFormEmbedModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
 type QueryallNewsItemsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<NewsItemModelFilter>;
@@ -4075,6 +4187,15 @@ type QueryformModalArgs = {
 type QueryhomePageArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type QueryhubspotFormEmbedArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HubspotFormEmbedModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HubspotFormEmbedModelOrderBy>>>;
 };
 
 
@@ -5161,7 +5282,7 @@ type focalPoint = {
 type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, introHeading?: string | null, promiseHeading: string, marshallHeading?: string | null, resultsHeading?: string | null, contactHeading?: string | null, companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, coachesSection: { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> }, thoughtLeadershipItems: Array<{ __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }>, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }>, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }, marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, resultsBody?: { __typename?: 'HomePageModelResultsBodyField', value: unknown } | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } } | null };
+type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, introHeading?: string | null, promiseHeading: string, marshallHeading?: string | null, resultsHeading?: string | null, contactHeading?: string | null, companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, coachesSection: { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> }, thoughtLeadershipItems: Array<{ __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }>, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }>, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }, marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, resultsBody?: { __typename?: 'HomePageModelResultsBodyField', value: unknown } | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactLink?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } } | null };
 
 type AllArticleModalQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5253,7 +5374,7 @@ type AllCoachesPageQuery = { __typename?: 'Query', allCoaches: Array<{ __typenam
 type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ContactPageQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageRecord', heading?: string | null, intro?: { __typename?: 'ContactPageModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> }, companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null };
+type ContactPageQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageRecord', heading?: string | null, intro?: { __typename?: 'ContactPageModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } | { __typename: 'HubspotFormEmbedRecord', id: string, portalId: string, formId: string, region: string }, companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null };
 
 type AllFormPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5294,9 +5415,11 @@ type FormTextFieldFragment = { __typename?: 'FormTextFieldRecord', id: string, l
 
 type FormModalFragment = { __typename: 'FormModalRecord', id: string, heading?: string | null, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } };
 
+type HubspotFormEmbedFragment = { __typename: 'HubspotFormEmbedRecord', id: string, portalId: string, formId: string, region: string };
+
 type HomeCoachesSectionFragment = { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> };
 
-type HomeContactFragment = { __typename?: 'HomePageRecord', contactHeading?: string | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } };
+type HomeContactFragment = { __typename?: 'HomePageRecord', contactHeading?: string | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactLink?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } };
 
 type HomeHeroFragment = { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }> };
 
