@@ -85,6 +85,11 @@ export const Nav = ({ data, className, ...props }: Props) => {
             <DatoLink
               data={data?.button}
               className={classes(styles.link, styles.button)}
+              onClick={
+                data?.button?.__typename !== 'CoachMenuLinkRecord'
+                  ? handleClose
+                  : undefined
+              }
             />
           </div>
         </nav>
