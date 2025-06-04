@@ -65,7 +65,7 @@ export const CoachCategoryCta = ({ data, ...props }: Props) => {
         colorVariant="GOLD_DARK"
         className={styles.button}
         as={Link}
-        href={'/forms/contact'}
+        href={'/contact'}
       />
     </section>
   )
