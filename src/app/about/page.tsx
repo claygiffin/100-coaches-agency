@@ -7,7 +7,6 @@ import {
   AboutHowFragment,
   AboutPartner,
   AboutPartnerFragment,
-  AboutServices,
   AboutServicesFragment,
   AboutTeam,
   PageIntro,

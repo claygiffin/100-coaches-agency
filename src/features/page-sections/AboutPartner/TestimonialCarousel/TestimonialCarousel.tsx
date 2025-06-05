@@ -4,6 +4,7 @@ import { type ComponentProps, useRef } from 'react'
 
 import { Carousel } from '@/features/carousel'
 import { Testimonial } from '@/features/testimonials'
+import { classes } from '@/utils/css'
 
 import styles from './TestimonialCarousel.module.scss'
 
@@ -11,20 +12,20 @@ type Props = ComponentProps<'div'> & {
   data: Queries.AboutPartnerFragment['testimonials'] | null | undefined
 }
 
-export const TestimonialCarousel = ({ data, ...props }: Props) => {
+export const TestimonialCarousel = ({
+  data,
+  className,
+  ...props
+}: Props) => {
   const navContainerRef = useRef<HTMLDivElement>(null)
   return (
-    // <div>
-    //   <div
-    //     className={styles.nav}
-    //     ref={navContainerRef}
-    //   />
     <Carousel
       snap={true}
       slideCount={data?.length}
-      className={styles.carousel}
+      className={classes(styles.carousel, className)}
       navContainer={navContainerRef.current}
       navVariant={'OVERLAY'}
+      {...props}
     >
       {data?.map(testimonial => (
         <Testimonial
@@ -33,6 +34,5 @@ export const TestimonialCarousel = ({ data, ...props }: Props) => {
         />
       ))}
     </Carousel>
-    // </div>
   )
 }
