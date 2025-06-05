@@ -8,7 +8,7 @@
   --slide-width: #{widthInCols($count: 9)};
   @include media('<ms') {
     --slide-width: #{widthInCols($count: 11)};
-  }
+  } 
   @include media('<s') {
     --slide-width: #{widthInCols($count: 12)};
   }
