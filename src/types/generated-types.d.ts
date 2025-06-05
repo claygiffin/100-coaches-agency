@@ -42,6 +42,14 @@ type AboutPageModelHowBodyField = {
 
 type AboutPageModelHowLinkField = FormLinkRecord | PageLinkRecord;
 
+type AboutPageModelPartnerBodyField = {
+  __typename?: 'AboutPageModelPartnerBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
 /** Record of type About Page (about_page) */
 type AboutPageRecord = RecordInterface & {
   __typename?: 'AboutPageRecord';
@@ -66,11 +74,14 @@ type AboutPageRecord = RecordInterface & {
   howHeading: Scalars['String']['output'];
   howLink?: Maybe<AboutPageModelHowLinkField>;
   id: Scalars['ItemId']['output'];
+  partnerBody?: Maybe<AboutPageModelPartnerBodyField>;
+  partnerHeading?: Maybe<Scalars['String']['output']>;
   seo?: Maybe<SeoField>;
   services: Array<ServiceRecord>;
   servicesHeading: Scalars['String']['output'];
   slug: Scalars['String']['output'];
   teamHeading: Scalars['String']['output'];
+  testimonials: Array<TestimonialRecord>;
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -3821,6 +3832,8 @@ type Query = {
   _allSWCategoriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allTeamMembersMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allTestimonialsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: CollectionMetadata;
   /** Returns the single instance record */
@@ -3849,6 +3862,8 @@ type Query = {
   allSWCategories: Array<SWCategoryRecord>;
   /** Returns a collection of records */
   allTeamMembers: Array<TeamMemberRecord>;
+  /** Returns a collection of records */
+  allTestimonials: Array<TestimonialRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns a specific record */
@@ -3879,6 +3894,8 @@ type Query = {
   sWCategory?: Maybe<SWCategoryRecord>;
   /** Returns a specific record */
   teamMember?: Maybe<TeamMemberRecord>;
+  /** Returns a specific record */
+  testimonial?: Maybe<TestimonialRecord>;
   /** Returns the single instance record */
   thoughtLeadershipPage?: Maybe<ThoughtLeadershipPageRecord>;
   /** Returns a specific asset */
@@ -3962,6 +3979,14 @@ type Query_allSWCategoriesMetaArgs = {
 type Query_allTeamMembersMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<TeamMemberModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allTestimonialsMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<TestimonialModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -4105,6 +4130,17 @@ type QueryallTeamMembersArgs = {
 
 
 /** The query root for this schema */
+type QueryallTestimonialsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<TestimonialModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<TestimonialModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
 type QueryallUploadsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<UploadFilter>;
@@ -4230,6 +4266,15 @@ type QueryteamMemberArgs = {
   filter?: InputMaybe<TeamMemberModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<TeamMemberModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QuerytestimonialArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<TestimonialModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<TestimonialModelOrderBy>>>;
 };
 
 
@@ -4720,6 +4765,90 @@ type TeamMemberRecord_seoMetaTagsArgs = {
 /** Record of type Team Member (team_member) */
 type TeamMemberRecordjobTitleExtendedArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+type TestimonialModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<TestimonialModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<TestimonialModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  attribution?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  logo?: InputMaybe<FileFilter>;
+  testimonial?: InputMaybe<StructuredTextFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum TestimonialModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  attribution_ASC = 'attribution_ASC',
+  attribution_DESC = 'attribution_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+type TestimonialModelTestimonialField = {
+  __typename?: 'TestimonialModelTestimonialField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Record of type Testimonial (testimonial) */
+type TestimonialRecord = RecordInterface & {
+  __typename?: 'TestimonialRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  attribution: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  logo: FileField;
+  testimonial: TestimonialModelTestimonialField;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Testimonial (testimonial) */
+type TestimonialRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 /** Specifies how to filter text fields */
@@ -5335,7 +5464,7 @@ type TeamMemberModalQuery = { __typename?: 'Query', teamMember?: { __typename: '
 type AboutPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename: 'AboutPageRecord', aboutHeading: string, teamHeading: string, slug: string, servicesHeading: string, id: string, howHeading: string, aboutBody?: { __typename?: 'AboutPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }>, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null } | null, allTeamMembers: Array<{ __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }> };
+type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename: 'AboutPageRecord', aboutHeading: string, teamHeading: string, slug: string, servicesHeading: string, id: string, howHeading: string, partnerHeading?: string | null, aboutBody?: { __typename?: 'AboutPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }>, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, partnerBody?: { __typename?: 'AboutPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> } | null, allTeamMembers: Array<{ __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }> };
 
 type AllArticlePageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5453,6 +5582,8 @@ type PageLinkFragment = { __typename: 'PageLinkRecord', id: string, linkText: st
 
 type AboutHowFragment = { __typename: 'AboutPageRecord', id: string, howHeading: string, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
 
+type AboutPartnerFragment = { __typename: 'AboutPageRecord', id: string, partnerHeading?: string | null, partnerBody?: { __typename?: 'AboutPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
+
 type AboutServicesFragment = { __typename?: 'AboutPageRecord', servicesHeading: string, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }> };
 
 type CoachCategoryCtaFragment = { __typename: 'CoachCategoryCtaRecord', id: string, ctaHeading: string, ctaLinkText?: string | null, ctaBody?: { __typename?: 'CoachCategoryCtaModelCtaBodyField', value: unknown } | null };
@@ -5460,5 +5591,7 @@ type CoachCategoryCtaFragment = { __typename: 'CoachCategoryCtaRecord', id: stri
 type CompaniesSectionFragment = { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
 
 type CompanyFragment = { __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } };
+
+type TestimonialFragment = { __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } };
 
 }

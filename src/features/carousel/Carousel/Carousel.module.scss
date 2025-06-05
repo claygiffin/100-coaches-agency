@@ -1,0 +1,59 @@
+@use '@/theme/mixins' as *;
+
+.outer {
+  --scroll-padding: var(--margin);
+  position: relative;
+  overflow: hidden;
+  // &[data-variant='ABOVE'] {
+  //   &[data-visible='true'] {
+  //     margin-top: 0 !important;
+  //   }
+  //   &[data-visible='false'] {
+  //     margin-top: 1.5rem;
+  //   }
+  // }
+}
+.scrollWidth {
+  width: var(--scroll-width, 100%);
+  position: absolute;
+}
+.slider {
+  position: relative;
+  height: 100%;
+  > div {
+    position: relative;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: visible;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+
+    // Hide scrollbar
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  [data-loaded='true'] &[data-snap='true'] > div {
+    scroll-snap-type: x mandatory;
+  }
+}
+.content {
+  position: relative;
+  min-height: min-content;
+  box-sizing: content-box;
+  display: grid;
+  grid-column-gap: var(--gtr);
+  grid-template-columns: repeat(var(--slide-count), var(--slide-width));
+  align-items: flex-start;
+  padding: 0 var(--scroll-padding);
+
+  > * {
+    scroll-snap-align: start;
+  }
+}
+.scrollArea {
+  scroll-padding-left: var(--scroll-padding);
+}

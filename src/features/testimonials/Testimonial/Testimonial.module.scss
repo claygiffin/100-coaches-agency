@@ -1,0 +1,114 @@
+@use '@/theme/mixins' as *;
+
+.container {
+  position: relative;
+  display: flex;
+  column-gap: 1em;
+  align-items: flex-start;
+  padding: 2em 2em 2em 0;
+  box-sizing: border-box;
+  height: 100%;
+  --logo-size: calc(1.5 * var(--fs-144));
+  &:before {
+    position: absolute;
+    content: '';
+    background: var(--color-gray90);
+    width: calc(100% - var(--logo-size) / 2);
+    height: 100%;
+    top: 0;
+    right: 0;
+    transition: opacity 500ms ease;
+  }
+  &[data-in-view='false']:before {
+    opacity: 0.75;
+  }
+  @include media('<m') {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1em 2em;
+    &:before {
+      width: 100%;
+      height: calc(100% - var(--logo-size) / 2);
+      top: auto;
+      bottom: 0;
+    }
+  }
+}
+.logo {
+  position: relative;
+  font-size: var(--logo-size);
+  width: 1em;
+  height: 1em;
+  padding: 0.2em;
+  box-sizing: border-box;
+  background-color: #fff;
+  flex: none;
+  display: flex;
+  border-radius: 50%;
+}
+.image {
+  width: 100%;
+  height: auto;
+  transition: opacity 500ms ease;
+  .container[data-in-view='false'] & {
+    opacity: 0.2;
+  }
+}
+.blockquote {
+  position: relative;
+  font-size: var(--fs-21);
+  color: var(--color-gray30);
+  font-family: var(--ff-display);
+  margin-top: -0.125em;
+  &:before {
+    content: '“';
+    font-size: 300%;
+    font-weight: 450;
+    position: absolute;
+    top: 0;
+    left: -0.5em;
+    opacity: 0.25;
+  }
+  transition: opacity 500ms ease;
+  .container[data-in-view='false'] & {
+    opacity: 0.15;
+  }
+  @include media('<ms') {
+    font-size: var(--fs-18);
+  }
+  @include media('<s') {
+    font-size: var(--fs-16);
+    margin: 0 1.5em;
+  }
+}
+.testimonial {
+  font-style: italic;
+  p {
+    line-height: 2;
+    font-weight: 350;
+    margin: 0.5em 0;
+    &:last-child {
+      &:after {
+        display: inline-block;
+        width: 0px;
+        overflow: visible;
+        line-height: 0;
+        content: '”';
+        font-size: 275%;
+        font-weight: 450;
+        top: 0;
+        left: -0.5em;
+        opacity: 0.25;
+        transform: translateY(0.425em);
+      }
+    }
+  }
+}
+.attribution {
+  font-family: var(--ff-body);
+  font-size: var(--fs-15);
+  text-transform: uppercase;
+  margin-top: 2em;
+  font-weight: 500;
+  opacity: 0.75;
+}
