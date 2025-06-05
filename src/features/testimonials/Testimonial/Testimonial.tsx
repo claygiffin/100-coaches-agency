@@ -14,7 +14,7 @@ type Props = ComponentProps<'div'> & {
 }
 
 export const Testimonial = ({ data, ...props }: Props) => {
-  const { inView, ref } = useInView({ threshold: 1, rootMargin: '100% 0%' })
+  const { inView, ref } = useInView({ rootMargin: '100% -49%' })
   const getLogo = () => {
     switch (data.logo.format) {
       case 'svg': {
