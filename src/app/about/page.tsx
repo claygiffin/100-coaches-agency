@@ -5,6 +5,8 @@ import { TeamMemberFragment } from '@/features/coaches'
 import {
   AboutHow,
   AboutHowFragment,
+  AboutPartner,
+  AboutPartnerFragment,
   AboutServices,
   AboutServicesFragment,
   AboutTeam,
@@ -24,6 +26,7 @@ const query = gql`
       }
       ...AboutServices
       ...AboutHow
+      ...AboutPartner
       teamHeading
       slug
       _seoMetaTags {
@@ -38,6 +41,7 @@ const query = gql`
   }
   ${AboutServicesFragment}
   ${AboutHowFragment}
+  ${AboutPartnerFragment}
   ${TeamMemberFragment}
 `
 
@@ -64,8 +68,9 @@ const AboutPage: NextPage = async () => {
         heading={aboutPage?.aboutHeading}
         body={aboutPage?.aboutBody}
       />
-      <AboutServices data={aboutPage} />
+      {/* <AboutServices data={aboutPage} /> */}
       <AboutHow data={aboutPage} />
+      <AboutPartner data={aboutPage} />
       <AboutTeam
         team={allTeamMembers}
         heading={aboutPage?.teamHeading}

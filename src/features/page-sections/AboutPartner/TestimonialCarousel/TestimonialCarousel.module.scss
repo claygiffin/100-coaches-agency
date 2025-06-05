@@ -1,0 +1,20 @@
+@use '@/theme/mixins' as *;
+
+.carousel {
+  grid-column: 1 / -1;
+  width: 100vw;
+  --gtr: var(--gtr-36);
+  --margin: calc(var(--gtr-108) * 0.75);
+  --slide-width: #{widthInCols($count: 9)};
+  @include media('<ms') {
+    --slide-width: #{widthInCols($count: 11)};
+  } 
+  @include media('<s') {
+    --slide-width: #{widthInCols($count: 12)};
+  }
+  --arrow-color: var(--color-gray20);
+  --arrow-color-hover: var(--color-goldShade1);
+  --arrow-color-disabled: var(--color-gray85);
+}
+.nav {
+}

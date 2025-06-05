@@ -4,6 +4,9 @@
 
 export * from './AboutHow/AboutHow.gql'
 export * from './AboutHow/AboutHow'
+export * from './AboutPartner/AboutPartner.gql'
+export * from './AboutPartner/AboutPartner'
+export * from './AboutPartner/TestimonialCarousel/TestimonialCarousel'
 export * from './AboutServices/AboutServices.gql'
 export * from './AboutServices/AboutServices'
 export * from './AboutTeam/AboutTeam'
