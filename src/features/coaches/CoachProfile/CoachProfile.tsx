@@ -93,7 +93,7 @@ export const CoachProfile = ({ data }: CoachProfileProps) => {
           <h2>{data?.jobTitleExtended || data?.jobTitle}</h2>
           <ArrowButton
             as={Link}
-            href="/forms/contact"
+            href="/contact"
             styleVariant="INLINE"
             text="Work With Us"
             scroll={false}

@@ -18,7 +18,7 @@ export const ContactButton = ({ text }: Props) => {
 
   return (
     <Link
-      href="/forms/contact"
+      href="/contact"
       className={styles.button}
       style={{ '--text-width': textWidth + 'px' }}
     >
