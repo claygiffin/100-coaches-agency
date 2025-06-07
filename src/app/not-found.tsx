@@ -10,7 +10,7 @@ const NotFoundPage: NextPage = async () => {
       <h1>
         <b>404:</b> Page not found
       </h1>
-      <p>{`It looks like the page your looking for doesn\'t exist.`}</p>
+      <p>{`It looks like the page you're looking for doesn\'t exist.`}</p>
     </main>
   )
 }

@@ -31,7 +31,7 @@ export function Modal({
   const openDuration = 600
   const closeDuration = 400
 
-  const timeout = useRef(setTimeout(() => {}))
+  const timeout = useRef<NodeJS.Timeout>(null)
 
   useEffect(() => {
     if (!dialogRef?.open) {
@@ -41,7 +41,10 @@ export function Modal({
       }, 10)
     }
     return () => {
-      clearTimeout(timeout.current)
+      if (timeout.current) {
+        clearTimeout(timeout.current)
+      }
+      dialogRef?.close()
     }
   }, [dialogRef])
 

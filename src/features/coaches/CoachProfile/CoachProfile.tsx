@@ -96,7 +96,6 @@ export const CoachProfile = ({ data }: CoachProfileProps) => {
             href="/contact"
             styleVariant="INLINE"
             text="Work With Us"
-            scroll={false}
           />
         </div>
         <div className={styles.photoWrap}>
