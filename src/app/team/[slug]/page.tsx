@@ -3,6 +3,7 @@ import type { Metadata, NextPage } from 'next'
 import { toNextMetadata } from 'react-datocms'
 
 import { CoachProfile, TeamMemberFragment } from '@/features/coaches'
+import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './teamMemberPage.module.scss'
@@ -52,7 +53,9 @@ export const generateMetadata = async ({
     query,
     variables: { slug },
   })
-  return toNextMetadata(teamMember?._seoMetaTags || [])
+  return generateDatoCmsMetadata(teamMember?._seoMetaTags || [], {
+    canonicalSlug: `team/${slug}`,
+  })
 }
 
 const TeamMemberModal: NextPage<Props> = async ({ params }) => {

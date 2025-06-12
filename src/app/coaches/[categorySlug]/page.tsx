@@ -15,6 +15,7 @@ import {
   CoachCategoryCta,
   CoachCategoryCtaFragment,
 } from '@/features/page-sections'
+import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './coachCategoryPage.module.scss'
@@ -87,7 +88,9 @@ export const generateMetadata = async ({
     query,
     variables: { categorySlug },
   })
-  return toNextMetadata(coachCategory?._seoMetaTags || [])
+  return generateDatoCmsMetadata(coachCategory?._seoMetaTags || [], {
+    canonicalSlug: `coaches/${categorySlug}`,
+  })
 }
 
 const CoachCategoryPage: NextPage<Props> = async ({ params }) => {

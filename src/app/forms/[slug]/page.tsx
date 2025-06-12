@@ -3,6 +3,7 @@ import type { Metadata, NextPage } from 'next'
 import { toNextMetadata } from 'react-datocms'
 
 import { FormModal, FormModalFragment } from '@/features/form'
+import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './formPage.module.scss'
@@ -56,7 +57,9 @@ export const generateMetadata = async ({
     query,
     variables: { slug },
   })
-  return toNextMetadata(formModal?._seoMetaTags || [])
+  return generateDatoCmsMetadata(formModal?._seoMetaTags || [], {
+    canonicalSlug: `forms/${slug}`,
+  })
 }
 
 const FormPage: NextPage<Props> = async ({ params }) => {

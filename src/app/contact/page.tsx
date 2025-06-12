@@ -13,6 +13,7 @@ import {
   CompaniesSection,
   CompaniesSectionFragment,
 } from '@/features/page-sections'
+import { generateDatoCmsMetadata } from '@/features/seo'
 import { MarkdownHeading } from '@/features/ui'
 import { datoRequest } from '@/lib/datocms-fetch'
 
@@ -56,7 +57,9 @@ export const generateMetadata = async (): Promise<Metadata> => {
   } = await datoRequest<Queries.ContactPageQuery>({
     query,
   })
-  return toNextMetadata(contactPage?._seoMetaTags || [])
+  return generateDatoCmsMetadata(contactPage?._seoMetaTags || [], {
+    canonicalSlug: 'contact',
+  })
 }
 
 const ContactPage: NextPage = async () => {

@@ -57,7 +57,7 @@ export const generateMetadata = async ({
     variables: { slug },
   })
   return generateDatoCmsMetadata(article?._seoMetaTags || [], {
-    canonicalSlug: slug,
+    canonicalSlug: `articles/${slug}`,
   })
 }
 
