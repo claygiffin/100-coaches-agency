@@ -20,7 +20,7 @@ import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './coachCategoryPage.module.scss'
 
-// export const dynamic = 'force-static'
+export const dynamic = 'force-static'
 
 type Props = {
   params: Promise<{
@@ -34,7 +34,7 @@ export async function generateStaticParams() {
   } = await datoRequest<Queries.AllCoachCategoryPageQuery>({
     query: gql`
       query AllCoachCategoryPage {
-        allCoachCategories(first: 10000) {
+        allCoachCategories(first: 5000) {
           categorySlug
         }
       }
