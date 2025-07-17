@@ -1,6 +1,5 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
-import { toNextMetadata } from 'react-datocms'
 
 import { FormModal, FormModalFragment } from '@/features/form'
 import { generateDatoCmsMetadata } from '@/features/seo'
