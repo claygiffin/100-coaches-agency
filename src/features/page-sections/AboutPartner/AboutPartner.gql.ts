@@ -16,6 +16,7 @@ export const AboutPartnerFragment = gql`
   }
   ${TestimonialFragment}
 `
+
 export const AdvisorsPartnerFragment = gql`
   fragment AdvisorsPartner on AdvisorsPageRecord {
     __typename
