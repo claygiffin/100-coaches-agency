@@ -4,7 +4,11 @@
   @include base-grid;
   padding: var(--gtr-108) 0;
 }
-
+.logo {
+  display: block;
+  height: calc(2 * var(--fs-144));
+  width: auto;
+}
 .heading {
   grid-column: 2 / -2;
   color: var(--color-goldShade1);

@@ -16,3 +16,17 @@ export const AboutPartnerFragment = gql`
   }
   ${TestimonialFragment}
 `
+export const AdvisorsPartnerFragment = gql`
+  fragment AdvisorsPartner on AdvisorsPageRecord {
+    __typename
+    id
+    partnerHeading
+    partnerBody {
+      value
+    }
+    testimonials {
+      ...Testimonial
+    }
+  }
+  ${TestimonialFragment}
+`

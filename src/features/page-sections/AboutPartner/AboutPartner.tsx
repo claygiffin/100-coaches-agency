@@ -13,7 +13,11 @@ import styles from './AboutPartner.module.scss'
 import { TestimonialCarousel } from './TestimonialCarousel/TestimonialCarousel'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.AboutPartnerFragment | null | undefined
+  data:
+    | Queries.AboutPartnerFragment
+    | Queries.AdvisorsPartnerFragment
+    | null
+    | undefined
 }
 
 export const AboutPartner = ({ data, ...props }: Props) => {

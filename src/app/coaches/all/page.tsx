@@ -34,8 +34,8 @@ export const generateMetadata = async (): Promise<Metadata> => {
     description:
       'Explore our global network of the world’s most experienced executive and leadership coaches and advisors.',
     alternates: {
-      canonical: `coaches/all`
-    }
+      canonical: `coaches/all`,
+    },
   }
 }
 

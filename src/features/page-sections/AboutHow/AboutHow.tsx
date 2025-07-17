@@ -13,7 +13,11 @@ import {
 import styles from './AboutHow.module.scss'
 
 type Props = {
-  data: Queries.AboutHowFragment | null | undefined
+  data:
+    | Queries.AboutHowFragment
+    | Queries.AdvisorsHowFragment
+    | null
+    | undefined
 }
 
 export const AboutHow = ({ data }: Props) => {

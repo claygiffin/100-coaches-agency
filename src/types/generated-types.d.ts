@@ -91,6 +91,71 @@ type AboutPageRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+type AdvisorsPageModelAboutBodyField = {
+  __typename?: 'AdvisorsPageModelAboutBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type AdvisorsPageModelHowBodyField = {
+  __typename?: 'AdvisorsPageModelHowBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type AdvisorsPageModelHowLinkField = FormLinkRecord | PageLinkRecord;
+
+type AdvisorsPageModelPartnerBodyField = {
+  __typename?: 'AdvisorsPageModelPartnerBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Record of type Advisors Page (advisors_page) */
+type AdvisorsPageRecord = RecordInterface & {
+  __typename?: 'AdvisorsPageRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  aboutBody?: Maybe<AdvisorsPageModelAboutBodyField>;
+  aboutHeading: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  howBody: AdvisorsPageModelHowBodyField;
+  howDetails: Array<TitleDescriptionRecord>;
+  howHeading: Scalars['String']['output'];
+  howLink?: Maybe<AdvisorsPageModelHowLinkField>;
+  id: Scalars['ItemId']['output'];
+  logo?: Maybe<FileField>;
+  partnerBody?: Maybe<AdvisorsPageModelPartnerBodyField>;
+  partnerHeading?: Maybe<Scalars['String']['output']>;
+  seo?: Maybe<SeoField>;
+  slug: Scalars['String']['output'];
+  testimonials: Array<TestimonialRecord>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Advisors Page (advisors_page) */
+type AdvisorsPageRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type AlertBarModelAlertTextField = {
   __typename?: 'AlertBarModelAlertTextField';
   blocks: Array<Scalars['String']['output']>;
@@ -3841,6 +3906,8 @@ type Query = {
   /** Returns the single instance record */
   aboutPage?: Maybe<AboutPageRecord>;
   /** Returns the single instance record */
+  advisorsPage?: Maybe<AdvisorsPageRecord>;
+  /** Returns the single instance record */
   alertBar?: Maybe<AlertBarRecord>;
   /** Returns a collection of records */
   allArticleCategories: Array<ArticleCategoryRecord>;
@@ -4007,6 +4074,13 @@ type Query_siteArgs = {
 
 /** The query root for this schema */
 type QueryaboutPageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type QueryadvisorsPageArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -5466,6 +5540,11 @@ type AboutPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename: 'AboutPageRecord', aboutHeading: string, teamHeading: string, slug: string, servicesHeading: string, id: string, howHeading: string, partnerHeading?: string | null, aboutBody?: { __typename?: 'AboutPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }>, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, partnerBody?: { __typename?: 'AboutPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> } | null, allTeamMembers: Array<{ __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }> };
 
+type AdvisorsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AdvisorsPageQuery = { __typename?: 'Query', advisorsPage?: { __typename: 'AdvisorsPageRecord', aboutHeading: string, slug: string, id: string, howHeading: string, partnerHeading?: string | null, logo?: { __typename?: 'FileField', url: string, alt?: string | null, title?: string | null } | null, aboutBody?: { __typename?: 'AdvisorsPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, howBody: { __typename?: 'AdvisorsPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, partnerBody?: { __typename?: 'AdvisorsPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> } | null };
+
 type AllArticlePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5582,7 +5661,11 @@ type PageLinkFragment = { __typename: 'PageLinkRecord', id: string, linkText: st
 
 type AboutHowFragment = { __typename: 'AboutPageRecord', id: string, howHeading: string, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
 
+type AdvisorsHowFragment = { __typename: 'AdvisorsPageRecord', id: string, howHeading: string, howBody: { __typename?: 'AdvisorsPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
+
 type AboutPartnerFragment = { __typename: 'AboutPageRecord', id: string, partnerHeading?: string | null, partnerBody?: { __typename?: 'AboutPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
+
+type AdvisorsPartnerFragment = { __typename: 'AdvisorsPageRecord', id: string, partnerHeading?: string | null, partnerBody?: { __typename?: 'AdvisorsPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
 
 type AboutServicesFragment = { __typename?: 'AboutPageRecord', servicesHeading: string, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }> };
 
