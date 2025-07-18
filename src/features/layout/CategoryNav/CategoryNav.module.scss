@@ -27,7 +27,7 @@
 .navItems {
   display: flex;
 
-  [data-collapsed='true'] & {
+  .nav[data-collapsed='true'] & {
     position: absolute;
     left: 0;
     top: 0;
