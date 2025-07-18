@@ -6,6 +6,7 @@
   flex-direction: column;
   cursor: pointer;
   text-decoration: none;
+  max-width: var(--max-width);
 }
 
 .imageWrap {
