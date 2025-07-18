@@ -58,13 +58,13 @@ const AdvisorsPage: NextPage = async () => {
   })
   return (
     <main>
-      <PageIntro
+      {/* <PageIntro
         logo={advisorsPage?.logo}
         heading={advisorsPage?.aboutHeading}
         body={advisorsPage?.aboutBody}
       />
       <AboutHow data={advisorsPage} />
-      <AboutPartner data={advisorsPage} />
+      <AboutPartner data={advisorsPage} /> */}
     </main>
   )
 }
