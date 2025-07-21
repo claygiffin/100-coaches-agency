@@ -28,3 +28,29 @@ export const AboutHowFragment = gql`
   ${PageLinkFragment}
   ${FormLinkFragment}
 `
+export const AdvisorsHowFragment = gql`
+  fragment AdvisorsHow on AdvisorsPageRecord {
+    __typename
+    id
+    howHeading
+    howBody {
+      value
+    }
+    howDetails {
+      title
+      description {
+        value
+      }
+    }
+    howLink {
+      ... on PageLinkRecord {
+        ...PageLink
+      }
+      ... on FormLinkRecord {
+        ...FormLink
+      }
+    }
+  }
+  ${PageLinkFragment}
+  ${FormLinkFragment}
+`
