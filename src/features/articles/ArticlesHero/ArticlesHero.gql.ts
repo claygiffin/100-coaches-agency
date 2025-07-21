@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { AnchorLinkFragment } from '@/features/links/AnchorLink/AnchorLink.gql'
+import { AnchorLinkFragment } from '@/features/links'
 
 import { ArticlesHeroImageFragment } from './ArticlesHeroImage/ArticlesHeroImage.gql'
 
