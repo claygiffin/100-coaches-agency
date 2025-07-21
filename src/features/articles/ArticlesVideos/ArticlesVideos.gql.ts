@@ -1,5 +1,6 @@
-import { PageLinkFragment } from '@/features/links'
 import gql from 'graphql-tag'
+
+import { PageLinkFragment } from '@/features/links'
 
 export const VideoFragment = gql`
   fragment Video on VideoRecord {

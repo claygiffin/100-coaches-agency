@@ -1,12 +1,13 @@
 'use client'
 
 import { type ComponentProps } from 'react'
+import { StructuredText } from 'react-datocms/structured-text'
+
+import { DatoLink } from '@/features/links'
 import { AnimateIn } from '@/features/ui'
 
 import styles from './ArticlesHero.module.scss'
 import { ArticlesHeroImage } from './ArticlesHeroImage/ArticlesHeroImage'
-import { StructuredText } from 'react-datocms/structured-text'
-import { DatoLink } from '@/features/links'
 
 type Props = ComponentProps<'section'> & {
   data: Queries.ArticlesHeroFragment | null | undefined
@@ -39,18 +40,18 @@ export const ArticlesHero = ({ data, ...props }: Props) => {
         </div>
       </AnimateIn>
       <div className={styles.links}>
-        <span className={styles.linksLabel}>{data?.heroLinksLabel}</span>
-        {
-          data?.heroLinks.map((link, index) => {
-            return (
-              <DatoLink
-                key={link.id}
-                data={link}
-                className={styles.link}
-              />
-            )
-          })
-        }
+        <span className={styles.linksLabel}>
+          {data?.heroLinksLabel}
+        </span>
+        {data?.heroLinks.map((link, index) => {
+          return (
+            <DatoLink
+              key={link.id}
+              data={link}
+              className={styles.link}
+            />
+          )
+        })}
       </div>
     </section>
   )

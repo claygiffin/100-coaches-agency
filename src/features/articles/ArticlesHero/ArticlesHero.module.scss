@@ -38,7 +38,7 @@
   text-align: center;
   z-index: 1;
   @include media('<m') {
-    grid-column: 3 / -3; 
+    grid-column: 3 / -3;
   }
   @include media('<ms') {
     grid-column: 2 / -2;
@@ -68,14 +68,15 @@
     display: none;
   }
 }
-.link, .linksLabel  {
+.link,
+.linksLabel {
   font-size: var(--fs-18);
   font-family: var(--ff-display);
   text-transform: uppercase;
   font-weight: 500;
   @include media('<ms') {
     display: none;
-  }   
+  }
 }
 .link {
   color: var(--color-gray30);

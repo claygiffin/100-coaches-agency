@@ -2,19 +2,20 @@
 
 import { type ComponentProps } from 'react'
 
-import styles from './ArticlesVideos.module.scss'
-import { DatoLink } from '@/features/links'
 import { DatoStructuredText } from '@/features/dato-structured-text'
+import { DatoLink } from '@/features/links'
+
+import styles from './ArticlesVideos.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.ArticlesVideosFragment | null | undefined,
+  data: Queries.ArticlesVideosFragment | null | undefined
   videos: Queries.VideoFragment[] | null | undefined
 }
 
 export const ArticlesVideos = ({ data, videos, ...props }: Props) => {
   return (
     <section
-      id='videos'
+      id="videos"
       className={styles.section}
       {...props}
     >
@@ -29,15 +30,15 @@ export const ArticlesVideos = ({ data, videos, ...props }: Props) => {
       </div>
       <div>
         <div className={styles.body}>
-          {
-            Array.isArray(videos) && videos.slice(0, 2).map((video, index) => {
+          {Array.isArray(videos) &&
+            videos.slice(0, 2).map((video, index) => {
               return (
-                <div>
-                  <div className={styles.videoWrapper} key={index}>
-                    <img 
+                <div key={index}>
+                  <div className={styles.videoWrapper}>
+                    <img
                       className={styles.videoThumbnail}
-                      src={video?.file?.thumbnailUrl} 
-                      alt={`video-${index}`} 
+                      src={video?.file?.thumbnailUrl}
+                      alt={`video-${index}`}
                     />
                     <div className={styles.innerTool}>
                       <div className={styles.playWrapper}>
@@ -51,8 +52,7 @@ export const ArticlesVideos = ({ data, videos, ...props }: Props) => {
                   </div>
                 </div>
               )
-            })
-          }
+            })}
         </div>
       </div>
     </section>

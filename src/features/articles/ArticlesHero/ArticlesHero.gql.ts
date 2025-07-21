@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 
-import { ArticlesHeroImageFragment } from './ArticlesHeroImage/ArticlesHeroImage.gql'
 import { AnchorLinkFragment } from '@/features/links/AnchorLink/AnchorLink.gql'
+
+import { ArticlesHeroImageFragment } from './ArticlesHeroImage/ArticlesHeroImage.gql'
 
 export const ArticlesHeroFragment = gql`
   fragment ArticlesHero on ThoughtLeadershipPageRecord {

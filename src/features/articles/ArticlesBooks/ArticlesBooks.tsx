@@ -1,23 +1,24 @@
 'use client'
 
 import { type ComponentProps } from 'react'
-import { AnimateIn, MarkdownHeading } from '@/features/ui'
 
-import styles from './ArticlesBooks.module.scss'
-import variables from '@/theme/variables.module.scss'
 import { DatoImageFocused } from '@/features/dato-image'
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
+import { AnimateIn, MarkdownHeading } from '@/features/ui'
+import variables from '@/theme/variables.module.scss'
+
+import styles from './ArticlesBooks.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.ArticlesBooksFragment | null | undefined,
+  data: Queries.ArticlesBooksFragment | null | undefined
   books: Queries.BookFragment[] | null | undefined
 }
 
 export const ArticlesBooks = ({ data, books, ...props }: Props) => {
   return (
     <section
-      id='books'
+      id="books"
       className={styles.section}
       {...props}
     >
@@ -32,14 +33,17 @@ export const ArticlesBooks = ({ data, books, ...props }: Props) => {
       </div>
       <div>
         <div className={styles.bodyFeatured}>
-          {
-            Array.isArray(books) && books.slice(0, 2).map((book, index) => {
+          {Array.isArray(books) &&
+            books.slice(0, 2).map((book, index) => {
               return (
-                <div className={styles.featuredItem} key={index}>
+                <div
+                  className={styles.featuredItem}
+                  key={index}
+                >
                   <div className={styles.featuredItemImage}>
                     <DatoImageFocused
-                        data={book?.image?.responsiveImage}
-                        focalPoint={book?.image?.focalPoint}
+                      data={book?.image?.responsiveImage}
+                      focalPoint={book?.image?.focalPoint}
                     />
                   </div>
                   <div className={styles.featuredItemBody}>
@@ -47,20 +51,23 @@ export const ArticlesBooks = ({ data, books, ...props }: Props) => {
                     <h2 className={styles.bookBio}>{book?.bio}</h2>
                     <div className={styles.line}></div>
                     <div className={styles.authors}>
-                      {
-                        Array.isArray(book?.authors) && book?.authors?.map((author, i) => {
+                      {Array.isArray(book?.authors) &&
+                        book?.authors?.map((author, i) => {
                           return (
-                            <div className={styles.author} key={i}>{author?.name}</div>
+                            <div
+                              className={styles.author}
+                              key={i}
+                            >
+                              {author?.name}
+                            </div>
                           )
-                        })
-                      }
+                        })}
                     </div>
                   </div>
                   <div className={styles.featuredBackground}></div>
                 </div>
               )
-            })
-          }
+            })}
         </div>
       </div>
     </section>

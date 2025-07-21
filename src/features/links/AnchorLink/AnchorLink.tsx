@@ -1,9 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import type { ComponentProps } from 'react'
 
 import type { IconType } from '../LinkIcon/LinkIcon'
-import Link from 'next/link'
 
 export type AnchorLinkProps = ComponentProps<'a'> & {
   data: Queries.AnchorLinkFragment | null | undefined
@@ -16,6 +16,11 @@ export const AnchorLink = ({
   ...props
 }: AnchorLinkProps) => {
   return (
-    <Link href={data?.href || ''} {...props}>{data?.linkText}</Link>
+    <Link
+      href={data?.href || ''}
+      {...props}
+    >
+      {data?.linkText}
+    </Link>
   )
 }

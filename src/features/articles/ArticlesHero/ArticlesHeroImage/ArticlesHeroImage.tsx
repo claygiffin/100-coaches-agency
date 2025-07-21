@@ -1,9 +1,6 @@
 'use client'
 
-import {
-  type ComponentProps,
-  useCallback,
-} from 'react'
+import { type ComponentProps, useCallback } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { DatoImageFocused } from '@/features/dato-image'
@@ -45,10 +42,12 @@ export const ArticlesHeroImage = ({ data, ...props }: Props) => {
       className={classes(styles.container, props.className)}
     >
       <div
-        className={classes(
-          styles.imageWrap,
-        )}
-        style={{ transformOrigin: focalPoint(data?.focalPoint || {x: 0, y: 0}) }}
+        className={classes(styles.imageWrap)}
+        style={{
+          transformOrigin: focalPoint(
+            data?.focalPoint || { x: 0, y: 0 }
+          ),
+        }}
       >
         <DatoImageFocused
           className={styles.image}

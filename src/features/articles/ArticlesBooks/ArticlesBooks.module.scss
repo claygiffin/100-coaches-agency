@@ -1,240 +1,240 @@
 @use '@/theme/mixins' as *;
 
 .section {
-    position: relative;
-    min-height: 30vh;
-    color: white;
-    font-size: var(--fs-72);
-    z-index: 2;
-    overflow: hidden;
-    background-color: var(--color-goldTint4);
-    padding: 0.75em 1em;
-    @include media('<m') {
-        padding: 0.75em 0.5em;
-    }
+  position: relative;
+  min-height: 30vh;
+  color: white;
+  font-size: var(--fs-72);
+  z-index: 2;
+  overflow: hidden;
+  background-color: var(--color-goldTint4);
+  padding: 0.75em 1em;
+  @include media('<m') {
+    padding: 0.75em 0.5em;
+  }
 }
 .header {
+  display: flex;
+  margin-bottom: 0.8em;
+  @include media('<m') {
+    margin-bottom: 0.6em;
+  }
+  @include media('<s') {
     display: flex;
-    margin-bottom: 0.8em;
+    flex-direction: column;
+    margin-bottom: 0.4em;
+  }
+  .heading {
+    font-size: var(--fs-36);
+    text-transform: uppercase;
+    color: var(--color-goldShade2);
+    margin: 0;
+    @include media('<s') {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .headerLine {
+    border-bottom: 1px solid var(--color-goldShade2);
+    flex: auto;
+    margin: 0 0.1em;
+    @include media('<s') {
+      width: 100%;
+      display: flex;
+      margin-top: 0.1em;
+    }
+  }
+  .archiveButton {
+    font-size: var(--fs-16);
+    text-transform: uppercase;
+    color: var(--color-goldShade2);
+    display: inline-flex;
+    font-weight: 400;
+    text-decoration: none;
+    padding-right: 1em;
+    padding-top: 0.75em;
+    @include media('<ls') {
+      padding-top: 0.5em;
+    }
     @include media('<m') {
-        margin-bottom: 0.6em;
+      padding-top: 0.1em;
     }
     @include media('<s') {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 0.4em;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 0.2em;
     }
-    .heading {
-        font-size: var(--fs-36);
-        text-transform: uppercase;
-        color: var(--color-goldShade2);
-        margin: 0;
-        @include media('<s') {
-            width: 100%;
-            text-align: center;
-        }
-    }
-    .headerLine {
-        border-bottom: 1px solid var(--color-goldShade2);
-        flex: auto;
-        margin: 0 0.1em;
-        @include media('<s') {
-            width: 100%;
-            display: flex;
-            margin-top: 0.1em;
-        }
-    }
-    .archiveButton {
-        font-size: var(--fs-16);
-        text-transform: uppercase;
-        color: var(--color-goldShade2);
-        display: inline-flex;
-        font-weight: 400;
-        text-decoration: none;
-        padding-right: 1em;
-        padding-top: 0.75em;
-        @include media('<ls') {
-            padding-top: 0.5em;
-        }
-        @include media('<m') {
-            padding-top: 0.1em;
-        }
-        @include media('<s') {
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            margin-top: 0.2em;
-        }
-        @media (hover: hover) {
-          &:hover {
-            color: var(--color-goldShade3);
-          }
-        }
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-goldShade3);
       }
+    }
+  }
 }
 .bodyFeatured {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.5em;
-    @include media('<m') {
-        grid-template-columns: repeat(1, minmax(0, 1fr));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5em;
+  @include media('<m') {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  .featuredItem {
+    display: flex;
+    position: relative;
+    @include media('<s') {
+      display: block;
     }
-    .featuredItem {
+    .featuredItemImage {
+      width: 50%;
+      @include media('<m') {
+        width: 35%;
+      }
+      @include media('<s') {
+        width: 50%;
+        margin: 0 auto;
+      }
+    }
+    .featuredItemBody {
+      width: 50%;
+      padding: 1em 0.6em 1em 0;
+      @include media('<m') {
+        width: 65%;
+        padding: 1.25em 0.8em 1.25em 0;
+      }
+      @include media('<s') {
+        width: auto;
+        padding: 0 0.5em 0.5em 0.5em;
+      }
+      .bookTitle {
+        font-size: var(--fs-30);
+        font-weight: 400;
+        text-transform: capitalize;
+        color: black;
+        margin: 0;
+        margin-bottom: 0.5em;
+      }
+      .bookBio {
+        font-size: var(--fs-21);
+        font-weight: 400;
+        line-height: 1.25;
+        color: var(--color-gray10);
+        margin: 0;
+        margin-bottom: 0.5em;
+      }
+      .line {
+        border-top: 1px solid var(--color-goldShade2);
+        width: 20%;
+      }
+      .authors {
         display: flex;
-        position: relative;
-        @include media('<s') {
-            display: block;
+        flex-direction: column;
+        margin-top: 0.2em;
+        .author {
+          font-size: var(--fs-15);
+          font-weight: 400;
+          line-height: 1.25;
+          color: var(--color-gray10);
+          margin: 0;
+          margin-bottom: 0.2em;
         }
-        .featuredItemImage {
-            width: 50%;
-            @include media('<m') {
-                width: 35%;
-            }
-            @include media('<s') {
-                width: 50%;
-                margin: 0 auto;
-            }
-        }
-        .featuredItemBody {
-            width: 50%;
-            padding: 1em 0.6em 1em 0;
-            @include media('<m') {
-                width: 65%;
-                padding: 1.25em 0.8em 1.25em 0;
-            }
-            @include media('<s') {
-                width: auto;
-                padding: 0 0.5em 0.5em 0.5em;
-            }
-            .bookTitle {
-                font-size: var(--fs-30);
-                font-weight: 400;
-                text-transform: capitalize;
-                color: black;
-                margin: 0;
-                margin-bottom: 0.5em;
-            }
-            .bookBio {
-                font-size: var(--fs-21);
-                font-weight: 400; 
-                line-height: 1.25;
-                color: var(--color-gray10);
-                margin: 0;
-                margin-bottom: 0.5em;
-            }
-            .line {
-                border-top: 1px solid var(--color-goldShade2);
-                width: 20%;
-            }
-            .authors {
-                display: flex;
-                flex-direction: column;
-                margin-top: 0.2em;
-                .author {
-                    font-size: var(--fs-15);
-                    font-weight: 400;
-                    line-height: 1.25;
-                    color: var(--color-gray10);
-                    margin: 0;
-                    margin-bottom: 0.2em;
-                }
-            }
-        }
-        .featuredBackground {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 85%;
-            height: 100%;
-            background-color: white;
-            border-radius: 0.2em;
-            z-index: -1;
-            @include media('<m') {
-                width: 90%;
-            }
-            @include media('<s') {
-                width: 100%;
-                height: 85%;
-            }
-        }
+      }
     }
+    .featuredBackground {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 85%;
+      height: 100%;
+      background-color: white;
+      border-radius: 0.2em;
+      z-index: -1;
+      @include media('<m') {
+        width: 90%;
+      }
+      @include media('<s') {
+        width: 100%;
+        height: 85%;
+      }
+    }
+  }
 }
 .body {
-    border-radius: 0.2em;
-    background-color: var(--color-gray30);
-    padding: 0.4em;
+  border-radius: 0.2em;
+  background-color: var(--color-gray30);
+  padding: 0.4em;
+  display: flex;
+  gap: 1em;
+  @include media('<m') {
+    padding: 0.3em;
+    gap: 0.5em;
+  }
+  @include media('<s') {
+    display: block;
+  }
+  .bodyImage {
+    width: 6em;
+    height: 6em;
+    flex: none;
     display: flex;
-    gap: 1em;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.2em;
     @include media('<m') {
-        padding: 0.3em;
-        gap: 0.5em; 
+      width: 5em;
+      height: 5em;
     }
     @include media('<s') {
-        display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
     }
-    .bodyImage {
-        width: 6em;
-        height: 6em;
-        flex: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border-radius: 0.2em;
-        @include media('<m') {
-            width: 5em;
-            height: 5em;
-        }
-        @include media('<s') {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 1 / 1;
-        }
+  }
+  .bodyContainer {
+    .bodyHeading {
+      font-size: var(--fs-36);
+      margin: 1em 0 0.25em;
+      line-height: 1.25;
+      em {
+        font-style: normal;
+        color: var(--color-goldShade1);
+      }
+      @include media('<m') {
+        font-size: var(--fs-27);
+        margin-top: 0;
+      }
+      @include media('<s') {
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+      }
     }
-    .bodyContainer {
-        .bodyHeading {
-            font-size: var(--fs-36);
-            margin: 1em 0 0.25em;
-            line-height: 1.25;
-            em {
-                font-style: normal;
-                color: var(--color-goldShade1);
-            }
-            @include media('<m') {
-                font-size: var(--fs-27);
-                margin-top: 0;
-            }
-            @include media('<s') {
-                margin-top: 1em;
-                margin-bottom: 0.5em;
-            }
-        }
-        .bodyText {
-            font-size: var(--fs-18);
-            line-height: 1.5;
-            > p {    
-                margin: 0;
-            }
-        }
-        .button {
-            color: #fff;
-            background: linear-gradient(
-              to right,
-              var(--color-goldTint1),
-              var(--color-gold),
-              var(--color-goldShade2)
-            );
-            font-size: var(--fs-21);
-            margin-top: 1.5em;
-            background-position: 100% 50%;
-            background-size: 200%;
-            @media (hover: hover) {
-              &:hover {
-                background-position: 0% 50%;
-                color: #000;
-              }
-            }
-          }
+    .bodyText {
+      font-size: var(--fs-18);
+      line-height: 1.5;
+      > p {
+        margin: 0;
+      }
     }
+    .button {
+      color: #fff;
+      background: linear-gradient(
+        to right,
+        var(--color-goldTint1),
+        var(--color-gold),
+        var(--color-goldShade2)
+      );
+      font-size: var(--fs-21);
+      margin-top: 1.5em;
+      background-position: 100% 50%;
+      background-size: 200%;
+      @media (hover: hover) {
+        &:hover {
+          background-position: 0% 50%;
+          color: #000;
+        }
+      }
+    }
+  }
 }

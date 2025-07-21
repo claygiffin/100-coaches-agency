@@ -1,6 +1,7 @@
+import gql from 'graphql-tag'
+
 import { ResponsiveImageFragment } from '@/features/dato-image'
 import { PageLinkFragment } from '@/features/links'
-import gql from 'graphql-tag'
 
 export const BookFragment = gql`
   fragment Book on BookRecord {
@@ -16,7 +17,7 @@ export const BookFragment = gql`
     }
     bio
     authors {
-      name 
+      name
     }
   }
   ${ResponsiveImageFragment}

@@ -2,13 +2,13 @@ import { type ComponentProps } from 'react'
 
 import { classes } from '@/utils/css'
 
+import { AnchorLink } from '../AnchorLink/AnchorLink'
 import { ArticleLink } from '../ArticleLink/ArticleLink'
 import { CoachMenuLink } from '../CoachMenuLink/CoachMenuLink'
 import { DocumentLink } from '../DocumentLink/DocumentLink'
 import { ExternalLink } from '../ExternalLink/ExternalLink'
 import { FormLink } from '../FormLink/FormLink'
 import { PageLink } from '../PageLink/PageLink'
-import { AnchorLink } from '../AnchorLink/AnchorLink'
 import styles from './DatoLink.module.scss'
 
 import type { IconType } from '../LinkIcon/LinkIcon'

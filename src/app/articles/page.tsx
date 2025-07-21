@@ -2,19 +2,22 @@ import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 
 import {
+  ArticlesBooks,
+  ArticlesBooksFragment,
+  ArticlesFeatured,
+  ArticlesFeaturedFragment,
+  ArticlesHero,
   ArticlesHeroFragment,
-  ArticlesHero
+  ArticlesNewsletters,
+  ArticlesNewslettersFragment,
+  ArticlesVideos,
+  ArticlesVideosFragment,
+  BookFragment,
+  NewsletterFragment,
+  VideoFragment,
 } from '@/features/articles'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
-import { ArticlesFeaturedFragment } from '@/features/articles/ArticlesFeatured/ArticlesFeatured.gql'
-import { ArticlesFeatured } from '@/features/articles/ArticlesFeatured/ArticlesFeatured'
-import { ArticlesBooksFragment, BookFragment } from '@/features/articles/ArticlesBooks/ArticlesBooks.gql'
-import { ArticlesBooks } from '@/features/articles/ArticlesBooks/ArticlesBooks'
-import { ArticlesNewslettersFragment, NewsletterFragment } from '@/features/articles/ArticlesNewsletter/ArticlesNewsletter.gql'
-import { ArticlesNewsletters } from '@/features/articles/ArticlesNewsletter/ArticlesNewsletter'
-import { ArticlesVideosFragment, VideoFragment } from '@/features/articles/ArticlesVideos/ArticlesVideos.gql'
-import { ArticlesVideos } from '@/features/articles/ArticlesVideos/ArticlesVideos'
 
 export const dynamic = 'force-static'
 
@@ -66,7 +69,12 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const ArticlesPage: NextPage = async () => {
   const {
-    data: { thoughtLeadershipPage, allBooks, allNewsletters, allVideos },
+    data: {
+      thoughtLeadershipPage,
+      allBooks,
+      allNewsletters,
+      allVideos,
+    },
   } = await datoRequest<Queries.ArticlesPageQuery>({
     query,
   })
@@ -75,9 +83,18 @@ const ArticlesPage: NextPage = async () => {
     <main data-articles>
       <ArticlesHero data={thoughtLeadershipPage} />
       <ArticlesFeatured data={thoughtLeadershipPage} />
-      <ArticlesBooks data={thoughtLeadershipPage} books={allBooks} />
-      <ArticlesNewsletters data={thoughtLeadershipPage} newsletter={allNewsletters} />
-      <ArticlesVideos data={thoughtLeadershipPage} videos={allVideos} />
+      <ArticlesBooks
+        data={thoughtLeadershipPage}
+        books={allBooks}
+      />
+      <ArticlesNewsletters
+        data={thoughtLeadershipPage}
+        newsletter={allNewsletters}
+      />
+      <ArticlesVideos
+        data={thoughtLeadershipPage}
+        videos={allVideos}
+      />
       <div>
         <br></br>
         <br></br>

@@ -13,8 +13,7 @@
 }
 .content {
   @include base-grid;
-  padding: calc(7vw + var(--gtr-72)) 0
-    calc(5vw + var(--gtr-108));
+  padding: calc(7vw + var(--gtr-72)) 0 calc(5vw + var(--gtr-108));
   color: #fff;
   justify-items: center;
   text-align: center;

@@ -1,151 +1,155 @@
 @use '@/theme/mixins' as *;
 
 .section {
-    position: relative;
-    min-height: 30vh;
-    color: white;
-    font-size: var(--fs-72);
-    z-index: 2;
-    overflow: hidden;
-    background: linear-gradient(to top right, var(--color-gold), var(--color-goldShade3));
-    padding: 0.75em 1em;
-    @include media('<m') {
-        padding: 0.75em 0.5em;
-    }
+  position: relative;
+  min-height: 30vh;
+  color: white;
+  font-size: var(--fs-72);
+  z-index: 2;
+  overflow: hidden;
+  background: linear-gradient(
+    to top right,
+    var(--color-gold),
+    var(--color-goldShade3)
+  );
+  padding: 0.75em 1em;
+  @include media('<m') {
+    padding: 0.75em 0.5em;
+  }
 }
 .header {
+  display: flex;
+  margin-bottom: 0.8em;
+  @include media('<m') {
+    margin-bottom: 0.6em;
+  }
+  @include media('<s') {
     display: flex;
-    margin-bottom: 0.8em;
+    flex-direction: column;
+    margin-bottom: 0.4em;
+  }
+  .heading {
+    font-size: var(--fs-36);
+    text-transform: uppercase;
+    color: white;
+    margin: 0;
+    @include media('<s') {
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .headerLine {
+    border-bottom: 1px solid white;
+    flex: auto;
+    margin: 0 0.1em;
+    @include media('<s') {
+      width: 100%;
+      display: flex;
+      margin-top: 0.1em;
+    }
+  }
+  .archiveButton {
+    font-size: var(--fs-16);
+    text-transform: uppercase;
+    color: white;
+    display: inline-flex;
+    font-weight: 400;
+    text-decoration: none;
+    padding-right: 1em;
+    padding-top: 0.75em;
+    @include media('<ls') {
+      padding-top: 0.5em;
+    }
     @include media('<m') {
-        margin-bottom: 0.6em;
+      padding-top: 0.1em;
     }
     @include media('<s') {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 0.4em;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 0.2em;
     }
-    .heading {
-        font-size: var(--fs-36);
-        text-transform: uppercase;
-        color: white;
-        margin: 0;
-        @include media('<s') {
-            width: 100%;
-            text-align: center;
-        }
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-goldShade3);
+      }
     }
-    .headerLine {
-        border-bottom: 1px solid white;
-        flex: auto;
-        margin: 0 0.1em;
-        @include media('<s') {
-            width: 100%;
-            display: flex;
-            margin-top: 0.1em;
-        }
-    }
-    .archiveButton {
-        font-size: var(--fs-16);
-        text-transform: uppercase;
-        color: white;
-        display: inline-flex;
-        font-weight: 400;
-        text-decoration: none;
-        padding-right: 1em;
-        padding-top: 0.75em;
-        @include media('<ls') {
-            padding-top: 0.5em;
-        }
-        @include media('<m') {
-            padding-top: 0.1em;
-        }
-        @include media('<s') {
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            margin-top: 0.2em;
-        }
-        @media (hover: hover) {
-          &:hover {
-            color: var(--color-goldShade3);
-          }
-        }
-    }
+  }
 }
 .body {
-    border-radius: 0.2em;
-    background-color: var(--color-goldTint5);
-    padding: 0.4em;
+  border-radius: 0.2em;
+  background-color: var(--color-goldTint5);
+  padding: 0.4em;
+  display: flex;
+  gap: 1em;
+  @include media('<m') {
+    padding: 0.3em;
+    gap: 0.5em;
+  }
+  @include media('<s') {
+    display: block;
+  }
+  .bodyImageWrapper {
+    width: 7em;
+    flex: none;
     display: flex;
-    gap: 1em;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 0.2em;
     @include media('<m') {
-        padding: 0.3em;
-        gap: 0.5em; 
+      width: 5em;
+      align-items: flex-start;
     }
     @include media('<s') {
-        display: block;
+      width: 100%;
     }
-    .bodyImageWrapper {
-        width: 7em;  
-        flex: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border-radius: 0.2em;
-        @include media('<m') {
-            width: 5em;
-            align-items: flex-start;
-        }
-        @include media('<s') {
-            width: 100%;
-        }
-        .bodyImage {
-            border-radius: 0.2em;
-        }
+    .bodyImage {
+      border-radius: 0.2em;
     }
-    .bodyContainer {
-        display: flex;
-        flex-direction: column;
-        .bodyLabel {
-            font-size: var(--fs-15);
-            color: var(--color-gray40);
-            font-weight: 500;
-            text-transform: uppercase;
-            margin-top: 1em;
-            @include media('<s') {
-                display: none;
-            }
-        }
-        .bodyHeading {
-            font-size: var(--fs-24);
-            color: black;
-            margin: 0.5em 0 0.25em;
-            line-height: 1.25;
-            font-weight: 400;
-            em {
-                font-style: normal;
-                color: var(--color-goldShade1);
-            }
-            @include media('<s') {
-                margin-bottom: 0.5em;
-            }
-        }
-        .bodyText {
-            font-size: var(--fs-18);
-            color: black;
-            > p {
-                font-weight: 400;
-                line-height: 1.5;
-                margin: 0;
-            }
-        }
-        .date {
-            font-size: var(--fs-16);
-            font-weight: 500;
-            color: var(--color-gray40);
-            margin-top: 1.25em;
-        }
+  }
+  .bodyContainer {
+    display: flex;
+    flex-direction: column;
+    .bodyLabel {
+      font-size: var(--fs-15);
+      color: var(--color-gray40);
+      font-weight: 500;
+      text-transform: uppercase;
+      margin-top: 1em;
+      @include media('<s') {
+        display: none;
+      }
     }
+    .bodyHeading {
+      font-size: var(--fs-24);
+      color: black;
+      margin: 0.5em 0 0.25em;
+      line-height: 1.25;
+      font-weight: 400;
+      em {
+        font-style: normal;
+        color: var(--color-goldShade1);
+      }
+      @include media('<s') {
+        margin-bottom: 0.5em;
+      }
+    }
+    .bodyText {
+      font-size: var(--fs-18);
+      color: black;
+      > p {
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0;
+      }
+    }
+    .date {
+      font-size: var(--fs-16);
+      font-weight: 500;
+      color: var(--color-gray40);
+      margin-top: 1.25em;
+    }
+  }
 }

@@ -1,6 +1,7 @@
+import gql from 'graphql-tag'
+
 import { ResponsiveImageFragment } from '@/features/dato-image'
 import { PageLinkFragment } from '@/features/links'
-import gql from 'graphql-tag'
 
 export const NewsletterFragment = gql`
   fragment Newsletter on NewsletterRecord {
