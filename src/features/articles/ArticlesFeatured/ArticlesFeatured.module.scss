@@ -1,0 +1,123 @@
+@use '@/theme/mixins' as *;
+
+.section {
+    position: relative;
+    min-height: 30vh;
+    color: white;
+    font-size: var(--fs-72);
+    z-index: 2;
+    overflow: hidden;
+    background-color: var(--color-gray20);
+    padding: 0.75em 1em;
+    @include media('<m') {
+        padding: 0.75em 0.5em;
+    }
+}
+.header {
+    display: flex;
+    margin-bottom: 0.8em;
+    @include media('<m') {
+        margin-bottom: 0.6em;
+    }
+    @include media('<s') {
+        display: block;
+        margin-bottom: 0.4em;
+    }
+    .heading {
+        font-size: var(--fs-36);
+        text-transform: uppercase;
+        color: var(--color-gold);
+        margin: 0;
+        @include media('<s') {
+            width: 100%;
+            text-align: center;
+        }
+    }
+    .headerLine {
+        border-bottom: 1px solid var(--color-gold);
+        flex: auto;
+        margin-left: 0.1em;
+        @include media('<s') {
+            width: 100%;
+            display: flex;
+            margin-top: 0.1em;
+        }
+    }
+}
+.body {
+    border-radius: 0.2em;
+    background-color: var(--color-gray30);
+    padding: 0.4em;
+    display: flex;
+    gap: 1em;
+    @include media('<m') {
+        padding: 0.3em;
+        gap: 0.5em; 
+    }
+    @include media('<s') {
+        display: block;
+    }
+    .bodyImage {
+        width: 6em;
+        height: 6em;
+        flex: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        border-radius: 0.2em;
+        @include media('<m') {
+            width: 5em;
+            height: 5em;
+        }
+        @include media('<s') {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+        }
+    }
+    .bodyContainer {
+        .bodyHeading {
+            font-size: var(--fs-36);
+            margin: 1em 0 0.25em;
+            line-height: 1.25;
+            em {
+                font-style: normal;
+                color: var(--color-goldShade1);
+            }
+            @include media('<m') {
+                margin-top: 0;
+            }
+            @include media('<s') {
+                margin-top: 1em;
+                margin-bottom: 0.5em;
+            }
+        }
+        .bodyText {
+            font-size: var(--fs-18);
+            line-height: 1.5;
+            > p {    
+                margin: 0;
+            }
+        }
+        .button {
+            color: #fff;
+            background: linear-gradient(
+              to right,
+              var(--color-goldTint1),
+              var(--color-gold),
+              var(--color-goldShade2)
+            );
+            font-size: var(--fs-21);
+            margin-top: 1.5em;
+            background-position: 100% 50%;
+            background-size: 200%;
+            @media (hover: hover) {
+              &:hover {
+                background-position: 0% 50%;
+                color: #000;
+              }
+            }
+          }
+    }
+}

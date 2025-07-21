@@ -8,6 +8,7 @@ import { DocumentLink } from '../DocumentLink/DocumentLink'
 import { ExternalLink } from '../ExternalLink/ExternalLink'
 import { FormLink } from '../FormLink/FormLink'
 import { PageLink } from '../PageLink/PageLink'
+import { AnchorLink } from '../AnchorLink/AnchorLink'
 import styles from './DatoLink.module.scss'
 
 import type { IconType } from '../LinkIcon/LinkIcon'
@@ -23,6 +24,7 @@ type Props = ComponentProps<'a' | 'button'> & {
     | Queries.DocumentLinkFragment
     | Queries.CoachMenuLinkFragment
     | Queries.ExternalLinkFragment
+    | Queries.AnchorLinkFragment
     | null
     | undefined
 }
@@ -69,6 +71,14 @@ export const DatoLink = ({
         <CoachMenuLink
           data={data}
           {...(linkProps as ComponentProps<'button'>)}
+        />
+      )
+    }
+    case 'AnchorLinkRecord': {
+      return (
+        <AnchorLink
+          data={data}
+          {...(linkProps as ComponentProps<'a'>)}
         />
       )
     }

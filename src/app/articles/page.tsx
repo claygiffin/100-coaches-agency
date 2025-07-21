@@ -2,37 +2,54 @@ import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 
 import {
-  ArticleFragment,
-  ArticlesGrid,
-  NewsItemFragment,
+  ArticlesHeroFragment,
+  ArticlesHero
 } from '@/features/articles'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
-
-import styles from './articles.module.scss'
+import { ArticlesFeaturedFragment } from '@/features/articles/ArticlesFeatured/ArticlesFeatured.gql'
+import { ArticlesFeatured } from '@/features/articles/ArticlesFeatured/ArticlesFeatured'
+import { ArticlesBooksFragment, BookFragment } from '@/features/articles/ArticlesBooks/ArticlesBooks.gql'
+import { ArticlesBooks } from '@/features/articles/ArticlesBooks/ArticlesBooks'
+import { ArticlesNewslettersFragment, NewsletterFragment } from '@/features/articles/ArticlesNewsletter/ArticlesNewsletter.gql'
+import { ArticlesNewsletters } from '@/features/articles/ArticlesNewsletter/ArticlesNewsletter'
+import { ArticlesVideosFragment, VideoFragment } from '@/features/articles/ArticlesVideos/ArticlesVideos.gql'
+import { ArticlesVideos } from '@/features/articles/ArticlesVideos/ArticlesVideos'
 
 export const dynamic = 'force-static'
 
 const query = gql`
   query ArticlesPage {
     thoughtLeadershipPage {
-      pageHeading
-      slug
+      ...ArticlesHero
+      ...ArticlesFeatured
+      ...ArticlesBooks
+      ...ArticlesNewsletters
+      ...ArticlesVideos
       _seoMetaTags {
         attributes
         content
         tag
       }
     }
-    articles: allArticles {
-      ...Article
+    allBooks(first: 10) {
+      ...Book
     }
-    newsItems: allNewsItems {
-      ...NewsItem
+    allNewsletters(first: 1) {
+      ...Newsletter
+    }
+    allVideos(first: 10) {
+      ...Video
     }
   }
-  ${ArticleFragment}
-  ${NewsItemFragment}
+  ${ArticlesHeroFragment}
+  ${ArticlesFeaturedFragment}
+  ${BookFragment}
+  ${ArticlesBooksFragment}
+  ${ArticlesNewslettersFragment}
+  ${NewsletterFragment}
+  ${ArticlesVideosFragment}
+  ${VideoFragment}
 `
 
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -43,27 +60,36 @@ export const generateMetadata = async (): Promise<Metadata> => {
   })
   return generateDatoCmsMetadata(
     thoughtLeadershipPage?._seoMetaTags || [],
-    { canonicalSlug: thoughtLeadershipPage?.slug }
+    { canonicalSlug: '' }
   )
 }
 
 const ArticlesPage: NextPage = async () => {
   const {
-    data: { articles, newsItems, thoughtLeadershipPage: page },
+    data: { thoughtLeadershipPage, allBooks, allNewsletters, allVideos },
   } = await datoRequest<Queries.ArticlesPageQuery>({
     query,
   })
 
-  const filters = ['Show All', 'Thought Leadership', 'News']
-
   return (
-    <main className={styles.main}>
-      <h1 className={styles.heading}>{page?.pageHeading}</h1>
-      <ArticlesGrid
-        articles={articles}
-        newsItems={newsItems}
-        filters={filters}
-      />
+    <main data-articles>
+      <ArticlesHero data={thoughtLeadershipPage} />
+      <ArticlesFeatured data={thoughtLeadershipPage} />
+      <ArticlesBooks data={thoughtLeadershipPage} books={allBooks} />
+      <ArticlesNewsletters data={thoughtLeadershipPage} newsletter={allNewsletters} />
+      <ArticlesVideos data={thoughtLeadershipPage} videos={allVideos} />
+      <div>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+      </div>
     </main>
   )
 }

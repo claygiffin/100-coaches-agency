@@ -1,0 +1,155 @@
+@use '@/theme/mixins' as *;
+
+.section {
+    position: relative;
+    min-height: 30vh;
+    color: var(--color-gray30);
+    font-size: var(--fs-72);
+    z-index: 2;
+    overflow: hidden;
+    background-color: white;
+    padding: 0.75em 1em;
+    @include media('<m') {
+        padding: 0.75em 0.5em;
+    }
+}
+.header {
+    display: flex;
+    margin-bottom: 0.8em;
+    @include media('<m') {
+        margin-bottom: 0.6em;
+    }
+    @include media('<s') {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.4em;
+    }
+    .heading {
+        font-size: var(--fs-36);
+        text-transform: uppercase;
+        color: var(--color-goldShade2);
+        margin: 0;
+        color: var(--color-gray30);
+        @include media('<s') {
+            width: 100%;
+            text-align: center;
+        }
+    }
+    .headerLine {
+        border-bottom: 1px solid var(--color-gray30);
+        flex: auto;
+        margin: 0 0.1em;
+        @include media('<s') {
+            width: 100%;
+            display: flex;
+            margin-top: 0.1em;
+        }
+    }
+    .archiveButton {
+        font-size: var(--fs-16);
+        text-transform: uppercase;
+        color: var(--color-gray30);
+        display: inline-flex;
+        font-weight: 400;
+        text-decoration: none;
+        padding-right: 1em;
+        padding-top: 0.75em;
+        @include media('<ls') {
+            padding-top: 0.5em;
+        }
+        @include media('<m') {
+            padding-top: 0.1em;
+        }
+        @include media('<s') {
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 0.2em;
+        }
+        @media (hover: hover) {
+          &:hover {
+            color: var(--color-goldShade3);
+          }
+        }
+      }
+}
+.body {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5em;
+    @include media('<s') {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    .videoWrapper {
+        border-radius: 0.2em;
+        display: flex;
+        position: relative;
+        @include media('<m') { 
+            justify-content: center;
+            align-items: center;
+        }
+        .videoThumbnail {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 0.2em;
+        }
+        .innerTool {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            @include media('>=m') { 
+                bottom: 0.4em;
+                left: 0;
+            }
+            @include media('<m') { 
+                justify-content: center;
+            }
+            .playWrapper {
+                margin: 0 0.4em;
+                width: 1em;
+                height: 1em;
+                min-height: 1em;
+                min-width: 1em;
+                background-color: white;
+                border-radius: 50%;
+                position: relative;
+                cursor: pointer;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .play {
+                    position: absolute;
+                    left: 0.3em;
+                    width: 0;
+                    height: 0;
+                    border-left: 0.5em solid var(--color-goldShade2); 
+                    border-top: 0.3em solid transparent;
+                    border-bottom: 0.3em solid transparent;
+                }
+            }
+            > h2 {
+                margin-right: 1em;
+                font-size: var(--fs-24);
+                line-height: 1.25;
+                color: white;
+                font-weight: 400;
+                @include media('<m') { 
+                    display: none;
+                }
+            }
+        }
+    }
+    .description {
+        > h2 {
+            font-size: var(--fs-24); 
+            line-height: 1.25;
+            color: var(--color-gray30);
+            font-weight: 400;
+            @include media('>=m') { 
+                display: none;
+            }
+        }
+    }
+}
