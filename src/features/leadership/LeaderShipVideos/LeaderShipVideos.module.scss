@@ -43,6 +43,8 @@
       width: 100%;
       display: flex;
       margin-top: 0.1em;
+      margin-right: 0;
+      margin-left: 0;
     }
   }
   .archiveButton {
@@ -91,6 +93,7 @@
     }
     .videoThumbnail {
       width: 100%;
+      height: 100%;
       aspect-ratio: 16 / 9;
       border-radius: 0.2em;
     }
@@ -112,7 +115,7 @@
         height: 1em;
         min-height: 1em;
         min-width: 1em;
-        background-color: white;
+        background-color: #ffffffdb;
         border-radius: 50%;
         position: relative;
         cursor: pointer;
@@ -150,6 +153,99 @@
       @include media('>=m') {
         display: none;
       }
+    }
+  }
+}
+.slider {
+  padding: 1em 0 0.5em;
+  .slide {
+    .videoThumbnailWrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      .videoThumbnail {
+        width: 100%;
+        height: 100%;
+        border-radius: 0.2em;
+      }
+      .innerTool {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .toolWrapper {
+          .playWrapper {
+            margin: 0 auto;
+            width: 1em;
+            height: 1em;
+            min-height: 1em;
+            min-width: 1em;
+            background-color: #ffffffdb;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .play {
+              position: absolute;
+              left: 0.3em;
+              width: 0;
+              height: 0;
+              border-left: 0.5em solid var(--color-goldShade2);
+              border-top: 0.3em solid transparent;
+              border-bottom: 0.3em solid transparent;
+            }
+          }
+          > h2 {
+            font-size: var(--fs-18);
+            line-height: 1.25;
+            color: white;
+            font-weight: 400;
+            text-align: center;
+            padding: 1em 1em 0;
+            @include media('<m') {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .videoDescription {
+      display: none;
+      @include media('<m') {
+        display: flex;
+      }
+      h2 {
+        font-size: var(--fs-16);
+        line-height: 1.25;
+        color: var(--color-gray30);
+        font-weight: 400;
+      }
+    }
+  }
+}
+.videoPlayerContainer {
+  width: 80vw;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @include media('<l') {
+    width: 100vw;
+  }
+  .videoPlayer {
+    width: 90%;
+    height: 90%;
+    > iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
     }
   }
 }

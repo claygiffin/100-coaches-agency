@@ -3,19 +3,17 @@
 import { type ComponentProps } from 'react'
 
 import { DatoImageFocused } from '@/features/dato-image'
-import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
-import { AnimateIn, MarkdownHeading } from '@/features/ui'
-import variables from '@/theme/variables.module.scss'
 
-import styles from './ArticlesBooks.module.scss'
+import { Slider } from '../index'
+import styles from './LeaderShipBooks.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.ArticlesBooksFragment | null | undefined
+  data: Queries.LeaderShipBooksFragment | null | undefined
   books: Queries.BookFragment[] | null | undefined
 }
 
-export const ArticlesBooks = ({ data, books, ...props }: Props) => {
+export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
   return (
     <section
       id="books"
@@ -68,6 +66,46 @@ export const ArticlesBooks = ({ data, books, ...props }: Props) => {
                 </div>
               )
             })}
+        </div>
+        <div className={styles.slider}>
+          <Slider>
+            {Array.isArray(books) &&
+              books.slice(2).map((book, index) => {
+                return (
+                  <div
+                    className={styles.slide}
+                    key={index}
+                  >
+                    <div className={styles.slideImageWrapper}>
+                      <DatoImageFocused
+                        data={book?.image?.responsiveImage}
+                        focalPoint={book?.image?.focalPoint}
+                        className={styles.slideImage}
+                      />
+                    </div>
+                    <div className={styles.slideBody}>
+                      <h2 className={styles.bookTitle}>
+                        {book?.title}
+                      </h2>
+                      <div className={styles.authors}>
+                        {Array.isArray(book?.authors) &&
+                          book?.authors?.map((author, i) => {
+                            return (
+                              <div
+                                className={styles.author}
+                                key={i}
+                              >
+                                {author?.name}
+                              </div>
+                            )
+                          })}
+                      </div>
+                    </div>
+                    <div className={styles.slideBackground}></div>
+                  </div>
+                )
+              })}
+          </Slider>
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 'use client'
 
 import { format } from 'date-fns'
+import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
 import { DatoImageFocused } from '@/features/dato-image'
@@ -8,18 +9,23 @@ import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
 import { MarkdownHeading } from '@/features/ui'
 
-import styles from './ArticlesNewsletter.module.scss'
+import styles from './LeaderShipNewsletter.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.ArticlesNewslettersFragment | null | undefined
-  newsletter: Queries.NewsletterFragment[] | null | undefined
+  data: Queries.LeaderShipNewslettersFragment | null | undefined
+  newsletter: Queries.ArticleFragment[] | null | undefined
 }
 
-export const ArticlesNewsletters = ({
+export const LeaderShipNewsletters = ({
   data,
   newsletter,
   ...props
 }: Props) => {
+  const router = useRouter()
+
+  const openArticle = (slug: string) =>
+    router.push(`/articles/${slug}`, { scroll: false })
+
   return (
     <section
       id="newsletter"
@@ -36,11 +42,14 @@ export const ArticlesNewsletters = ({
         />
       </div>
       {Array.isArray(newsletter) && (
-        <div className={styles.body}>
+        <div
+          className={styles.body}
+          onClick={() => openArticle(newsletter[0]?.slug)}
+        >
           <div className={styles.bodyImageWrapper}>
             <DatoImageFocused
-              data={newsletter[0]?.image?.responsiveImage}
-              focalPoint={newsletter[0]?.image?.focalPoint}
+              data={newsletter[0]?.thumbnail?.responsiveImage}
+              focalPoint={newsletter[0]?.thumbnail?.focalPoint}
               className={styles.bodyImage}
             />
           </div>

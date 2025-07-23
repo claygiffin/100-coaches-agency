@@ -12,8 +12,8 @@ export const VideoFragment = gql`
   }
 `
 
-export const ArticlesVideosFragment = gql`
-  fragment ArticlesVideos on ThoughtLeadershipPageRecord {
+export const LeaderShipVideosFragment = gql`
+  fragment LeaderShipVideos on ThoughtLeadershipPageRecord {
     videosHeading
     videosArchiveButton {
       ... on PageLinkRecord {

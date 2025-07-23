@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import { ResponsiveImageFragment } from '@/features/dato-image'
 import { PageLinkFragment } from '@/features/links'
 
-export const NewsletterFragment = gql`
-  fragment Newsletter on NewsletterRecord {
+export const BookFragment = gql`
+  fragment Book on BookRecord {
     title
     image {
       responsiveImage {
@@ -15,19 +15,18 @@ export const NewsletterFragment = gql`
         y
       }
     }
-    body {
-      value
+    bio
+    authors {
+      name
     }
-    createdAt
   }
   ${ResponsiveImageFragment}
 `
 
-export const ArticlesNewslettersFragment = gql`
-  fragment ArticlesNewsletters on ThoughtLeadershipPageRecord {
-    newslettersLabel
-    newslettersHeading
-    newslettersArchiveButton {
+export const LeaderShipBooksFragment = gql`
+  fragment LeaderShipBooks on ThoughtLeadershipPageRecord {
+    booksHeading
+    booksArchiveButton {
       ... on PageLinkRecord {
         ...PageLink
       }

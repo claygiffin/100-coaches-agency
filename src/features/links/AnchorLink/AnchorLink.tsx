@@ -3,11 +3,13 @@
 import Link from 'next/link'
 import type { ComponentProps } from 'react'
 
+import DatoLinkIcon from '../LinkIcon/LinkIcon'
+
 import type { IconType } from '../LinkIcon/LinkIcon'
 
 export type AnchorLinkProps = ComponentProps<'a'> & {
   data: Queries.AnchorLinkFragment | null | undefined
-  iconType?: IconType
+  iconType?: IconType | null | undefined
 }
 
 export const AnchorLink = ({
@@ -20,7 +22,13 @@ export const AnchorLink = ({
       href={data?.href || ''}
       {...props}
     >
-      {data?.linkText}
+      {iconType === 'ARROW_LEFT' && (
+        <DatoLinkIcon iconType="ARROW_LEFT" />
+      )}
+      <span>{data?.linkText}</span>
+      {iconType && iconType !== 'ARROW_LEFT' && (
+        <DatoLinkIcon iconType={iconType} />
+      )}
     </Link>
   )
 }

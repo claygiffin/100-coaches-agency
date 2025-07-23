@@ -17,6 +17,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.datocms-assets.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'i.ytimg.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.vimeocdn.com',
+      },
     ],
   },
   sassOptions: {

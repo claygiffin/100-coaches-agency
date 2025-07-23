@@ -8,14 +8,14 @@ import { useWindowDimensions } from '@/hooks/useWindowDimensions'
 import { classes } from '@/utils/css'
 import { focalPoint } from '@/utils/helpers'
 
-import styles from './ArticlesHeroImage.module.scss'
+import styles from './LeaderShipHeroImage.module.scss'
 
 type Props = ComponentProps<'div'> & {
-  data: Queries.ArticlesHeroImageFragment | null | undefined
+  data: Queries.LeaderShipHeroImageFragment | null | undefined
 }
 
-export const ArticlesHeroImage = ({ data, ...props }: Props) => {
-  const { ref: inViewRef, inView } = useInView({
+export const LeaderShipHeroImage = ({ data, ...props }: Props) => {
+  const { ref: inViewRef } = useInView({
     rootMargin: '10% 0% -10%',
     initialInView: true,
   })

@@ -2,111 +2,67 @@ import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 
 import {
-  ArticlesBooks,
-  ArticlesBooksFragment,
-  ArticlesFeatured,
-  ArticlesFeaturedFragment,
-  ArticlesHero,
-  ArticlesHeroFragment,
-  ArticlesNewsletters,
-  ArticlesNewslettersFragment,
-  ArticlesVideos,
-  ArticlesVideosFragment,
-  BookFragment,
-  NewsletterFragment,
-  VideoFragment,
+  ArticleFragment,
+  ArticlesGrid,
+  NewsItemFragment,
 } from '@/features/articles'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
+
+import styles from './articles.module.scss'
 
 export const dynamic = 'force-static'
 
 const query = gql`
   query ArticlesPage {
-    thoughtLeadershipPage {
-      ...ArticlesHero
-      ...ArticlesFeatured
-      ...ArticlesBooks
-      ...ArticlesNewsletters
-      ...ArticlesVideos
+    articlesPage {
+      pageHeading
+      slug
       _seoMetaTags {
         attributes
         content
         tag
       }
     }
-    allBooks(first: 10) {
-      ...Book
+    articles: allArticles {
+      ...Article
     }
-    allNewsletters(first: 1) {
-      ...Newsletter
-    }
-    allVideos(first: 10) {
-      ...Video
+    newsItems: allNewsItems {
+      ...NewsItem
     }
   }
-  ${ArticlesHeroFragment}
-  ${ArticlesFeaturedFragment}
-  ${BookFragment}
-  ${ArticlesBooksFragment}
-  ${ArticlesNewslettersFragment}
-  ${NewsletterFragment}
-  ${ArticlesVideosFragment}
-  ${VideoFragment}
+  ${ArticleFragment}
+  ${NewsItemFragment}
 `
 
 export const generateMetadata = async (): Promise<Metadata> => {
   const {
-    data: { thoughtLeadershipPage },
+    data: { articlesPage },
   } = await datoRequest<Queries.ArticlesPageQuery>({
     query,
   })
-  return generateDatoCmsMetadata(
-    thoughtLeadershipPage?._seoMetaTags || [],
-    { canonicalSlug: '' }
-  )
+  return generateDatoCmsMetadata(articlesPage?._seoMetaTags || [], {
+    canonicalSlug: articlesPage?.slug,
+  })
 }
 
 const ArticlesPage: NextPage = async () => {
   const {
-    data: {
-      thoughtLeadershipPage,
-      allBooks,
-      allNewsletters,
-      allVideos,
-    },
+    data: { articles, newsItems, articlesPage: page },
   } = await datoRequest<Queries.ArticlesPageQuery>({
     query,
   })
 
+  const filters = ['Show All', 'Thought Leadership', 'News']
+
   return (
-    <main data-articles>
-      <ArticlesHero data={thoughtLeadershipPage} />
-      <ArticlesFeatured data={thoughtLeadershipPage} />
-      <ArticlesBooks
-        data={thoughtLeadershipPage}
-        books={allBooks}
+    <main className={styles.main}>
+      <h1 className={styles.heading}>{page?.pageHeading}</h1>
+      <ArticlesGrid
+        articles={articles}
+        newsItems={newsItems}
+        filters={filters}
       />
-      <ArticlesNewsletters
-        data={thoughtLeadershipPage}
-        newsletter={allNewsletters}
-      />
-      <ArticlesVideos
-        data={thoughtLeadershipPage}
-        videos={allVideos}
-      />
-      <div>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-      </div>
     </main>
   )
 }

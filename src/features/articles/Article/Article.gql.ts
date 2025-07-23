@@ -37,6 +37,10 @@ export const ArticleFragment = gql`
       ) {
         ...ResponsiveImage
       }
+      focalPoint {
+        x
+        y
+      }
     }
     createdAt: _createdAt
     slug

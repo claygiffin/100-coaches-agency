@@ -11,7 +11,8 @@ import styles from './Modal.module.scss'
 
 type Props = ComponentProps<'dialog'> & {
   metaData?: Metadata
-  variant?: 'DEFAULT' | 'ARTICLE' | 'FORM' | 'PROFILE'
+  variant?: 'DEFAULT' | 'ARTICLE' | 'FORM' | 'PROFILE' | 'VIDEOLIGHTBOX'
+  onClose?: () => void
 }
 
 export function Modal({
@@ -19,6 +20,7 @@ export function Modal({
   metaData,
   className,
   variant = 'DEFAULT',
+  onClose,
   ...props
 }: Props) {
   const router = useRouter()
@@ -51,7 +53,11 @@ export function Modal({
   const handleDismiss = () => {
     setAnimating('CLOSING')
     timeout.current = setTimeout(() => {
-      router.back()
+      if (onClose) {
+        onClose()
+      } else {
+        router.back()
+      }
     }, closeDuration)
   }
 
@@ -75,37 +81,38 @@ export function Modal({
   }, [metaData])
 
   return (
-    <dialog
-      ref={setDialogRef}
-      className={classes(styles.modal, className)}
-      onClose={handleDismiss}
-      data-animating={animating}
-      style={{
-        '--open-duration': `${openDuration}ms`,
-        '--close-duration': `${closeDuration}ms`,
-      }}
-      data-variant={variant}
-      {...props}
-    >
-      <button
-        className={styles.backdrop}
-        onClick={handleDismiss}
-        tabIndex={-1}
-        aria-hidden
-      />
-      <div className={styles.contentWrapper}>
+    <div data-variant={variant}>
+      <dialog
+        ref={setDialogRef}
+        className={classes(styles.modal, className)}
+        onClose={handleDismiss}
+        data-animating={animating}
+        style={{
+          '--open-duration': `${openDuration}ms`,
+          '--close-duration': `${closeDuration}ms`,
+        }}
+        {...props}
+      >
         <button
+          className={styles.backdrop}
           onClick={handleDismiss}
-          className={styles.closeButton}
-          aria-label="Close Modal"
-        >
-          <svg viewBox="0 0 30 30">
-            <path d="M1 1L29 29" />
-            <path d="M29 1L1 29" />
-          </svg>
-        </button>
-        <div className={styles.content}>{children}</div>
-      </div>
-    </dialog>
+          tabIndex={-1}
+          aria-hidden
+        />
+        <div className={styles.contentWrapper}>
+          <button
+            onClick={handleDismiss}
+            className={styles.closeButton}
+            aria-label="Close Modal"
+          >
+            <svg viewBox="0 0 30 30">
+              <path d="M1 1L29 29" />
+              <path d="M29 1L1 29" />
+            </svg>
+          </button>
+          <div className={styles.content}>{children}</div>
+        </div>
+      </dialog>
+    </div>
   )
 }

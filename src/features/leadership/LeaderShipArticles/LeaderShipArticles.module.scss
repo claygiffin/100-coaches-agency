@@ -1,17 +1,12 @@
 @use '@/theme/mixins' as *;
 
 .section {
-  position: relative;
   min-height: 30vh;
-  color: white;
+  color: black;
   font-size: var(--fs-72);
   z-index: 2;
   overflow: hidden;
-  background: linear-gradient(
-    to top right,
-    var(--color-gold),
-    var(--color-goldShade3)
-  );
+  background-color: var(--color-gray90);
   padding: 0.75em 1em;
   @include media('<m') {
     padding: 0.75em 0.5em;
@@ -31,7 +26,7 @@
   .heading {
     font-size: var(--fs-36);
     text-transform: uppercase;
-    color: white;
+    color: black;
     margin: 0;
     @include media('<s') {
       width: 100%;
@@ -39,19 +34,21 @@
     }
   }
   .headerLine {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
     flex: auto;
     margin: 0 0.1em;
     @include media('<s') {
       width: 100%;
       display: flex;
       margin-top: 0.1em;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
   .archiveButton {
     font-size: var(--fs-16);
     text-transform: uppercase;
-    color: white;
+    color: black;
     display: inline-flex;
     font-weight: 400;
     text-decoration: none;
@@ -68,7 +65,7 @@
       display: flex;
       justify-content: center;
       align-items: flex-start;
-      margin-top: 0.2em;
+      margin-top: 0.5em;
     }
     @media (hover: hover) {
       &:hover {
@@ -79,10 +76,11 @@
 }
 .body {
   border-radius: 0.2em;
-  background-color: var(--color-goldTint5);
+  background-color: white;
   padding: 0.4em;
   display: flex;
   gap: 1em;
+  cursor: pointer;
   @include media('<m') {
     padding: 0.3em;
     gap: 0.5em;
@@ -94,7 +92,7 @@
     width: 7em;
     flex: none;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     overflow: hidden;
     border-radius: 0.2em;
@@ -112,6 +110,9 @@
   .bodyContainer {
     display: flex;
     flex-direction: column;
+    @include media('<s') {
+      padding: 0.3em;
+    }
     .bodyLabel {
       font-size: var(--fs-15);
       color: var(--color-gray40);
@@ -125,7 +126,7 @@
     .bodyHeading {
       font-size: var(--fs-24);
       color: black;
-      margin: 0.5em 0 0.25em;
+      margin: 0.5em 0;
       line-height: 1.25;
       font-weight: 400;
       em {
@@ -138,7 +139,11 @@
     }
     .bodyText {
       font-size: var(--fs-18);
+      height: 12em;
+      min-height: 12em;
       color: black;
+      margin-bottom: 2em;
+      overflow: hidden;
       > p {
         font-weight: 400;
         line-height: 1.5;
@@ -149,7 +154,54 @@
       font-size: var(--fs-16);
       font-weight: 500;
       color: var(--color-gray40);
-      margin-top: 1.25em;
+      padding-top: 1.25em;
+      border-top: 2px solid var(--color-gray75);
+    }
+  }
+}
+.slider {
+  padding: 1em 0 0.5em;
+  .slide {
+    cursor: pointer;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: white;
+    border-radius: 0.3em;
+    .slideImageWrapper {
+      width: 100%;
+      max-height: 4em;
+      left: 0;
+      bottom: 10%;
+      display: flex;
+      justify-content: center;
+      .slideImage {
+        width: 100%;
+        border-radius: 0.3em;
+        margin: 0.3em;
+      }
+    }
+    .slideBody {
+      padding: 0.2em 0.3em 0.3em 0.3em;
+      display: flex;
+      flex-direction: column;
+      flex: auto;
+      height: 2em;
+      h2 {
+        font-size: var(--fs-21);
+        font-weight: 400;
+        line-height: 1.25;
+        margin: 0;
+        flex: auto;
+      }
+      .date {
+        font-size: var(--fs-16);
+        font-weight: 500;
+        color: var(--color-gray40);
+        padding-top: 1.25em;
+        border-top: 2px solid var(--color-gray75);
+      }
     }
   }
 }

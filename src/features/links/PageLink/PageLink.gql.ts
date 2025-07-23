@@ -19,6 +19,9 @@ export const PageLinkFragment = gql`
       ... on ContactPageRecord {
         slug
       }
+      ... on ArticlesPageRecord {
+        slug
+      }
     }
   }
 `

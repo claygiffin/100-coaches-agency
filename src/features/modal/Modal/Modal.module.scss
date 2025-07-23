@@ -13,9 +13,12 @@
   justify-items: center;
   align-items: center;
   background: transparent;
-  overflow: scroll;
+  overflow: auto;
   &::backdrop {
     display: none;
+  }
+  [data-variant='VIDEOLIGHTBOX'] & {
+    background: color-mix(in srgb, white 50%, transparent);
   }
 }
 
@@ -50,6 +53,9 @@
   }
   [data-animating='CLOSING'] & {
     transform: translate3d(0, -12rem, 0);
+  }
+  [data-variant='VIDEOLIGHTBOX'] & {
+    margin: 0;
   }
   @include media('<s') {
     margin: 0.5rem;
@@ -86,6 +92,9 @@
   [data-variant='FORM'] & {
     background: linear-gradient(to top right, #222, #555);
   }
+  [data-variant='VIDEOLIGHTBOX'] & {
+    background: transparent;
+  }
 }
 
 .closeButton {
@@ -114,6 +123,16 @@
   }
   [data-variant='FORM'] & {
     color: #ffffffcc;
+  }
+  [data-variant='VIDEOLIGHTBOX'] & {
+    position: absolute;
+    top: -2rem;
+    @include media('<m') {
+      top: -3rem;
+    }
+    @include media('<s') {
+      top: -4rem;
+    }
   }
   svg {
     width: 100%;

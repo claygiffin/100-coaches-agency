@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 import { ThoughtLeadershipItemFragment } from '@/features/home-sections'
 
-export const ArticlesFeaturedFragment = gql`
-  fragment ArticlesFeatured on ThoughtLeadershipPageRecord {
+export const LeaderShipFeaturedFragment = gql`
+  fragment LeaderShipFeatured on ThoughtLeadershipPageRecord {
     featuredHeading
     featuredBody {
       ...ThoughtLeadershipItem
