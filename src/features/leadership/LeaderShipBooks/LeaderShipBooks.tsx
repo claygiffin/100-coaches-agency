@@ -14,6 +14,10 @@ type Props = ComponentProps<'section'> & {
 }
 
 export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
+  const showingBooks = data?.booksItems?.length
+    ? data.booksItems
+    : books
+
   return (
     <section
       id="books"
@@ -31,8 +35,8 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
       </div>
       <div>
         <div className={styles.bodyFeatured}>
-          {Array.isArray(books) &&
-            books.slice(0, 2).map((book, index) => {
+          {Array.isArray(showingBooks) &&
+            showingBooks.slice(0, 2).map((book, index) => {
               return (
                 <div
                   className={styles.featuredItem}
@@ -40,13 +44,13 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
                 >
                   <div className={styles.featuredItemImage}>
                     <DatoImageFocused
-                      data={book?.image?.responsiveImage}
-                      focalPoint={book?.image?.focalPoint}
+                      data={book?.thumbnail?.responsiveImage}
+                      focalPoint={book?.thumbnail?.focalPoint}
                     />
                   </div>
                   <div className={styles.featuredItemBody}>
                     <h2 className={styles.bookTitle}>{book?.title}</h2>
-                    <h2 className={styles.bookBio}>{book?.bio}</h2>
+                    <h2 className={styles.bookBio}>{book?.subtitle}</h2>
                     <div className={styles.line}></div>
                     <div className={styles.authors}>
                       {Array.isArray(book?.authors) &&
@@ -69,8 +73,8 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
         </div>
         <div className={styles.slider}>
           <Slider>
-            {Array.isArray(books) &&
-              books.slice(2).map((book, index) => {
+            {Array.isArray(showingBooks) &&
+              showingBooks.slice(2).map((book, index) => {
                 return (
                   <div
                     className={styles.slide}
@@ -78,8 +82,8 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
                   >
                     <div className={styles.slideImageWrapper}>
                       <DatoImageFocused
-                        data={book?.image?.responsiveImage}
-                        focalPoint={book?.image?.focalPoint}
+                        data={book?.thumbnail?.responsiveImage}
+                        focalPoint={book?.thumbnail?.focalPoint}
                         className={styles.slideImage}
                       />
                     </div>

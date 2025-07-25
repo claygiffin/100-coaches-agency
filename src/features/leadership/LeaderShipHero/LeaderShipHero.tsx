@@ -27,8 +27,7 @@ export const LeaderShipHero = ({ data, ...props }: Props) => {
         innerAs="span"
         className={styles.heading}
       >
-        <span>{data?.heroHeadingLine1}</span>{' '}
-        <span>{data?.heroHeadingLine2}</span>
+        <span>{data?.heroHeadingLine}</span>{' '}
       </AnimateIn>
       <AnimateIn
         as="div"

@@ -18,12 +18,11 @@ import {
   LeaderShipNewslettersFragment,
   LeaderShipVideos,
   LeaderShipVideosFragment,
+  NewsletterFragment,
   VideoFragment,
 } from '@/features/leadership'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
-
-export const dynamic = 'force-static'
 
 const query = gql`
   query LeadershipPage {
@@ -40,6 +39,12 @@ const query = gql`
         content
         tag
       }
+      featuredVisible
+      booksVisible
+      newslettersVisible
+      videosVisible
+      articlesVisible
+      coursesVisible
     }
     allBooks(first: 10) {
       ...Book
@@ -50,11 +55,8 @@ const query = gql`
     allArticles(first: 10) {
       ...Article
     }
-    newsletterArticles: allArticles(
-      first: 1
-      filter: { category: { eq: "JlKSeOHiTjuvbDUmk_CVEg" } }
-    ) {
-      ...Article
+    allNewsletters(first: 1) {
+      ...Newsletter
     }
   }
   ${LeaderShipHeroFragment}
@@ -65,6 +67,7 @@ const query = gql`
   ${LeaderShipVideosFragment}
   ${VideoFragment}
   ${ArticleFragment}
+  ${NewsletterFragment}
   ${LeaderShipArticlesFragment}
   ${LeaderShipCoursesFragment}
 `
@@ -88,33 +91,45 @@ const LeadershipPage: NextPage = async () => {
       allBooks,
       allVideos,
       allArticles,
-      newsletterArticles,
+      allNewsletters,
     },
   } = await datoRequest<Queries.LeadershipPageQuery>({
     query,
   })
 
   return (
-    <main data-articles>
+    <main>
       <LeaderShipHero data={thoughtLeadershipPage} />
-      <LeaderShipFeatured data={thoughtLeadershipPage} />
-      <LeaderShipBooks
-        data={thoughtLeadershipPage}
-        books={allBooks}
-      />
-      <LeaderShipNewsletters
-        data={thoughtLeadershipPage}
-        newsletter={newsletterArticles}
-      />
-      <LeaderShipVideos
-        data={thoughtLeadershipPage}
-        videos={allVideos}
-      />
-      <LeaderShipArticles
-        data={thoughtLeadershipPage}
-        articles={allArticles}
-      />
-      <LeaderShipCourses data={thoughtLeadershipPage} />
+      {thoughtLeadershipPage?.featuredVisible && (
+        <LeaderShipFeatured data={thoughtLeadershipPage} />
+      )}
+      {thoughtLeadershipPage?.booksVisible && (
+        <LeaderShipBooks
+          data={thoughtLeadershipPage}
+          books={allBooks}
+        />
+      )}
+      {thoughtLeadershipPage?.newslettersVisible && (
+        <LeaderShipNewsletters
+          data={thoughtLeadershipPage}
+          newsletter={allNewsletters}
+        />
+      )}
+      {thoughtLeadershipPage?.videosVisible && (
+        <LeaderShipVideos
+          data={thoughtLeadershipPage}
+          videos={allVideos}
+        />
+      )}
+      {thoughtLeadershipPage?.articlesVisible && (
+        <LeaderShipArticles
+          data={thoughtLeadershipPage}
+          articles={allArticles}
+        />
+      )}
+      {thoughtLeadershipPage?.coursesVisible && (
+        <LeaderShipCourses data={thoughtLeadershipPage} />
+      )}
     </main>
   )
 }

@@ -20,7 +20,11 @@ export const LeaderShipVideosFragment = gql`
         ...PageLink
       }
     }
+    videosItems {
+      ...Video
+    }
   }
 
   ${PageLinkFragment}
+  ${VideoFragment}
 `

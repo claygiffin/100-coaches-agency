@@ -23,6 +23,9 @@ export const LeaderShipArticles = ({
   ...props
 }: Props) => {
   const router = useRouter()
+  const showingArticles = data?.articlesItems?.length
+    ? data?.articlesItems
+    : articles
 
   const openArticle = (slug: string) =>
     router.push(`/articles/${slug}`, { scroll: false })
@@ -42,15 +45,15 @@ export const LeaderShipArticles = ({
           iconType={'ARROW_RIGHT'}
         />
       </div>
-      {Array.isArray(articles) && (
+      {Array.isArray(showingArticles) && (
         <div
           className={styles.body}
-          onClick={() => openArticle(articles[0]?.slug)}
+          onClick={() => openArticle(showingArticles[0]?.slug)}
         >
           <div className={styles.bodyImageWrapper}>
             <DatoImageFocused
-              data={articles[0]?.thumbnail?.responsiveImage}
-              focalPoint={articles[0]?.thumbnail?.focalPoint}
+              data={showingArticles[0]?.thumbnail?.responsiveImage}
+              focalPoint={showingArticles[0]?.thumbnail?.focalPoint}
               className={styles.bodyImage}
             />
           </div>
@@ -59,21 +62,24 @@ export const LeaderShipArticles = ({
               className={styles.bodyHeading}
               as="h2"
             >
-              {articles[0]?.title || ''}
+              {showingArticles[0]?.title || ''}
             </MarkdownHeading>
             <div className={styles.bodyText}>
-              <DatoStructuredText data={articles[0]?.body} />
+              <DatoStructuredText data={showingArticles[0]?.body} />
             </div>
             <div className={styles.date}>
-              {format(new Date(articles[0]?.createdAt), 'MMMM d, yyyy')}
+              {format(
+                new Date(showingArticles[0]?.createdAt),
+                'MMMM d, yyyy'
+              )}
             </div>
           </div>
         </div>
       )}
       <div className={styles.slider}>
         <Slider>
-          {Array.isArray(articles) &&
-            articles.slice(1).map((article, index) => {
+          {Array.isArray(showingArticles) &&
+            showingArticles.slice(1).map((article, index) => {
               return (
                 <div
                   className={styles.slide}

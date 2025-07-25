@@ -1,12 +1,29 @@
 import gql from 'graphql-tag'
 
 import { ResponsiveImageFragment } from '@/features/dato-image'
-import { PageLinkFragment } from '@/features/links'
+import {
+  ExternalLinkFragment,
+  PageLinkFragment,
+} from '@/features/links'
+
+import { PdfFragment } from '../LeaderShipFeatured/LeaderShipFeatured.gql'
+
+export const BookTestimonialFragment = gql`
+  fragment BookTestimonial on BookTestimonialRecord {
+    quote {
+      value
+    }
+    attributionName
+    attributionTitle {
+      value
+    }
+  }
+`
 
 export const BookFragment = gql`
   fragment Book on BookRecord {
     title
-    image {
+    thumbnail {
       responsiveImage {
         ...ResponsiveImage
       }
@@ -15,12 +32,62 @@ export const BookFragment = gql`
         y
       }
     }
-    bio
+    subtitle
     authors {
       name
+      title
+      bio {
+        value
+      }
+      photo {
+        responsiveImage {
+          ...ResponsiveImage
+        }
+        focalPoint {
+          x
+          y
+        }
+      }
+    }
+    purchaseLink {
+      ... on ExternalLinkRecord {
+        ...ExternalLink
+      }
+    }
+    secondaryCta
+    descriptionHeading
+    descriptionBody {
+      value
+    }
+    descriptionCtaButton {
+      ... on PageLinkRecord {
+        ...PageLink
+      }
+      ... on ExternalLinkRecord {
+        ...ExternalLink
+      }
+      ... on PdfRecord {
+        ...Pdf
+      }
+    }
+    testimonials {
+      ...BookTestimonial
+    }
+    miscellaneousInformationHeading
+    miscellaneousInformationBody {
+      value
+    }
+    createdAt: _createdAt
+    slug
+    _seoMetaTags {
+      tag
     }
   }
   ${ResponsiveImageFragment}
+  ${ExternalLinkFragment}
+  ${PageLinkFragment}
+  ${PdfFragment}
+  ${BookTestimonialFragment}
 `
 
 export const LeaderShipBooksFragment = gql`
@@ -31,7 +98,11 @@ export const LeaderShipBooksFragment = gql`
         ...PageLink
       }
     }
+    booksItems {
+      ...Book
+    }
   }
 
   ${PageLinkFragment}
+  ${BookFragment}
 `

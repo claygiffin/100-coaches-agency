@@ -6,7 +6,11 @@ import { DatoImage } from '@/features/dato-image'
 import styles from './Article.module.scss'
 
 type PropTypes = {
-  article: Queries.ArticleFragment | null | undefined
+  article:
+    | Queries.ArticleFragment
+    | Queries.NewsletterFragment
+    | null
+    | undefined
   layout: 'MODAL' | 'PAGE'
 }
 

@@ -1,0 +1,65 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  position: relative;
+  min-height: 30vh;
+  color: black;
+  font-size: var(--fs-72);
+  z-index: 2;
+  overflow: hidden;
+  background-color: white;
+  padding: 2em 3em 1em;
+  display: flex;
+  flex-direction: column;
+  @include media('<ls') {
+    padding: 1em 0.5em 0.5em;
+  }
+  .heading {
+    font-size: var(--fs-30);
+    line-height: 1.25;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    em {
+      font-style: normal;
+      color: var(--color-goldShade1);
+    }
+  }
+  .body {
+    > p {
+      font-size: var(--fs-18);
+      line-height: 1.5;
+      margin-bottom: 2em;
+    }
+    .button {
+      font-size: var(--fs-21);
+      margin-top: 1.5em;
+      background-position: 100% 50%;
+      background-size: 200%;
+      appearance: none;
+      background: transparent;
+      padding: 0.6em 1em;
+      line-height: 1.1;
+      border-radius: 1.25em;
+      color: var(--color-goldTint1);
+      border: 1px solid currentColor;
+      transition-property: color, border-color, background-color;
+      transition-duration: 200ms;
+      transition-timing-function: ease;
+      text-align: center;
+      @media (hover: hover) {
+        &:hover {
+          background: var(--color-goldShade1);
+          border-color: var(--color-goldShade1);
+          color: #fff;
+        }
+      }
+      @include media('<ls') {
+        margin: 1em 0 1.5em;
+      }
+      @include media('<s') {
+        font-size: var(--fs-18);
+      }
+    }
+  }
+}

@@ -19,6 +19,10 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
   const [selectedVideo, setSelectedVideo] =
     useState<Queries.VideoFragment | null>(null)
 
+  const showingVideos = data?.videosItems?.length
+    ? data?.videosItems
+    : videos
+
   return (
     <section
       id="videos"
@@ -36,8 +40,8 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
       </div>
       <div>
         <div className={styles.body}>
-          {Array.isArray(videos) &&
-            videos.slice(0, 2).map((video, index) => {
+          {Array.isArray(showingVideos) &&
+            showingVideos.slice(0, 2).map((video, index) => {
               return (
                 <div key={index}>
                   <div className={styles.videoWrapper}>
@@ -67,8 +71,8 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
         </div>
         <div className={styles.slider}>
           <Slider>
-            {Array.isArray(videos) &&
-              videos.slice(2).map((video, index) => {
+            {Array.isArray(showingVideos) &&
+              showingVideos.slice(2).map((video, index) => {
                 return (
                   <div
                     className={styles.slide}

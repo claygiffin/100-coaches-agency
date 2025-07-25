@@ -6,8 +6,7 @@ import { LeaderShipHeroImageFragment } from './LeaderShipHeroImage/LeaderShipHer
 
 export const LeaderShipHeroFragment = gql`
   fragment LeaderShipHero on ThoughtLeadershipPageRecord {
-    heroHeadingLine1
-    heroHeadingLine2
+    heroHeadingLine
     heroImage {
       ...LeaderShipHeroImage
     }

@@ -13,7 +13,7 @@ import styles from './LeaderShipNewsletter.module.scss'
 
 type Props = ComponentProps<'section'> & {
   data: Queries.LeaderShipNewslettersFragment | null | undefined
-  newsletter: Queries.ArticleFragment[] | null | undefined
+  newsletter: Queries.NewsletterFragment[] | null | undefined
 }
 
 export const LeaderShipNewsletters = ({
@@ -22,9 +22,11 @@ export const LeaderShipNewsletters = ({
   ...props
 }: Props) => {
   const router = useRouter()
+  const showingNewsletter =
+    data?.newslettersItem ?? newsletter?.[0] ?? null
 
-  const openArticle = (slug: string) =>
-    router.push(`/articles/${slug}`, { scroll: false })
+  const openNewsletter = (slug: string) =>
+    router.push(`/newsletters/${slug}`, { scroll: false })
 
   return (
     <section
@@ -41,15 +43,15 @@ export const LeaderShipNewsletters = ({
           iconType={'ARROW_RIGHT'}
         />
       </div>
-      {Array.isArray(newsletter) && (
+      {showingNewsletter && (
         <div
           className={styles.body}
-          onClick={() => openArticle(newsletter[0]?.slug)}
+          onClick={() => openNewsletter(showingNewsletter?.slug)}
         >
           <div className={styles.bodyImageWrapper}>
             <DatoImageFocused
-              data={newsletter[0]?.thumbnail?.responsiveImage}
-              focalPoint={newsletter[0]?.thumbnail?.focalPoint}
+              data={showingNewsletter?.thumbnail?.responsiveImage}
+              focalPoint={showingNewsletter?.thumbnail?.focalPoint}
               className={styles.bodyImage}
             />
           </div>
@@ -61,14 +63,14 @@ export const LeaderShipNewsletters = ({
               className={styles.bodyHeading}
               as="h2"
             >
-              {newsletter[0]?.title || ''}
+              {showingNewsletter?.title || ''}
             </MarkdownHeading>
             <div className={styles.bodyText}>
-              <DatoStructuredText data={newsletter[0]?.body} />
+              <DatoStructuredText data={showingNewsletter?.body} />
             </div>
             <div className={styles.date}>
               {format(
-                new Date(newsletter[0]?.createdAt),
+                new Date(showingNewsletter?.createdAt),
                 'MMMM d, yyyy'
               )}
             </div>

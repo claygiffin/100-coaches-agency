@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { ArticleFragment } from '@/features/articles'
 import { PageLinkFragment } from '@/features/links'
 
 export const LeaderShipArticlesFragment = gql`
@@ -10,7 +11,10 @@ export const LeaderShipArticlesFragment = gql`
         ...PageLink
       }
     }
+    articlesItems {
+      ...Article
+    }
   }
-
+  ${ArticleFragment}
   ${PageLinkFragment}
 `

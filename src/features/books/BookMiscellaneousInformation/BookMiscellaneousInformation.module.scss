@@ -1,0 +1,45 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  position: relative;
+  color: black;
+  font-size: var(--fs-72);
+  min-height: 20vh;
+  z-index: 2;
+  overflow: hidden;
+  padding: 1em 3em 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include media('<ls') {
+    padding: 1em 0.5em 1.5em;
+  }
+  .heading {
+    font-size: var(--fs-42);
+    line-height: 1.25;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    text-align: center;
+    em {
+      font-style: normal;
+      color: var(--color-goldShade1);
+    }
+  }
+  .lineWrapper {
+    display: flex;
+    justify-content: center;
+    .line {
+      width: 2em;
+      border: 1px solid var(--color-gray75);
+    }
+  }
+  .body {
+    > p {
+      font-size: var(--fs-24);
+      line-height: 1.25;
+      font-weight: 400;
+      font-family: var(--ff-display);
+    }
+  }
+}
