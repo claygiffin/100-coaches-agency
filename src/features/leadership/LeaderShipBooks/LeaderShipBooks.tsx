@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
 import { DatoImageFocused } from '@/features/dato-image'
@@ -14,9 +15,12 @@ type Props = ComponentProps<'section'> & {
 }
 
 export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
+  const router = useRouter()
   const showingBooks = data?.booksItems?.length
     ? data.booksItems
     : books
+
+  const goToBookPage = (slug: string) => router.push(`/books/${slug}`)
 
   return (
     <section
@@ -41,6 +45,7 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
                 <div
                   className={styles.featuredItem}
                   key={index}
+                  onClick={() => goToBookPage(book?.slug)}
                 >
                   <div className={styles.featuredItemImage}>
                     <DatoImageFocused
@@ -79,6 +84,7 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
                   <div
                     className={styles.slide}
                     key={index}
+                    onClick={() => goToBookPage(book?.slug)}
                   >
                     <div className={styles.slideImageWrapper}>
                       <DatoImageFocused
