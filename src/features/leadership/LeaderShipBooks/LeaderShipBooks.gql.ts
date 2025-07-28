@@ -22,6 +22,7 @@ export const BookTestimonialFragment = gql`
 
 export const BookFragment = gql`
   fragment Book on BookRecord {
+    __typename
     title
     thumbnail {
       responsiveImage {

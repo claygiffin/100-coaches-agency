@@ -4,11 +4,13 @@ import { PageLinkFragment } from '@/features/links'
 
 export const VideoFragment = gql`
   fragment Video on VideoRecord {
+    __typename
     description
     file {
       url
       thumbnailUrl
     }
+    createdAt: _createdAt
   }
 `
 

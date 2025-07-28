@@ -1,0 +1,92 @@
+@use '@/theme/mixins' as *;
+
+.backButton {
+  font-size: var(--fs-16);
+  text-transform: uppercase;
+  color: var(--color-gray40);
+  display: inline-flex;
+  flex-direction: row;
+  font-weight: 400;
+  text-decoration: none;
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-gray50);
+    }
+  }
+}
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @include media('<ls') {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25em;
+    margin-top: 0.5em;
+  }
+  .title {
+    font-size: var(--fs-48);
+    font-weight: 300;
+    text-align: center;
+    em {
+      font-style: normal;
+      color: var(--color-goldShade1);
+    }
+  }
+  .selectbox {
+    font-size: var(--fs-24);
+    > div {
+      display: inline-block;
+      position: relative;
+      transition: color 200ms ease;
+      font-weight: 400;
+      &:hover,
+      &:focus-within {
+        color: var(--color-goldShade1);
+      }
+      > span > svg {
+        transform: translateY(0.2em);
+      }
+    }
+    > span {
+      color: #555;
+      display: inline-block;
+      margin-right: 0.5em;
+    }
+    select {
+      @include absolute-fill;
+      width: 120%;
+      height: 120%;
+      left: auto;
+      right: 0;
+      appearance: none;
+      border: none;
+      color: transparent;
+      background: transparent;
+      cursor: pointer;
+      > option {
+        color: black;
+        padding: 0.1em;
+        text-transform: uppercase;
+      }
+    }
+    .category {
+      text-transform: uppercase;
+    }
+  }
+}
+.cardLayout {
+  display: grid;
+  margin-top: 0.5em;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5em;
+  @include media('<ls') {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 0.6em;
+  }
+  @include media('<ms') {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.75em;
+  }
+}

@@ -59,6 +59,7 @@
       .photoWrapper {
         display: flex;
         align-items: center;
+        justify-content: center;
         width: 30%;
         gap: 0;
         @include media('<ms') {

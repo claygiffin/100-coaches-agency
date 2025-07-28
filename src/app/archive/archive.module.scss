@@ -1,0 +1,14 @@
+@use '@/theme/mixins' as *;
+
+.main {
+  padding: 0em 1em 3em;
+  background-color: var(--color-gray95);
+  color: black;
+  font-size: var(--fs-72);
+  display: flex;
+  flex-direction: column;
+
+  @include media('<ls') {
+    padding: 0em 0.5em 2em;
+  }
+}

@@ -34,6 +34,7 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
         <DatoLink
           data={data?.booksArchiveButton}
           className={styles.archiveButton}
+          searchParam={{ field: 'category', value: 'book' }}
           iconType={'ARROW_RIGHT'}
         />
       </div>

@@ -15,13 +15,19 @@ const DatoLinkIcon = ({ iconType, ...props }: Props) => {
   switch (iconType) {
     case 'ARROW_RIGHT':
       return (
-        <div className={styles.container}>
+        <div
+          className={styles.container}
+          arrow-direction={'ARROW_RIGHT'}
+        >
           <VscArrowRight {...props} />
         </div>
       )
     case 'ARROW_LEFT':
       return (
-        <div className={styles.container}>
+        <div
+          className={styles.container}
+          arrow-direction={'ARROW_LEFT'}
+        >
           <VscArrowLeft {...props} />
         </div>
       )

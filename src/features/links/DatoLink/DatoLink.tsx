@@ -17,6 +17,10 @@ type Props = ComponentProps<'a' | 'button'> & {
   iconType?: IconType
   isButton?: boolean
   borderVariant?: 'SQUARE' | 'ROUNDED'
+  searchParam?: {
+    field: string
+    value: string
+  }
   data:
     | Queries.PageLinkFragment
     | Queries.FormLinkFragment
@@ -33,6 +37,7 @@ export const DatoLink = ({
   data,
   iconType,
   isButton,
+  searchParam,
   borderVariant,
   className,
   ...props
@@ -54,6 +59,7 @@ export const DatoLink = ({
       return (
         <PageLink
           data={data}
+          searchParam={searchParam}
           {...(linkProps as ComponentProps<'a'>)}
         />
       )

@@ -6,11 +6,16 @@ import DatoLinkIcon, { type IconType } from '../LinkIcon/LinkIcon'
 export type PageLinkProps = ComponentProps<'a'> & {
   data: Queries.PageLinkFragment | null | undefined
   iconType?: IconType
+  searchParam?: {
+    field: string
+    value: string
+  }
 }
 
 export const PageLink = ({
   data,
   iconType,
+  searchParam,
   ...props
 }: PageLinkProps) => {
   const getSlug = () => {
@@ -20,7 +25,9 @@ export const PageLink = ({
       case 'CoachCategoryRecord':
         return `/coaches/${data.page.slug}/`
       default:
-        return `/${data?.page?.slug}/`
+        return !!searchParam
+          ? `/${data?.page?.slug + '?' + searchParam?.field + '=' + searchParam?.value}`
+          : `/${data?.page?.slug}/`
     }
   }
   return (
