@@ -7,12 +7,15 @@
   min-height: 20vh;
   z-index: 2;
   overflow: hidden;
-  padding: 1em 3em 2em;
+  padding: 1em 4em 2em;
   display: flex;
   align-items: center;
   justify-content: center;
   @include media('<ls') {
     padding: 1em 0.5em 1.5em;
+  }
+  @include media('<s') {
+    padding: 1em 0.5em 1em;
   }
   .heading {
     font-size: var(--fs-42);
@@ -40,6 +43,7 @@
       line-height: 1.25;
       font-weight: 400;
       font-family: var(--ff-display);
+      text-align: center;
     }
   }
 }
