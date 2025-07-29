@@ -86,11 +86,18 @@
     display: flex;
     position: relative;
     cursor: pointer;
+    @include media('<ls') {
+      gap: 0.2em;
+    }
     @include media('<s') {
-      display: block;
+      flex-direction: column;
+      gap: 0.75em;
     }
     .featuredItemImage {
-      width: 50%;
+      width: 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       @include media('<m') {
         width: 35%;
       }
@@ -98,17 +105,25 @@
         width: 50%;
         margin: 0 auto;
       }
+      .thumbnail {
+        width: 80%;
+        box-shadow: -0.1em 0.3em 0.2em var(--color-gray75);
+      }
     }
     .featuredItemBody {
-      width: 50%;
+      width: 60%;
       padding: 1em 0.6em 1em 0;
+      display: flex;
+      flex-direction: column;
       @include media('<m') {
         width: 65%;
         padding: 1.25em 0.8em 1.25em 0;
+        height: 3.5em;
       }
       @include media('<s') {
         width: auto;
         padding: 0 0.5em 0.5em 0.5em;
+        height: 4em;
       }
       .bookTitle {
         font-size: var(--fs-30);
@@ -117,28 +132,33 @@
         color: black;
         margin: 0;
         margin-bottom: 0.5em;
+        flex: 0;
       }
       .bookBio {
         font-size: var(--fs-21);
         font-weight: 400;
         line-height: 1.25;
-        color: var(--color-gray10);
+        color: var(--color-gray20);
         margin: 0;
         margin-bottom: 0.5em;
+        flex: 1;
       }
       .line {
         border-top: 1px solid var(--color-goldShade2);
         width: 20%;
+        flex: 0;
       }
       .authors {
         display: flex;
         flex-direction: column;
         margin-top: 0.2em;
+        flex: 0;
         .author {
+          text-transform: uppercase;
           font-size: var(--fs-15);
           font-weight: 400;
           line-height: 1.25;
-          color: var(--color-gray10);
+          color: var(--color-gray30);
           margin: 0;
           margin-bottom: 0.2em;
         }
@@ -249,8 +269,10 @@
     flex-direction: column;
     position: relative;
     cursor: pointer;
+    gap: 0.5em;
     @include media('<m') {
       flex-direction: row;
+      gap: 0.4em;
     }
     .slideImageWrapper {
       width: 100%;
@@ -259,17 +281,17 @@
       bottom: 10%;
       display: flex;
       justify-content: center;
+      align-items: center;
       .slideImage {
         width: 50%;
-        transform: translateY(-0.4em);
+        box-shadow: -0.1em 0.3em 0.2em var(--color-gray75);
         @include media('<m') {
-          width: 100%;
-          transform: none;
+          width: auto;
+          height: 90%;
         }
       }
       @include media('<m') {
         width: 35%;
-        transform: none;
       }
     }
     .slideBody {
@@ -277,12 +299,11 @@
       display: flex;
       flex-direction: column;
       flex: auto;
-      transform: translateY(-0.4em);
-      height: 1.5em;
+      height: 2em;
       @include media('<m') {
+        width: 65%;
         padding: 0;
-        transform: none;
-        height: auto;
+        height: 3em;
         justify-content: center;
         padding: 0 0.1em 0 0;
       }
@@ -296,10 +317,11 @@
         flex-direction: column;
         margin-top: 0.2em;
         .author {
+          text-transform: uppercase;
           font-size: var(--fs-15);
           font-weight: 400;
           line-height: 1.25;
-          color: var(--color-gray10);
+          color: var(--color-gray30);
           margin: 0;
           margin-bottom: 0.2em;
         }

@@ -52,11 +52,14 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
                     <DatoImageFocused
                       data={book?.thumbnail?.responsiveImage}
                       focalPoint={book?.thumbnail?.focalPoint}
+                      className={styles.thumbnail}
                     />
                   </div>
                   <div className={styles.featuredItemBody}>
                     <h2 className={styles.bookTitle}>{book?.title}</h2>
-                    <h2 className={styles.bookBio}>{book?.subtitle}</h2>
+                    <div className={styles.bookBio}>
+                      {book?.subtitle}
+                    </div>
                     <div className={styles.line}></div>
                     <div className={styles.authors}>
                       {Array.isArray(book?.authors) &&

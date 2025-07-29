@@ -27,11 +27,13 @@ export const BookHero = ({ book }: PropTypes) => {
     <section className={styles.section}>
       <div className={styles.mainWrapper}>
         <div className={styles.thumbnailWrapper}>
-          <DatoImageFocused
-            className={styles.thumbnail}
-            data={book?.thumbnail?.responsiveImage}
-            focalPoint={book?.thumbnail?.focalPoint}
-          />
+          <div className={styles.thumbnail}>
+            <DatoImageFocused
+              className={styles.bookThumbnail}
+              data={book?.thumbnail?.responsiveImage}
+              focalPoint={book?.thumbnail?.focalPoint}
+            />
+          </div>
         </div>
         <div className={styles.body}>
           <h2 className={styles.bookTitle}>{book?.title}</h2>
