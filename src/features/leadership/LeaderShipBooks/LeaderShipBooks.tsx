@@ -16,9 +16,21 @@ type Props = ComponentProps<'section'> & {
 
 export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
   const router = useRouter()
-  const showingBooks = data?.booksItems?.length
-    ? data.booksItems
-    : books
+
+  const showingBooks = (() => {
+    const primary = data?.booksItems ?? []
+    const fallback = books ?? []
+
+    if (primary.length >= 5) return primary
+
+    const slugs = new Set(primary.map(item => item?.slug))
+    const needed = 5 - primary.length
+    const additional = fallback
+      .filter(item => item && !slugs.has(item.slug))
+      .slice(0, needed)
+
+    return [...primary, ...additional]
+  })()
 
   const goToBookPage = (slug: string) => router.push(`/books/${slug}`)
 

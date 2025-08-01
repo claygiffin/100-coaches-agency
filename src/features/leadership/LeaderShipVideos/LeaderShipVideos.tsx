@@ -19,9 +19,20 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
   const [selectedVideo, setSelectedVideo] =
     useState<Queries.VideoFragment | null>(null)
 
-  const showingVideos = data?.videosItems?.length
-    ? data?.videosItems
-    : videos
+  const showingVideos = (() => {
+    const primary = data?.videosItems ?? []
+    const fallback = videos ?? []
+
+    if (primary.length >= 5) return primary
+
+    const urls = new Set(primary.map(item => item?.file?.url))
+    const needed = 5 - primary.length
+    const additional = fallback
+      .filter(item => item && !urls.has(item.file?.url))
+      .slice(0, needed)
+
+    return [...primary, ...additional]
+  })()
 
   return (
     <section

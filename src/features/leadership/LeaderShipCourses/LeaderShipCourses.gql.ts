@@ -1,6 +1,9 @@
 import gql from 'graphql-tag'
 
-import { PageLinkFragment } from '@/features/links'
+import {
+  ExternalLinkFragment,
+  PageLinkFragment,
+} from '@/features/links'
 
 export const CoursesCoachFragment = gql`
   fragment CoursesCoach on CoursesCoachRecord {
@@ -37,6 +40,9 @@ export const LeaderShipCoursesFragment = gql`
       ... on PageLinkRecord {
         ...PageLink
       }
+      ... on ExternalLinkRecord {
+        ...ExternalLink
+      }
     }
     coursesCoaches {
       ...CoursesCoach
@@ -44,4 +50,5 @@ export const LeaderShipCoursesFragment = gql`
   }
   ${CoursesCoachFragment}
   ${PageLinkFragment}
+  ${ExternalLinkFragment}
 `
