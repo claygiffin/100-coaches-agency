@@ -9,6 +9,7 @@ import {
 } from 'react'
 import { useInView } from 'react-intersection-observer'
 
+import { useNavMenuContext } from '@/contexts/navMenuContext'
 import { DatoLink } from '@/features/links'
 import { LogoHorizontal } from '@/features/logo'
 import { BurgerIcon } from '@/features/ui'
@@ -28,13 +29,12 @@ export const Nav = ({ data, className, ...props }: Props) => {
   const [navRef, setNavRef] = useState<HTMLElement | null>(null)
 
   const navHeight = useElementHeight(navRef) || 0
-
-  const [burgerOpen, setBurgerOpen] = useState(false)
+  const { navMenuIsOpen, setNavMenuIsOpen } = useNavMenuContext()
   const handleClose = () => {
-    setBurgerOpen(false)
+    setNavMenuIsOpen(false)
   }
 
-  useEscKeyFunction(() => setBurgerOpen(false))
+  useEscKeyFunction(() => setNavMenuIsOpen(false))
 
   useEffect(() => {
     document.documentElement.style.setProperty(
@@ -49,7 +49,7 @@ export const Nav = ({ data, className, ...props }: Props) => {
   return (
     <Fragment>
       <div
-        data-burger-open={burgerOpen}
+        data-burger-open={navMenuIsOpen}
         data-scrolled={!spacerInView}
         className={classes(styles.container, className)}
         {...props}
@@ -66,8 +66,8 @@ export const Nav = ({ data, className, ...props }: Props) => {
             <LogoHorizontal />
           </Link>
           <BurgerIcon
-            open={burgerOpen}
-            toggleOpen={() => setBurgerOpen(prev => !prev)}
+            open={navMenuIsOpen}
+            toggleOpen={() => setNavMenuIsOpen(prev => !prev)}
           />
           <div className={styles.navItems}>
             {data?.links.map(link => (
