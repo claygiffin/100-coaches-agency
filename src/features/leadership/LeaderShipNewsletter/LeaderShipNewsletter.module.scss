@@ -56,8 +56,7 @@
     display: inline-flex;
     font-weight: 400;
     text-decoration: none;
-    padding-right: 1em;
-    padding-top: 0.75em;
+    align-items: flex-end;
     @include media('<ls') {
       padding-top: 0.5em;
     }
