@@ -43,7 +43,7 @@ export function Slider({
   ariaLabel = 'Content slider',
   hideNavButtons = false,
   showNumbers = { desktop: 3, tablet: 2, mobile: 1 },
-  peekPercent = 5,
+  peekPercent = 7,
   className,
   ...rest
 }: SliderProps) {
@@ -88,7 +88,7 @@ export function Slider({
   const peek = Math.max(0, Math.min(40, peekPercent)) // cap at 40% for sanity
 
   // Each *full* item width as % of container.
-  const fullItemPct = (100 - peek - 2 * visibleCount) / visibleCount
+  const fullItemPct = (100 - peek - 3 * visibleCount) / visibleCount
 
   // Max starting index so we never scroll beyond last full item group.
   // If fewer slides than visibleCount, clamp to 0.
@@ -114,11 +114,11 @@ export function Slider({
   const next = useCallback(() => goTo(index + 1), [index, goTo])
 
   // Move the track so that the `index`th slide is flush left.
-  const peekAdj = (peek - 2) / 2 // from user formula
+  const peekAdj = (peek - 3) / 2 // from user formula
   const translatePct =
     index === 0
       ? peek - peekAdj
-      : `-${(index - 1) * (fullItemPct + 2) + (fullItemPct - peekAdj)}`
+      : `-${(index - 1) * (fullItemPct + 3) + (fullItemPct - peekAdj)}`
 
   const trackStyle = {
     transform: `translateX(${translatePct}%)`,

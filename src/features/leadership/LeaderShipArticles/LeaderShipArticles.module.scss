@@ -7,15 +7,17 @@
   z-index: 2;
   overflow: hidden;
   background-color: var(--color-gray90);
-  padding: 0.75em 1em;
+  padding: 0.75em 0;
   @include media('<m') {
-    padding: 0.75em 0.5em;
+    padding: 0.75em 0;
   }
 }
 .header {
   display: flex;
   margin-bottom: 0.8em;
+  padding: 0 1em;
   @include media('<m') {
+    padding: 0 0.5em;
     margin-bottom: 0.6em;
   }
   @include media('<s') {
@@ -77,10 +79,12 @@
   border-radius: 0.2em;
   background-color: white;
   padding: 0.4em;
+  margin: 0 1em;
   display: flex;
   gap: 1em;
   cursor: pointer;
   @include media('<m') {
+    margin: 0 0.5em;
     padding: 0.3em;
     gap: 0.5em;
   }
