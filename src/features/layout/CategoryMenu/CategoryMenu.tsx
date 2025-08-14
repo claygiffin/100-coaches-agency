@@ -108,7 +108,10 @@ export const CategoryMenu = ({
                       /\/\//g,
                       '/'
                     )}all/`}
-                    onClick={handleClose}
+                    onClick={() => {
+                      handleClose()
+                      setNavMenuIsOpen(false)
+                    }}
                     className={classes(styles.link, styles.allLink)}
                   >
                     View All
