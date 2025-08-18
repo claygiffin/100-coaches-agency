@@ -1,6 +1,7 @@
 'use client'
 
 import { DatoImageFocused } from '@/features/dato-image'
+import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
 
 import styles from './BookHero.module.scss'
@@ -49,10 +50,9 @@ export const BookHero = ({ book }: PropTypes) => {
         </div>
       </div>
       <div className={styles.orderWrapper}>
-        <div
-          className={styles.order}
-          dangerouslySetInnerHTML={{ __html: book?.secondaryCta || '' }}
-        ></div>
+        <div className={styles.order}>
+          <DatoStructuredText data={book?.secondaryCta} />
+        </div>
       </div>
     </section>
   )

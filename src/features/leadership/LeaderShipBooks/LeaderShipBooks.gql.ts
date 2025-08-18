@@ -54,7 +54,9 @@ export const BookFragment = gql`
         ...ExternalLink
       }
     }
-    secondaryCta
+    secondaryCta {
+      value
+    }
     descriptionHeading
     descriptionBody {
       value
