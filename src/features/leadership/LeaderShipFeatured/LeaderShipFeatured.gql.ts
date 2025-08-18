@@ -7,18 +7,8 @@ import {
   ExternalLinkFragment,
   FormLinkFragment,
   PageLinkFragment,
+  PdfFragment,
 } from '@/features/links'
-
-export const PdfFragment = gql`
-  fragment Pdf on PdfRecord {
-    __typename
-    id
-    pdf {
-      url
-    }
-    createdAt
-  }
-`
 
 export const ThoughtLeadershipFeaturedItemFragment = gql`
   fragment ThoughtLeadershipFeaturedItem on ThoughtLeadershipFeaturedItemRecord {

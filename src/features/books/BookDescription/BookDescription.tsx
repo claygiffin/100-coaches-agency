@@ -21,14 +21,12 @@ export const BookDescription = ({ book }: PropTypes) => {
       </MarkdownHeading>
       <div className={styles.body}>
         <DatoStructuredText data={book?.descriptionBody} />
-        {book?.descriptionCtaButton?.__typename !== 'PdfRecord' && (
-          <DatoLink
-            className={styles.button}
-            data={book?.descriptionCtaButton}
-            isButton
-            borderVariant={'ROUNDED'}
-          />
-        )}
+        <DatoLink
+          className={styles.button}
+          data={book?.descriptionCtaButton}
+          isButton
+          borderVariant={'ROUNDED'}
+        />
       </div>
     </section>
   )

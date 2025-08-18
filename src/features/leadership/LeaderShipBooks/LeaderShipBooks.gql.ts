@@ -5,8 +5,7 @@ import {
   ExternalLinkFragment,
   PageLinkFragment,
 } from '@/features/links'
-
-import { PdfFragment } from '../LeaderShipFeatured/LeaderShipFeatured.gql'
+import { PdfFragment } from '@/features/links'
 
 export const BookTestimonialFragment = gql`
   fragment BookTestimonial on BookTestimonialRecord {

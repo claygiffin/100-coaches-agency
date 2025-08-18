@@ -163,7 +163,8 @@
     }
   }
   &:hover {
-    .bodyHeading, .bodyText {
+    .bodyHeading,
+    .bodyText {
       color: var(--color-gray30);
     }
   }

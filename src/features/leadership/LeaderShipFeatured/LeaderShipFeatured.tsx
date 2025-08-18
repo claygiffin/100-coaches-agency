@@ -40,14 +40,12 @@ export const LeaderShipFeatured = ({ data, ...props }: Props) => {
           <div className={styles.bodyText}>
             <DatoStructuredText data={data?.featuredBody?.body} />
           </div>
-          {data?.featuredBody?.link?.__typename !== 'PdfRecord' && (
-            <DatoLink
-              className={styles.button}
-              data={data?.featuredBody?.link}
-              isButton
-              borderVariant={'ROUNDED'}
-            />
-          )}
+          <DatoLink
+            className={styles.button}
+            data={data?.featuredBody?.link}
+            isButton
+            borderVariant={'ROUNDED'}
+          />
         </div>
       </div>
     </section>
