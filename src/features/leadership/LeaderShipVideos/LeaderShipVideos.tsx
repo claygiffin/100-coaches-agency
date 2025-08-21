@@ -56,7 +56,10 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
             showingVideos.slice(0, 2).map((video, index) => {
               return (
                 <div key={index}>
-                  <div className={styles.videoWrapper}>
+                  <div
+                    className={styles.videoWrapper}
+                    onClick={() => setSelectedVideo(video)}
+                  >
                     <Image
                       className={styles.videoThumbnail}
                       src={video?.file?.thumbnailUrl}
@@ -66,10 +69,7 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                     />
                     <div className={styles.innerTool}>
                       <div className={styles.playWrapper}>
-                        <div
-                          className={styles.play}
-                          onClick={() => setSelectedVideo(video)}
-                        ></div>
+                        <div className={styles.play}></div>
                       </div>
                       <h2>{video?.description}</h2>
                     </div>
@@ -90,7 +90,10 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                     className={styles.slide}
                     key={index}
                   >
-                    <div className={styles.videoThumbnailWrapper}>
+                    <div
+                      className={styles.videoThumbnailWrapper}
+                      onClick={() => setSelectedVideo(video)}
+                    >
                       <Image
                         className={styles.videoThumbnail}
                         src={video?.file?.thumbnailUrl}
@@ -101,10 +104,7 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                       <div className={styles.innerTool}>
                         <div className={styles.toolWrapper}>
                           <div className={styles.playWrapper}>
-                            <div
-                              className={styles.play}
-                              onClick={() => setSelectedVideo(video)}
-                            ></div>
+                            <div className={styles.play}></div>
                           </div>
                           <h2>{video?.description}</h2>
                         </div>
