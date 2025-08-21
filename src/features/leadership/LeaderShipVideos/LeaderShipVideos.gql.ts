@@ -22,7 +22,7 @@ export const LeaderShipVideosFragment = gql`
         ...PageLink
       }
     }
-    videosItems {
+    videoItemsOverrides {
       ...Video
     }
   }

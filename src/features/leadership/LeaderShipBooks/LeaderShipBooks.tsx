@@ -18,7 +18,7 @@ export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
   const router = useRouter()
 
   const showingBooks = (() => {
-    const primary = data?.booksItems ?? []
+    const primary = data?.bookItemsOverrides ?? []
     const fallback = books ?? []
 
     if (primary.length >= 5) return primary

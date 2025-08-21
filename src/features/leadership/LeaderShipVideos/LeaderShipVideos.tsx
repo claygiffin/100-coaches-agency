@@ -20,7 +20,7 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
     useState<Queries.VideoFragment | null>(null)
 
   const showingVideos = (() => {
-    const primary = data?.videosItems ?? []
+    const primary = data?.videoItemsOverrides ?? []
     const fallback = videos ?? []
 
     if (primary.length >= 5) return primary

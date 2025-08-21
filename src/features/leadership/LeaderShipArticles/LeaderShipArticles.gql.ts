@@ -11,7 +11,7 @@ export const LeaderShipArticlesFragment = gql`
         ...PageLink
       }
     }
-    articlesItems {
+    articleItemsOverrides {
       ...Article
     }
   }

@@ -24,7 +24,7 @@ export const LeaderShipArticles = ({
 }: Props) => {
   const router = useRouter()
   const showingArticles = (() => {
-    const primary = data?.articlesItems ?? []
+    const primary = data?.articleItemsOverrides ?? []
     const fallback = articles ?? []
 
     if (primary.length >= 5) return primary

@@ -100,7 +100,7 @@ export const LeaderShipBooksFragment = gql`
         ...PageLink
       }
     }
-    booksItems {
+    bookItemsOverrides {
       ...Book
     }
   }
