@@ -11,6 +11,10 @@ export const VideoFragment = gql`
       thumbnailUrl
     }
     createdAt: _createdAt
+    slug
+    _seoMetaTags {
+      tag
+    }
   }
 `
 

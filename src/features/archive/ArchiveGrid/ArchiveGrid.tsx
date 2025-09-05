@@ -32,7 +32,6 @@ export const ArchiveGrid = ({ category, pageData }: Props) => {
       date: string
       slug: string
       thumbnail: any
-      videoLink: string
     }>
   >([])
 
@@ -54,16 +53,14 @@ export const ArchiveGrid = ({ category, pageData }: Props) => {
       date: item?.createdAt || '',
       slug: item?.slug || '',
       thumbnail: item?.thumbnail,
-      videoLink: '',
     }))
 
     const videoItems = (pageData?.allVideos || []).map(item => ({
       type: 'Video',
       description: item?.description || '',
       date: item?.createdAt || '',
-      slug: '',
+      slug: item?.slug,
       thumbnail: item?.file?.thumbnailUrl,
-      videoLink: item?.file?.url,
     }))
 
     const combinedItems = [...items, ...videoItems]

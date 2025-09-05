@@ -1,11 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import { type ComponentProps, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { type ComponentProps } from 'react'
 
 import { DatoLink } from '@/features/links'
-import { Modal } from '@/features/modal'
-import { getVideoEmbedUrl } from '@/lib/video-embed-link'
 
 import { Slider } from '../index'
 import styles from './LeaderShipVideos.module.scss'
@@ -16,8 +15,7 @@ type Props = ComponentProps<'section'> & {
 }
 
 export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
-  const [selectedVideo, setSelectedVideo] =
-    useState<Queries.VideoFragment | null>(null)
+  const router = useRouter()
 
   const showingVideos = (() => {
     const primary = data?.videoItemsOverrides ?? []
@@ -33,6 +31,9 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
 
     return [...primary, ...additional]
   })()
+
+  const openVideo = (slug: string) =>
+    router.push(`/videos/${slug}`, { scroll: false })
 
   return (
     <section
@@ -58,7 +59,7 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                 <div key={index}>
                   <div
                     className={styles.videoWrapper}
-                    onClick={() => setSelectedVideo(video)}
+                    onClick={() => openVideo(video?.slug)}
                   >
                     <Image
                       className={styles.videoThumbnail}
@@ -92,7 +93,7 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                   >
                     <div
                       className={styles.videoThumbnailWrapper}
-                      onClick={() => setSelectedVideo(video)}
+                      onClick={() => openVideo(video?.slug)}
                     >
                       <Image
                         className={styles.videoThumbnail}
@@ -119,20 +120,6 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
           </Slider>
         </div>
       </div>
-      {Array.isArray(videos) && !!selectedVideo && (
-        <Modal
-          variant={'VIDEOLIGHTBOX'}
-          onClose={() => setSelectedVideo(null)}
-        >
-          <div className={styles.videoPlayerContainer}>
-            <div className={styles.videoPlayer}>
-              <iframe
-                src={getVideoEmbedUrl(selectedVideo?.file?.url)}
-              ></iframe>
-            </div>
-          </div>
-        </Modal>
-      )}
     </section>
   )
 }

@@ -3,11 +3,9 @@
 import { format } from 'date-fns'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import React from 'react'
 
 import { DatoImageFocused } from '@/features/dato-image'
-import { Modal } from '@/features/modal'
-import { getVideoEmbedUrl } from '@/lib/video-embed-link'
 
 import styles from './Card.module.scss'
 
@@ -17,7 +15,6 @@ interface CardProps {
   date: string
   slug: string
   thumbnail: any
-  videoLink: string
 }
 
 interface CardThumbnailProps {
@@ -74,12 +71,8 @@ export const Card: React.FC<CardProps> = ({
   date,
   slug,
   thumbnail,
-  videoLink,
 }) => {
   const router = useRouter()
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(
-    null
-  )
 
   const handleClick = () => {
     switch (type) {
@@ -93,7 +86,7 @@ export const Card: React.FC<CardProps> = ({
         router.push(`/articles/${slug}`, { scroll: false })
         break
       case 'Video':
-        setSelectedVideo(videoLink)
+        router.push(`/videos/${slug}`, { scroll: false })
         break
       default:
         break
@@ -117,22 +110,6 @@ export const Card: React.FC<CardProps> = ({
           {format(new Date(date), 'MMMM d, yyyy')}
         </p>
       </div>
-
-      {selectedVideo && (
-        <Modal
-          variant="VIDEOLIGHTBOX"
-          onClose={() => setSelectedVideo(null)}
-        >
-          <div className={styles.videoPlayerContainer}>
-            <div className={styles.videoPlayer}>
-              <iframe
-                src={getVideoEmbedUrl(selectedVideo)}
-                allowFullScreen
-              />
-            </div>
-          </div>
-        </Modal>
-      )}
     </div>
   )
 }
