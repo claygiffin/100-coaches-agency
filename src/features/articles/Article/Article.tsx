@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { StructuredText } from 'react-datocms'
 
 import { DatoImage } from '@/features/dato-image'
+import { getVideoEmbedUrl } from '@/lib/video-embed-link'
 
 import styles from './Article.module.scss'
 
@@ -38,6 +39,20 @@ export const Article = ({ article, layout }: PropTypes) => {
                     <figcaption>{record.image.title}</figcaption>
                   )}
                 </figure>
+              )
+            } else if (record.__typename === 'ExternalVideoRecord') {
+              return (
+                <div className={styles.videoContainer}>
+                  <iframe
+                    src={getVideoEmbedUrl(record?.file?.url)}
+                  ></iframe>
+                </div>
+              )
+            } else if (record.__typename === 'InternalVideoRecord') {
+              return (
+                <div className={styles.videoContainer}>
+                  <iframe src={record?.file?.url}></iframe>
+                </div>
               )
             } else return null
           }}

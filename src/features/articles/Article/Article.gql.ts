@@ -2,6 +2,32 @@ import { gql } from 'graphql-tag'
 
 import { ResponsiveImageFragment } from '@/features/dato-image'
 
+export const ExternalVideoFragment = gql`
+  fragment ExternalVideo on ExternalVideoRecord {
+    id
+    __typename
+    file {
+      url
+      thumbnailUrl
+    }
+    createdAt: _createdAt
+  }
+`
+
+export const InternalVideoFragment = gql`
+  fragment InternalVideo on InternalVideoRecord {
+    id
+    __typename
+    file {
+      url
+      video {
+        thumbnailUrl
+      }
+    }
+    createdAt: _createdAt
+  }
+`
+
 export const ArticleFragment = gql`
   fragment Article on ArticleRecord {
     id
@@ -10,16 +36,24 @@ export const ArticleFragment = gql`
     body {
       value
       blocks {
-        id
-        __typename
-        image {
-          responsiveImage(
-            imgixParams: { q: 60, auto: [format, compress] }
-          ) {
-            ...ResponsiveImage
+        ... on ImageRecord {
+          id
+          __typename
+          image {
+            responsiveImage(
+              imgixParams: { q: 60, auto: [format, compress] }
+            ) {
+              ...ResponsiveImage
+            }
+            alt
+            title
           }
-          alt
-          title
+        }
+        ... on ExternalVideoRecord {
+          ...ExternalVideo
+        }
+        ... on InternalVideoRecord {
+          ...InternalVideo
         }
       }
     }
@@ -49,4 +83,6 @@ export const ArticleFragment = gql`
     }
   }
   ${ResponsiveImageFragment}
+  ${ExternalVideoFragment}
+  ${InternalVideoFragment}
 `
