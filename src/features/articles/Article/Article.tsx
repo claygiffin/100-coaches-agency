@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { StructuredText } from 'react-datocms'
 
 import { DatoImage } from '@/features/dato-image'
+import { HubspotForm } from '@/features/hubSpotForm'
 import { getVideoEmbedUrl } from '@/lib/video-embed-link'
 
 import styles from './Article.module.scss'
@@ -60,6 +61,14 @@ export const Article = ({ article, layout }: PropTypes) => {
                     <div className={styles.videoContainer}>
                       <iframe src={record?.file?.url}></iframe>
                     </div>
+                  )
+                } else if (record.__typename === 'HubspotFormRecord') {
+                  return (
+                    <HubspotForm
+                      portalId={record?.portalId}
+                      formId={record?.formId}
+                      region={record?.region}
+                    />
                   )
                 } else return null
               }}

@@ -28,6 +28,17 @@ export const InternalVideoFragment = gql`
   }
 `
 
+export const HubspotFormFragment = gql`
+  fragment HubspotForm on HubspotFormRecord {
+    id
+    __typename
+    portalId
+    formId
+    region
+    createdAt: _createdAt
+  }
+`
+
 export const ArticleFragment = gql`
   fragment Article on ArticleRecord {
     id
@@ -54,6 +65,9 @@ export const ArticleFragment = gql`
         }
         ... on InternalVideoRecord {
           ...InternalVideo
+        }
+        ... on HubspotFormRecord {
+          ...HubspotForm
         }
       }
     }
@@ -85,4 +99,5 @@ export const ArticleFragment = gql`
   ${ResponsiveImageFragment}
   ${ExternalVideoFragment}
   ${InternalVideoFragment}
+  ${HubspotFormFragment}
 `
