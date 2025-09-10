@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
+import { DatoImageFocused } from '@/features/dato-image'
 import { DatoLink } from '@/features/links'
 
 import { Slider } from '../index'
@@ -23,10 +24,10 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
 
     if (primary.length >= 5) return primary
 
-    const urls = new Set(primary.map(item => item?.file?.url))
+    const slugs = new Set(primary.map(item => item?.slug))
     const needed = 5 - primary.length
     const additional = fallback
-      .filter(item => item && !urls.has(item.file?.url))
+      .filter(item => item && !slugs.has(item.slug))
       .slice(0, needed)
 
     return [...primary, ...additional]
@@ -61,22 +62,36 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                     className={styles.videoWrapper}
                     onClick={() => openVideo(video?.slug)}
                   >
-                    <Image
-                      className={styles.videoThumbnail}
-                      src={video?.file?.thumbnailUrl}
-                      alt={`video-${index}`}
-                      width={320}
-                      height={180}
-                    />
+                    {video?.thumbnail ? (
+                      <DatoImageFocused
+                        data={video?.thumbnail.responsiveImage}
+                        focalPoint={video?.thumbnail.focalPoint}
+                        className={styles.videoThumbnail}
+                      />
+                    ) : (
+                      <Image
+                        className={styles.videoThumbnail}
+                        src={
+                          video?.body?.blocks[0]?.__typename ===
+                          'ExternalVideoRecord'
+                            ? video?.body?.blocks[0].file?.thumbnailUrl
+                            : video?.body?.blocks[0].file?.video
+                                ?.thumbnailUrl
+                        }
+                        alt={`video-${index}`}
+                        width={320}
+                        height={180}
+                      />
+                    )}
                     <div className={styles.innerTool}>
                       <div className={styles.playWrapper}>
                         <div className={styles.play}></div>
                       </div>
-                      <h2>{video?.description}</h2>
+                      <h2>{video?.title}</h2>
                     </div>
                   </div>
                   <div className={styles.description}>
-                    <h2>{video?.description}</h2>
+                    <h2>{video?.title}</h2>
                   </div>
                 </div>
               )
@@ -95,24 +110,39 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                       className={styles.videoThumbnailWrapper}
                       onClick={() => openVideo(video?.slug)}
                     >
-                      <Image
-                        className={styles.videoThumbnail}
-                        src={video?.file?.thumbnailUrl}
-                        alt={`video-${index}`}
-                        width={320}
-                        height={180}
-                      />
+                      {video?.thumbnail ? (
+                        <DatoImageFocused
+                          data={video?.thumbnail.responsiveImage}
+                          focalPoint={video?.thumbnail.focalPoint}
+                          className={styles.videoThumbnail}
+                        />
+                      ) : (
+                        <Image
+                          className={styles.videoThumbnail}
+                          src={
+                            video?.body?.blocks[0]?.__typename ===
+                            'ExternalVideoRecord'
+                              ? video?.body?.blocks[0].file
+                                  ?.thumbnailUrl
+                              : video?.body?.blocks[0].file?.video
+                                  ?.thumbnailUrl
+                          }
+                          alt={`video-${index}`}
+                          width={320}
+                          height={180}
+                        />
+                      )}
                       <div className={styles.innerTool}>
                         <div className={styles.toolWrapper}>
                           <div className={styles.playWrapper}>
                             <div className={styles.play}></div>
                           </div>
-                          <h2>{video?.description}</h2>
+                          <h2>{video?.title}</h2>
                         </div>
                       </div>
                     </div>
                     <div className={styles.videoDescription}>
-                      <h2>{video?.description}</h2>
+                      <h2>{video?.title}</h2>
                     </div>
                   </div>
                 )

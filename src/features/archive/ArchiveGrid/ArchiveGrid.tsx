@@ -42,35 +42,34 @@ export const ArchiveGrid = ({ category, pageData }: Props) => {
       ...(pageData?.allArticles || []),
       ...(pageData?.allBooks || []),
       ...(pageData?.allNewsletters || []),
+      ...(pageData?.allVideos || []),
     ].map(item => ({
       type:
         item?.__typename === 'ArticleRecord'
           ? 'Article'
           : item?.__typename === 'BookRecord'
             ? 'Book'
-            : 'Newsletter',
+            : item?.__typename === 'VideoRecord'
+              ? 'Video'
+              : 'Newsletter',
       description: item?.title || '',
       date: item?.createdAt || '',
       slug: item?.slug || '',
-      thumbnail: item?.thumbnail,
+      thumbnail:
+        item?.__typename === 'VideoRecord'
+          ? (item?.body?.blocks[0]?.__typename === 'ExternalVideoRecord'
+              ? item?.body?.blocks[0].file?.thumbnailUrl
+              : item?.body?.blocks[0].file?.video?.thumbnailUrl) ||
+            item?.thumbnail
+          : item?.thumbnail,
     }))
-
-    const videoItems = (pageData?.allVideos || []).map(item => ({
-      type: 'Video',
-      description: item?.description || '',
-      date: item?.createdAt || '',
-      slug: item?.slug,
-      thumbnail: item?.file?.thumbnailUrl,
-    }))
-
-    const combinedItems = [...items, ...videoItems]
 
     // Sort by date descending (newest first)
-    combinedItems.sort(
+    items.sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     )
 
-    setAllItems(combinedItems)
+    setAllItems(items)
   }, [pageData])
 
   // Optional: Filtered items based on selected category

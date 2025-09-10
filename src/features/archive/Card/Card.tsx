@@ -39,13 +39,21 @@ const CardThumbnail: React.FC<CardThumbnailProps> = ({
     >
       {isVideo ? (
         <div className={styles.videoThumbnailWrapper}>
-          <Image
-            className={styles.videoThumbnail}
-            src={thumbnail}
-            alt={`video-${slug}`}
-            width={320}
-            height={180}
-          />
+          {thumbnail?.responsiveImage ? (
+            <DatoImageFocused
+              className={styles.videoThumbnail}
+              data={thumbnail?.responsiveImage}
+              focalPoint={thumbnail?.focalPoint}
+            />
+          ) : (
+            <Image
+              className={styles.videoThumbnail}
+              src={thumbnail}
+              alt={`video-${slug}`}
+              width={320}
+              height={180}
+            />
+          )}
           <div className={styles.innerTool}>
             <div className={styles.toolWrapper}>
               <div className={styles.playWrapper}>
