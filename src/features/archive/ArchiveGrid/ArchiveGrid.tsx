@@ -59,8 +59,10 @@ export const ArchiveGrid = ({ category, pageData }: Props) => {
         item?.__typename === 'VideoRecord'
           ? (item?.body?.blocks[0]?.__typename === 'ExternalVideoRecord'
               ? item?.body?.blocks[0].file?.thumbnailUrl
-              : item?.body?.blocks[0].file?.video?.thumbnailUrl) ||
-            item?.thumbnail
+              : item?.body?.blocks[0]?.__typename ===
+                  'InternalVideoRecord'
+                ? item?.body?.blocks[0].file?.video?.thumbnailUrl
+                : '') || item?.thumbnail
           : item?.thumbnail,
     }))
 

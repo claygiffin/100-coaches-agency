@@ -75,8 +75,11 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                           video?.body?.blocks[0]?.__typename ===
                           'ExternalVideoRecord'
                             ? video?.body?.blocks[0].file?.thumbnailUrl
-                            : video?.body?.blocks[0].file?.video
-                                ?.thumbnailUrl
+                            : video?.body?.blocks[0]?.__typename ===
+                                'InternalVideoRecord'
+                              ? video?.body?.blocks[0].file?.video
+                                  ?.thumbnailUrl
+                              : ''
                         }
                         alt={`video-${index}`}
                         width={320}
@@ -124,8 +127,11 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                             'ExternalVideoRecord'
                               ? video?.body?.blocks[0].file
                                   ?.thumbnailUrl
-                              : video?.body?.blocks[0].file?.video
-                                  ?.thumbnailUrl
+                              : video?.body?.blocks[0]?.__typename ===
+                                  'InternalVideoRecord'
+                                ? video?.body?.blocks[0].file?.video
+                                    ?.thumbnailUrl
+                                : ''
                           }
                           alt={`video-${index}`}
                           width={320}

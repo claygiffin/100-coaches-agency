@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import {
   ExternalVideoFragment,
+  HubspotFormFragment,
   InternalVideoFragment,
 } from '@/features/articles'
 import { ResponsiveImageFragment } from '@/features/dato-image'
@@ -15,11 +16,27 @@ export const VideoFragment = gql`
     body {
       value
       blocks {
+        ... on ImageRecord {
+          id
+          __typename
+          image {
+            responsiveImage(
+              imgixParams: { q: 60, auto: [format, compress] }
+            ) {
+              ...ResponsiveImage
+            }
+            alt
+            title
+          }
+        }
         ... on ExternalVideoRecord {
           ...ExternalVideo
         }
         ... on InternalVideoRecord {
           ...InternalVideo
+        }
+        ... on HubspotFormRecord {
+          ...HubspotForm
         }
       }
     }
@@ -52,6 +69,7 @@ export const VideoFragment = gql`
   ${ResponsiveImageFragment}
   ${ExternalVideoFragment}
   ${InternalVideoFragment}
+  ${HubspotFormFragment}
 `
 
 export const LeaderShipVideosFragment = gql`
