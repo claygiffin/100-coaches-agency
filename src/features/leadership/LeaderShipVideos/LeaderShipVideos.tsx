@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
@@ -62,30 +61,11 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                     className={styles.videoWrapper}
                     onClick={() => openVideo(video?.slug)}
                   >
-                    {video?.thumbnail ? (
-                      <DatoImageFocused
-                        data={video?.thumbnail.responsiveImage}
-                        focalPoint={video?.thumbnail.focalPoint}
-                        className={styles.videoThumbnail}
-                      />
-                    ) : (
-                      <Image
-                        className={styles.videoThumbnail}
-                        src={
-                          video?.body?.blocks[0]?.__typename ===
-                          'ExternalVideoRecord'
-                            ? video?.body?.blocks[0].file?.thumbnailUrl
-                            : video?.body?.blocks[0]?.__typename ===
-                                'InternalVideoRecord'
-                              ? video?.body?.blocks[0].file?.video
-                                  ?.thumbnailUrl
-                              : ''
-                        }
-                        alt={`video-${index}`}
-                        width={320}
-                        height={180}
-                      />
-                    )}
+                    <DatoImageFocused
+                      data={video?.thumbnail.responsiveImage}
+                      focalPoint={video?.thumbnail.focalPoint}
+                      className={styles.videoThumbnail}
+                    />
                     <div className={styles.innerTool}>
                       <div className={styles.playWrapper}>
                         <div className={styles.play}></div>
@@ -113,31 +93,11 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                       className={styles.videoThumbnailWrapper}
                       onClick={() => openVideo(video?.slug)}
                     >
-                      {video?.thumbnail ? (
-                        <DatoImageFocused
-                          data={video?.thumbnail.responsiveImage}
-                          focalPoint={video?.thumbnail.focalPoint}
-                          className={styles.videoThumbnail}
-                        />
-                      ) : (
-                        <Image
-                          className={styles.videoThumbnail}
-                          src={
-                            video?.body?.blocks[0]?.__typename ===
-                            'ExternalVideoRecord'
-                              ? video?.body?.blocks[0].file
-                                  ?.thumbnailUrl
-                              : video?.body?.blocks[0]?.__typename ===
-                                  'InternalVideoRecord'
-                                ? video?.body?.blocks[0].file?.video
-                                    ?.thumbnailUrl
-                                : ''
-                          }
-                          alt={`video-${index}`}
-                          width={320}
-                          height={180}
-                        />
-                      )}
+                      <DatoImageFocused
+                        data={video?.thumbnail.responsiveImage}
+                        focalPoint={video?.thumbnail.focalPoint}
+                        className={styles.videoThumbnail}
+                      />
                       <div className={styles.innerTool}>
                         <div className={styles.toolWrapper}>
                           <div className={styles.playWrapper}>

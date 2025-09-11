@@ -55,15 +55,7 @@ export const ArchiveGrid = ({ category, pageData }: Props) => {
       description: item?.title || '',
       date: item?.createdAt || '',
       slug: item?.slug || '',
-      thumbnail:
-        item?.__typename === 'VideoRecord'
-          ? (item?.body?.blocks[0]?.__typename === 'ExternalVideoRecord'
-              ? item?.body?.blocks[0].file?.thumbnailUrl
-              : item?.body?.blocks[0]?.__typename ===
-                  'InternalVideoRecord'
-                ? item?.body?.blocks[0].file?.video?.thumbnailUrl
-                : '') || item?.thumbnail
-          : item?.thumbnail,
+      thumbnail: item?.thumbnail,
     }))
 
     // Sort by date descending (newest first)
