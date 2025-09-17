@@ -54,6 +54,9 @@ export const CategoryNav = ({
       <div
         className={styles.widthCheck}
         ref={node => setWidthRef(node)}
+      />
+      <nav
+        className={styles.nav}
         data-collapsed={collapsed}
         data-open={open}
         data-theme={theme}
@@ -63,8 +66,7 @@ export const CategoryNav = ({
           '--collapsed-container-height':
             collapsedContainerHeight + 'px',
         }}
-      />
-      <nav className={styles.nav}>
+      >
         <div
           className={styles.navItems}
           ref={node => setNavRef(node)}

@@ -12,6 +12,7 @@ import {
 import { createPortal } from 'react-dom'
 import { BsChevronRight } from 'react-icons/bs'
 
+import { useNavMenuContext } from '@/contexts/navMenuContext'
 import { ScrollToggle } from '@/features/ui'
 import { useEscKeyFunction } from '@/hooks/useEscKeyFunction'
 import { classes } from '@/utils/css'
@@ -45,6 +46,7 @@ export const CategoryMenu = ({
   const [closing, setClosing] = useState(false)
 
   const timer: { current: NodeJS.Timeout | null } = useRef(null)
+  const { setNavMenuIsOpen } = useNavMenuContext()
 
   const handleClose = useCallback(() => {
     setClosing(true)
@@ -83,7 +85,10 @@ export const CategoryMenu = ({
                     <Link
                       href={`/coaches/${category.categorySlug}`}
                       key={i}
-                      onClick={handleClose}
+                      onClick={() => {
+                        handleClose()
+                        setNavMenuIsOpen(false)
+                      }}
                       className={styles.link}
                     >
                       <h3>
@@ -103,7 +108,10 @@ export const CategoryMenu = ({
                       /\/\//g,
                       '/'
                     )}all/`}
-                    onClick={handleClose}
+                    onClick={() => {
+                      handleClose()
+                      setNavMenuIsOpen(false)
+                    }}
                     className={classes(styles.link, styles.allLink)}
                   >
                     View All

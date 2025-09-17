@@ -64,7 +64,12 @@ const RootLayout = async ({
           />
           {children}
           <Footer />
-          <div id="lightbox-container">{modal}</div>
+          <div
+            id="lightbox-container"
+            style={{ zIndex: 100 }}
+          >
+            {modal}
+          </div>
         </body>
       </html>
     </ContextWrapper>

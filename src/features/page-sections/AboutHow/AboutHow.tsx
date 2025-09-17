@@ -1,5 +1,6 @@
 'use client'
 
+import { isEmptyDocument } from 'datocms-structured-text-utils'
 import { useId, useState } from 'react'
 import { StructuredText } from 'react-datocms/structured-text'
 
@@ -52,8 +53,11 @@ export const AboutHow = ({ data }: Props) => {
       </svg>
       <div className={styles.content}>
         <h2 className={styles.heading}>{data?.howHeading}</h2>
-        <div className={styles.body}>
-          <StructuredText data={data?.howBody} />
+        <div
+          className={styles.body}
+          data-is-empty={isEmptyDocument(data?.howBody) || undefined}
+        >
+          <DatoStructuredText data={data?.howBody} />
         </div>
 
         {data?.howDetails.map((detail, i: number) => (

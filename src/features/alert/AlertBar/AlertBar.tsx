@@ -10,6 +10,7 @@ import {
   useState,
 } from 'react'
 
+import { useNavMenuContext } from '@/contexts/navMenuContext'
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import '@/features/links'
 import { DatoLink } from '@/features/links'
@@ -24,6 +25,7 @@ type Props = ComponentProps<'section'> & {
 export const AlertBar = ({ data, ...props }: Props) => {
   const [ref, setRef] = useState<HTMLDivElement | null>(null)
   const height = useElementHeight(ref)
+  const { navMenuIsOpen } = useNavMenuContext()
 
   const [scrolledUp, setScrolledUp] = useState(data?.isActive)
   const prevPos = useRef(0)
@@ -70,7 +72,7 @@ export const AlertBar = ({ data, ...props }: Props) => {
         style={{ '--height': height + 'px' }}
         data-alert
         data-ready={height !== undefined}
-        data-scrolled-up={scrolledUp}
+        data-scrolled-up={navMenuIsOpen ? false : scrolledUp}
         {...props}
       >
         <div

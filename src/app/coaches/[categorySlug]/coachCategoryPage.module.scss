@@ -22,14 +22,19 @@
   background: white;
   display: grid;
   position: relative;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(var(--column-count), 1fr);
   grid-gap: var(--gtr-12);
   padding: var(--gtr-36);
+  --column-count: 4;
+  --max-width: calc(
+    100vw / var(var(--column-count)) - var(--gtr-12) *
+      (var(var(--column-count) - 1) - 2 * var(--gtr-36))
+  );
   @include media('<ml') {
-    grid-template-columns: repeat(3, 1fr);
+    --column-count: 3;
   }
   @include media('<ms') {
-    grid-template-columns: repeat(2, 1fr);
+    --column-count: 2;
   }
 }
 
