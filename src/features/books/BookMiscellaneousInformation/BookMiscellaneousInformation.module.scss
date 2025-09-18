@@ -2,7 +2,7 @@
 
 .section {
   position: relative;
-  color: black;
+  color: var(--color-gray20);
   font-size: var(--fs-72);
   min-height: 20vh;
   z-index: 2;

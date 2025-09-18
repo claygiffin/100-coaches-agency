@@ -3,6 +3,7 @@
 import { DatoImageFocused } from '@/features/dato-image'
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
+import { MarkdownHeading } from '@/features/ui'
 
 import styles from './BookHero.module.scss'
 
@@ -47,11 +48,44 @@ export const BookHero = ({ book }: PropTypes) => {
             isButton
             borderVariant={'ROUNDED'}
           />
+          <div className={styles.secondLine}></div>
+          <div className={styles.description}>
+            <MarkdownHeading
+              className={styles.heading}
+              as="h2"
+            >
+              {book?.descriptionHeading}
+            </MarkdownHeading>
+            <div className={styles.body}>
+              <DatoStructuredText data={book?.descriptionBody} />
+              <DatoLink
+                className={styles.downloadButton}
+                data={book?.descriptionCtaButton}
+                isButton
+                borderVariant={'ROUNDED'}
+              />
+            </div>
+          </div>
         </div>
       </div>
-      <div className={styles.orderWrapper}>
-        <div className={styles.order}>
-          <DatoStructuredText data={book?.secondaryCta} />
+      <div className={styles.descriptionWrapper}>
+        <div className={styles.secondLine}></div>
+        <div className={styles.description}>
+          <MarkdownHeading
+            className={styles.heading}
+            as="h2"
+          >
+            {book?.descriptionHeading}
+          </MarkdownHeading>
+          <div className={styles.body}>
+            <DatoStructuredText data={book?.descriptionBody} />
+            <DatoLink
+              className={styles.downloadButton}
+              data={book?.descriptionCtaButton}
+              isButton
+              borderVariant={'ROUNDED'}
+            />
+          </div>
         </div>
       </div>
     </section>

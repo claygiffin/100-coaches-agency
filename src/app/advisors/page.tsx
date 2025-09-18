@@ -2,11 +2,8 @@ import gql from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 
 import {
-  AboutHow,
-  AboutPartner,
   AdvisorsHowFragment,
   AdvisorsPartnerFragment,
-  PageIntro,
 } from '@/features/page-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'

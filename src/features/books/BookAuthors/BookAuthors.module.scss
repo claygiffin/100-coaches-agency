@@ -13,6 +13,9 @@
   @include media('<ls') {
     padding: 1.5em 1em;
   }
+  @include media('<m') {
+    padding: 1em 0.75em;
+  }
   @include media('<s') {
     padding: 1em 0.5em;
   }

@@ -3,59 +3,42 @@
 .section {
   position: relative;
   min-height: 30vh;
-  color: white;
+  color: black;
   font-size: var(--fs-72);
   z-index: 3;
-  background: linear-gradient(
-    to top right,
-    var(--color-gray30),
-    var(--color-gray10)
-  );
   .mainWrapper {
     display: flex;
-    gap: 0.5em;
-    padding: 0 1em;
-    @include media('<s') {
-      padding: 0 0.5em;
+    gap: 0.75em;
+    padding: 1em 1em 0.5em 1em;
+    @include media('<m') {
+      padding: 0.75em 0.75em 0.25em 0.75em;
     }
-    @include media('<ms') {
+    @include media('<s') {
+      padding: 0.5em 0.5em 0.25em 0.5em;
       flex-direction: column;
+      gap: 1em;
     }
     .thumbnailWrapper {
       width: 35%;
       position: relative;
-      @include media('>=ls') {
-        aspect-ratio: 16 / 15;
-        height: 100%;
+      @include media('<m') {
+        width: 40%;
       }
-      @include media('<ls') {
-        display: flex;
-        align-items: center;
-      }
-      @include media('<ms') {
+      @include media('<s') {
         width: 100%;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        padding: 0.75em 0;
       }
       .thumbnail {
         width: 100%;
         display: flex;
         justify-content: center;
-        @include media('>=ls') {
-          position: absolute;
-          width: 100%;
-          top: 1em;
-        }
         .bookThumbnail {
-          width: 75%;
+          width: 90%;
           box-shadow: -0.1em 0.3em 0.5em var(--color-gray20);
           @include media('<m') {
             width: 100%;
           }
-          @include media('<ms') {
-            width: 75%;
+          @include media('<s') {
+            width: 90%;
           }
         }
       }
@@ -65,13 +48,12 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      color: white;
-      @include media('<ls') {
-        padding: 1em 0;
+      color: black;
+      @include media('<m') {
+        width: 60%;
       }
-      @include media('<ms') {
+      @include media('<s') {
         width: 100%;
-        padding: 0 0 1em 0;
       }
       .bookTitle {
         font-size: var(--fs-48);
@@ -81,34 +63,46 @@
         margin-bottom: 0.5em;
       }
       .bookBio {
+        width: 70%;
         font-size: var(--fs-27);
+        color: var(--color-gray40);
         font-weight: 400;
         line-height: 1.25;
         margin: 0;
-        margin-bottom: 0.5em;
+        margin-bottom: 1em;
+        @include media('<m') {
+          width: 100%;
+        }
       }
       .line {
-        border: 1px solid var(--color-gray40);
+        border: 1px solid var(--color-gold);
         width: 20%;
       }
       .authors {
-        font-size: var(--fs-16);
+        width: 50%;
+        font-size: var(--fs-15);
+        color: var(--color-gray40);
         font-weight: 400;
         line-height: 1.25;
         margin: 0;
-        margin-top: 1em;
+        margin-top: 1.5em;
         text-transform: uppercase;
+        @include media('<m') {
+          width: 80%;
+        }
+        @include media('<s') {
+          width: 100%;
+        }
       }
       .button {
         color: #fff;
         background: linear-gradient(
           to right,
-          var(--color-goldTint1),
-          var(--color-gold),
-          var(--color-goldShade2)
+          var(--color-goldShade2),
+          var(--color-gold)
         );
         font-size: var(--fs-21);
-        margin-top: 1.5em;
+        margin: 2em 0;
         background-position: 100% 50%;
         background-size: 200%;
         @media (hover: hover) {
@@ -117,25 +111,147 @@
             color: #000;
           }
         }
+        @include media('<m') {
+          margin-bottom: 0;
+        }
+      }
+      .secondLine {
+        border: 1px solid var(--color-gray75);
+        width: 100%;
+        @include media('<m') {
+          display: none;
+        }
+      }
+      .description {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        @include media('<m') {
+          display: none;
+        }
+        .heading {
+          font-size: var(--fs-24);
+          line-height: 1.25;
+          font-weight: 400;
+          margin-top: 1.5em;
+          margin-bottom: 0.5em;
+          em {
+            font-style: normal;
+            color: var(--color-goldShade1);
+          }
+        }
+        .body {
+          width: 100%;
+          > p {
+            font-size: var(--fs-18);
+            line-height: 1.5;
+            margin-bottom: 1em;
+          }
+          .downloadButton {
+            font-size: var(--fs-18);
+            margin-top: 1.5em;
+            background-position: 100% 50%;
+            background-size: 200%;
+            appearance: none;
+            background: transparent;
+            padding: 0.6em 1em;
+            line-height: 1.1;
+            border-radius: 1.25em;
+            color: var(--color-goldTint1);
+            border: 1px solid currentColor;
+            transition-property: color, border-color, background-color;
+            transition-duration: 200ms;
+            transition-timing-function: ease;
+            text-align: center;
+            @media (hover: hover) {
+              &:hover {
+                background: var(--color-goldShade1);
+                border-color: var(--color-goldShade1);
+                color: #fff;
+              }
+            }
+            @include media('<ls') {
+              margin: 1em 0 1.5em;
+            }
+            @include media('<s') {
+              font-size: var(--fs-18);
+            }
+          }
+        }
       }
     }
   }
-  .orderWrapper {
-    background-color: black;
-    width: 100%;
-    text-align: end;
-    z-index: -1;
-    .order {
-      padding: 0.25em 0.5em;
-      p {
-        font-size: var(--fs-21);
+  .descriptionWrapper {
+    padding: 1em 1em 0.5em 1em;
+    display: none;
+    @include media('<m') {
+      padding: 0.75em;
+      display: block;
+    }
+    @include media('<ms') {
+      flex-direction: column;
+      gap: 0.5em;
+    }
+    @include media('<s') {
+      padding: 0.5em 0.5em 0.75em 0.5em;
+      display: block;
+    }
+    .secondLine {
+      border: 1px solid var(--color-gray75);
+      width: 100%;
+    }
+    .description {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      .heading {
+        font-size: var(--fs-24);
+        line-height: 1.25;
         font-weight: 400;
-        text-transform: capitalize;
-        margin: 0;
-        font-family: var(--ff-display);
+        margin-top: 2em;
+        margin-bottom: 0.5em;
+        em {
+          font-style: normal;
+          color: var(--color-goldShade1);
+        }
+        @include media('<m') {
+          font-size: var(--fs-30);
+        }
       }
-      a {
-        text-decoration: none;
+      .body {
+        width: 100%;
+        > p {
+          font-size: var(--fs-18);
+          line-height: 1.5;
+          margin-bottom: 1em;
+        }
+        .downloadButton {
+          font-size: var(--fs-18);
+          margin-top: 1.5em;
+          background-position: 100% 50%;
+          background-size: 200%;
+          appearance: none;
+          background: transparent;
+          padding: 0.6em 1em;
+          line-height: 1.1;
+          border-radius: 1.25em;
+          color: var(--color-goldTint1);
+          border: 1px solid currentColor;
+          transition-property: color, border-color, background-color;
+          transition-duration: 200ms;
+          transition-timing-function: ease;
+          text-align: center;
+          @media (hover: hover) {
+            &:hover {
+              background: var(--color-goldShade1);
+              border-color: var(--color-goldShade1);
+              color: #fff;
+            }
+          }
+          @include media('<s') {
+            font-size: var(--fs-18);
+          }
+        }
       }
     }
   }

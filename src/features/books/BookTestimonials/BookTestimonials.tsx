@@ -3,6 +3,7 @@
 import { useId, useState } from 'react'
 
 import { DatoStructuredText } from '@/features/dato-structured-text'
+import { MarkdownHeading } from '@/features/ui'
 import {
   useElementHeight,
   useElementWidth,
@@ -46,17 +47,33 @@ export const BookTestimonials = ({ book }: PropTypes) => {
         </defs>
       </svg>
       <div className={styles.body}>
+        <MarkdownHeading
+          className={styles.heading}
+          as="h2"
+        >
+          {book?.testimonialsHeading}
+        </MarkdownHeading>
+        <div className={styles.line}></div>
         {Array.isArray(book?.testimonials) && (
           <div className={styles.testimonials}>
-            <DatoStructuredText data={book?.testimonials[0]?.quote} />
-            <div className={styles.attribution}>
-              <span className={styles.attributionName}>
-                -{book?.testimonials[0]?.attributionName}
-              </span>
-              <DatoStructuredText
-                data={book?.testimonials[0]?.attributionTitle}
-              />
-            </div>
+            {book?.testimonials?.map((testimonial, index) => {
+              return (
+                <div
+                  className={styles.testimonial}
+                  key={index}
+                >
+                  <DatoStructuredText data={testimonial?.quote} />
+                  <div className={styles.attribution}>
+                    <span className={styles.attributionName}>
+                      -{testimonial?.attributionName}
+                    </span>
+                    <DatoStructuredText
+                      data={testimonial?.attributionTitle}
+                    />
+                  </div>
+                </div>
+              )
+            })}
           </div>
         )}
       </div>

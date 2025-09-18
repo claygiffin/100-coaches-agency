@@ -72,6 +72,7 @@ export const BookFragment = gql`
         ...Pdf
       }
     }
+    testimonialsHeading
     testimonials {
       ...BookTestimonial
     }

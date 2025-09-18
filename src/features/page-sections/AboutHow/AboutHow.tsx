@@ -2,7 +2,6 @@
 
 import { isEmptyDocument } from 'datocms-structured-text-utils'
 import { useId, useState } from 'react'
-import { StructuredText } from 'react-datocms/structured-text'
 
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'

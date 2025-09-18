@@ -8,7 +8,7 @@ import {
   BookMiscellaneousInformation,
   BookTestimonials,
 } from '@/features/books'
-import { BookDescription } from '@/features/books'
+// import { BookDescription } from '@/features/books'
 import { BookFragment } from '@/features/leadership'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
@@ -83,7 +83,7 @@ const BookPage: NextPage<Props> = async ({ params }) => {
   return (
     <main>
       <BookHero book={book} />
-      <BookDescription book={book} />
+      {/* <BookDescription book={book} /> */}
       <BookTestimonials book={book} />
       <BookAuthors book={book} />
       <BookMiscellaneousInformation book={book} />
