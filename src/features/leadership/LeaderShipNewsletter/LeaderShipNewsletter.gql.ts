@@ -1,18 +1,27 @@
 import gql from 'graphql-tag'
 
 import {
+  ArticleAccordionFragment,
+  ArticleButtonFieldFragment,
+  ArticleCarouselFragment,
+  ArticlePullQuoteFragment,
+  ArticleTestimonialFragment,
   ExternalVideoFragment,
   HubspotFormFragment,
   InternalVideoFragment,
 } from '@/features/articles'
 import { ResponsiveImageFragment } from '@/features/dato-image'
-import { PageLinkFragment } from '@/features/links'
+import {
+  ExternalLinkFragment,
+  PageLinkFragment,
+} from '@/features/links'
 
 export const NewsletterFragment = gql`
   fragment Newsletter on NewsletterRecord {
     id
     __typename
     title
+    subtitle
     body {
       value
       blocks {
@@ -38,6 +47,30 @@ export const NewsletterFragment = gql`
         ... on HubspotFormRecord {
           ...HubspotForm
         }
+        ... on ArticleCarouselRecord {
+          ...ArticleCarousel
+        }
+        ... on ArticleAccordionRecord {
+          ...ArticleAccordion
+        }
+        ... on ArticleButtonFieldRecord {
+          ...ArticleButtonField
+        }
+        ... on ArticlePullQuoteRecord {
+          ...ArticlePullQuote
+        }
+        ... on ArticleTestimonialRecord {
+          ...ArticleTestimonial
+        }
+      }
+    }
+    ctaText
+    ctaButton {
+      ... on PageLinkRecord {
+        ...PageLink
+      }
+      ... on ExternalLinkRecord {
+        ...ExternalLink
       }
     }
     thumbnail {
@@ -69,6 +102,13 @@ export const NewsletterFragment = gql`
   ${ExternalVideoFragment}
   ${InternalVideoFragment}
   ${HubspotFormFragment}
+  ${ArticleCarouselFragment}
+  ${ArticleAccordionFragment}
+  ${ArticleButtonFieldFragment}
+  ${ArticlePullQuoteFragment}
+  ${ArticleTestimonialFragment}
+  ${PageLinkFragment}
+  ${ExternalLinkFragment}
 `
 
 export const LeaderShipNewslettersFragment = gql`

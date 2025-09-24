@@ -4,6 +4,7 @@
 
 export * from './Article/Article.gql'
 export * from './Article/Article'
+export * from './ArticleCarousel/ArticleCarousel'
 export * from './ArticlesGrid/ArticlesGrid'
 export * from './ArticleThumbnail/ArticleThumbnail.gql'
 export * from './ArticleThumbnail/ArticleThumbnail'

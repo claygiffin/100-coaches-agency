@@ -203,7 +203,7 @@ export function Slider({
 }
 
 /* --- Inline SVG arrow icons --- */
-function ArrowLeftIcon(props: React.SVGProps<SVGSVGElement>) {
+export function ArrowLeftIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -226,7 +226,7 @@ function ArrowLeftIcon(props: React.SVGProps<SVGSVGElement>) {
   )
 }
 
-function ArrowRightIcon(props: React.SVGProps<SVGSVGElement>) {
+export function ArrowRightIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       viewBox="0 0 24 24"

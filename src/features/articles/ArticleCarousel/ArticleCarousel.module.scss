@@ -1,0 +1,79 @@
+@use '@/theme/mixins' as *;
+
+.carousel {
+  position: relative;
+  margin: 3em 0 5em;
+  .carouselBody {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    .arrow {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: cener;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(100, 100, 100, 0.8);
+      color: white;
+      border: none;
+      padding: 1em;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      transition: background 0.2s ease;
+      &.left {
+        left: -2em;
+        .icon {
+          transform: translateX(50%);
+        }
+      }
+      &.right {
+        right: -2em;
+        .icon {
+          transform: translateX(-50%);
+        }
+      }
+
+      &:hover {
+        background: var(--color-goldShade1);
+        color: #fff;
+      }
+    }
+  }
+
+  .topBorder {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    top: -0.2em;
+    left: -0.2em;
+    background-color: var(--color-gray85);
+    z-index: 0;
+  }
+
+  .bottomBorder {
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    bottom: -0.2em;
+    right: -0.2em;
+    background-color: var(--color-gray85);
+    z-index: 0;
+  }
+
+  .description {
+    position: absolute;
+    bottom: 0;
+    right: -0.25em;
+    transform: translateY(100%);
+    background-color: var(--color-gray85);
+    padding: 0.2em 0.5em;
+    font-size: var(--fs-16);
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: right;
+    color: var(--color-gray30);
+  }
+}
