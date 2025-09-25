@@ -1,6 +1,5 @@
 'use client'
 
-import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
@@ -68,12 +67,6 @@ export const LeaderShipNewsletters = ({
             </MarkdownHeading>
             <div className={styles.bodyText}>
               <DatoStructuredText data={showingNewsletter?.body} />
-            </div>
-            <div className={styles.date}>
-              {format(
-                new Date(showingNewsletter?.createdAt),
-                'MMMM d, yyyy'
-              )}
             </div>
           </div>
         </div>

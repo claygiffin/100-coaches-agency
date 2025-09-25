@@ -264,7 +264,7 @@ type ArticleAccordionModelTextField = {
   value: Scalars['JsonField']['output'];
 };
 
-/** Block of type Article Accordion  (article_accordion) */
+/** Block of type Accordion  (article_accordion) */
 type ArticleAccordionRecord = RecordInterface & {
   __typename?: 'ArticleAccordionRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -288,14 +288,14 @@ type ArticleAccordionRecord = RecordInterface & {
 };
 
 
-/** Block of type Article Accordion  (article_accordion) */
+/** Block of type Accordion  (article_accordion) */
 type ArticleAccordionRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
 type ArticleButtonFieldModelButtonsField = ExternalLinkRecord | PageLinkRecord;
 
-/** Block of type Article Button Field (article_button_field) */
+/** Block of type Button (article_button_field) */
 type ArticleButtonFieldRecord = RecordInterface & {
   __typename?: 'ArticleButtonFieldRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -318,12 +318,12 @@ type ArticleButtonFieldRecord = RecordInterface & {
 };
 
 
-/** Block of type Article Button Field (article_button_field) */
+/** Block of type Button (article_button_field) */
 type ArticleButtonFieldRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-/** Block of type Article Carousel (article_carousel) */
+/** Block of type Image Carousel (article_carousel) */
 type ArticleCarouselRecord = RecordInterface & {
   __typename?: 'ArticleCarouselRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -347,7 +347,7 @@ type ArticleCarouselRecord = RecordInterface & {
 };
 
 
-/** Block of type Article Carousel (article_carousel) */
+/** Block of type Image Carousel (article_carousel) */
 type ArticleCarouselRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
@@ -527,7 +527,7 @@ type ArticlePullQuoteModelQuoteField = {
   value: Scalars['JsonField']['output'];
 };
 
-/** Block of type Article Pull Quote (article_pull_quote) */
+/** Block of type Pull Quote (article_pull_quote) */
 type ArticlePullQuoteRecord = RecordInterface & {
   __typename?: 'ArticlePullQuoteRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -550,7 +550,7 @@ type ArticlePullQuoteRecord = RecordInterface & {
 };
 
 
-/** Block of type Article Pull Quote (article_pull_quote) */
+/** Block of type Pull Quote (article_pull_quote) */
 type ArticlePullQuoteRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
@@ -1543,7 +1543,7 @@ type ExternalLinkRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-/** Block of type External Video (external_video) */
+/** Block of type Video - External (external_video) */
 type ExternalVideoRecord = RecordInterface & {
   __typename?: 'ExternalVideoRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -1566,7 +1566,7 @@ type ExternalVideoRecord = RecordInterface & {
 };
 
 
-/** Block of type External Video (external_video) */
+/** Block of type Video - External (external_video) */
 type ExternalVideoRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
@@ -4234,7 +4234,7 @@ type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
-/** Block of type Internal Video (internal_video) */
+/** Block of type Video - Internal (internal_video) */
 type InternalVideoRecord = RecordInterface & {
   __typename?: 'InternalVideoRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -4257,7 +4257,7 @@ type InternalVideoRecord = RecordInterface & {
 };
 
 
-/** Block of type Internal Video (internal_video) */
+/** Block of type Video - Internal (internal_video) */
 type InternalVideoRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };

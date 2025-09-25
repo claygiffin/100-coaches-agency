@@ -1,6 +1,5 @@
 'use client'
 
-import { format } from 'date-fns'
 import { useState } from 'react'
 import { StructuredText } from 'react-datocms'
 
@@ -44,11 +43,6 @@ const QuoteSymbol = () => {
 export const Article = ({ article, layout }: PropTypes) => {
   const [selectedAccordion, setSelectedAccordion] = useState('')
 
-  const formattedDate = format(
-    new Date(article?.createdAt || ''),
-    'MMMM d, yyyy'
-  )
-
   const selectAccordion = (id: string) => {
     if (id === selectedAccordion) setSelectedAccordion('')
     else setSelectedAccordion(id)
@@ -67,7 +61,6 @@ export const Article = ({ article, layout }: PropTypes) => {
         {article?.subtitle && (
           <h2 className={styles.subTitle}>{article?.subtitle}</h2>
         )}
-        <span className={styles.date}>{formattedDate}</span>
         <div className={styles.headerLine}></div>
         <div className={styles.body}>
           <StructuredText

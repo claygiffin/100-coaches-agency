@@ -1,6 +1,5 @@
 'use client'
 
-import { format } from 'date-fns'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
@@ -79,12 +78,6 @@ export const LeaderShipArticles = ({
             <div className={styles.bodyText}>
               <DatoStructuredText data={showingArticles[0]?.body} />
             </div>
-            <div className={styles.date}>
-              {format(
-                new Date(showingArticles[0]?.createdAt),
-                'MMMM d, yyyy'
-              )}
-            </div>
           </div>
         </div>
       )}
@@ -109,12 +102,6 @@ export const LeaderShipArticles = ({
                     <h2 className={styles.bookTitle}>
                       {article?.title}
                     </h2>
-                    <span className={styles.date}>
-                      {format(
-                        new Date(article?.createdAt),
-                        'MMMM d, yyyy'
-                      )}
-                    </span>
                   </div>
                 </div>
               )

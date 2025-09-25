@@ -1,6 +1,5 @@
 'use client'
 
-import { format } from 'date-fns'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -114,9 +113,6 @@ export const Card: React.FC<CardProps> = ({
         <div className={styles.descriptionWrapper}>
           <h3 className={styles.description}>{description}</h3>
         </div>
-        <p className={styles.date}>
-          {format(new Date(date), 'MMMM d, yyyy')}
-        </p>
       </div>
     </div>
   )
