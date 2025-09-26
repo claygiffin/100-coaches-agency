@@ -598,7 +598,7 @@ type ArticleTestimonialModelTestimonialBodyField = {
   value: Scalars['JsonField']['output'];
 };
 
-/** Block of type Article Testimonial (article_testimonial) */
+/** Block of type Testimonial Box (article_testimonial) */
 type ArticleTestimonialRecord = RecordInterface & {
   __typename?: 'ArticleTestimonialRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -623,7 +623,7 @@ type ArticleTestimonialRecord = RecordInterface & {
 };
 
 
-/** Block of type Article Testimonial (article_testimonial) */
+/** Block of type Testimonial Box (article_testimonial) */
 type ArticleTestimonialRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
