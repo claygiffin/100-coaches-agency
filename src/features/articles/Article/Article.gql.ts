@@ -5,31 +5,33 @@ import {
   ExternalLinkFragment,
   PageLinkFragment,
 } from '@/features/links'
+import {
+  ExternalVideoFileFragment,
+  InternalVideoFileFragment,
+} from '@/features/video-player'
 
 export const ExternalVideoFragment = gql`
   fragment ExternalVideo on ExternalVideoRecord {
     id
     __typename
-    file {
-      url
-      thumbnailUrl
+    video {
+      ...ExternalVideoFile
     }
     createdAt: _createdAt
   }
+  ${ExternalVideoFileFragment}
 `
 
 export const InternalVideoFragment = gql`
   fragment InternalVideo on InternalVideoRecord {
     id
     __typename
-    file {
-      url
-      video {
-        thumbnailUrl
-      }
+    video {
+      ...InternalVideoFile
     }
     createdAt: _createdAt
   }
+  ${InternalVideoFileFragment}
 `
 
 export const HubspotFormFragment = gql`

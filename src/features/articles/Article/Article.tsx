@@ -7,6 +7,10 @@ import { DatoImage, DatoImageFocused } from '@/features/dato-image'
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { HubspotForm } from '@/features/hubSpotForm'
 import { DatoLink } from '@/features/links'
+import {
+  ExternalVideoPlayer,
+  InternalVideoPlayer,
+} from '@/features/video-player'
 import { getVideoEmbedUrl } from '@/lib/video-embed-link'
 import { classes } from '@/utils/css'
 
@@ -76,17 +80,22 @@ export const Article = ({ article, layout }: PropTypes) => {
                 )
               } else if (record.__typename === 'ExternalVideoRecord') {
                 return (
-                  <div className={styles.videoContainer}>
-                    <iframe
-                      src={getVideoEmbedUrl(record?.file?.url)}
-                    ></iframe>
-                  </div>
+                  <ExternalVideoPlayer
+                    data={record.video}
+                    className={styles.videoContainer}
+                  />
                 )
               } else if (record.__typename === 'InternalVideoRecord') {
                 return (
-                  <div className={styles.videoContainer}>
-                    <iframe src={record?.file?.url}></iframe>
-                  </div>
+                  <InternalVideoPlayer
+                    data={record.video}
+                    className={styles.videoContainer}
+                    style={{
+                      '--aspect-ratio':
+                        record.video.video.width /
+                        record.video.video.height,
+                    }}
+                  />
                 )
               } else if (record.__typename === 'HubspotFormRecord') {
                 return (

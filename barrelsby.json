@@ -1,6 +1,19 @@
 {
-  "directory": ["./src/features"],
-  "exclude": ["subcomponents", "components", "archive", "./_"],
+  "directory": [
+    "./src",
+    "./src/features"
+  ],
+  "include": [
+    "./*.ts",
+    "./*.gql.ts$"
+  ],
+  "exclude": [
+    "archive",
+    "src/app",
+    "src/lib",
+    "src/features/(?:[^/]+/){3,}[^/]+\\.tsx$",
+    "./*.d.ts$"
+  ],
   "delete": true,
   "location": "below",
   "singleQuotes": true,

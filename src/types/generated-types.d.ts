@@ -91,6 +91,71 @@ type AboutPageRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+type AccordionItemModelBodyField = {
+  __typename?: 'AccordionItemModelBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Block of type Accordion Item (accordion_item) */
+type AccordionItemRecord = RecordInterface & {
+  __typename?: 'AccordionItemRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  body: AccordionItemModelBodyField;
+  createdAt: Scalars['DateTime']['output'];
+  heading: Scalars['String']['output'];
+  id: Scalars['ItemId']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Accordion Item (accordion_item) */
+type AccordionItemRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+/** Block of type Accordion (accordion) */
+type AccordionRecord = RecordInterface & {
+  __typename?: 'AccordionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  items: Array<AccordionItemRecord>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Accordion (accordion) */
+type AccordionRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type AdvisorsPageModelAboutBodyField = {
   __typename?: 'AdvisorsPageModelAboutBodyField';
   blocks: Array<Scalars['String']['output']>;
@@ -136,7 +201,7 @@ type AdvisorsPageRecord = RecordInterface & {
   aboutBody?: Maybe<AdvisorsPageModelAboutBodyField>;
   aboutHeading: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
-  howBody: AdvisorsPageModelHowBodyField;
+  howBody?: Maybe<AdvisorsPageModelHowBodyField>;
   howDetails: Array<TitleDescriptionRecord>;
   howHeading: Scalars['String']['output'];
   howLink?: Maybe<AdvisorsPageModelHowLinkField>;
@@ -264,7 +329,7 @@ type ArticleAccordionModelTextField = {
   value: Scalars['JsonField']['output'];
 };
 
-/** Block of type Accordion  (article_accordion) */
+/** Block of type Article Accordion (article_accordion) */
 type ArticleAccordionRecord = RecordInterface & {
   __typename?: 'ArticleAccordionRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -288,14 +353,14 @@ type ArticleAccordionRecord = RecordInterface & {
 };
 
 
-/** Block of type Accordion  (article_accordion) */
+/** Block of type Article Accordion (article_accordion) */
 type ArticleAccordionRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
 type ArticleButtonFieldModelButtonsField = ExternalLinkRecord | PageLinkRecord;
 
-/** Block of type Button (article_button_field) */
+/** Block of type Article Button (article_button_field) */
 type ArticleButtonFieldRecord = RecordInterface & {
   __typename?: 'ArticleButtonFieldRecord';
   _createdAt: Scalars['DateTime']['output'];
@@ -318,7 +383,7 @@ type ArticleButtonFieldRecord = RecordInterface & {
 };
 
 
-/** Block of type Button (article_button_field) */
+/** Block of type Article Button (article_button_field) */
 type ArticleButtonFieldRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
@@ -933,6 +998,36 @@ type BooleanFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
+type ButtonModelButtonField = AnchorLinkRecord | ArticleLinkRecord | CoachMenuLinkRecord | DocumentLinkRecord | ExternalLinkRecord | FormLinkRecord | PageLinkRecord;
+
+/** Block of type Button (button) */
+type ButtonRecord = RecordInterface & {
+  __typename?: 'ButtonRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  button: ButtonModelButtonField;
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Button (button) */
+type ButtonRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type CoachCategoryCtaModelCtaBodyField = {
   __typename?: 'CoachCategoryCtaModelCtaBodyField';
   blocks: Array<Scalars['String']['output']>;
@@ -1344,6 +1439,66 @@ type ContactPageRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+type ContentSectionModelBodyBlocksField = ButtonRecord | LinkListRecord;
+
+type ContentSectionModelBodyField = {
+  __typename?: 'ContentSectionModelBodyField';
+  blocks: Array<ContentSectionModelBodyBlocksField>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type ContentSectionModelPullQuoteField = {
+  __typename?: 'ContentSectionModelPullQuoteField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type ContentSectionModelSubheadingField = {
+  __typename?: 'ContentSectionModelSubheadingField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Block of type Content Section (content_section) */
+type ContentSectionRecord = RecordInterface & {
+  __typename?: 'ContentSectionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  body: ContentSectionModelBodyField;
+  colorScheme: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  heading: Scalars['String']['output'];
+  id: Scalars['ItemId']['output'];
+  image?: Maybe<ImageFileField>;
+  layout: Scalars['String']['output'];
+  pullQuote?: Maybe<ContentSectionModelPullQuoteField>;
+  subheading?: Maybe<ContentSectionModelSubheadingField>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Content Section (content_section) */
+type ContentSectionRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Block of type Courses Coach (courses_coach) */
 type CoursesCoachRecord = RecordInterface & {
   __typename?: 'CoursesCoachRecord';
@@ -1560,9 +1715,9 @@ type ExternalVideoRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  file: VideoField;
   id: Scalars['ItemId']['output'];
   updatedAt: Scalars['DateTime']['output'];
+  video: VideoField;
 };
 
 
@@ -4234,6 +4389,83 @@ type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
+type InteriorPageModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<InteriorPageModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<InteriorPageModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  pageTitle?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<SeoFilter>;
+  slug?: InputMaybe<SlugFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum InteriorPageModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  pageTitle_ASC = 'pageTitle_ASC',
+  pageTitle_DESC = 'pageTitle_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Interior Page (interior_page) */
+type InteriorPageRecord = RecordInterface & {
+  __typename?: 'InteriorPageRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  hero: PageHeroRecord;
+  id: Scalars['ItemId']['output'];
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  seo?: Maybe<SeoField>;
+  slug?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type Interior Page (interior_page) */
+type InteriorPageRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Block of type Video - Internal (internal_video) */
 type InternalVideoRecord = RecordInterface & {
   __typename?: 'InternalVideoRecord';
@@ -4251,9 +4483,9 @@ type InternalVideoRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
   createdAt: Scalars['DateTime']['output'];
-  file: VideoFileField;
   id: Scalars['ItemId']['output'];
   updatedAt: Scalars['DateTime']['output'];
+  video: VideoFileField;
 };
 
 
@@ -4294,6 +4526,37 @@ type LinkFilter = {
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
 };
 
+type LinkListModelLinksField = AnchorLinkRecord | ArticleLinkRecord | CoachMenuLinkRecord | DocumentLinkRecord | ExternalLinkRecord | FormLinkRecord | PageLinkRecord;
+
+/** Block of type Link List (link_list) */
+type LinkListRecord = RecordInterface & {
+  __typename?: 'LinkListRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  heading?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  links: Array<LinkListModelLinksField>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Link List (link_list) */
+type LinkListRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter Multiple-links fields */
 type LinksFilter = {
   /** Filter records linked to all of the specified records. The specified values must be Record IDs */
@@ -4306,6 +4569,36 @@ type LinksFilter = {
   exists?: InputMaybe<Scalars['BooleanType']['input']>;
   /** Filter records not linked to any of the specified records. The specified values must be Record IDs */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
+};
+
+type MediaCarouselModelMediaField = ExternalVideoRecord | ImageRecord | InternalVideoRecord;
+
+/** Block of type Media Carousel (media_carousel) */
+type MediaCarouselRecord = RecordInterface & {
+  __typename?: 'MediaCarouselRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  id: Scalars['ItemId']['output'];
+  media: Array<MediaCarouselModelMediaField>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Media Carousel (media_carousel) */
+type MediaCarouselRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 enum MuxThumbnailFormatType {
@@ -4566,6 +4859,35 @@ type OrientationFilter = {
   neq?: InputMaybe<UploadOrientation>;
 };
 
+/** Block of type Page Hero (page_hero) */
+type PageHeroRecord = RecordInterface & {
+  __typename?: 'PageHeroRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  backgroundImage: ImageFileField;
+  createdAt: Scalars['DateTime']['output'];
+  heading: Scalars['String']['output'];
+  id: Scalars['ItemId']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Page Hero (page_hero) */
+type PageHeroRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type PageLinkModelPageField = AboutPageRecord | ArchivePageRecord | ArticlesPageRecord | CoachCategoryRecord | ContactPageRecord | HomePageRecord | ThoughtLeadershipPageRecord;
 
 /** Block of type Page Link (page_link) */
@@ -4682,6 +5004,8 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allHubspotFormEmbedsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allInteriorPagesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allNewsItemsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allNewslettersMeta: CollectionMetadata;
@@ -4721,6 +5045,8 @@ type Query = {
   allForms: Array<FormRecord>;
   /** Returns a collection of records */
   allHubspotFormEmbeds: Array<HubspotFormEmbedRecord>;
+  /** Returns a collection of records */
+  allInteriorPages: Array<InteriorPageRecord>;
   /** Returns a collection of records */
   allNewsItems: Array<NewsItemRecord>;
   /** Returns a collection of records */
@@ -4763,6 +5089,8 @@ type Query = {
   homePage?: Maybe<HomePageRecord>;
   /** Returns a specific record */
   hubspotFormEmbed?: Maybe<HubspotFormEmbedRecord>;
+  /** Returns a specific record */
+  interiorPage?: Maybe<InteriorPageRecord>;
   /** Returns the single instance record */
   nav?: Maybe<NavRecord>;
   /** Returns a specific record */
@@ -4852,6 +5180,14 @@ type Query_allFormsMetaArgs = {
 type Query_allHubspotFormEmbedsMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<HubspotFormEmbedModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allInteriorPagesMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<InteriorPageModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -5034,6 +5370,17 @@ type QueryallHubspotFormEmbedsArgs = {
   first?: InputMaybe<Scalars['IntType']['input']>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<HubspotFormEmbedModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']['input']>;
+};
+
+
+/** The query root for this schema */
+type QueryallInteriorPagesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<InteriorPageModelFilter>;
+  first?: InputMaybe<Scalars['IntType']['input']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<InteriorPageModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']['input']>;
 };
 
@@ -5228,6 +5575,15 @@ type QueryhubspotFormEmbedArgs = {
   filter?: InputMaybe<HubspotFormEmbedModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<HubspotFormEmbedModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QueryinteriorPageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<InteriorPageModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<InteriorPageModelOrderBy>>>;
 };
 
 
@@ -6705,7 +7061,73 @@ type focalPoint = {
 type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, introHeading?: string | null, promiseHeading: string, marshallHeading?: string | null, resultsHeading?: string | null, contactHeading?: string | null, companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, coachesSection: { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> }, thoughtLeadershipItems: Array<{ __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }>, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }>, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }, marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, resultsBody?: { __typename?: 'HomePageModelResultsBodyField', value: unknown } | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactLink?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } } | null };
+type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, introHeading?: string | null, promiseHeading: string, marshallHeading?: string | null, resultsHeading?: string | null, contactHeading?: string | null, companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, coachesSection: { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?:
+        | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+        | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+       | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> }, thoughtLeadershipItems: Array<{ __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?:
+        | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+        | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+        | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+        | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+       | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }>, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }>, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta:
+      | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+      | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+    , marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?:
+      | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+      | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, resultsBody?: { __typename?: 'HomePageModelResultsBodyField', value: unknown } | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactLink?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
+        | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
+        | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null }
+        | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }
+      >, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<
+        | { __typename: 'CreateHubspotContactActionRecord' }
+        | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+        | { __typename: 'SendEmailActionRecord', recipients: string }
+      > } } | null };
 
 type AllArticleModalQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6717,7 +7139,39 @@ type ArticleModalQueryVariables = Exact<{
 }>;
 
 
-type ArticleModalQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
+type ArticleModalQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
 
 type AllCoachProfileModalQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6741,7 +7195,15 @@ type FormModalQueryVariables = Exact<{
 }>;
 
 
-type FormModalQuery = { __typename?: 'Query', formModal?: { __typename: 'FormModalRecord', id: string, heading?: string | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } } | null };
+type FormModalQuery = { __typename?: 'Query', formModal?: { __typename: 'FormModalRecord', id: string, heading?: string | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
+        | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
+        | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null }
+        | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }
+      >, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<
+        | { __typename: 'CreateHubspotContactActionRecord' }
+        | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+        | { __typename: 'SendEmailActionRecord', recipients: string }
+      > } } | null };
 
 type AllNewsletterModalQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6753,7 +7215,39 @@ type NewsletterModalQueryVariables = Exact<{
 }>;
 
 
-type NewsletterModalQuery = { __typename?: 'Query', newsletter?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
+type NewsletterModalQuery = { __typename?: 'Query', newsletter?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
 
 type AllTeamMemberModalQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6777,22 +7271,203 @@ type VideoModalQueryVariables = Exact<{
 }>;
 
 
-type VideoModalQuery = { __typename?: 'Query', video?: { __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
+type VideoModalQuery = { __typename?: 'Query', video?: { __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
 
 type AboutPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename: 'AboutPageRecord', aboutHeading: string, teamHeading: string, slug: string, servicesHeading: string, id: string, howHeading: string, partnerHeading?: string | null, aboutBody?: { __typename?: 'AboutPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }>, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, partnerBody?: { __typename?: 'AboutPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> } | null, allTeamMembers: Array<{ __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }> };
+type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename: 'AboutPageRecord', aboutHeading: string, teamHeading: string, slug: string, servicesHeading: string, id: string, howHeading: string, partnerHeading?: string | null, aboutBody?: { __typename?: 'AboutPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<
+        | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+      > }>, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?:
+      | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, partnerBody?: { __typename?: 'AboutPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> } | null, allTeamMembers: Array<{ __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }> };
 
 type AdvisorsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AdvisorsPageQuery = { __typename?: 'Query', advisorsPage?: { __typename: 'AdvisorsPageRecord', aboutHeading: string, slug: string, id: string, howHeading: string, partnerHeading?: string | null, logo?: { __typename?: 'FileField', url: string, alt?: string | null, title?: string | null } | null, aboutBody?: { __typename?: 'AdvisorsPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, howBody: { __typename?: 'AdvisorsPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, partnerBody?: { __typename?: 'AdvisorsPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> } | null };
+type AdvisorsPageQuery = { __typename?: 'Query', advisorsPage?: { __typename: 'AdvisorsPageRecord', aboutHeading: string, slug: string, id: string, howHeading: string, partnerHeading?: string | null, logo?: { __typename?: 'FileField', url: string, alt?: string | null, title?: string | null } | null, aboutBody?: { __typename?: 'AdvisorsPageModelAboutBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, howBody?: { __typename?: 'AdvisorsPageModelHowBodyField', value: unknown } | null, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?:
+      | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, partnerBody?: { __typename?: 'AdvisorsPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> } | null };
 
 type ArchivePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'ArchivePageRecord', archiveHeading: string, slug: string, archiveBackLink: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, allBooks: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allVideos: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allNewsletters: Array<{ __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
+type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'ArchivePageRecord', archiveHeading: string, slug: string, archiveBackLink: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, allBooks: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+      | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+     | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allVideos: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allNewsletters: Array<{ __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
 
 type AllArticlePageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6804,12 +7479,76 @@ type ArticlePageQueryVariables = Exact<{
 }>;
 
 
-type ArticlePageQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
+type ArticlePageQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
 
 type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ArticlesPageQuery = { __typename?: 'Query', articlesPage?: { __typename?: 'ArticlesPageRecord', pageHeading?: string | null, slug: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, articles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, newsItems: Array<{ __typename: 'NewsItemRecord', id: string, title: string, publication: string, url?: string | null, createdAt: string }> };
+type ArticlesPageQuery = { __typename?: 'Query', articlesPage?: { __typename?: 'ArticlesPageRecord', pageHeading?: string | null, slug: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, articles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, newsItems: Array<{ __typename: 'NewsItemRecord', id: string, title: string, publication: string, url?: string | null, createdAt: string }> };
 
 type AllBookPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6821,7 +7560,19 @@ type BookPageQueryVariables = Exact<{
 }>;
 
 
-type BookPageQuery = { __typename?: 'Query', book?: { __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null } | null };
+type BookPageQuery = { __typename?: 'Query', book?: { __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+      | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+     | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null } | null };
 
 type AllCoachCategoryPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6843,7 +7594,18 @@ type AllCoachesPageQuery = { __typename?: 'Query', allCoaches: Array<{ __typenam
 type ContactPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ContactPageQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageRecord', heading?: string | null, intro?: { __typename?: 'ContactPageModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } | { __typename: 'HubspotFormEmbedRecord', id: string, portalId: string, formId: string, region: string }, companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null };
+type ContactPageQuery = { __typename?: 'Query', contactPage?: { __typename?: 'ContactPageRecord', heading?: string | null, intro?: { __typename?: 'ContactPageModelIntroField', value: unknown } | null, form:
+      | { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
+          | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
+          | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null }
+          | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }
+        >, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<
+          | { __typename: 'CreateHubspotContactActionRecord' }
+          | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+          | { __typename: 'SendEmailActionRecord', recipients: string }
+        > }
+      | { __typename: 'HubspotFormEmbedRecord', id: string, portalId: string, formId: string, region: string }
+    , companiesSection: { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> }, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null };
 
 type AllFormPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6855,12 +7617,62 @@ type FormPageQueryVariables = Exact<{
 }>;
 
 
-type FormPageQuery = { __typename?: 'Query', formModal?: { __typename: 'FormModalRecord', id: string, heading?: string | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } } | null };
+type FormPageQuery = { __typename?: 'Query', formModal?: { __typename: 'FormModalRecord', id: string, heading?: string | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
+        | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
+        | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null }
+        | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }
+      >, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<
+        | { __typename: 'CreateHubspotContactActionRecord' }
+        | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+        | { __typename: 'SendEmailActionRecord', recipients: string }
+      > } } | null };
 
 type RootLayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type RootLayoutQuery = { __typename?: 'Query', alertBar?: { __typename: 'AlertBarRecord', id: string, isActive?: boolean | null, alertText?: { __typename?: 'AlertBarModelAlertTextField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null } | null, nav?: { __typename: 'NavRecord', id: string, links: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }>, button?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null } | null, allCoachCategories: Array<{ __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string }> };
+type RootLayoutQuery = { __typename?: 'Query', alertBar?: { __typename: 'AlertBarRecord', id: string, isActive?: boolean | null, alertText?: { __typename?: 'AlertBarModelAlertTextField', value: unknown } | null, link?:
+      | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+      | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null } | null, nav?: { __typename: 'NavRecord', id: string, links: Array<
+      | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+    >, button?:
+      | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+      | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+      | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null } | null, allCoachCategories: Array<{ __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string }> };
 
 type AllNewslettersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6872,18 +7684,338 @@ type NewsletterPageQueryVariables = Exact<{
 }>;
 
 
-type NewsletterPageQuery = { __typename?: 'Query', newsletter?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
+type NewsletterPageQuery = { __typename?: 'Query', newsletter?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
 
 type LeadershipPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __typename?: 'ThoughtLeadershipPageRecord', featuredVisible?: boolean | null, booksVisible?: boolean | null, newslettersVisible?: boolean | null, videosVisible?: boolean | null, articlesVisible?: boolean | null, coursesVisible?: boolean | null, heroHeadingLine: string, heroLinksLabel?: string | null, featuredHeading: string, booksHeading: string, newslettersLabel: string, newslettersHeading: string, videosHeading: string, articlesHeading: string, coursesHeading: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImage?: { __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null, heroText: { __typename?: 'ThoughtLeadershipPageModelHeroTextField', value: unknown }, heroLinks: Array<{ __typename: 'AnchorLinkRecord', id: string, linkText: string, href: string }>, featuredBody: { __typename: 'ThoughtLeadershipFeaturedItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipFeaturedItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }, booksArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, bookItemsOverrides: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, newslettersArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, newslettersItem?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> } | null, videosArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, videoItemsOverrides: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, articlesArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, coursesImage: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, coursesDescription: { __typename?: 'ThoughtLeadershipPageModelCoursesDescriptionField', value: unknown }, coursesButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, coursesCoaches: Array<{ __typename?: 'CoursesCoachRecord', name: string, title: string, image: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }> } | null, allBooks: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allVideos: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allNewsletters: Array<{ __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
+type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __typename?: 'ThoughtLeadershipPageRecord', featuredVisible?: boolean | null, booksVisible?: boolean | null, newslettersVisible?: boolean | null, videosVisible?: boolean | null, articlesVisible?: boolean | null, coursesVisible?: boolean | null, heroHeadingLine: string, heroLinksLabel?: string | null, featuredHeading: string, booksHeading: string, newslettersLabel: string, newslettersHeading: string, videosHeading: string, articlesHeading: string, coursesHeading: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImage?: { __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null, heroText: { __typename?: 'ThoughtLeadershipPageModelHeroTextField', value: unknown }, heroLinks: Array<{ __typename: 'AnchorLinkRecord', id: string, linkText: string, href: string }>, featuredBody: { __typename: 'ThoughtLeadershipFeaturedItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipFeaturedItemModelBodyField', value: unknown } | null, link?:
+        | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+        | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+        | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+        | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+        | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+       | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }, booksArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       } | null, bookItemsOverrides: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
+        | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+        | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+       | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, newslettersArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       } | null, newslettersItem?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
+          | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+          | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+              | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+              | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                  | { __typename: 'AboutPageRecord', slug: string }
+                  | { __typename: 'ArchivePageRecord', slug: string }
+                  | { __typename: 'ArticlesPageRecord', slug: string }
+                  | { __typename: 'CoachCategoryRecord', slug: string }
+                  | { __typename: 'ContactPageRecord', slug: string }
+                  | { __typename: 'HomePageRecord' }
+                  | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+                 }
+            > }
+          | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+          | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+          | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+          | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+          | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+          | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+          | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+        > }, ctaButton?:
+        | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+       | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> } | null, videosArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       } | null, videoItemsOverrides: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<
+          | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+          | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+              | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+              | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                  | { __typename: 'AboutPageRecord', slug: string }
+                  | { __typename: 'ArchivePageRecord', slug: string }
+                  | { __typename: 'ArticlesPageRecord', slug: string }
+                  | { __typename: 'CoachCategoryRecord', slug: string }
+                  | { __typename: 'ContactPageRecord', slug: string }
+                  | { __typename: 'HomePageRecord' }
+                  | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+                 }
+            > }
+          | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+          | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+          | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+          | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+          | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+          | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+          | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+        > }, ctaButton?:
+        | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+       | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, articlesArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+          | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+          | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+              | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+              | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                  | { __typename: 'AboutPageRecord', slug: string }
+                  | { __typename: 'ArchivePageRecord', slug: string }
+                  | { __typename: 'ArticlesPageRecord', slug: string }
+                  | { __typename: 'CoachCategoryRecord', slug: string }
+                  | { __typename: 'ContactPageRecord', slug: string }
+                  | { __typename: 'HomePageRecord' }
+                  | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+                 }
+            > }
+          | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+          | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+          | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+          | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+          | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+          | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+          | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+        > }, ctaButton?:
+        | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+       | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, coursesImage: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, coursesDescription: { __typename?: 'ThoughtLeadershipPageModelCoursesDescriptionField', value: unknown }, coursesButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, coursesCoaches: Array<{ __typename?: 'CoursesCoachRecord', name: string, title: string, image: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }> } | null, allBooks: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+      | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+     | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allVideos: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allNewsletters: Array<{ __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
 
-type AlertBarFragment = { __typename: 'AlertBarRecord', id: string, isActive?: boolean | null, alertText?: { __typename?: 'AlertBarModelAlertTextField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
+type AlertBarFragment = { __typename: 'AlertBarRecord', id: string, isActive?: boolean | null, alertText?: { __typename?: 'AlertBarModelAlertTextField', value: unknown } | null, link?:
+    | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+    | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null };
 
-type ExternalVideoFragment = { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } };
+type ExternalVideoFragment = { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } };
 
-type InternalVideoFragment = { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } };
+type InternalVideoFragment = { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } };
 
 type HubspotFormFragment = { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string };
 
@@ -6891,13 +8023,56 @@ type ArticleCarouselFragment = { __typename: 'ArticleCarouselRecord', id: string
 
 type ArticleAccordionFragment = { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } };
 
-type ArticleButtonFieldFragment = { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> };
+type ArticleButtonFieldFragment = { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+  > };
 
 type ArticlePullQuoteFragment = { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } };
 
 type ArticleTestimonialFragment = { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null };
 
-type ArticleFragment = { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
+type ArticleFragment = { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+      | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+      | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+          | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+          | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+              | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'ArchivePageRecord', slug: string }
+              | { __typename: 'ArticlesPageRecord', slug: string }
+              | { __typename: 'CoachCategoryRecord', slug: string }
+              | { __typename: 'ContactPageRecord', slug: string }
+              | { __typename: 'HomePageRecord' }
+              | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+             }
+        > }
+      | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+      | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+      | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+      | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+      | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+      | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+      | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+    > }, ctaButton?:
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
 type NewsItemFragment = { __typename: 'NewsItemRecord', id: string, title: string, publication: string, url?: string | null, createdAt: string };
 
@@ -6907,7 +8082,15 @@ type TeamMemberFragment = { __typename: 'TeamMemberRecord', id: string, name: st
 
 type ResponsiveImageFragment = { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null };
 
-type FormFragment = { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> };
+type FormFragment = { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
+    | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
+    | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null }
+    | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }
+  >, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<
+    | { __typename: 'CreateHubspotContactActionRecord' }
+    | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+    | { __typename: 'SendEmailActionRecord', recipients: string }
+  > };
 
 type FormSelectFieldFragment = { __typename?: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> };
 
@@ -6915,13 +8098,49 @@ type FormTextAreaFragment = { __typename?: 'FormTextAreaRecord', id: string, lab
 
 type FormTextFieldFragment = { __typename?: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null };
 
-type FormModalFragment = { __typename: 'FormModalRecord', id: string, heading?: string | null, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } };
+type FormModalFragment = { __typename: 'FormModalRecord', id: string, heading?: string | null, intro?: { __typename?: 'FormModalModelIntroField', value: unknown } | null, form: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
+      | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
+      | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null }
+      | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }
+    >, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<
+      | { __typename: 'CreateHubspotContactActionRecord' }
+      | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+      | { __typename: 'SendEmailActionRecord', recipients: string }
+    > } };
 
 type HubspotFormEmbedFragment = { __typename: 'HubspotFormEmbedRecord', id: string, portalId: string, formId: string, region: string };
 
-type HomeCoachesSectionFragment = { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> };
+type HomeCoachesSectionFragment = { __typename: 'HomeCoachesSectionRecord', id: string, heading?: string | null, body?: { __typename?: 'HomeCoachesSectionModelBodyField', value: unknown } | null, cta?:
+    | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> };
 
-type HomeContactFragment = { __typename?: 'HomePageRecord', contactHeading?: string | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactLink?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<{ __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> } | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null } | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }>, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<{ __typename: 'CreateHubspotContactActionRecord' } | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'SendEmailActionRecord', recipients: string }> } };
+type HomeContactFragment = { __typename?: 'HomePageRecord', contactHeading?: string | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactLink?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+      | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'ArchivePageRecord', slug: string }
+      | { __typename: 'ArticlesPageRecord', slug: string }
+      | { __typename: 'CoachCategoryRecord', slug: string }
+      | { __typename: 'ContactPageRecord', slug: string }
+      | { __typename: 'HomePageRecord' }
+      | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+     } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
+      | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
+      | { __typename: 'FormTextAreaRecord', id: string, label: string, required?: boolean | null }
+      | { __typename: 'FormTextFieldRecord', id: string, label: string, fieldType: string, isInternational?: boolean | null, width: string, required?: boolean | null }
+    >, successMessage: { __typename?: 'FormModelSuccessMessageField', value: unknown }, onSubmit: Array<
+      | { __typename: 'CreateHubspotContactActionRecord' }
+      | { __typename: 'OpenDocumentActionRecord', document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+      | { __typename: 'SendEmailActionRecord', recipients: string }
+    > } };
 
 type HomeHeroFragment = { __typename?: 'HomePageRecord', heroHeading1: string, heroHeading2: string, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }> };
 
@@ -6929,45 +8148,368 @@ type HomeHeroImagesFragment = { __typename?: 'FileField', horizontal?: { __typen
 
 type HomeIntroFragment = { __typename?: 'HomePageRecord', introHeading?: string | null };
 
-type HomeMarshallFragment = { __typename?: 'HomePageRecord', marshallHeading?: string | null, marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null };
+type HomeMarshallFragment = { __typename?: 'HomePageRecord', marshallHeading?: string | null, marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?:
+    | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null };
 
-type HomePromiseFragment = { __typename?: 'HomePageRecord', promiseHeading: string, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta: { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } };
+type HomePromiseFragment = { __typename?: 'HomePageRecord', promiseHeading: string, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta:
+    | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   };
 
 type HomeResultsFragment = { __typename?: 'HomePageRecord', resultsHeading?: string | null, resultsBody?: { __typename?: 'HomePageModelResultsBodyField', value: unknown } | null };
 
-type ThoughtLeadershipItemFragment = { __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null };
+type ThoughtLeadershipItemFragment = { __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?:
+    | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+    | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null };
 
 type CoachCategoryMenuFragment = { __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string };
 
-type NavFragment = { __typename: 'NavRecord', id: string, links: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }>, button?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
+type NavFragment = { __typename: 'NavRecord', id: string, links: Array<
+    | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+  >, button?:
+    | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+    | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+    | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null };
 
-type LeaderShipArticlesFragment = { __typename?: 'ThoughtLeadershipPageRecord', articlesHeading: string, articlesArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
+type LeaderShipArticlesFragment = { __typename?: 'ThoughtLeadershipPageRecord', articlesHeading: string, articlesArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+      | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'ArchivePageRecord', slug: string }
+      | { __typename: 'ArticlesPageRecord', slug: string }
+      | { __typename: 'CoachCategoryRecord', slug: string }
+      | { __typename: 'ContactPageRecord', slug: string }
+      | { __typename: 'HomePageRecord' }
+      | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+     } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
 
 type BookTestimonialFragment = { __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null };
 
-type BookFragment = { __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
+type BookFragment = { __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+    | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+   | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
-type LeaderShipBooksFragment = { __typename?: 'ThoughtLeadershipPageRecord', booksHeading: string, booksArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, bookItemsOverrides: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
+type LeaderShipBooksFragment = { __typename?: 'ThoughtLeadershipPageRecord', booksHeading: string, booksArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+      | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'ArchivePageRecord', slug: string }
+      | { __typename: 'ArticlesPageRecord', slug: string }
+      | { __typename: 'CoachCategoryRecord', slug: string }
+      | { __typename: 'ContactPageRecord', slug: string }
+      | { __typename: 'HomePageRecord' }
+      | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+     } | null, bookItemsOverrides: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+      | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+     | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
 
 type CoursesCoachFragment = { __typename?: 'CoursesCoachRecord', name: string, title: string, image: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } };
 
-type LeaderShipCoursesFragment = { __typename?: 'ThoughtLeadershipPageRecord', coursesHeading: string, coursesImage: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, coursesDescription: { __typename?: 'ThoughtLeadershipPageModelCoursesDescriptionField', value: unknown }, coursesButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, coursesCoaches: Array<{ __typename?: 'CoursesCoachRecord', name: string, title: string, image: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }> };
+type LeaderShipCoursesFragment = { __typename?: 'ThoughtLeadershipPageRecord', coursesHeading: string, coursesImage: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, coursesDescription: { __typename?: 'ThoughtLeadershipPageModelCoursesDescriptionField', value: unknown }, coursesButton?:
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null, coursesCoaches: Array<{ __typename?: 'CoursesCoachRecord', name: string, title: string, image: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }> };
 
-type ThoughtLeadershipFeaturedItemFragment = { __typename: 'ThoughtLeadershipFeaturedItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipFeaturedItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null };
+type ThoughtLeadershipFeaturedItemFragment = { __typename: 'ThoughtLeadershipFeaturedItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipFeaturedItemModelBodyField', value: unknown } | null, link?:
+    | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+    | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+    | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+   | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null };
 
-type LeaderShipFeaturedFragment = { __typename?: 'ThoughtLeadershipPageRecord', featuredHeading: string, featuredBody: { __typename: 'ThoughtLeadershipFeaturedItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipFeaturedItemModelBodyField', value: unknown } | null, link?: { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } } | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } } | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } } | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null } };
+type LeaderShipFeaturedFragment = { __typename?: 'ThoughtLeadershipPageRecord', featuredHeading: string, featuredBody: { __typename: 'ThoughtLeadershipFeaturedItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipFeaturedItemModelBodyField', value: unknown } | null, link?:
+      | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+      | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+      | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
+     | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null } };
 
 type LeaderShipHeroFragment = { __typename?: 'ThoughtLeadershipPageRecord', heroHeadingLine: string, heroLinksLabel?: string | null, heroImage?: { __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null, heroText: { __typename?: 'ThoughtLeadershipPageModelHeroTextField', value: unknown }, heroLinks: Array<{ __typename: 'AnchorLinkRecord', id: string, linkText: string, href: string }> };
 
 type LeaderShipHeroImageFragment = { __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null };
 
-type NewsletterFragment = { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
+type NewsletterFragment = { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
+      | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+      | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+          | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+          | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+              | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'ArchivePageRecord', slug: string }
+              | { __typename: 'ArticlesPageRecord', slug: string }
+              | { __typename: 'CoachCategoryRecord', slug: string }
+              | { __typename: 'ContactPageRecord', slug: string }
+              | { __typename: 'HomePageRecord' }
+              | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+             }
+        > }
+      | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+      | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+      | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+      | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+      | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+      | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+      | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+    > }, ctaButton?:
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
-type LeaderShipNewslettersFragment = { __typename?: 'ThoughtLeadershipPageRecord', newslettersLabel: string, newslettersHeading: string, newslettersArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, newslettersItem?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> } | null };
+type LeaderShipNewslettersFragment = { __typename?: 'ThoughtLeadershipPageRecord', newslettersLabel: string, newslettersHeading: string, newslettersArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+      | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'ArchivePageRecord', slug: string }
+      | { __typename: 'ArticlesPageRecord', slug: string }
+      | { __typename: 'CoachCategoryRecord', slug: string }
+      | { __typename: 'ContactPageRecord', slug: string }
+      | { __typename: 'HomePageRecord' }
+      | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+     } | null, newslettersItem?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> } | null };
 
-type VideoFragment = { __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
+type VideoFragment = { __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<
+      | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+      | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+          | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+          | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+              | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'ArchivePageRecord', slug: string }
+              | { __typename: 'ArticlesPageRecord', slug: string }
+              | { __typename: 'CoachCategoryRecord', slug: string }
+              | { __typename: 'ContactPageRecord', slug: string }
+              | { __typename: 'HomePageRecord' }
+              | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+             }
+        > }
+      | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+      | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+      | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+      | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+      | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+      | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+      | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+    > }, ctaButton?:
+    | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
-type LeaderShipVideosFragment = { __typename?: 'ThoughtLeadershipPageRecord', videosHeading: string, videosArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, videoItemsOverrides: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<{ __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } } | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<{ __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> } | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> } | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } } | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null } | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoField', url: string, thumbnailUrl: string } } | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string } | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } } | { __typename: 'InternalVideoRecord', id: string, createdAt: string, file: { __typename?: 'VideoFileField', url: string, video: { __typename?: 'UploadVideoField', thumbnailUrl: string } } }> }, ctaButton?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
+type LeaderShipVideosFragment = { __typename?: 'ThoughtLeadershipPageRecord', videosHeading: string, videosArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+      | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'ArchivePageRecord', slug: string }
+      | { __typename: 'ArticlesPageRecord', slug: string }
+      | { __typename: 'CoachCategoryRecord', slug: string }
+      | { __typename: 'ContactPageRecord', slug: string }
+      | { __typename: 'HomePageRecord' }
+      | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+     } | null, videoItemsOverrides: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<
+        | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
+        | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
+            | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+            | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'ArchivePageRecord', slug: string }
+                | { __typename: 'ArticlesPageRecord', slug: string }
+                | { __typename: 'CoachCategoryRecord', slug: string }
+                | { __typename: 'ContactPageRecord', slug: string }
+                | { __typename: 'HomePageRecord' }
+                | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+               }
+          > }
+        | { __typename: 'ArticleCarouselRecord', id: string, description: string, images: Array<{ __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }> }
+        | { __typename: 'ArticlePullQuoteRecord', id: string, quote: { __typename?: 'ArticlePullQuoteModelQuoteField', value: unknown } }
+        | { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null }
+        | { __typename: 'ExternalVideoRecord', id: string, createdAt: string, video: { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }
+        | { __typename: 'HubspotFormRecord', id: string, portalId: string, formId: string, region: string, createdAt: string }
+        | { __typename: 'ImageRecord', id: string, image: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+        | { __typename: 'InternalVideoRecord', id: string, createdAt: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
+      > }, ctaButton?:
+      | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
 
 type AnchorLinkFragment = { __typename: 'AnchorLinkRecord', id: string, linkText: string, href: string };
 
@@ -6981,19 +8523,60 @@ type ExternalLinkFragment = { __typename: 'ExternalLinkRecord', id: string, url:
 
 type FormLinkFragment = { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } };
 
-type PageLinkFragment = { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } };
+type PageLinkFragment = { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+    | { __typename: 'AboutPageRecord', slug: string }
+    | { __typename: 'ArchivePageRecord', slug: string }
+    | { __typename: 'ArticlesPageRecord', slug: string }
+    | { __typename: 'CoachCategoryRecord', slug: string }
+    | { __typename: 'ContactPageRecord', slug: string }
+    | { __typename: 'HomePageRecord' }
+    | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+   };
 
 type PdfFragment = { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } };
 
-type AboutHowFragment = { __typename: 'AboutPageRecord', id: string, howHeading: string, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
+type AboutHowFragment = { __typename: 'AboutPageRecord', id: string, howHeading: string, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?:
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null };
 
-type AdvisorsHowFragment = { __typename: 'AdvisorsPageRecord', id: string, howHeading: string, howBody: { __typename?: 'AdvisorsPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?: { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } } | null };
+type AdvisorsHowFragment = { __typename: 'AdvisorsPageRecord', id: string, howHeading: string, howBody?: { __typename?: 'AdvisorsPageModelHowBodyField', value: unknown } | null, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?:
+    | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+    | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+        | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'ArchivePageRecord', slug: string }
+        | { __typename: 'ArticlesPageRecord', slug: string }
+        | { __typename: 'CoachCategoryRecord', slug: string }
+        | { __typename: 'ContactPageRecord', slug: string }
+        | { __typename: 'HomePageRecord' }
+        | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+       }
+   | null };
 
 type AboutPartnerFragment = { __typename: 'AboutPageRecord', id: string, partnerHeading?: string | null, partnerBody?: { __typename?: 'AboutPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
 
 type AdvisorsPartnerFragment = { __typename: 'AdvisorsPageRecord', id: string, partnerHeading?: string | null, partnerBody?: { __typename?: 'AdvisorsPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
 
-type AboutServicesFragment = { __typename?: 'AboutPageRecord', servicesHeading: string, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<{ __typename: 'CoachMenuLinkRecord', id: string, linkText: string } | { __typename: 'PageLinkRecord', id: string, linkText: string, page: { __typename: 'AboutPageRecord', slug: string } | { __typename: 'ArchivePageRecord', slug: string } | { __typename: 'ArticlesPageRecord', slug: string } | { __typename: 'CoachCategoryRecord', slug: string } | { __typename: 'ContactPageRecord', slug: string } | { __typename: 'HomePageRecord' } | { __typename: 'ThoughtLeadershipPageRecord', slug: string } }> }> };
+type AboutServicesFragment = { __typename?: 'AboutPageRecord', servicesHeading: string, services: Array<{ __typename?: 'ServiceRecord', title?: string | null, description?: { __typename?: 'ServiceModelDescriptionField', value: unknown } | null, link: Array<
+      | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+      | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+          | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'ArchivePageRecord', slug: string }
+          | { __typename: 'ArticlesPageRecord', slug: string }
+          | { __typename: 'CoachCategoryRecord', slug: string }
+          | { __typename: 'ContactPageRecord', slug: string }
+          | { __typename: 'HomePageRecord' }
+          | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+         }
+    > }> };
 
 type CoachCategoryCtaFragment = { __typename: 'CoachCategoryCtaRecord', id: string, ctaHeading: string, ctaLinkText?: string | null, ctaBody?: { __typename?: 'CoachCategoryCtaModelCtaBodyField', value: unknown } | null };
 
@@ -7002,5 +8585,9 @@ type CompaniesSectionFragment = { __typename: 'CompaniesSectionRecord', id: stri
 type CompanyFragment = { __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } };
 
 type TestimonialFragment = { __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, logo: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } };
+
+type ExternalVideoFileFragment = { __typename?: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number };
+
+type InternalVideoFileFragment = { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } };
 
 }
