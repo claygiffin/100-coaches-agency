@@ -11,7 +11,7 @@ type Props = ComponentProps<'a'> & {
 export const DocumentLink = ({ data, iconType, ...props }: Props) => {
   return (
     <Link
-      href={`/documents/${data?.document?.id}/${data?.document?.filename}`}
+      href={`/api/doc/${data?.document?.id}/${data?.document?.filename}`}
       target={'_blank'}
       rel={'noopener'}
       {...props}

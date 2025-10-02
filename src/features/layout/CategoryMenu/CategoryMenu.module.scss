@@ -224,11 +224,6 @@
     stroke: currentColor;
     fill: transparent;
   }
-  @media (hover: hover) {
-    &:hover {
-      color: var(--color-gold);
-    }
-  }
   opacity: 0;
   transform: translate3d(9rem, 0, 0);
   animation-name: animateIn;
@@ -239,6 +234,11 @@
     opacity: 1;
     transform: translate3d(0, 0, 0);
     animation-name: linksOut;
+  }
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-gold);
+    }
   }
 }
 .allLink {

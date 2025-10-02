@@ -81,7 +81,7 @@ export const Form = ({
           if (action.__typename === 'OpenDocumentActionRecord') {
             const { document } = action
             window.open(
-              `/documents/${document.id}/${document.filename}`,
+              `/api/doc/${document.id}/${document.filename}`,
               '_blank'
             )
           }

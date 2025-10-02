@@ -22,7 +22,6 @@ import {
   deleteQueries,
   queriesReferencingCacheTags,
 } from '@/lib/datocms-database'
-import { docsToPublic } from '@/lib/docs-to-public'
 
 export const dynamic = 'force-dynamic' // defaults to auto
 
@@ -52,9 +51,6 @@ export async function POST(request: Request) {
       { status: 401 }
     )
   }
-
-  // Run script to download documents to public folder
-  await docsToPublic().catch(console.error)
 
   const data = (await request.json()) as CdaCacheTagsInvalidateWebhook
 
