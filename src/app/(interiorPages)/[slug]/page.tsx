@@ -1,8 +1,8 @@
-import type { Metadata, NextPage } from 'next'
 import { gql } from 'graphql-tag'
+import type { Metadata, NextPage } from 'next'
 
-import { datoRequest } from '@/lib/datocms-fetch'
 import { generateDatoCmsMetadata } from '@/features/seo'
+import { datoRequest } from '@/lib/datocms-fetch'
 
 type Props = {
   params: Promise<{
@@ -29,7 +29,7 @@ export async function generateStaticParams() {
 
 const query = gql`
   query InteriorPage($slug: String!) {
-    interiorPage (filter: { slug: { eq: $slug } }) {
+    interiorPage(filter: { slug: { eq: $slug } }) {
       _seoMetaTags {
         attributes
         content
@@ -43,25 +43,27 @@ export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
   const { slug } = await params
-  const { data: { interiorPage }} = await datoRequest<Queries.InteriorPageQuery>({
+  const {
+    data: { interiorPage },
+  } = await datoRequest<Queries.InteriorPageQuery>({
     query,
     variables: { slug },
   })
-  return generateDatoCmsMetadata(interiorPage?._seoMetaTags || [], { canonicalSlug: undefined })
+  return generateDatoCmsMetadata(interiorPage?._seoMetaTags || [], {
+    canonicalSlug: undefined,
+  })
 }
 
 const InteriorPage: NextPage<Props> = async ({ params }) => {
   const { slug } = await params
-  const { data: { interiorPage }} = await datoRequest<Queries.InteriorPageQuery>({
+  const {
+    data: { interiorPage },
+  } = await datoRequest<Queries.InteriorPageQuery>({
     query,
     variables: { slug },
   })
   if (!interiorPage) return
-  return (
-    <main>
-      
-    </main>
-  )
+  return <main></main>
 }
 
 export default InteriorPage

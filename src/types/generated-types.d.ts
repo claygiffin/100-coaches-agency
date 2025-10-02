@@ -7129,6 +7129,18 @@ type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage
         | { __typename: 'SendEmailActionRecord', recipients: string }
       > } } | null };
 
+type AllInteriorPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllInteriorPageQuery = { __typename?: 'Query', allInteriorPages: Array<{ __typename?: 'InteriorPageRecord', slug?: string | null }> };
+
+type InteriorPageQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: 'InteriorPageRecord', _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null };
+
 type AllArticleModalQueryVariables = Exact<{ [key: string]: never; }>;
 
 

@@ -75,7 +75,7 @@ const CardThumbnail: React.FC<CardThumbnailProps> = ({
 export const Card: React.FC<CardProps> = ({
   type,
   description,
-  date,
+  // date,
   slug,
   thumbnail,
 }) => {

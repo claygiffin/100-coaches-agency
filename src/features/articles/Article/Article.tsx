@@ -11,7 +11,6 @@ import {
   ExternalVideoPlayer,
   InternalVideoPlayer,
 } from '@/features/video-player'
-import { getVideoEmbedUrl } from '@/lib/video-embed-link'
 import { classes } from '@/utils/css'
 
 import { ArticleCarousel } from '../ArticleCarousel/ArticleCarousel'
