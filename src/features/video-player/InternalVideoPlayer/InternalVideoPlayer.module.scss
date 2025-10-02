@@ -9,7 +9,7 @@
 
 .positioner {
   z-index: 0;
-  @include aspectRatio(var(--aspect-ratio));
+  @include aspect-ratio(var(--aspect-ratio));
   .container[data-background-video='true'] & {
     pointer-events: none;
   }
