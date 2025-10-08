@@ -26,6 +26,7 @@ const nextConfig = {
         hostname: 'i.vimeocdn.com',
       },
     ],
+    qualities: [10, 50, 60, 70, 80, 90, 100],
   },
   sassOptions: {
     silenceDeprecations: [

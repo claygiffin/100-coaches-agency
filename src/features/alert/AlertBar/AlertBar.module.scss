@@ -7,8 +7,8 @@
   width: 100%;
   overflow: hidden;
   pointer-events: none;
+  z-index: 12;
   &[data-scrolled-up='true'] {
-    z-index: 12;
     pointer-events: all;
   }
 }

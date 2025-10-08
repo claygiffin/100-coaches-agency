@@ -25,7 +25,7 @@ export const NewsletterFragment = gql`
     body {
       value
       blocks {
-        ... on ImageRecord {
+        ... on ImageBlockRecord {
           id
           __typename
           image {

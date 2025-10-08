@@ -49,26 +49,49 @@
       color: var(--arrow-color-hover);
     }
   }
-  nav[data-variant='OVERLAY'] & {
-    width: var(--margin);
-    height: auto;
-    padding: 1em;
+  .nav[data-variant='OVERLAY'] & {
+    width: var(--nav-width);
+    height: calc(2 * var(--nav-width));
     box-sizing: border-box;
+    background-color: var(--button-bg-color);
+    transition: all 300ms ease;
+    &[data-back] {
+      border-top-right-radius: var(--nav-width);
+      border-bottom-right-radius: var(--nav-width);
+      padding: 1rem 1.5rem 1rem 0.5rem;
+    }
+    &[data-forward] {
+      border-top-left-radius: var(--nav-width);
+      border-bottom-left-radius: var(--nav-width);
+      padding: 1rem 0.5rem 1rem 1.5rem;
+    }
+    @media (hover: hover) {
+      &:hover:not([disabled]) {
+        background-color: var(--button-bg-color-hover);
+        transform: scale3d(1.05, 1.05, 1);
+        transition:
+          all 300ms ease,
+          transform 400ms var(--bezier-bounce);
+      }
+    }
+    &[disabled] {
+      background-color: var(--button-bg-color-disabled);
+    }
+
     @include media('<s') {
       padding: 0.75em;
     }
   }
-  nav[data-variant='ABOVE'] & {
+  .nav[data-variant='ABOVE'] & {
     font-size: var(--fs-36);
     width: 1em;
     height: 1em;
     padding: 0.25em;
     box-sizing: content-box;
-  }
-
-  &[data-back] {
-  }
-  &[data-forward] {
+    &[data-back] {
+    }
+    &[data-forward] {
+    }
   }
   &[disabled] {
     color: var(--arrow-color-disabled);

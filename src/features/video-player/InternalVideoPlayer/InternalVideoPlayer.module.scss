@@ -27,7 +27,7 @@
 }
 
 .player {
-  --media-accent-color: var(--controls-color, var(--color-red));
+  --media-accent-color: var(--controls-color, var(--color-gold));
   --media-object-fit: var(--object-fit, cover);
   --media-object-position: var(--object-position, 50% 50%);
   --seek-backward-button: none;
@@ -43,57 +43,48 @@
   &::part(controller) {
     background-color: var(--background-color, #fff);
   }
+  [data-is-playing='false'] &::part(play) {
+    opacity: 1;
+    pointer-events: all;
+  }
   .container[data-background-video='true'] & {
     --controls: none;
     &::part(title) {
       display: none;
     }
   }
-  .container[data-variant='CONTENT_BLOCK'] & {
-    [data-layout-orientation='TEXT_RIGHT'] & {
-      --padding-left: calc(var(--nav-width) + 1.5rem);
-    }
-    [data-layout-orientation='TEXT_LEFT'] & {
-      --padding-right: calc(var(--nav-width) + 1.5rem);
-    }
-    &::part(control-bar bottom),
-    &::part(time range) {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-      padding-left: var(--padding-left, 1.5rem);
-      padding-right: var(--padding-right, 1.5rem);
+  // .container[data-variant='CONTENT_BLOCK'] & {
+  //   [data-layout-orientation='TEXT_RIGHT'] & {
+  //     --padding-left: calc(var(--nav-width) + 1.5rem);
+  //   }
+  //   [data-layout-orientation='TEXT_LEFT'] & {
+  //     --padding-right: calc(var(--nav-width) + 1.5rem);
+  //   }
+  //   &::part(control-bar bottom),
+  //   &::part(time range) {
+  //     padding-top: 0.5rem;
+  //     padding-bottom: 0.5rem;
+  //     padding-left: var(--padding-left, 1.5rem);
+  //     padding-right: var(--padding-right, 1.5rem);
 
-      --media-control-padding: 6px;
-      --media-control-height: 18px;
-      --media-tooltip-container-margin: 18px;
-      // padding-left: 1rem;
-      // padding-right: 1rem;
-    }
-    &::part(control-bar bottom) {
-      padding-bottom: 1.25rem;
-    }
-    &::part(title) {
-      font-family: var(--ff-sans-serif);
-      font-size: var(--fs-18);
-      font-weight: 400;
-      // font-style: italic;
-      padding: 1em 1.5rem;
-      height: auto;
-    }
-  }
-  .container[data-variant='TOUR'][data-is-playing='false'] & {
-    &::part(play button) {
-      opacity: 1;
-    }
-    &::part(control-bar bottom),
-    &::part(time range),
-    &::part(top title) {
-      opacity: 0;
-    }
-    &::part(play button) {
-      pointer-events: all;
-    }
-  }
+  //     --media-control-padding: 6px;
+  //     --media-control-height: 18px;
+  //     --media-tooltip-container-margin: 18px;
+  //     // padding-left: 1rem;
+  //     // padding-right: 1rem;
+  //   }
+  //   &::part(control-bar bottom) {
+  //     padding-bottom: 1.25rem;
+  //   }
+  //   &::part(title) {
+  //     font-family: var(--ff-sans-serif);
+  //     font-size: var(--fs-18);
+  //     font-weight: 400;
+  //     // font-style: italic;
+  //     padding: 1em 1.5rem;
+  //     height: auto;
+  //   }
+  // }
 }
 
 .posterWrapper {

@@ -1,0 +1,39 @@
+@use '@/theme/mixins' as *;
+.section {
+  position: relative;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  min-height: 25vw;
+}
+.imageContainer {
+  @include absolute-fill;
+}
+.image {
+  @include absolute-fill;
+  &:after {
+    content: '';
+    @include absolute-fill;
+    background: #000;
+    opacity: 0.5;
+  }
+}
+.heading {
+  position: relative;
+  font-size: var(--fs-48);
+  font-family: var(--ff-body);
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 0.125em #00000055;
+  display: grid;
+  justify-items: center;
+  > span {
+    display: block;
+    margin: 0.5em 0 0.625em;
+  }
+}
+.flourish {
+  font-size: 1rem;
+  color: var(--color-gold);
+}

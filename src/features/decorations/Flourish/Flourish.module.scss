@@ -1,0 +1,19 @@
+.flourish {
+  font-size: var(--flourish-size, 0.75rem);
+  color: var(--flourish-color);
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid currentColor;
+  width: var(--flourish-width, 12em);
+  div {
+    height: 1em;
+    width: 2em;
+    margin-bottom: -1px;
+    background-color: currentColor;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+  }
+  &[data-flip] {
+    transform: scaleY(-1);
+  }
+}

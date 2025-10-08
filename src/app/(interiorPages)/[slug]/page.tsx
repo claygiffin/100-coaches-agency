@@ -1,6 +1,16 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 
+import {
+  ContentSection,
+  ContentSectionFragment,
+  MediaSection,
+  MediaSectionFragment,
+  PageHero,
+  PageHeroFragment,
+  TestimonialSection,
+  TestimonialSectionFragment,
+} from '@/features/page-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
@@ -30,6 +40,20 @@ export async function generateStaticParams() {
 const query = gql`
   query InteriorPage($slug: String!) {
     interiorPage(filter: { slug: { eq: $slug } }) {
+      hero {
+        ...PageHero
+      }
+      content {
+        ... on ContentSectionRecord {
+          ...ContentSection
+        }
+        ... on MediaSectionRecord {
+          ...MediaSection
+        }
+        ... on TestimonialSectionRecord {
+          ...TestimonialSection
+        }
+      }
       _seoMetaTags {
         attributes
         content
@@ -37,6 +61,10 @@ const query = gql`
       }
     }
   }
+  ${PageHeroFragment}
+  ${ContentSectionFragment}
+  ${MediaSectionFragment}
+  ${TestimonialSectionFragment}
 `
 
 export const generateMetadata = async ({
@@ -50,7 +78,7 @@ export const generateMetadata = async ({
     variables: { slug },
   })
   return generateDatoCmsMetadata(interiorPage?._seoMetaTags || [], {
-    canonicalSlug: undefined,
+    canonicalSlug: slug,
   })
 }
 
@@ -63,7 +91,39 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
     variables: { slug },
   })
   if (!interiorPage) return
-  return <main></main>
+  return (
+    <main>
+      <PageHero data={interiorPage.hero} />
+      {interiorPage.content.map(section => {
+        switch (section.__typename) {
+          case 'ContentSectionRecord': {
+            return (
+              <ContentSection
+                data={section}
+                key={section.id}
+              />
+            )
+          }
+          case 'MediaSectionRecord': {
+            return (
+              <MediaSection
+                data={section}
+                key={section.id}
+              />
+            )
+          }
+          case 'TestimonialSectionRecord': {
+            return (
+              <TestimonialSection
+                data={section}
+                key={section.id}
+              />
+            )
+          }
+        }
+      })}
+    </main>
+  )
 }
 
 export default InteriorPage

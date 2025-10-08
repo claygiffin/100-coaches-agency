@@ -10,6 +10,13 @@ export const TestimonialFragment = gql`
       value
     }
     attribution
+    headshot {
+      responsiveImage(
+        imgixParams: { ar: "1:1", fit: crop, crop: [focalpoint] }
+      ) {
+        ...ResponsiveImage
+      }
+    }
     logo {
       format
       url
@@ -19,6 +26,9 @@ export const TestimonialFragment = gql`
       responsiveImage {
         ...ResponsiveImage
       }
+    }
+    logoBackgroundColor {
+      hex
     }
   }
   ${ResponsiveImageFragment}

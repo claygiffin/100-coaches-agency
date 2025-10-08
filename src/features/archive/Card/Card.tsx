@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -20,21 +21,20 @@ interface CardThumbnailProps {
   type?: string
   slug: string
   thumbnail: any
-  onClick: () => void
 }
 
 const CardThumbnail: React.FC<CardThumbnailProps> = ({
   type,
   slug,
   thumbnail,
-  onClick,
 }) => {
   const isVideo = type === 'Video'
 
   return (
-    <div
+    <Link
       className={styles.imagePlaceholder}
-      onClick={onClick}
+      href={slug}
+      scroll={slug.includes('/books/')}
     >
       {isVideo ? (
         <div className={styles.videoThumbnailWrapper}>
@@ -48,7 +48,7 @@ const CardThumbnail: React.FC<CardThumbnailProps> = ({
             <Image
               className={styles.videoThumbnail}
               src={thumbnail}
-              alt={`video-${slug}`}
+              alt={''}
               width={320}
               height={180}
             />
@@ -68,7 +68,7 @@ const CardThumbnail: React.FC<CardThumbnailProps> = ({
           focalPoint={thumbnail?.focalPoint}
         />
       )}
-    </div>
+    </Link>
   )
 }
 
@@ -79,24 +79,18 @@ export const Card: React.FC<CardProps> = ({
   slug,
   thumbnail,
 }) => {
-  const router = useRouter()
-
-  const handleClick = () => {
+  const getSlug = () => {
     switch (type) {
       case 'Book':
-        router.push(`/books/${slug}`)
-        break
+        return `/books/${slug}`
       case 'Newsletter':
-        router.push(`/newsletters/${slug}`, { scroll: false })
-        break
+        return `/newsletters/${slug}`
       case 'Article':
-        router.push(`/articles/${slug}`, { scroll: false })
-        break
+        return `/articles/${slug}`
       case 'Video':
-        router.push(`/videos/${slug}`, { scroll: false })
-        break
+        return `/videos/${slug}`
       default:
-        break
+        return `/`
     }
   }
 
@@ -104,9 +98,9 @@ export const Card: React.FC<CardProps> = ({
     <div className={styles.card}>
       <CardThumbnail
         type={type}
-        slug={slug}
         thumbnail={thumbnail}
-        onClick={handleClick}
+        // onClick={handleClick}
+        slug={getSlug()}
       />
       <div className={styles.content}>
         <div className={styles.type}>{type}</div>

@@ -25,7 +25,7 @@ export const VideoFragment = gql`
     body {
       value
       blocks {
-        ... on ImageRecord {
+        ... on ImageBlockRecord {
           id
           __typename
           image {

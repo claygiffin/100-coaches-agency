@@ -1,0 +1,9 @@
+.list {
+  &:before {
+    content: attr(aria-label);
+    display: block;
+  }
+  list-style: none;
+  margin: 1em 0;
+  padding: 0;
+}

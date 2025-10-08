@@ -1,0 +1,59 @@
+.section {
+  display: grid;
+  padding: var(--row-72) var(--margin);
+  background: var(--background);
+  color: var(--text-color);
+  &[data-color-scheme='WHITE'] {
+    --background: #fff;
+    --text-color: var(--color-gray10);
+    --caption-bg-color: var(--color-gray95);
+  }
+  &[data-color-scheme='LIGHT'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-gray95),
+      var(--color-gray90)
+    );
+    --text-color: var(--color-gray10);
+    --caption-bg-color: var(--color-gray85);
+  }
+  &[data-color-scheme='DARK'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-gray30),
+      var(--color-gray10)
+    );
+    --text-color: #fff;
+    --caption-bg-color: var(--color-gray30);
+  }
+  &[data-color-scheme='GOLD'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-goldTint2),
+      var(--color-goldShade1)
+    );
+    --text-color: var(--color-brownText);
+    --caption-bg-color: var(--color-gold);
+  }
+  &:last-child {
+    padding-bottom: calc(var(--row-72) + 5vw);
+  }
+}
+.carousel {
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: calc(50% + 1rem);
+    height: calc(50% + 1rem);
+    background-color: var(--caption-bg-color);
+  }
+  &:before {
+    top: -1rem;
+    left: -1rem;
+  }
+  &:after {
+    bottom: -1rem;
+    right: -1rem;
+  }
+}

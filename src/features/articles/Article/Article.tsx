@@ -68,7 +68,7 @@ export const Article = ({ article, layout }: PropTypes) => {
         <div className={styles.body}>
           <StructuredText
             renderBlock={({ record }) => {
-              if (record.__typename === 'ImageRecord') {
+              if (record.__typename === 'ImageBlockRecord') {
                 return (
                   <figure className={styles.fig}>
                     <DatoImage data={record.image.responsiveImage} />

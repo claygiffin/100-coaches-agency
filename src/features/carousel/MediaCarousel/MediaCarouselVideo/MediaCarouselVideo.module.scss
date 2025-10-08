@@ -1,0 +1,104 @@
+@use '@/theme/mixins' as *;
+.container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: calc(var(--page-width, 100vw) - 2 * var(--margin));
+  background-color: var(--color-gray95);
+  clip-path: inset(0 0 0 0);
+  @include aspect-ratio(var(--aspect-ratio));
+  [data-is-single='true'] & {
+    display: block;
+    margin: 1.75em var(--margin);
+    width: fit-content;
+    aspect-ratio: auto;
+  }
+  &[data-orientation='PORTRAIT'] {
+    width: auto;
+    height: 40em;
+  }
+  [data-variant='CONTENT_SECTION'] & {
+    width: var(--container-width);
+    height: 100%;
+    aspect-ratio: auto;
+    margin: 0;
+    --background-color: #000;
+  }
+}
+.video {
+  height: 100%;
+  opacity: 0.125;
+  transition: opacity 500ms ease;
+  [data-is-single='true'] & {
+    background-color: transparent;
+  }
+  .container[data-in-view='true'] & {
+    opacity: 1;
+  }
+  [data-variant='CONTENT_SECTION'] & {
+    position: absolute;
+    width: 100%;
+    &[data-is-playing='true'] {
+      --object-fit: contain;
+    }
+  }
+}
+.internal {
+}
+.external {
+  // .container[data-is-single='false'][data-has-played='true']:has(
+  //     youtube-video
+  //   )
+  //   & {
+  //   background-color: var(--border-end-color);
+  //   padding-bottom: calc(2rem + 1.5 * var(--fs-30));
+  // }
+  [data-variant='CONTENT_SECTION'] & {
+    position: absolute;
+    width: 100%;
+  }
+}
+.caption {
+  position: absolute;
+  z-index: 2;
+  bottom: 1rem;
+  line-height: 1.25;
+  color: #fff;
+  font-family: var(--ff-sans-serif);
+  font-style: italic;
+  font-size: var(--fs-16);
+  opacity: 0;
+  transition:
+    opacity 1200ms ease,
+    transform 900ms var(--bezier-ease-out);
+  margin: 0 0 var(--inset);
+  padding: 0.5em 1.5em 0.667em 1.25em;
+  border-top: 2px solid var(--color-red);
+  background: #{setAlpha('gray10', 0.85)};
+  max-width: calc(100% - 2rem - var(--nav-width));
+  min-height: calc(1.5 * var(--fs-30));
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  pointer-events: none;
+  --caption-offset: 1rem;
+  transform: translate3d(-6rem, 0, 0);
+  .container[data-is-single='true'] & {
+    --caption-offset: 0px;
+    --single-padding: 1.5em;
+  }
+  .container[data-in-view='true'][data-has-played='false'] &,
+  .container[data-in-view='true'][data-is-single='false']:has(
+      youtube-video
+    )
+    & {
+    & {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+      pointer-events: all;
+    }
+  }
+  @include media('<ms') {
+    bottom: 1.5rem;
+  }
+}

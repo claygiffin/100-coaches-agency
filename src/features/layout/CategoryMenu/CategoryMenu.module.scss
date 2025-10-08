@@ -36,7 +36,7 @@
   color: #fff;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  z-index: 11;
+  z-index: 13;
   @include media('<ms') {
     grid-template-columns: 1fr;
     overflow: auto;

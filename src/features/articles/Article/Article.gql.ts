@@ -50,7 +50,7 @@ export const ArticleCarouselFragment = gql`
     id
     __typename
     images {
-      ... on ImageRecord {
+      ... on ImageBlockRecord {
         id
         __typename
         image {
@@ -137,7 +137,7 @@ export const ArticleFragment = gql`
     body {
       value
       blocks {
-        ... on ImageRecord {
+        ... on ImageBlockRecord {
           id
           __typename
           image {

@@ -1,20 +1,39 @@
 @use '@/theme/mixins' as *;
 
+.container {
+  position: relative;
+  display: grid;
+}
 .carousel {
   grid-column: 1 / -1;
   width: 100vw;
+  transition: height 500ms ease;
   --gtr: var(--gtr-36);
   --margin: calc(var(--gtr-108) * 0.75);
-  --slide-width: #{widthInCols($count: 9)};
+  --slide-width: #{widthInCols($count: 11)};
+  height: var(--height);
   @include media('<ms') {
-    --slide-width: #{widthInCols($count: 11)};
+    --margin: var(--gtr-54);
   }
-  @include media('<s') {
+  @include media('<ms') {
     --slide-width: #{widthInCols($count: 12)};
   }
-  --arrow-color: var(--color-gray20);
-  --arrow-color-hover: var(--color-goldShade1);
-  --arrow-color-disabled: var(--color-gray85);
+  &[data-is-single] {
+    --slide-width: #{widthInCols($count: 12)};
+  }
 }
-.nav {
+.carouselNav {
+  --nav-width: var(--fs-48);
+  --arrow-color: #fff;
+  --arrow-color-hover: #fff;
+  --arrow-color-disabled: #ffffff11;
+  --button-bg-color: var(--color-gold);
+  --button-bg-color-disabled: #88888822;
+  --button-bg-color-hover: var(--color-goldShade1);
+  .container[data-is-single='true'] & {
+    display: none;
+  }
+  @include media('<ms') {
+    --stroke-width: 1.5;
+  }
 }

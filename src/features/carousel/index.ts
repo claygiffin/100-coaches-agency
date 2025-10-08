@@ -3,3 +3,6 @@
  */
 
 export * from './Carousel/Carousel'
+export * from './MediaCarousel/MediaCarousel.gql'
+export * from './MediaCarousel/MediaCarousel'
+export * from './MediaCarousel/MediaCarouselImage/MediaCarouselImage.gql'

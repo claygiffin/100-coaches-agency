@@ -24,6 +24,7 @@
     "@libsql/client": "0.15",
     "@next/third-parties": "^15.5.4",
     "date-fns": "^4.1.0",
+    "datocms-structured-text-to-plain-text": "^5.1.6",
     "datocms-structured-text-utils": "^5.1.4",
     "graphql-tag": "^2.12.6",
     "html-react-parser": "^5.2.6",

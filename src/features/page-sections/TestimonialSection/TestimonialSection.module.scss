@@ -1,0 +1,44 @@
+.section {
+  display: grid;
+  padding: var(--row-72) 0;
+  background: var(--background);
+  &[data-color-scheme='WHITE'] {
+    --background: #fff;
+    --text-color: var(--color-gray10);
+    --testimonial-bg-color: var(--color-gray95);
+    --testimonial-text-color: var(--gray30);
+  }
+  &[data-color-scheme='LIGHT'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-gray95),
+      var(--color-gray90)
+    );
+    --text-color: var(--color-gray10);
+    --testimonial-bg-color: var(--color-gray85);
+    --testimonial-text-color: var(--gray30);
+  }
+  &[data-color-scheme='DARK'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-gray30),
+      var(--color-gray10)
+    );
+    --text-color: #fff;
+    --testimonial-bg-color: var(--color-gray30);
+    --testimonial-text-color: #fff;
+  }
+  &[data-color-scheme='GOLD'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-goldTint1),
+      var(--color-goldShade2)
+    );
+    --text-color: var(--color-brownText);
+    --testimonial-bg-color: var(--color-goldTint2);
+    --testimonial-text-color: var(--color-brownText);
+  }
+  &:last-child {
+    padding-bottom: calc(var(--row-72) + 5vw);
+  }
+}
