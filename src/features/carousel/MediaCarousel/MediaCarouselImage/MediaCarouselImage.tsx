@@ -1,7 +1,7 @@
 import { type ComponentProps, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-import { DatoImage, DatoImageFocused } from '@/features/dato-image'
+import { DatoImageFocused } from '@/features/dato-image'
 import { useElementRect } from '@/hooks'
 
 import styles from './MediaCarouselImage.module.scss'

@@ -1,6 +1,6 @@
 'use client'
 
-import { type ComponentProps, useRef, useState } from 'react'
+import { type ComponentProps, useState } from 'react'
 
 import { Carousel } from '@/features/carousel'
 import { Testimonial } from '@/features/testimonials'
@@ -21,13 +21,10 @@ export const TestimonialCarousel = ({
   ...props
 }: Props) => {
   const [carouselHeight, setCarouselHeight] = useState<number>()
-  const [currentSlideWidth, setCurrentSlideWidth] = useState<number>()
   const [containerRef, setContainerRef] =
     useState<HTMLDivElement | null>(null)
 
   const containerWidth = useElementWidth(containerRef)
-  const [firstSlideWidth, setFirstSlideWidth] = useState<number>()
-  const [lastSlideWidth, setLastSlideWidth] = useState<number>()
   return (
     <div
       className={classes(styles.container, className)}
@@ -49,15 +46,6 @@ export const TestimonialCarousel = ({
             : undefined,
           '--container-width': containerWidth
             ? containerWidth + 'px'
-            : undefined,
-          '--current-slide-width': currentSlideWidth
-            ? currentSlideWidth + 'px'
-            : undefined,
-          '--first-slide-width': firstSlideWidth
-            ? firstSlideWidth + 'px'
-            : undefined,
-          '--last-slide-width': lastSlideWidth
-            ? lastSlideWidth + 'px'
             : undefined,
         }}
         {...props}

@@ -1,6 +1,6 @@
 import { renderNodeRule } from 'datocms-structured-text-to-plain-text'
 import { isParagraph } from 'datocms-structured-text-utils'
-import { type ComponentProps, Fragment } from 'react'
+import { type ComponentProps } from 'react'
 
 import { MediaCarousel } from '@/features/carousel'
 import { DatoStructuredText } from '@/features/dato-structured-text'

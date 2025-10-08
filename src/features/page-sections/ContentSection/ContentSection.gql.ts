@@ -1,9 +1,5 @@
 import { gql } from 'graphql-tag'
 
-import {
-  ExternalVideoFragment,
-  InternalVideoFragment,
-} from '@/features/articles'
 import { MediaCarouselFragment } from '@/features/carousel'
 import {
   AccordionFragment,
