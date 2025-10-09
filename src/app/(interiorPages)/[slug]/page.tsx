@@ -4,6 +4,8 @@ import type { Metadata, NextPage } from 'next'
 import {
   ContentSection,
   ContentSectionFragment,
+  CtaBar,
+  CtaBarFragment,
   MediaSection,
   MediaSectionFragment,
   PageHero,
@@ -53,6 +55,9 @@ const query = gql`
         ... on TestimonialSectionRecord {
           ...TestimonialSection
         }
+        ... on CtaBarRecord {
+          ...CtaBar
+        }
       }
       _seoMetaTags {
         attributes
@@ -65,6 +70,7 @@ const query = gql`
   ${ContentSectionFragment}
   ${MediaSectionFragment}
   ${TestimonialSectionFragment}
+  ${CtaBarFragment}
 `
 
 export const generateMetadata = async ({
@@ -115,6 +121,14 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
           case 'TestimonialSectionRecord': {
             return (
               <TestimonialSection
+                data={section}
+                key={section.id}
+              />
+            )
+          }
+          case 'CtaBarRecord': {
+            return (
+              <CtaBar
                 data={section}
                 key={section.id}
               />
