@@ -1,0 +1,22 @@
+.section {
+  display: flex;
+  background-color: var(--color-brownText);
+  align-items: center;
+  column-gap: 1em;
+  &:before,
+  &:after {
+    content: '';
+    flex: 1;
+    border-top: 2px solid var(--color-gold);
+  }
+}
+.heading {
+  color: #fff;
+  font-size: var(--fs-30);
+  font-family: var(--ff-body);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1.125;
+  text-align: center;
+  margin: 0.875em 0;
+}

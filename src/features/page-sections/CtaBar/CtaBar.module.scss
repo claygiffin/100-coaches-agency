@@ -21,6 +21,21 @@
     font-family: var(--ff-body);
     font-weight: 450;
   }
+  p {
+    margin: 0.5em 0;
+    line-height: 1.333;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &:not(:has(h2)) {
+    p {
+      font-size: var(--fs-21);
+    }
+  }
 }
 .linkArea {
 }

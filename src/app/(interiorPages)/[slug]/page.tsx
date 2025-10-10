@@ -2,6 +2,8 @@ import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 
 import {
+  BioSection,
+  BioSectionFragment,
   ContentSection,
   ContentSectionFragment,
   CtaBar,
@@ -10,6 +12,8 @@ import {
   MediaSectionFragment,
   PageHero,
   PageHeroFragment,
+  SectionDivider,
+  SectionDividerFragment,
   TestimonialSection,
   TestimonialSectionFragment,
 } from '@/features/page-sections'
@@ -58,6 +62,12 @@ const query = gql`
         ... on CtaBarRecord {
           ...CtaBar
         }
+        ... on BioSectionRecord {
+          ...BioSection
+        }
+        ... on SectionDividerRecord {
+          ...SectionDivider
+        }
       }
       _seoMetaTags {
         attributes
@@ -71,6 +81,8 @@ const query = gql`
   ${MediaSectionFragment}
   ${TestimonialSectionFragment}
   ${CtaBarFragment}
+  ${BioSectionFragment}
+  ${SectionDividerFragment}
 `
 
 export const generateMetadata = async ({
@@ -129,6 +141,22 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
           case 'CtaBarRecord': {
             return (
               <CtaBar
+                data={section}
+                key={section.id}
+              />
+            )
+          }
+          case 'BioSectionRecord': {
+            return (
+              <BioSection
+                data={section}
+                key={section.id}
+              />
+            )
+          }
+          case 'SectionDividerRecord': {
+            return (
+              <SectionDivider
                 data={section}
                 key={section.id}
               />

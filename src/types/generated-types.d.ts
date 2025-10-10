@@ -811,6 +811,49 @@ type AuthorRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+type BioSectionModelBodyBlocksField = AccordionRecord | ButtonRecord | LinkListRecord;
+
+type BioSectionModelBodyField = {
+  __typename?: 'BioSectionModelBodyField';
+  blocks: Array<BioSectionModelBodyBlocksField>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Block of type Bio Section (bio_section) */
+type BioSectionRecord = RecordInterface & {
+  __typename?: 'BioSectionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  body: BioSectionModelBodyField;
+  colorScheme: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  heading: Scalars['String']['output'];
+  headshot: ImageFileField;
+  id: Scalars['ItemId']['output'];
+  layout: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Bio Section (bio_section) */
+type BioSectionRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type BookModelDescriptionBodyField = {
   __typename?: 'BookModelDescriptionBodyField';
   blocks: Array<Scalars['String']['output']>;
@@ -4434,7 +4477,7 @@ type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
-type InteriorPageModelContentField = ContentSectionRecord | CtaBarRecord | MediaSectionRecord | TestimonialSectionRecord;
+type InteriorPageModelContentField = BioSectionRecord | ContentSectionRecord | CtaBarRecord | MediaSectionRecord | SectionDividerRecord | TestimonialSectionRecord;
 
 type InteriorPageModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<InteriorPageModelFilter>>>;
@@ -5926,6 +5969,34 @@ type SWCategoryRecorddescriptionArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+/** Block of type Section Divider (section_divider) */
+type SectionDividerRecord = RecordInterface & {
+  __typename?: 'SectionDividerRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  heading: Scalars['String']['output'];
+  id: Scalars['ItemId']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Section Divider (section_divider) */
+type SectionDividerRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Block of type Send Email (send_email_action) */
 type SendEmailActionRecord = RecordInterface & {
   __typename?: 'SendEmailActionRecord';
@@ -7250,6 +7321,41 @@ type InteriorPageQueryVariables = Exact<{
 
 
 type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: 'InteriorPageRecord', hero: { __typename: 'PageHeroRecord', id: string, heading: string, backgroundImage: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } }, content: Array<
+      | { __typename: 'BioSectionRecord', id: string, layout: string, colorScheme: string, heading: string, title?: string | null, body: { __typename?: 'BioSectionModelBodyField', value: unknown, blocks: Array<
+            | { __typename: 'AccordionRecord', id: string, items: Array<{ __typename: 'AccordionItemRecord', id: string, heading: string, body: { __typename?: 'AccordionItemModelBodyField', value: unknown } }> }
+            | { __typename: 'ButtonRecord', id: string, button:
+                | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+                | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+                | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+                | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+                | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+                | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                    | { __typename: 'AboutPageRecord', slug: string }
+                    | { __typename: 'ArchivePageRecord', slug: string }
+                    | { __typename: 'ArticlesPageRecord', slug: string }
+                    | { __typename: 'CoachCategoryRecord', slug: string }
+                    | { __typename: 'ContactPageRecord', slug: string }
+                    | { __typename: 'HomePageRecord' }
+                    | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+                   }
+               }
+            | { __typename: 'LinkListRecord', id: string, heading?: string | null, links: Array<
+                | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+                | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+                | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+                | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+                | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+                | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                    | { __typename: 'AboutPageRecord', slug: string }
+                    | { __typename: 'ArchivePageRecord', slug: string }
+                    | { __typename: 'ArticlesPageRecord', slug: string }
+                    | { __typename: 'CoachCategoryRecord', slug: string }
+                    | { __typename: 'ContactPageRecord', slug: string }
+                    | { __typename: 'HomePageRecord' }
+                    | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+                   }
+              > }
+          > }, headshot: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
       | { __typename: 'ContentSectionRecord', id: string, layout: string, colorScheme: string, heading: string, subheading?: { __typename?: 'ContentSectionModelSubheadingField', value: unknown } | null, body: { __typename?: 'ContentSectionModelBodyField', value: unknown, blocks: Array<
             | { __typename: 'AccordionRecord', id: string, items: Array<{ __typename: 'AccordionItemRecord', id: string, heading: string, body: { __typename?: 'AccordionItemModelBodyField', value: unknown } }> }
             | { __typename: 'ButtonRecord', id: string, button:
@@ -7309,6 +7415,7 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
             | { __typename: 'ImageBlockRecord', id: string, image: { __typename?: 'ImageFileField', width: number, height: number, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } }
             | { __typename: 'InternalVideoRecord', id: string, video: { __typename: 'VideoFileField', id: string, video: { __typename?: 'UploadVideoField', muxPlaybackId: string, title?: string | null, width: number, height: number, thumbnailUrl: string } } }
           > } }
+      | { __typename: 'SectionDividerRecord', id: string, heading: string }
       | { __typename: 'TestimonialSectionRecord', id: string, colorScheme: string, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, headshot?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } | null, logo?: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, logoBackgroundColor?: { __typename?: 'ColorField', hex: string } | null }> }
     >, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null };
 
@@ -8769,6 +8876,42 @@ type AboutServicesFragment = { __typename?: 'AboutPageRecord', servicesHeading: 
          }
     > }> };
 
+type BioSectionFragment = { __typename: 'BioSectionRecord', id: string, layout: string, colorScheme: string, heading: string, title?: string | null, body: { __typename?: 'BioSectionModelBodyField', value: unknown, blocks: Array<
+      | { __typename: 'AccordionRecord', id: string, items: Array<{ __typename: 'AccordionItemRecord', id: string, heading: string, body: { __typename?: 'AccordionItemModelBodyField', value: unknown } }> }
+      | { __typename: 'ButtonRecord', id: string, button:
+          | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+          | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+          | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+          | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+          | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+          | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+              | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'ArchivePageRecord', slug: string }
+              | { __typename: 'ArticlesPageRecord', slug: string }
+              | { __typename: 'CoachCategoryRecord', slug: string }
+              | { __typename: 'ContactPageRecord', slug: string }
+              | { __typename: 'HomePageRecord' }
+              | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+             }
+         }
+      | { __typename: 'LinkListRecord', id: string, heading?: string | null, links: Array<
+          | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+          | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+          | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+          | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+          | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+          | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+              | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'ArchivePageRecord', slug: string }
+              | { __typename: 'ArticlesPageRecord', slug: string }
+              | { __typename: 'CoachCategoryRecord', slug: string }
+              | { __typename: 'ContactPageRecord', slug: string }
+              | { __typename: 'HomePageRecord' }
+              | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+             }
+        > }
+    > }, headshot: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } };
+
 type CoachCategoryCtaFragment = { __typename: 'CoachCategoryCtaRecord', id: string, ctaHeading: string, ctaLinkText?: string | null, ctaBody?: { __typename?: 'CoachCategoryCtaModelCtaBodyField', value: unknown } | null };
 
 type CompaniesSectionFragment = { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
@@ -8838,6 +8981,8 @@ type MediaSectionFragment = { __typename: 'MediaSectionRecord', id: string, colo
     > } };
 
 type PageHeroFragment = { __typename: 'PageHeroRecord', id: string, heading: string, backgroundImage: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } };
+
+type SectionDividerFragment = { __typename: 'SectionDividerRecord', id: string, heading: string };
 
 type TestimonialSectionFragment = { __typename: 'TestimonialSectionRecord', id: string, colorScheme: string, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, headshot?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } | null, logo?: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, logoBackgroundColor?: { __typename?: 'ColorField', hex: string } | null }> };
 
