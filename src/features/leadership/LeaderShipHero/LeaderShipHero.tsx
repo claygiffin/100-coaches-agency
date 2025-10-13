@@ -39,9 +39,11 @@ export const LeaderShipHero = ({ data, ...props }: Props) => {
         </div>
       </AnimateIn>
       <div className={styles.links}>
-        <span className={styles.linksLabel}>
-          {data?.heroLinksLabel}
-        </span>
+        {data?.heroLinksLabel && (
+          <span className={styles.linksLabel}>
+            {data.heroLinksLabel}
+          </span>
+        )}
         {data?.heroLinks.map(link => {
           return (
             <DatoLink
