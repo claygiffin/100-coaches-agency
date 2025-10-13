@@ -8,10 +8,11 @@ $breakpoints: (
 );
 
 $colors: (
-  'gold': #e8b24c,
-  'goldShade1': #df9b35,
-  'goldShade2': #c67c27,
-  'goldShade3': #a66427,
+  'gold': hsl(39, 77%, 60%),
+  'goldShade1': hsl(36, 73%, 54%),
+  'goldShade2': hsl(32, 67%, 46%),
+  'goldShade3': hsl(29, 62%, 40%),
+  'goldShade4': hsl(29, 62%, 30%),
   'goldTint1': #f5bd5d,
   'goldTint2': #ffcc73,
   'goldTint3': #ffda99,

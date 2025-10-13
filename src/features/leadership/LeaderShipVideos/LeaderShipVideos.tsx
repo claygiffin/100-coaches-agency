@@ -70,7 +70,6 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                       <div className={styles.playWrapper}>
                         <div className={styles.play}></div>
                       </div>
-                      <h2>{video?.title}</h2>
                     </div>
                   </div>
                   <div className={styles.description}>
@@ -103,7 +102,6 @@ export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
                           <div className={styles.playWrapper}>
                             <div className={styles.play}></div>
                           </div>
-                          <h2>{video?.title}</h2>
                         </div>
                       </div>
                     </div>
