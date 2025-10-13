@@ -25,6 +25,12 @@ export const PageLinkFragment = gql`
       ... on ArchivePageRecord {
         slug
       }
+      ... on AdvisorsPageRecord {
+        slug
+      }
+      ... on InteriorPageRecord {
+        slug
+      }
     }
   }
 `

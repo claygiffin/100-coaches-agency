@@ -4547,7 +4547,7 @@ type InteriorPageRecord = RecordInterface & {
   id: Scalars['ItemId']['output'];
   pageTitle?: Maybe<Scalars['String']['output']>;
   seo?: Maybe<SeoField>;
-  slug?: Maybe<Scalars['String']['output']>;
+  slug: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
 };
 
@@ -5008,7 +5008,7 @@ type PageHeroRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-type PageLinkModelPageField = AboutPageRecord | ArchivePageRecord | ArticlesPageRecord | CoachCategoryRecord | ContactPageRecord | HomePageRecord | ThoughtLeadershipPageRecord;
+type PageLinkModelPageField = AboutPageRecord | AdvisorsPageRecord | ArchivePageRecord | ArticlesPageRecord | CoachCategoryRecord | ContactPageRecord | HomePageRecord | InteriorPageRecord | ThoughtLeadershipPageRecord;
 
 /** Block of type Page Link (page_link) */
 type PageLinkRecord = RecordInterface & {
@@ -7247,11 +7247,13 @@ type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage
         | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
         | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
             | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'AdvisorsPageRecord', slug: string }
             | { __typename: 'ArchivePageRecord', slug: string }
             | { __typename: 'ArticlesPageRecord', slug: string }
             | { __typename: 'CoachCategoryRecord', slug: string }
             | { __typename: 'ContactPageRecord', slug: string }
             | { __typename: 'HomePageRecord' }
+            | { __typename: 'InteriorPageRecord', slug: string }
             | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
            }
        | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> }, thoughtLeadershipItems: Array<{ __typename: 'ThoughtLeadershipItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipItemModelBodyField', value: unknown } | null, link?:
@@ -7261,11 +7263,13 @@ type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage
         | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
         | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
             | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'AdvisorsPageRecord', slug: string }
             | { __typename: 'ArchivePageRecord', slug: string }
             | { __typename: 'ArticlesPageRecord', slug: string }
             | { __typename: 'CoachCategoryRecord', slug: string }
             | { __typename: 'ContactPageRecord', slug: string }
             | { __typename: 'HomePageRecord' }
+            | { __typename: 'InteriorPageRecord', slug: string }
             | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
            }
        | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }>, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroImages: Array<{ __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }>, promiseBody?: { __typename?: 'HomePageModelPromiseBodyField', value: unknown } | null, promiseCta:
@@ -7273,11 +7277,13 @@ type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage
       | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
     , marshallBody?: { __typename?: 'HomePageModelMarshallBodyField', value: unknown } | null, marshallCta?:
@@ -7285,20 +7291,24 @@ type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage
       | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, resultsBody?: { __typename?: 'HomePageModelResultsBodyField', value: unknown } | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactLink?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
         | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
@@ -7313,7 +7323,7 @@ type HomePageQuery = { __typename?: 'Query', homePage?: { __typename?: 'HomePage
 type AllInteriorPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AllInteriorPageQuery = { __typename?: 'Query', allInteriorPages: Array<{ __typename?: 'InteriorPageRecord', slug?: string | null }> };
+type AllInteriorPageQuery = { __typename?: 'Query', allInteriorPages: Array<{ __typename?: 'InteriorPageRecord', slug: string }> };
 
 type InteriorPageQueryVariables = Exact<{
   slug: Scalars['String']['input'];
@@ -7331,11 +7341,13 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
                 | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
                 | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                     | { __typename: 'AboutPageRecord', slug: string }
+                    | { __typename: 'AdvisorsPageRecord', slug: string }
                     | { __typename: 'ArchivePageRecord', slug: string }
                     | { __typename: 'ArticlesPageRecord', slug: string }
                     | { __typename: 'CoachCategoryRecord', slug: string }
                     | { __typename: 'ContactPageRecord', slug: string }
                     | { __typename: 'HomePageRecord' }
+                    | { __typename: 'InteriorPageRecord', slug: string }
                     | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                    }
                }
@@ -7347,11 +7359,13 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
                 | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
                 | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                     | { __typename: 'AboutPageRecord', slug: string }
+                    | { __typename: 'AdvisorsPageRecord', slug: string }
                     | { __typename: 'ArchivePageRecord', slug: string }
                     | { __typename: 'ArticlesPageRecord', slug: string }
                     | { __typename: 'CoachCategoryRecord', slug: string }
                     | { __typename: 'ContactPageRecord', slug: string }
                     | { __typename: 'HomePageRecord' }
+                    | { __typename: 'InteriorPageRecord', slug: string }
                     | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                    }
               > }
@@ -7366,11 +7380,13 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
                 | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
                 | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                     | { __typename: 'AboutPageRecord', slug: string }
+                    | { __typename: 'AdvisorsPageRecord', slug: string }
                     | { __typename: 'ArchivePageRecord', slug: string }
                     | { __typename: 'ArticlesPageRecord', slug: string }
                     | { __typename: 'CoachCategoryRecord', slug: string }
                     | { __typename: 'ContactPageRecord', slug: string }
                     | { __typename: 'HomePageRecord' }
+                    | { __typename: 'InteriorPageRecord', slug: string }
                     | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                    }
                }
@@ -7382,11 +7398,13 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
                 | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
                 | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                     | { __typename: 'AboutPageRecord', slug: string }
+                    | { __typename: 'AdvisorsPageRecord', slug: string }
                     | { __typename: 'ArchivePageRecord', slug: string }
                     | { __typename: 'ArticlesPageRecord', slug: string }
                     | { __typename: 'CoachCategoryRecord', slug: string }
                     | { __typename: 'ContactPageRecord', slug: string }
                     | { __typename: 'HomePageRecord' }
+                    | { __typename: 'InteriorPageRecord', slug: string }
                     | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                    }
               > }
@@ -7402,11 +7420,13 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
           | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
           | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
               | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'AdvisorsPageRecord', slug: string }
               | { __typename: 'ArchivePageRecord', slug: string }
               | { __typename: 'ArticlesPageRecord', slug: string }
               | { __typename: 'CoachCategoryRecord', slug: string }
               | { __typename: 'ContactPageRecord', slug: string }
               | { __typename: 'HomePageRecord' }
+              | { __typename: 'InteriorPageRecord', slug: string }
               | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
              }
          }
@@ -7435,11 +7455,13 @@ type ArticleModalQuery = { __typename?: 'Query', article?: { __typename: 'Articl
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7454,11 +7476,13 @@ type ArticleModalQuery = { __typename?: 'Query', article?: { __typename: 'Articl
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
@@ -7511,11 +7535,13 @@ type NewsletterModalQuery = { __typename?: 'Query', newsletter?: { __typename: '
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7530,11 +7556,13 @@ type NewsletterModalQuery = { __typename?: 'Query', newsletter?: { __typename: '
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
@@ -7567,11 +7595,13 @@ type VideoModalQuery = { __typename?: 'Query', video?: { __typename: 'VideoRecor
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7586,11 +7616,13 @@ type VideoModalQuery = { __typename?: 'Query', video?: { __typename: 'VideoRecor
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
@@ -7602,22 +7634,26 @@ type AboutPageQuery = { __typename?: 'Query', aboutPage?: { __typename: 'AboutPa
         | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
         | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
             | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'AdvisorsPageRecord', slug: string }
             | { __typename: 'ArchivePageRecord', slug: string }
             | { __typename: 'ArticlesPageRecord', slug: string }
             | { __typename: 'CoachCategoryRecord', slug: string }
             | { __typename: 'ContactPageRecord', slug: string }
             | { __typename: 'HomePageRecord' }
+            | { __typename: 'InteriorPageRecord', slug: string }
             | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
            }
       > }>, howBody: { __typename?: 'AboutPageModelHowBodyField', value: unknown }, howDetails: Array<{ __typename?: 'TitleDescriptionRecord', title: string, description: { __typename?: 'TitleDescriptionModelDescriptionField', value: unknown } }>, howLink?:
       | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, partnerBody?: { __typename?: 'AboutPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, headshot?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } | null, logo?: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, logoBackgroundColor?: { __typename?: 'ColorField', hex: string } | null }> } | null, allTeamMembers: Array<{ __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }> };
@@ -7629,11 +7665,13 @@ type AdvisorsPageQuery = { __typename?: 'Query', advisorsPage?: { __typename: 'A
       | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, partnerBody?: { __typename?: 'AdvisorsPageModelPartnerBodyField', value: unknown } | null, testimonials: Array<{ __typename: 'TestimonialRecord', id: string, attribution: string, testimonial: { __typename?: 'TestimonialModelTestimonialField', value: unknown }, headshot?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } | null, logo?: { __typename?: 'FileField', format: string, url: string, alt?: string | null, width?: number | null, height?: number | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null, logoBackgroundColor?: { __typename?: 'ColorField', hex: string } | null }> } | null };
@@ -7643,21 +7681,25 @@ type ArchivePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'ArchivePageRecord', archiveHeading: string, slug: string, archiveBackLink: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, allBooks: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
       | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
@@ -7667,11 +7709,13 @@ type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'Ar
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7686,11 +7730,13 @@ type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'Ar
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
@@ -7699,11 +7745,13 @@ type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'Ar
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7718,11 +7766,13 @@ type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'Ar
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allNewsletters: Array<{ __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
@@ -7731,11 +7781,13 @@ type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'Ar
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7750,11 +7802,13 @@ type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'Ar
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
@@ -7775,11 +7829,13 @@ type ArticlePageQuery = { __typename?: 'Query', article?: { __typename: 'Article
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7794,11 +7850,13 @@ type ArticlePageQuery = { __typename?: 'Query', article?: { __typename: 'Article
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
@@ -7812,11 +7870,13 @@ type ArticlesPageQuery = { __typename?: 'Query', articlesPage?: { __typename?: '
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7831,11 +7891,13 @@ type ArticlesPageQuery = { __typename?: 'Query', articlesPage?: { __typename?: '
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, newsItems: Array<{ __typename: 'NewsItemRecord', id: string, title: string, publication: string, url?: string | null, createdAt: string }> };
@@ -7854,11 +7916,13 @@ type BookPageQuery = { __typename?: 'Query', book?: { __typename: 'BookRecord', 
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
       | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
@@ -7927,11 +7991,13 @@ type RootLayoutQuery = { __typename?: 'Query', alertBar?: { __typename: 'AlertBa
       | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null } | null, nav?: { __typename: 'NavRecord', id: string, links: Array<
@@ -7940,11 +8006,13 @@ type RootLayoutQuery = { __typename?: 'Query', alertBar?: { __typename: 'AlertBa
       | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
     >, button?:
@@ -7955,11 +8023,13 @@ type RootLayoutQuery = { __typename?: 'Query', alertBar?: { __typename: 'AlertBa
       | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null } | null, allCoachCategories: Array<{ __typename: 'CoachCategoryRecord', id: string, categoryName: string, categoryNameFull?: string | null, description: string, categorySlug: string }> };
@@ -7980,11 +8050,13 @@ type NewsletterPageQuery = { __typename?: 'Query', newsletter?: { __typename: 'N
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -7999,11 +8071,13 @@ type NewsletterPageQuery = { __typename?: 'Query', newsletter?: { __typename: 'N
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
@@ -8018,41 +8092,49 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
         | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
         | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
             | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'AdvisorsPageRecord', slug: string }
             | { __typename: 'ArchivePageRecord', slug: string }
             | { __typename: 'ArticlesPageRecord', slug: string }
             | { __typename: 'CoachCategoryRecord', slug: string }
             | { __typename: 'ContactPageRecord', slug: string }
             | { __typename: 'HomePageRecord' }
+            | { __typename: 'InteriorPageRecord', slug: string }
             | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
            }
         | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
        | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null }, booksArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        } | null, bookItemsOverrides: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
         | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
         | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
             | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'AdvisorsPageRecord', slug: string }
             | { __typename: 'ArchivePageRecord', slug: string }
             | { __typename: 'ArticlesPageRecord', slug: string }
             | { __typename: 'CoachCategoryRecord', slug: string }
             | { __typename: 'ContactPageRecord', slug: string }
             | { __typename: 'HomePageRecord' }
+            | { __typename: 'InteriorPageRecord', slug: string }
             | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
            }
         | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
        | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, newslettersArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        } | null, newslettersItem?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
           | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
@@ -8060,11 +8142,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
               | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
               | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                   | { __typename: 'AboutPageRecord', slug: string }
+                  | { __typename: 'AdvisorsPageRecord', slug: string }
                   | { __typename: 'ArchivePageRecord', slug: string }
                   | { __typename: 'ArticlesPageRecord', slug: string }
                   | { __typename: 'CoachCategoryRecord', slug: string }
                   | { __typename: 'ContactPageRecord', slug: string }
                   | { __typename: 'HomePageRecord' }
+                  | { __typename: 'InteriorPageRecord', slug: string }
                   | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                  }
             > }
@@ -8079,20 +8163,24 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
         | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
         | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
             | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'AdvisorsPageRecord', slug: string }
             | { __typename: 'ArchivePageRecord', slug: string }
             | { __typename: 'ArticlesPageRecord', slug: string }
             | { __typename: 'CoachCategoryRecord', slug: string }
             | { __typename: 'ContactPageRecord', slug: string }
             | { __typename: 'HomePageRecord' }
+            | { __typename: 'InteriorPageRecord', slug: string }
             | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
            }
        | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> } | null, videosArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        } | null, videoItemsOverrides: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<
           | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
@@ -8100,11 +8188,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
               | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
               | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                   | { __typename: 'AboutPageRecord', slug: string }
+                  | { __typename: 'AdvisorsPageRecord', slug: string }
                   | { __typename: 'ArchivePageRecord', slug: string }
                   | { __typename: 'ArticlesPageRecord', slug: string }
                   | { __typename: 'CoachCategoryRecord', slug: string }
                   | { __typename: 'ContactPageRecord', slug: string }
                   | { __typename: 'HomePageRecord' }
+                  | { __typename: 'InteriorPageRecord', slug: string }
                   | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                  }
             > }
@@ -8119,20 +8209,24 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
         | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
         | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
             | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'AdvisorsPageRecord', slug: string }
             | { __typename: 'ArchivePageRecord', slug: string }
             | { __typename: 'ArticlesPageRecord', slug: string }
             | { __typename: 'CoachCategoryRecord', slug: string }
             | { __typename: 'ContactPageRecord', slug: string }
             | { __typename: 'HomePageRecord' }
+            | { __typename: 'InteriorPageRecord', slug: string }
             | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
            }
        | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, articlesArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
           | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
@@ -8140,11 +8234,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
               | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
               | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                   | { __typename: 'AboutPageRecord', slug: string }
+                  | { __typename: 'AdvisorsPageRecord', slug: string }
                   | { __typename: 'ArchivePageRecord', slug: string }
                   | { __typename: 'ArticlesPageRecord', slug: string }
                   | { __typename: 'CoachCategoryRecord', slug: string }
                   | { __typename: 'ContactPageRecord', slug: string }
                   | { __typename: 'HomePageRecord' }
+                  | { __typename: 'InteriorPageRecord', slug: string }
                   | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                  }
             > }
@@ -8159,33 +8255,39 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
         | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
         | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
             | { __typename: 'AboutPageRecord', slug: string }
+            | { __typename: 'AdvisorsPageRecord', slug: string }
             | { __typename: 'ArchivePageRecord', slug: string }
             | { __typename: 'ArticlesPageRecord', slug: string }
             | { __typename: 'CoachCategoryRecord', slug: string }
             | { __typename: 'ContactPageRecord', slug: string }
             | { __typename: 'HomePageRecord' }
+            | { __typename: 'InteriorPageRecord', slug: string }
             | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
            }
        | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, coursesImage: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, coursesDescription: { __typename?: 'ThoughtLeadershipPageModelCoursesDescriptionField', value: unknown }, coursesButton?:
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, coursesCoaches: Array<{ __typename?: 'CoursesCoachRecord', name: string, title: string, image: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }> } | null, allBooks: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
       | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
@@ -8195,11 +8297,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -8214,11 +8318,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
@@ -8227,11 +8333,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -8246,11 +8354,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allNewsletters: Array<{ __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
@@ -8259,11 +8369,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -8278,11 +8390,13 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
@@ -8294,11 +8408,13 @@ type AlertBarFragment = { __typename: 'AlertBarRecord', id: string, isActive?: b
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null };
@@ -8317,11 +8433,13 @@ type ArticleButtonFieldFragment = { __typename: 'ArticleButtonFieldRecord', id: 
     | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
   > };
@@ -8336,11 +8454,13 @@ type ArticleFragment = { __typename: 'ArticleRecord', id: string, title: string,
           | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
           | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
               | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'AdvisorsPageRecord', slug: string }
               | { __typename: 'ArchivePageRecord', slug: string }
               | { __typename: 'ArticlesPageRecord', slug: string }
               | { __typename: 'CoachCategoryRecord', slug: string }
               | { __typename: 'ContactPageRecord', slug: string }
               | { __typename: 'HomePageRecord' }
+              | { __typename: 'InteriorPageRecord', slug: string }
               | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
              }
         > }
@@ -8355,11 +8475,13 @@ type ArticleFragment = { __typename: 'ArticleRecord', id: string, title: string,
     | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
@@ -8413,22 +8535,26 @@ type HomeCoachesSectionFragment = { __typename: 'HomeCoachesSectionRecord', id: 
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null, backgroundImages: Array<{ __typename?: 'ImageFileField', horizontal: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, vertical: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }> };
 
 type HomeContactFragment = { __typename?: 'HomePageRecord', contactHeading?: string | null, contactBody?: { __typename?: 'HomePageModelContactBodyField', value: unknown } | null, contactLink?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }
       | { __typename: 'ArticlesPageRecord', slug: string }
       | { __typename: 'CoachCategoryRecord', slug: string }
       | { __typename: 'ContactPageRecord', slug: string }
       | { __typename: 'HomePageRecord' }
+      | { __typename: 'InteriorPageRecord', slug: string }
       | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
      } | null, contactForm: { __typename: 'FormRecord', id: string, formName: string, submitButtonText: string, formFields: Array<
       | { __typename: 'FormSelectFieldRecord', id: string, label: string, required?: boolean | null, width: string, options: Array<{ __typename?: 'FormSelectOptionRecord', id: string, value: string }> }
@@ -8451,11 +8577,13 @@ type HomeMarshallFragment = { __typename?: 'HomePageRecord', marshallHeading?: s
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null, marshallQuote?: { __typename?: 'QuoteRecord', attribution?: string | null, quote?: { __typename?: 'QuoteModelQuoteField', value: unknown } | null } | null, marshallImage?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } | null };
@@ -8465,11 +8593,13 @@ type HomePromiseFragment = { __typename?: 'HomePageRecord', promiseHeading: stri
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    };
@@ -8483,11 +8613,13 @@ type ThoughtLeadershipItemFragment = { __typename: 'ThoughtLeadershipItemRecord'
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null };
@@ -8500,11 +8632,13 @@ type NavFragment = { __typename: 'NavRecord', id: string, links: Array<
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
   >, button?:
@@ -8515,22 +8649,26 @@ type NavFragment = { __typename: 'NavRecord', id: string, links: Array<
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null };
 
 type LeaderShipArticlesFragment = { __typename?: 'ThoughtLeadershipPageRecord', articlesHeading: string, articlesArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }
       | { __typename: 'ArticlesPageRecord', slug: string }
       | { __typename: 'CoachCategoryRecord', slug: string }
       | { __typename: 'ContactPageRecord', slug: string }
       | { __typename: 'HomePageRecord' }
+      | { __typename: 'InteriorPageRecord', slug: string }
       | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
      } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
@@ -8538,11 +8676,13 @@ type LeaderShipArticlesFragment = { __typename?: 'ThoughtLeadershipPageRecord', 
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -8557,11 +8697,13 @@ type LeaderShipArticlesFragment = { __typename?: 'ThoughtLeadershipPageRecord', 
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
@@ -8572,11 +8714,13 @@ type BookFragment = { __typename: 'BookRecord', title: string, subtitle?: string
     | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
     | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
@@ -8584,21 +8728,25 @@ type BookFragment = { __typename: 'BookRecord', title: string, subtitle?: string
 
 type LeaderShipBooksFragment = { __typename?: 'ThoughtLeadershipPageRecord', booksHeading: string, booksArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }
       | { __typename: 'ArticlesPageRecord', slug: string }
       | { __typename: 'CoachCategoryRecord', slug: string }
       | { __typename: 'ContactPageRecord', slug: string }
       | { __typename: 'HomePageRecord' }
+      | { __typename: 'InteriorPageRecord', slug: string }
       | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
      } | null, bookItemsOverrides: Array<{ __typename: 'BookRecord', title: string, subtitle?: string | null, descriptionHeading?: string | null, testimonialsHeading: string, miscellaneousInformationHeading?: string | null, slug: string, createdAt: string, thumbnail: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, authors: Array<{ __typename?: 'AuthorRecord', name: string, title: string, bio: { __typename?: 'AuthorModelBioField', value: unknown }, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }>, purchaseLink?: { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string } | null, secondaryCta?: { __typename?: 'BookModelSecondaryCtaField', value: unknown } | null, descriptionBody?: { __typename?: 'BookModelDescriptionBodyField', value: unknown } | null, descriptionCtaButton?:
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
       | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
@@ -8610,11 +8758,13 @@ type LeaderShipCoursesFragment = { __typename?: 'ThoughtLeadershipPageRecord', c
     | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null, coursesCoaches: Array<{ __typename?: 'CoursesCoachRecord', name: string, title: string, image: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } }> };
@@ -8626,11 +8776,13 @@ type ThoughtLeadershipFeaturedItemFragment = { __typename: 'ThoughtLeadershipFea
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
     | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
@@ -8643,11 +8795,13 @@ type LeaderShipFeaturedFragment = { __typename?: 'ThoughtLeadershipPageRecord', 
       | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
       | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
@@ -8663,11 +8817,13 @@ type NewsletterFragment = { __typename: 'NewsletterRecord', id: string, title: s
           | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
           | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
               | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'AdvisorsPageRecord', slug: string }
               | { __typename: 'ArchivePageRecord', slug: string }
               | { __typename: 'ArticlesPageRecord', slug: string }
               | { __typename: 'CoachCategoryRecord', slug: string }
               | { __typename: 'ContactPageRecord', slug: string }
               | { __typename: 'HomePageRecord' }
+              | { __typename: 'InteriorPageRecord', slug: string }
               | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
              }
         > }
@@ -8682,22 +8838,26 @@ type NewsletterFragment = { __typename: 'NewsletterRecord', id: string, title: s
     | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
 type LeaderShipNewslettersFragment = { __typename?: 'ThoughtLeadershipPageRecord', newslettersLabel: string, newslettersHeading: string, newslettersArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }
       | { __typename: 'ArticlesPageRecord', slug: string }
       | { __typename: 'CoachCategoryRecord', slug: string }
       | { __typename: 'ContactPageRecord', slug: string }
       | { __typename: 'HomePageRecord' }
+      | { __typename: 'InteriorPageRecord', slug: string }
       | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
      } | null, newslettersItem?: { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
@@ -8705,11 +8865,13 @@ type LeaderShipNewslettersFragment = { __typename?: 'ThoughtLeadershipPageRecord
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -8724,11 +8886,13 @@ type LeaderShipNewslettersFragment = { __typename?: 'ThoughtLeadershipPageRecord
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> } | null };
@@ -8739,11 +8903,13 @@ type VideoFragment = { __typename: 'VideoRecord', id: string, title: string, sub
           | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
           | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
               | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'AdvisorsPageRecord', slug: string }
               | { __typename: 'ArchivePageRecord', slug: string }
               | { __typename: 'ArticlesPageRecord', slug: string }
               | { __typename: 'CoachCategoryRecord', slug: string }
               | { __typename: 'ContactPageRecord', slug: string }
               | { __typename: 'HomePageRecord' }
+              | { __typename: 'InteriorPageRecord', slug: string }
               | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
              }
         > }
@@ -8758,22 +8924,26 @@ type VideoFragment = { __typename: 'VideoRecord', id: string, title: string, sub
     | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
 type LeaderShipVideosFragment = { __typename?: 'ThoughtLeadershipPageRecord', videosHeading: string, videosArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
+      | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }
       | { __typename: 'ArticlesPageRecord', slug: string }
       | { __typename: 'CoachCategoryRecord', slug: string }
       | { __typename: 'ContactPageRecord', slug: string }
       | { __typename: 'HomePageRecord' }
+      | { __typename: 'InteriorPageRecord', slug: string }
       | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
      } | null, videoItemsOverrides: Array<{ __typename: 'VideoRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'VideoModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
@@ -8781,11 +8951,13 @@ type LeaderShipVideosFragment = { __typename?: 'ThoughtLeadershipPageRecord', vi
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
             | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
                 | { __typename: 'AboutPageRecord', slug: string }
+                | { __typename: 'AdvisorsPageRecord', slug: string }
                 | { __typename: 'ArchivePageRecord', slug: string }
                 | { __typename: 'ArticlesPageRecord', slug: string }
                 | { __typename: 'CoachCategoryRecord', slug: string }
                 | { __typename: 'ContactPageRecord', slug: string }
                 | { __typename: 'HomePageRecord' }
+                | { __typename: 'InteriorPageRecord', slug: string }
                 | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
                }
           > }
@@ -8800,11 +8972,13 @@ type LeaderShipVideosFragment = { __typename?: 'ThoughtLeadershipPageRecord', vi
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }> };
@@ -8823,11 +8997,13 @@ type FormLinkFragment = { __typename: 'FormLinkRecord', id: string, linkText: st
 
 type PageLinkFragment = { __typename: 'PageLinkRecord', id: string, linkText: string, page:
     | { __typename: 'AboutPageRecord', slug: string }
+    | { __typename: 'AdvisorsPageRecord', slug: string }
     | { __typename: 'ArchivePageRecord', slug: string }
     | { __typename: 'ArticlesPageRecord', slug: string }
     | { __typename: 'CoachCategoryRecord', slug: string }
     | { __typename: 'ContactPageRecord', slug: string }
     | { __typename: 'HomePageRecord' }
+    | { __typename: 'InteriorPageRecord', slug: string }
     | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
    };
 
@@ -8837,11 +9013,13 @@ type AboutHowFragment = { __typename: 'AboutPageRecord', id: string, howHeading:
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null };
@@ -8850,11 +9028,13 @@ type AdvisorsHowFragment = { __typename: 'AdvisorsPageRecord', id: string, howHe
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    | null };
@@ -8867,11 +9047,13 @@ type AboutServicesFragment = { __typename?: 'AboutPageRecord', servicesHeading: 
       | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
       | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
           | { __typename: 'AboutPageRecord', slug: string }
+          | { __typename: 'AdvisorsPageRecord', slug: string }
           | { __typename: 'ArchivePageRecord', slug: string }
           | { __typename: 'ArticlesPageRecord', slug: string }
           | { __typename: 'CoachCategoryRecord', slug: string }
           | { __typename: 'ContactPageRecord', slug: string }
           | { __typename: 'HomePageRecord' }
+          | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
     > }> };
@@ -8886,11 +9068,13 @@ type BioSectionFragment = { __typename: 'BioSectionRecord', id: string, layout: 
           | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
           | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
               | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'AdvisorsPageRecord', slug: string }
               | { __typename: 'ArchivePageRecord', slug: string }
               | { __typename: 'ArticlesPageRecord', slug: string }
               | { __typename: 'CoachCategoryRecord', slug: string }
               | { __typename: 'ContactPageRecord', slug: string }
               | { __typename: 'HomePageRecord' }
+              | { __typename: 'InteriorPageRecord', slug: string }
               | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
              }
          }
@@ -8902,11 +9086,13 @@ type BioSectionFragment = { __typename: 'BioSectionRecord', id: string, layout: 
           | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
           | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
               | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'AdvisorsPageRecord', slug: string }
               | { __typename: 'ArchivePageRecord', slug: string }
               | { __typename: 'ArticlesPageRecord', slug: string }
               | { __typename: 'CoachCategoryRecord', slug: string }
               | { __typename: 'ContactPageRecord', slug: string }
               | { __typename: 'HomePageRecord' }
+              | { __typename: 'InteriorPageRecord', slug: string }
               | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
              }
         > }
@@ -8928,11 +9114,13 @@ type ContentSectionFragment = { __typename: 'ContentSectionRecord', id: string, 
           | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
           | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
               | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'AdvisorsPageRecord', slug: string }
               | { __typename: 'ArchivePageRecord', slug: string }
               | { __typename: 'ArticlesPageRecord', slug: string }
               | { __typename: 'CoachCategoryRecord', slug: string }
               | { __typename: 'ContactPageRecord', slug: string }
               | { __typename: 'HomePageRecord' }
+              | { __typename: 'InteriorPageRecord', slug: string }
               | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
              }
          }
@@ -8944,11 +9132,13 @@ type ContentSectionFragment = { __typename: 'ContentSectionRecord', id: string, 
           | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
           | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
               | { __typename: 'AboutPageRecord', slug: string }
+              | { __typename: 'AdvisorsPageRecord', slug: string }
               | { __typename: 'ArchivePageRecord', slug: string }
               | { __typename: 'ArticlesPageRecord', slug: string }
               | { __typename: 'CoachCategoryRecord', slug: string }
               | { __typename: 'ContactPageRecord', slug: string }
               | { __typename: 'HomePageRecord' }
+              | { __typename: 'InteriorPageRecord', slug: string }
               | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
              }
         > }
@@ -8965,11 +9155,13 @@ type CtaBarFragment = { __typename: 'CtaBarRecord', id: string, text: { __typena
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    };
@@ -9000,11 +9192,13 @@ type ButtonFragment = { __typename: 'ButtonRecord', id: string, button:
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    };
@@ -9017,11 +9211,13 @@ type LinkListFragment = { __typename: 'LinkListRecord', id: string, heading?: st
     | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
+        | { __typename: 'AdvisorsPageRecord', slug: string }
         | { __typename: 'ArchivePageRecord', slug: string }
         | { __typename: 'ArticlesPageRecord', slug: string }
         | { __typename: 'CoachCategoryRecord', slug: string }
         | { __typename: 'ContactPageRecord', slug: string }
         | { __typename: 'HomePageRecord' }
+        | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
   > };
