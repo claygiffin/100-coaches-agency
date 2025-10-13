@@ -10,14 +10,14 @@ import { classes } from '@/utils/css'
 import styles from './Modal.module.scss'
 
 type Props = ComponentProps<'dialog'> & {
-  metaData?: Metadata
+  metadata?: Metadata
   variant?: 'DEFAULT' | 'ARTICLE' | 'FORM' | 'PROFILE' | 'VIDEOLIGHTBOX'
   onClose?: () => void
 }
 
 export function Modal({
   children,
-  metaData,
+  metadata,
   className,
   variant = 'DEFAULT',
   onClose,
@@ -66,9 +66,9 @@ export function Modal({
   // Set and remove page title
   const initialTitle = useRef<string | undefined>(undefined)
   useEffect(() => {
-    if (metaData) {
+    if (metadata) {
       initialTitle.current = document.title
-      const title = metaData.title
+      const title = metadata.title
       if (title) {
         document.title = title
       }
@@ -78,7 +78,7 @@ export function Modal({
         document.title = initialTitle.current
       }
     }
-  }, [metaData])
+  }, [metadata])
 
   return (
     <div data-variant={variant}>

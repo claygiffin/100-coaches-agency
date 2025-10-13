@@ -65,7 +65,7 @@ const TeamMemberModal: NextPage<Props> = async ({ params }) => {
   return (
     <Modal
       variant={'PROFILE'}
-      metaData={toNextMetadata(teamMember?._seoMetaTags || [])}
+      metadata={toNextMetadata(teamMember?._seoMetaTags || [])}
     >
       <CoachProfile data={teamMember} />
     </Modal>

@@ -70,7 +70,7 @@ const ArticleModal: NextPage<Props> = async ({ params }) => {
     variables: { slug },
   })
   return (
-    <Modal metaData={toNextMetadata(article?._seoMetaTags || [])}>
+    <Modal metadata={toNextMetadata(article?._seoMetaTags || [])}>
       <Article
         article={article}
         layout="MODAL"

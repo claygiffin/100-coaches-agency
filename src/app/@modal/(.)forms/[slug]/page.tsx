@@ -69,7 +69,7 @@ const FormModalPage: NextPage<Props> = async ({ params }) => {
   return (
     <Modal
       variant={'FORM'}
-      metaData={toNextMetadata(formModal?._seoMetaTags || [])}
+      metadata={toNextMetadata(formModal?._seoMetaTags || [])}
     >
       <FormModal
         data={formModal}

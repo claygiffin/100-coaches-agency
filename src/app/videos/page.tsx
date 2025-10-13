@@ -19,9 +19,9 @@ type Props = {
 export async function generateStaticParams() {
   const {
     data: { allVideos },
-  } = await datoRequest<Queries.AllVideoModalQuery>({
+  } = await datoRequest<Queries.AllVideoPageQuery>({
     query: gql`
-      query AllVideoModal {
+      query AllVideoPage {
         allVideos(first: 10000) {
           slug
         }
@@ -34,7 +34,7 @@ export async function generateStaticParams() {
 }
 
 const query = gql`
-  query VideoModal($slug: String!) {
+  query VideoPage($slug: String!) {
     video(filter: { slug: { eq: $slug } }) {
       ...Video
       _seoMetaTags {
@@ -53,7 +53,7 @@ export const generateMetadata = async ({
   const { slug } = await params
   const {
     data: { video },
-  } = await datoRequest<Queries.VideoModalQuery>({
+  } = await datoRequest<Queries.VideoPageQuery>({
     query,
     variables: { slug },
   })
@@ -62,22 +62,22 @@ export const generateMetadata = async ({
   })
 }
 
-const VideoModal: NextPage<Props> = async ({ params }) => {
+const VideoPage: NextPage<Props> = async ({ params }) => {
   const { slug } = await params
   const {
     data: { video },
-  } = await datoRequest<Queries.VideoModalQuery>({
+  } = await datoRequest<Queries.VideoPageQuery>({
     query,
     variables: { slug },
   })
   return (
-    <Modal metadata={toNextMetadata(video?._seoMetaTags || [])}>
+    <main>
       <Article
         article={video}
         layout="MODAL"
       />
-    </Modal>
+    </main>
   )
 }
 
-export default VideoModal
+export default VideoPage
