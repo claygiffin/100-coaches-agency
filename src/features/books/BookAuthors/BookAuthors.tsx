@@ -72,11 +72,6 @@ export const BookAuthors = ({ book }: PropTypes) => {
                     data={author?.photo?.responsiveImage}
                     focalPoint={author?.photo?.focalPoint}
                   />
-                  <div className={styles.info}>
-                    <div className={styles.name}>{author?.name}</div>
-                    <div className={styles.title}>{author?.title}</div>
-                    <div className={styles.line}></div>
-                  </div>
                 </div>
                 <div className={styles.description}>
                   <div className={styles.name}>{author?.name}</div>
