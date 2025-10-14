@@ -16,61 +16,6 @@ interface CardProps {
   thumbnail: any
 }
 
-interface CardThumbnailProps {
-  type?: string
-  slug: string
-  thumbnail: any
-}
-
-const CardThumbnail: React.FC<CardThumbnailProps> = ({
-  type,
-  slug,
-  thumbnail,
-}) => {
-  const isVideo = type === 'Video'
-
-  return (
-    <Link
-      className={styles.imagePlaceholder}
-      href={slug}
-      scroll={slug.includes('/books/')}
-    >
-      {isVideo ? (
-        <div className={styles.videoThumbnailWrapper}>
-          {thumbnail?.responsiveImage ? (
-            <DatoImageFocused
-              className={styles.videoThumbnail}
-              data={thumbnail?.responsiveImage}
-              focalPoint={thumbnail?.focalPoint}
-            />
-          ) : (
-            <Image
-              className={styles.videoThumbnail}
-              src={thumbnail}
-              alt={''}
-              width={320}
-              height={180}
-            />
-          )}
-          <div className={styles.innerTool}>
-            <div className={styles.toolWrapper}>
-              <div className={styles.playWrapper}>
-                <div className={styles.play} />
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <DatoImageFocused
-          className={styles.thumbnail}
-          data={thumbnail?.responsiveImage}
-          focalPoint={thumbnail?.focalPoint}
-        />
-      )}
-    </Link>
-  )
-}
-
 export const Card: React.FC<CardProps> = ({
   type,
   description,
@@ -78,6 +23,8 @@ export const Card: React.FC<CardProps> = ({
   slug,
   thumbnail,
 }) => {
+  const isVideo = type === 'Video'
+
   const getSlug = () => {
     switch (type) {
       case 'Book':
@@ -94,19 +41,51 @@ export const Card: React.FC<CardProps> = ({
   }
 
   return (
-    <div className={styles.card}>
-      <CardThumbnail
-        type={type}
-        thumbnail={thumbnail}
-        // onClick={handleClick}
-        slug={getSlug()}
-      />
+    <Link
+      className={styles.card}
+      href={getSlug()}
+      scroll={slug.includes('/books/')}
+    >
+      <div className={styles.imageContainer}>
+        {isVideo ? (
+          <div className={styles.videoThumbnailWrapper}>
+            {thumbnail?.responsiveImage ? (
+              <DatoImageFocused
+                className={styles.videoThumbnail}
+                data={thumbnail?.responsiveImage}
+                focalPoint={thumbnail?.focalPoint}
+              />
+            ) : (
+              <Image
+                className={styles.videoThumbnail}
+                src={thumbnail}
+                alt={''}
+                width={320}
+                height={180}
+              />
+            )}
+            <div className={styles.innerTool}>
+              <div className={styles.toolWrapper}>
+                <div className={styles.playWrapper}>
+                  <div className={styles.play} />
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <DatoImageFocused
+            className={styles.thumbnail}
+            data={thumbnail?.responsiveImage}
+            focalPoint={thumbnail?.focalPoint}
+          />
+        )}
+      </div>
       <div className={styles.content}>
         <div className={styles.type}>{type}</div>
         <div className={styles.descriptionWrapper}>
           <h3 className={styles.description}>{description}</h3>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }

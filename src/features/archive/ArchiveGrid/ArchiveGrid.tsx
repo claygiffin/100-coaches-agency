@@ -1,7 +1,8 @@
 'use client'
 
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import type { ComponentProps } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { BiChevronDown } from 'react-icons/bi'
 
 import { DatoLink } from '@/features/links'
@@ -19,12 +20,13 @@ const categories = [
 ]
 
 type Props = ComponentProps<'section'> & {
-  category: string
+  initialCategory: string
   pageData: Queries.ArchivePageQuery
 }
 
-export const ArchiveGrid = ({ category, pageData }: Props) => {
-  const [selectedCategory, setSelectedCategory] = useState(category)
+export const ArchiveGrid = ({ initialCategory, pageData }: Props) => {
+  const [selectedCategory, setSelectedCategory] =
+    useState(initialCategory)
   const [allItems, setAllItems] = useState<
     Array<{
       type: string
@@ -66,7 +68,7 @@ export const ArchiveGrid = ({ category, pageData }: Props) => {
     setAllItems(items)
   }, [pageData])
 
-  // Optional: Filtered items based on selected category
+  // Optional: Filtered items based on selected initialCategory
   const filteredItems =
     selectedCategory === 'all content'
       ? allItems
@@ -74,6 +76,18 @@ export const ArchiveGrid = ({ category, pageData }: Props) => {
           item =>
             item.type.toLowerCase() === selectedCategory.toLowerCase()
         )
+
+  const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  useEffect(() => {
+    const currentParamCategory = searchParams.get('category')
+    if (currentParamCategory !== selectedCategory) {
+      const newParams = new URLSearchParams()
+      newParams.set('category', selectedCategory)
+      router.push(pathname + '?' + newParams)
+    }
+  }, [selectedCategory])
 
   return (
     <main className={styles.main}>

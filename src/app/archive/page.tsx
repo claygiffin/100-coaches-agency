@@ -37,7 +37,7 @@ const query = gql`
     allVideos {
       ...Video
     }
-    allArticles {
+    allArticles(filter: { showInThoughtLeadership: { eq: true } }) {
       ...Article
     }
     allNewsletters {
@@ -77,7 +77,7 @@ const ArchivePage: NextPage<Props> = async ({ searchParams }) => {
   return (
     <main className={styles.main}>
       <ArchiveGrid
-        category={category || 'all content'}
+        initialCategory={category || 'all content'}
         pageData={data}
       />
     </main>
