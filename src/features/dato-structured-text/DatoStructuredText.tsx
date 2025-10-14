@@ -54,11 +54,7 @@ export const DatoStructuredText = <
             inlineBlocks?: R3[]
           }
         }
-        customNodeRules={[
-          linksRule,
-          noEmptyParagraphsRule,
-          ...(customNodeRules || []),
-        ]}
+        customNodeRules={[linksRule, ...(customNodeRules || [])]}
         {...props}
       />
     )

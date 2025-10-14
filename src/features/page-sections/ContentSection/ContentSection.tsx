@@ -3,7 +3,10 @@ import { isParagraph } from 'datocms-structured-text-utils'
 import { type ComponentProps } from 'react'
 
 import { MediaCarousel } from '@/features/carousel'
-import { DatoStructuredText } from '@/features/dato-structured-text'
+import {
+  DatoStructuredText,
+  noEmptyParagraphsRule,
+} from '@/features/dato-structured-text'
 import { Flourish } from '@/features/decorations'
 import { Accordion, Button, LinkList } from '@/features/ui'
 
@@ -38,6 +41,7 @@ export const ContentSection = ({ data, ...props }: Props) => {
         <div className={styles.body}>
           <DatoStructuredText
             data={data.body}
+            customNodeRules={[noEmptyParagraphsRule]}
             renderBlock={({ record }) => {
               switch (record.__typename) {
                 case 'AccordionRecord': {

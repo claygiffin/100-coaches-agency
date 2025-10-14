@@ -1,7 +1,10 @@
 import { type ComponentProps } from 'react'
 
 import { DatoImage } from '@/features/dato-image'
-import { DatoStructuredText } from '@/features/dato-structured-text'
+import {
+  DatoStructuredText,
+  noEmptyParagraphsRule,
+} from '@/features/dato-structured-text'
 import { Accordion, Button, LinkList } from '@/features/ui'
 
 import styles from './BioSection.module.scss'
@@ -24,6 +27,7 @@ export const BioSection = ({ data, ...props }: Props) => {
         <div className={styles.body}>
           <DatoStructuredText
             data={data.body}
+            customNodeRules={[noEmptyParagraphsRule]}
             renderBlock={({ record }) => {
               switch (record.__typename) {
                 case 'AccordionRecord': {
