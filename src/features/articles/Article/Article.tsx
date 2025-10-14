@@ -66,7 +66,7 @@ export const Article = ({ article, layout }: PropTypes) => {
         )}
         <div className={styles.headerLine}></div>
         <div className={styles.body}>
-          <StructuredText
+          <DatoStructuredText
             renderBlock={({ record }) => {
               if (record.__typename === 'ImageBlockRecord') {
                 return (

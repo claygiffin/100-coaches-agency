@@ -30,6 +30,7 @@
     );
     z-index: -1;
   }
+  // do not use swoosh if last child
   &:last-child:before {
     clip-path: none;
   }
