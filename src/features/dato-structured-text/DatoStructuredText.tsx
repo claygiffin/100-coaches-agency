@@ -9,6 +9,8 @@ import {
   renderNodeRule,
 } from 'react-datocms/structured-text'
 
+import { linksRule, noEmptyParagraphsRule } from './customNodeRules'
+
 interface Props<
   R1 extends
     StructuredTextGraphQlResponseRecord = StructuredTextGraphQlResponseRecord,
@@ -56,21 +58,8 @@ export const DatoStructuredText = <
           }
         }
         customNodeRules={[
-          renderNodeRule(isLink, ({ node, children, key }) => {
-            const isInternal =
-              node.url.startsWith('/') || node.url.startsWith('#')
-            return (
-              <Link
-                key={key}
-                href={node.url}
-                target={isInternal ? undefined : '_blank'}
-                rel={isInternal ? undefined : 'noreferrer'}
-                {...node.meta}
-              >
-                {children}
-              </Link>
-            )
-          }),
+          linksRule,
+          noEmptyParagraphsRule,
           ...(customNodeRules || []),
         ]}
         {...props}

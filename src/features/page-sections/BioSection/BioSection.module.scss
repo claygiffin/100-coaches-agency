@@ -99,11 +99,10 @@
     grid-column: span 1 / -1;
     --zero-left: 0px;
   }
-
-  margin: var(--row-72) var(--zero-right, var(--margin)) var(--row-72)
+  margin: var(--row-54) var(--zero-right, var(--margin)) var(--row-54)
     var(--zero-left, var(--margin));
   @include media('<m') {
-    margin: 1em var(--margin) var(--row-72);
+    margin: 1em var(--margin) var(--row-54);
     display: grid;
     justify-items: center;
   }
