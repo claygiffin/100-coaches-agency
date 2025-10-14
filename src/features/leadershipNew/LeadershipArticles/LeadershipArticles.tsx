@@ -9,14 +9,14 @@ import { DatoLink } from '@/features/links'
 import { MarkdownHeading } from '@/features/ui'
 
 import { Slider } from '../index'
-import styles from './LeaderShipArticles.module.scss'
+import styles from './LeadershipArticles.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.LeaderShipArticlesFragment | null | undefined
+  data: Queries.LeadershipArticlesFragment | null | undefined
   articles: Queries.ArticleFragment[] | null | undefined
 }
 
-export const LeaderShipArticles = ({
+export const LeadershipArticles = ({
   data,
   articles,
   ...props

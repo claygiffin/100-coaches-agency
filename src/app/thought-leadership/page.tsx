@@ -4,20 +4,20 @@ import type { Metadata, NextPage } from 'next'
 import { ArticleFragment } from '@/features/articles'
 import {
   BookFragment,
-  LeaderShipArticles,
-  LeaderShipArticlesFragment,
-  LeaderShipBooks,
-  LeaderShipBooksFragment,
-  LeaderShipCourses,
-  LeaderShipCoursesFragment,
-  LeaderShipFeatured,
-  LeaderShipFeaturedFragment,
-  LeaderShipHero,
-  LeaderShipHeroFragment,
-  LeaderShipNewsletters,
-  LeaderShipNewslettersFragment,
-  LeaderShipVideos,
-  LeaderShipVideosFragment,
+  LeadershipArticles,
+  LeadershipArticlesFragment,
+  LeadershipBooks,
+  LeadershipBooksFragment,
+  LeadershipCourses,
+  LeadershipCoursesFragment,
+  LeadershipFeatured,
+  LeadershipFeaturedFragment,
+  LeadershipHero,
+  LeadershipHeroFragment,
+  LeadershipNewsletters,
+  LeadershipNewslettersFragment,
+  LeadershipVideos,
+  LeadershipVideosFragment,
   NewsletterFragment,
   VideoFragment,
 } from '@/features/leadership'
@@ -27,13 +27,13 @@ import { datoRequest } from '@/lib/datocms-fetch'
 const query = gql`
   query LeadershipPage {
     thoughtLeadershipPage {
-      ...LeaderShipHero
-      ...LeaderShipFeatured
-      ...LeaderShipBooks
-      ...LeaderShipNewsletters
-      ...LeaderShipVideos
-      ...LeaderShipArticles
-      ...LeaderShipCourses
+      ...LeadershipHero
+      ...LeadershipFeatured
+      ...LeadershipBooks
+      ...LeadershipNewsletters
+      ...LeadershipVideos
+      ...LeadershipArticles
+      ...LeadershipCourses
       _seoMetaTags {
         attributes
         content
@@ -59,17 +59,17 @@ const query = gql`
       ...Newsletter
     }
   }
-  ${LeaderShipHeroFragment}
-  ${LeaderShipFeaturedFragment}
+  ${LeadershipHeroFragment}
+  ${LeadershipFeaturedFragment}
   ${BookFragment}
-  ${LeaderShipBooksFragment}
-  ${LeaderShipNewslettersFragment}
-  ${LeaderShipVideosFragment}
+  ${LeadershipBooksFragment}
+  ${LeadershipNewslettersFragment}
+  ${LeadershipVideosFragment}
   ${VideoFragment}
   ${ArticleFragment}
   ${NewsletterFragment}
-  ${LeaderShipArticlesFragment}
-  ${LeaderShipCoursesFragment}
+  ${LeadershipArticlesFragment}
+  ${LeadershipCoursesFragment}
 `
 
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -99,36 +99,36 @@ const LeadershipPage: NextPage = async () => {
 
   return (
     <main>
-      <LeaderShipHero data={thoughtLeadershipPage} />
+      <LeadershipHero data={thoughtLeadershipPage} />
       {thoughtLeadershipPage?.featuredVisible && (
-        <LeaderShipFeatured data={thoughtLeadershipPage} />
+        <LeadershipFeatured data={thoughtLeadershipPage} />
       )}
       {thoughtLeadershipPage?.booksVisible && (
-        <LeaderShipBooks
+        <LeadershipBooks
           data={thoughtLeadershipPage}
           books={allBooks}
         />
       )}
       {thoughtLeadershipPage?.newslettersVisible && (
-        <LeaderShipNewsletters
+        <LeadershipNewsletters
           data={thoughtLeadershipPage}
           newsletter={allNewsletters}
         />
       )}
       {thoughtLeadershipPage?.videosVisible && (
-        <LeaderShipVideos
+        <LeadershipVideos
           data={thoughtLeadershipPage}
           videos={allVideos}
         />
       )}
       {thoughtLeadershipPage?.articlesVisible && (
-        <LeaderShipArticles
+        <LeadershipArticles
           data={thoughtLeadershipPage}
           articles={allArticles}
         />
       )}
       {thoughtLeadershipPage?.coursesVisible && (
-        <LeaderShipCourses data={thoughtLeadershipPage} />
+        <LeadershipCourses data={thoughtLeadershipPage} />
       )}
     </main>
   )

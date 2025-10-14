@@ -6,21 +6,21 @@ import { StructuredText } from 'react-datocms/structured-text'
 import { DatoLink } from '@/features/links'
 import { AnimateIn } from '@/features/ui'
 
-import styles from './LeaderShipHero.module.scss'
-import { LeaderShipHeroImage } from './LeaderShipHeroImage/LeaderShipHeroImage'
+import styles from './LeadershipHero.module.scss'
+import { LeadershipHeroImage } from './LeadershipHeroImage/LeadershipHeroImage'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.LeaderShipHeroFragment | null | undefined
+  data: Queries.LeadershipHeroFragment | null | undefined
 }
 
-export const LeaderShipHero = ({ data, ...props }: Props) => {
+export const LeadershipHero = ({ data, ...props }: Props) => {
   return (
     <section
       className={styles.section}
       {...props}
     >
       <div className={styles.background}>
-        <LeaderShipHeroImage data={data?.heroImage} />
+        <LeadershipHeroImage data={data?.heroImage} />
       </div>
       <AnimateIn
         as="h1"

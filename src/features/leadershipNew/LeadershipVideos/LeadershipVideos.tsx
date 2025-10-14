@@ -7,14 +7,14 @@ import { DatoImageFocused } from '@/features/dato-image'
 import { DatoLink } from '@/features/links'
 
 import { Slider } from '../index'
-import styles from './LeaderShipVideos.module.scss'
+import styles from './LeadershipVideos.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.LeaderShipVideosFragment | null | undefined
+  data: Queries.LeadershipVideosFragment | null | undefined
   videos: Queries.VideoFragment[] | null | undefined
 }
 
-export const LeaderShipVideos = ({ data, videos, ...props }: Props) => {
+export const LeadershipVideos = ({ data, videos, ...props }: Props) => {
   const router = useRouter()
 
   const showingVideos = (() => {

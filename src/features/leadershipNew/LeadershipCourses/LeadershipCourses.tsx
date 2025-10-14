@@ -6,13 +6,13 @@ import { DatoImageFocused } from '@/features/dato-image'
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
 
-import styles from './LeaderShipCourses.module.scss'
+import styles from './LeadershipCourses.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.LeaderShipCoursesFragment | null | undefined
+  data: Queries.LeadershipCoursesFragment | null | undefined
 }
 
-export const LeaderShipCourses = ({ data, ...props }: Props) => {
+export const LeadershipCourses = ({ data, ...props }: Props) => {
   return (
     <section
       id="courses"

@@ -8708,7 +8708,7 @@ type NavFragment = { __typename: 'NavRecord', id: string, links: Array<
        }
    | null };
 
-type LeaderShipArticlesFragment = { __typename?: 'ThoughtLeadershipPageRecord', articlesHeading: string, articlesArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+type LeadershipArticlesFragment = { __typename?: 'ThoughtLeadershipPageRecord', articlesHeading: string, articlesArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
       | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }
@@ -8774,7 +8774,7 @@ type BookFragment = { __typename: 'BookRecord', title: string, subtitle?: string
     | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
    | null, testimonials: Array<{ __typename?: 'BookTestimonialRecord', attributionName: string, quote: { __typename?: 'BookTestimonialModelQuoteField', value: unknown }, attributionTitle?: { __typename?: 'BookTestimonialModelAttributionTitleField', value: unknown } | null }>, miscellaneousInformationBody?: { __typename?: 'BookModelMiscellaneousInformationBodyField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
-type LeaderShipBooksFragment = { __typename?: 'ThoughtLeadershipPageRecord', booksHeading: string, booksArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+type LeadershipBooksFragment = { __typename?: 'ThoughtLeadershipPageRecord', booksHeading: string, booksArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
       | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }
@@ -8802,7 +8802,7 @@ type LeaderShipBooksFragment = { __typename?: 'ThoughtLeadershipPageRecord', boo
 
 type CoursesCoachFragment = { __typename?: 'CoursesCoachRecord', name: string, title: string, image: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } };
 
-type LeaderShipCoursesFragment = { __typename?: 'ThoughtLeadershipPageRecord', coursesHeading: string, coursesImage: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, coursesDescription: { __typename?: 'ThoughtLeadershipPageModelCoursesDescriptionField', value: unknown }, coursesButton?:
+type LeadershipCoursesFragment = { __typename?: 'ThoughtLeadershipPageRecord', coursesHeading: string, coursesImage: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null }, coursesDescription: { __typename?: 'ThoughtLeadershipPageModelCoursesDescriptionField', value: unknown }, coursesButton?:
     | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
     | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
         | { __typename: 'AboutPageRecord', slug: string }
@@ -8836,7 +8836,7 @@ type ThoughtLeadershipFeaturedItemFragment = { __typename: 'ThoughtLeadershipFea
     | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
    | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null };
 
-type LeaderShipFeaturedFragment = { __typename?: 'ThoughtLeadershipPageRecord', featuredHeading: string, featuredBody: { __typename: 'ThoughtLeadershipFeaturedItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipFeaturedItemModelBodyField', value: unknown } | null, link?:
+type LeadershipFeaturedFragment = { __typename?: 'ThoughtLeadershipPageRecord', featuredHeading: string, featuredBody: { __typename: 'ThoughtLeadershipFeaturedItemRecord', id: string, heading: string, body?: { __typename?: 'ThoughtLeadershipFeaturedItemModelBodyField', value: unknown } | null, link?:
       | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
       | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
       | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
@@ -8855,9 +8855,9 @@ type LeaderShipFeaturedFragment = { __typename?: 'ThoughtLeadershipPageRecord', 
       | { __typename: 'PdfRecord', id: string, pdfLink?: string | null, createdAt: string, pdf: { __typename?: 'FileField', title?: string | null, url: string } }
      | null, image?: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } | null } };
 
-type LeaderShipHeroFragment = { __typename?: 'ThoughtLeadershipPageRecord', heroHeadingLine: string, heroLinksLabel?: string | null, heroImage?: { __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null, heroText: { __typename?: 'ThoughtLeadershipPageModelHeroTextField', value: unknown }, heroLinks: Array<{ __typename: 'AnchorLinkRecord', id: string, linkText: string, href: string }> };
+type LeadershipHeroFragment = { __typename?: 'ThoughtLeadershipPageRecord', heroHeadingLine: string, heroLinksLabel?: string | null, heroImage?: { __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null, heroText: { __typename?: 'ThoughtLeadershipPageModelHeroTextField', value: unknown }, heroLinks: Array<{ __typename: 'AnchorLinkRecord', id: string, linkText: string, href: string }> };
 
-type LeaderShipHeroImageFragment = { __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null };
+type LeadershipHeroImageFragment = { __typename?: 'FileField', horizontal?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, vertical?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null };
 
 type NewsletterFragment = { __typename: 'NewsletterRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'NewsletterModelBodyField', value: unknown, blocks: Array<
       | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
@@ -8897,7 +8897,7 @@ type NewsletterFragment = { __typename: 'NewsletterRecord', id: string, title: s
        }
    | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
-type LeaderShipNewslettersFragment = { __typename?: 'ThoughtLeadershipPageRecord', newslettersLabel: string, newslettersHeading: string, newslettersArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+type LeadershipNewslettersFragment = { __typename?: 'ThoughtLeadershipPageRecord', newslettersLabel: string, newslettersHeading: string, newslettersArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
       | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }
@@ -8983,7 +8983,7 @@ type VideoFragment = { __typename: 'VideoRecord', id: string, title: string, sub
        }
    | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> };
 
-type LeaderShipVideosFragment = { __typename?: 'ThoughtLeadershipPageRecord', videosHeading: string, videosArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+type LeadershipVideosFragment = { __typename?: 'ThoughtLeadershipPageRecord', videosHeading: string, videosArchiveButton?: { __typename: 'PageLinkRecord', id: string, linkText: string, page:
       | { __typename: 'AboutPageRecord', slug: string }
       | { __typename: 'AdvisorsPageRecord', slug: string }
       | { __typename: 'ArchivePageRecord', slug: string }

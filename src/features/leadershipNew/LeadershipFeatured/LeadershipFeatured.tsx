@@ -7,13 +7,13 @@ import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
 import { MarkdownHeading } from '@/features/ui'
 
-import styles from './LeaderShipFeatured.module.scss'
+import styles from './LeadershipFeatured.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.LeaderShipFeaturedFragment | null | undefined
+  data: Queries.LeadershipFeaturedFragment | null | undefined
 }
 
-export const LeaderShipFeatured = ({ data, ...props }: Props) => {
+export const LeadershipFeatured = ({ data, ...props }: Props) => {
   return (
     <section
       className={styles.section}

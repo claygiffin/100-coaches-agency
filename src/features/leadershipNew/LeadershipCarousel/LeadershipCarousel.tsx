@@ -10,7 +10,7 @@ import React, {
   useState,
 } from 'react'
 
-import styles from './LeaderShipCarousel.module.scss'
+import styles from './LeadershipCarousel.module.scss'
 
 // Responsive counts config
 export interface ShowNumbersConfig {

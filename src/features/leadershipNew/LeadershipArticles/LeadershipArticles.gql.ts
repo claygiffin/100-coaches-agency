@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import { ArticleFragment } from '@/features/articles'
 import { PageLinkFragment } from '@/features/links'
 
-export const LeaderShipArticlesFragment = gql`
-  fragment LeaderShipArticles on ThoughtLeadershipPageRecord {
+export const LeadershipArticlesFragment = gql`
+  fragment LeadershipArticles on ThoughtLeadershipPageRecord {
     articlesHeading
     articlesArchiveButton {
       ... on PageLinkRecord {

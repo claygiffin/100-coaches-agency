@@ -21,8 +21,8 @@ export const CoursesCoachFragment = gql`
   }
 `
 
-export const LeaderShipCoursesFragment = gql`
-  fragment LeaderShipCourses on ThoughtLeadershipPageRecord {
+export const LeadershipCoursesFragment = gql`
+  fragment LeadershipCourses on ThoughtLeadershipPageRecord {
     coursesHeading
     coursesImage {
       responsiveImage {

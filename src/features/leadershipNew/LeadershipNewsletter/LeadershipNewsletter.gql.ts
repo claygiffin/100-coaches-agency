@@ -16,8 +16,8 @@ import {
   PageLinkFragment,
 } from '@/features/links'
 
-export const VideoFragment = gql`
-  fragment Video on VideoRecord {
+export const NewsletterFragment = gql`
+  fragment Newsletter on NewsletterRecord {
     id
     __typename
     title
@@ -78,8 +78,7 @@ export const VideoFragment = gql`
       title
       responsiveImage(
         imgixParams: {
-          w: 320
-          h: 180
+          ar: "16:9"
           crop: focalpoint
           fit: crop
           q: 50
@@ -112,19 +111,19 @@ export const VideoFragment = gql`
   ${ExternalLinkFragment}
 `
 
-export const LeaderShipVideosFragment = gql`
-  fragment LeaderShipVideos on ThoughtLeadershipPageRecord {
-    videosHeading
-    videosArchiveButton {
+export const LeadershipNewslettersFragment = gql`
+  fragment LeadershipNewsletters on ThoughtLeadershipPageRecord {
+    newslettersLabel
+    newslettersHeading
+    newslettersArchiveButton {
       ... on PageLinkRecord {
         ...PageLink
       }
     }
-    videoItemsOverrides {
-      ...Video
+    newslettersItem {
+      ...Newsletter
     }
   }
-
+  ${NewsletterFragment}
   ${PageLinkFragment}
-  ${VideoFragment}
 `

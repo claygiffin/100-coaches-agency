@@ -58,8 +58,8 @@ export const ThoughtLeadershipFeaturedItemFragment = gql`
   ${PdfFragment}
 `
 
-export const LeaderShipFeaturedFragment = gql`
-  fragment LeaderShipFeatured on ThoughtLeadershipPageRecord {
+export const LeadershipFeaturedFragment = gql`
+  fragment LeadershipFeatured on ThoughtLeadershipPageRecord {
     featuredHeading
     featuredBody {
       ...ThoughtLeadershipFeaturedItem

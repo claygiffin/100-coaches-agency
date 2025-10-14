@@ -7,14 +7,14 @@ import { DatoImageFocused } from '@/features/dato-image'
 import { DatoLink } from '@/features/links'
 
 import { Slider } from '../index'
-import styles from './LeaderShipBooks.module.scss'
+import styles from './LeadershipBooks.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.LeaderShipBooksFragment | null | undefined
+  data: Queries.LeadershipBooksFragment | null | undefined
   books: Queries.BookFragment[] | null | undefined
 }
 
-export const LeaderShipBooks = ({ data, books, ...props }: Props) => {
+export const LeadershipBooks = ({ data, books, ...props }: Props) => {
   const router = useRouter()
 
   const showingBooks = (() => {

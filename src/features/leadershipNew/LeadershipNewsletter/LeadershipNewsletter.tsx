@@ -8,14 +8,14 @@ import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
 import { MarkdownHeading } from '@/features/ui'
 
-import styles from './LeaderShipNewsletter.module.scss'
+import styles from './LeadershipNewsletter.module.scss'
 
 type Props = ComponentProps<'section'> & {
-  data: Queries.LeaderShipNewslettersFragment | null | undefined
+  data: Queries.LeadershipNewslettersFragment | null | undefined
   newsletter: Queries.NewsletterFragment[] | null | undefined
 }
 
-export const LeaderShipNewsletters = ({
+export const LeadershipNewsletters = ({
   data,
   newsletter,
   ...props

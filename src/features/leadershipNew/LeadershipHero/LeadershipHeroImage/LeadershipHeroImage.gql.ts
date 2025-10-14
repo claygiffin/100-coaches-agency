@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 import { ResponsiveImageFragment } from '@/features/dato-image'
 
-export const LeaderShipHeroImageFragment = gql`
-  fragment LeaderShipHeroImage on FileField {
+export const LeadershipHeroImageFragment = gql`
+  fragment LeadershipHeroImage on FileField {
     horizontal: responsiveImage(
       imgixParams: { q: 100, ar: "16:10", fit: crop, auto: [format] }
     ) {

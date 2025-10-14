@@ -93,8 +93,8 @@ export const BookFragment = gql`
   ${BookTestimonialFragment}
 `
 
-export const LeaderShipBooksFragment = gql`
-  fragment LeaderShipBooks on ThoughtLeadershipPageRecord {
+export const LeadershipBooksFragment = gql`
+  fragment LeadershipBooks on ThoughtLeadershipPageRecord {
     booksHeading
     booksArchiveButton {
       ... on PageLinkRecord {

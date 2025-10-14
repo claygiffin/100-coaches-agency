@@ -2,13 +2,13 @@ import gql from 'graphql-tag'
 
 import { AnchorLinkFragment } from '@/features/links'
 
-import { LeaderShipHeroImageFragment } from './LeaderShipHeroImage/LeaderShipHeroImage.gql'
+import { LeadershipHeroImageFragment } from './LeadershipHeroImage/LeadershipHeroImage.gql'
 
-export const LeaderShipHeroFragment = gql`
-  fragment LeaderShipHero on ThoughtLeadershipPageRecord {
+export const LeadershipHeroFragment = gql`
+  fragment LeadershipHero on ThoughtLeadershipPageRecord {
     heroHeadingLine
     heroImage {
-      ...LeaderShipHeroImage
+      ...LeadershipHeroImage
     }
     heroText {
       value
@@ -20,6 +20,6 @@ export const LeaderShipHeroFragment = gql`
       }
     }
   }
-  ${LeaderShipHeroImageFragment}
+  ${LeadershipHeroImageFragment}
   ${AnchorLinkFragment}
 `
