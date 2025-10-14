@@ -70,10 +70,10 @@ const AboutPage: NextPage = async () => {
       {/* <AboutServices data={aboutPage} /> */}
       <AboutHow data={aboutPage} />
       <AboutPartner data={aboutPage} />
-      <AboutTeam
+      {/* <AboutTeam
         team={allTeamMembers}
         heading={aboutPage?.teamHeading}
-      />
+      /> */}
     </main>
   )
 }
