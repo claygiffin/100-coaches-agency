@@ -24,7 +24,8 @@ export const LeadershipArticles = ({
 }: Props) => {
   const showingArticles = (() => {
     const primary = data?.articleItemsOverrides ?? []
-    const fallback = articles ?? []
+    const fallback =
+      articles?.filter(article => article.showInThoughtLeadership) ?? []
 
     if (primary.length >= 5) return primary
 

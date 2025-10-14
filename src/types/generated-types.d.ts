@@ -546,6 +546,7 @@ type ArticleModelFilter = {
   ctaText?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
   seo?: InputMaybe<SeoFilter>;
+  showInThoughtLeadership?: InputMaybe<BooleanFilter>;
   slug?: InputMaybe<SlugFilter>;
   subtitle?: InputMaybe<StringFilter>;
   thumbnail?: InputMaybe<FileFilter>;
@@ -576,6 +577,8 @@ enum ArticleModelOrderBy {
   ctaText_DESC = 'ctaText_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
+  showInThoughtLeadership_ASC = 'showInThoughtLeadership_ASC',
+  showInThoughtLeadership_DESC = 'showInThoughtLeadership_DESC',
   subtitle_ASC = 'subtitle_ASC',
   subtitle_DESC = 'subtitle_DESC',
   title_ASC = 'title_ASC',
@@ -642,6 +645,7 @@ type ArticleRecord = RecordInterface & {
   ctaText?: Maybe<Scalars['String']['output']>;
   id: Scalars['ItemId']['output'];
   seo?: Maybe<SeoField>;
+  showInThoughtLeadership?: Maybe<Scalars['BooleanType']['output']>;
   slug: Scalars['String']['output'];
   subtitle?: Maybe<Scalars['String']['output']>;
   thumbnail: ImageFileField;
@@ -7449,7 +7453,7 @@ type ArticleModalQueryVariables = Exact<{
 }>;
 
 
-type ArticleModalQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+type ArticleModalQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, showInThoughtLeadership?: boolean | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
         | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
@@ -7739,7 +7743,7 @@ type ArchivePageQuery = { __typename?: 'Query', archivePage?: { __typename?: 'Ar
           | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
-     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, showInThoughtLeadership?: boolean | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
         | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
@@ -7823,7 +7827,7 @@ type ArticlePageQueryVariables = Exact<{
 }>;
 
 
-type ArticlePageQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+type ArticlePageQuery = { __typename?: 'Query', article?: { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, showInThoughtLeadership?: boolean | null, slug: string, createdAt: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
         | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
@@ -7864,7 +7868,7 @@ type ArticlePageQuery = { __typename?: 'Query', article?: { __typename: 'Article
 type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ArticlesPageQuery = { __typename?: 'Query', articlesPage?: { __typename?: 'ArticlesPageRecord', pageHeading?: string | null, slug: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, articles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+type ArticlesPageQuery = { __typename?: 'Query', articlesPage?: { __typename?: 'ArticlesPageRecord', pageHeading?: string | null, slug: string, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> } | null, articles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, showInThoughtLeadership?: boolean | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
         | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
@@ -8228,7 +8232,7 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
         | { __typename: 'HomePageRecord' }
         | { __typename: 'InteriorPageRecord', slug: string }
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
-       } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+       } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, showInThoughtLeadership?: boolean | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
           | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
           | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
               | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
@@ -8327,7 +8331,7 @@ type LeadershipPageQuery = { __typename?: 'Query', thoughtLeadershipPage?: { __t
           | { __typename: 'InteriorPageRecord', slug: string }
           | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
          }
-     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+     | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } }, _seoMetaTags: Array<{ __typename?: 'Tag', tag: string }> }>, allArticles: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, showInThoughtLeadership?: boolean | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
         | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
@@ -8496,7 +8500,7 @@ type ArticlePullQuoteFragment = { __typename: 'ArticlePullQuoteRecord', id: stri
 
 type ArticleTestimonialFragment = { __typename: 'ArticleTestimonialRecord', id: string, customerName: string, testimonialBody: { __typename?: 'ArticleTestimonialModelTestimonialBodyField', value: unknown }, customerPhoto?: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null, focalPoint?: { __typename?: 'focalPoint', x: number, y: number } | null } | null };
 
-type ArticleFragment = { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+type ArticleFragment = { __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, showInThoughtLeadership?: boolean | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
       | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
       | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
           | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
@@ -8718,7 +8722,7 @@ type LeadershipArticlesFragment = { __typename?: 'ThoughtLeadershipPageRecord', 
       | { __typename: 'HomePageRecord' }
       | { __typename: 'InteriorPageRecord', slug: string }
       | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
-     } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
+     } | null, articleItemsOverrides: Array<{ __typename: 'ArticleRecord', id: string, title: string, subtitle?: string | null, ctaText?: string | null, showInThoughtLeadership?: boolean | null, slug: string, createdAt: string, body: { __typename?: 'ArticleModelBodyField', value: unknown, blocks: Array<
         | { __typename: 'ArticleAccordionRecord', id: string, title: string, text: { __typename?: 'ArticleAccordionModelTextField', value: unknown } }
         | { __typename: 'ArticleButtonFieldRecord', id: string, buttons: Array<
             | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }

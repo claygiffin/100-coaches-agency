@@ -205,6 +205,7 @@ export const ArticleFragment = gql`
       }
     }
     createdAt: _createdAt
+    showInThoughtLeadership
     slug
     _seoMetaTags {
       tag
