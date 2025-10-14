@@ -10,6 +10,11 @@ type PropTypes = {
 }
 
 export const BookMiscellaneousInformation = ({ book }: PropTypes) => {
+  if (
+    !book?.miscellaneousInformationBody ||
+    !book.miscellaneousInformationHeading
+  )
+    return
   return (
     <section className={styles.section}>
       <div className={styles.body}>
