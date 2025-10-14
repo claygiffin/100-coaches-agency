@@ -153,6 +153,7 @@
 .subheading {
   font-size: var(--fs-21);
   margin: 0.25em 0;
+  line-height: 1.5;
   font-weight: 325;
   .section[data-layout='INTRO'] & {
     font-size: var(--fs-24);
@@ -160,6 +161,17 @@
   @extend %divider;
 }
 .body {
+  p {
+    margin: 0.5em 0;
+  }
+  a {
+    color: var(--link-color);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--link-color-hover);
+      }
+    }
+  }
   .section[data-layout='INTRO'] &,
   .section[data-layout='TEXT'] & {
     grid-column: span 1 / -1;
@@ -173,14 +185,6 @@
   }
   .section[data-layout='CENTERED'] & {
     min-width: min(80ch, 100vw - 2 * var(--margin));
-  }
-  a {
-    color: var(--link-color);
-    @media (hover: hover) {
-      &:hover {
-        color: var(--link-color-hover);
-      }
-    }
   }
   .section:last-child & {
     margin-bottom: 5vw;

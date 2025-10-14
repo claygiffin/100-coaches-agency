@@ -93,7 +93,7 @@ export const VideoFragment = gql`
         y
       }
     }
-    createdAt: _createdAt
+    createdAt: _firstPublishedAt
     slug
     _seoMetaTags {
       tag

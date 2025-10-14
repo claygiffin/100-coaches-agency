@@ -89,6 +89,7 @@
     display: flex;
     position: relative;
     cursor: pointer;
+    text-decoration: none;
     @include media('<ls') {
       gap: 0.2em;
     }
@@ -274,6 +275,7 @@
 .slider {
   padding: 1em 0 0.5em;
   .slide {
+    text-decoration: none;
     color: black;
     display: flex;
     flex-direction: column;

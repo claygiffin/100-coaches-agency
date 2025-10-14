@@ -7,6 +7,6 @@ export const NewsItemFragment = gql`
     title
     publication
     url
-    createdAt: _createdAt
+    createdAt: _firstPublishedAt
   }
 `

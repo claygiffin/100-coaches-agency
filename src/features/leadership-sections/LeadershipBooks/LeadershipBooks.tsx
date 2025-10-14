@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
@@ -15,8 +16,6 @@ type Props = ComponentProps<'section'> & {
 }
 
 export const LeadershipBooks = ({ data, books, ...props }: Props) => {
-  const router = useRouter()
-
   const showingBooks = (() => {
     const primary = data?.bookItemsOverrides ?? []
     const fallback = books ?? []
@@ -31,8 +30,6 @@ export const LeadershipBooks = ({ data, books, ...props }: Props) => {
 
     return [...primary, ...additional]
   })()
-
-  const goToBookPage = (slug: string) => router.push(`/books/${slug}`)
 
   return (
     <section
@@ -55,10 +52,10 @@ export const LeadershipBooks = ({ data, books, ...props }: Props) => {
           {Array.isArray(showingBooks) &&
             showingBooks.slice(0, 2).map((book, index) => {
               return (
-                <div
+                <Link
                   className={styles.featuredItem}
                   key={index}
-                  onClick={() => goToBookPage(book?.slug)}
+                  href={`/books/${book.slug}`}
                 >
                   <div className={styles.featuredItemImage}>
                     <DatoImageFocused
@@ -88,7 +85,7 @@ export const LeadershipBooks = ({ data, books, ...props }: Props) => {
                     </div>
                   </div>
                   <div className={styles.featuredBackground}></div>
-                </div>
+                </Link>
               )
             })}
         </div>
@@ -97,10 +94,10 @@ export const LeadershipBooks = ({ data, books, ...props }: Props) => {
             {Array.isArray(showingBooks) &&
               showingBooks.slice(2).map((book, index) => {
                 return (
-                  <div
+                  <Link
                     className={styles.slide}
                     key={index}
-                    onClick={() => goToBookPage(book?.slug)}
+                    href={`/books/${book.slug}`}
                   >
                     <div className={styles.slideImageWrapper}>
                       <DatoImageFocused
@@ -128,7 +125,7 @@ export const LeadershipBooks = ({ data, books, ...props }: Props) => {
                       </div>
                     </div>
                     <div className={styles.slideBackground}></div>
-                  </div>
+                  </Link>
                 )
               })}
           </Slider>

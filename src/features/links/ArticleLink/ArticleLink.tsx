@@ -15,7 +15,7 @@ export const ArticleLink = ({
 }: ArticleLinkProps) => {
   return (
     <Link
-      href={`/${data?.article.slug}`}
+      href={`/articles/${data?.article.slug}`}
       scroll={false}
       {...props}
     >

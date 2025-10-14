@@ -141,6 +141,10 @@
   @extend %divider;
 }
 .body {
+  margin-top: 1em;
+  p {
+    margin: 0.5em 0;
+  }
   a {
     color: var(--link-color);
     @media (hover: hover) {

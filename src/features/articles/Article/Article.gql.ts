@@ -17,7 +17,7 @@ export const ExternalVideoFragment = gql`
     video {
       ...ExternalVideoFile
     }
-    createdAt: _createdAt
+    createdAt: _firstPublishedAt
   }
   ${ExternalVideoFileFragment}
 `
@@ -29,7 +29,7 @@ export const InternalVideoFragment = gql`
     video {
       ...InternalVideoFile
     }
-    createdAt: _createdAt
+    createdAt: _firstPublishedAt
   }
   ${InternalVideoFileFragment}
 `
@@ -41,7 +41,7 @@ export const HubspotFormFragment = gql`
     portalId
     formId
     region
-    createdAt: _createdAt
+    createdAt: _firstPublishedAt
   }
 `
 
@@ -204,7 +204,7 @@ export const ArticleFragment = gql`
         y
       }
     }
-    createdAt: _createdAt
+    createdAt: _firstPublishedAt
     showInThoughtLeadership
     slug
     _seoMetaTags {

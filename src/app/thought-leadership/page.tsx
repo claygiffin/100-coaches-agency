@@ -46,16 +46,16 @@ const query = gql`
       articlesVisible
       coursesVisible
     }
-    allBooks(first: 10) {
+    allBooks(first: 10, orderBy: [_firstPublishedAt_DESC]) {
       ...Book
     }
-    allVideos(first: 10) {
+    allVideos(first: 10, orderBy: [_firstPublishedAt_DESC]) {
       ...Video
     }
-    allArticles(first: 10) {
+    allArticles(first: 10, orderBy: [_firstPublishedAt_DESC]) {
       ...Article
     }
-    allNewsletters(first: 1) {
+    allNewsletters(first: 1, orderBy: [_firstPublishedAt_DESC]) {
       ...Newsletter
     }
   }
