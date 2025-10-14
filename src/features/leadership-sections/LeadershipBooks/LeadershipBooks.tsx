@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
 import { DatoImageFocused } from '@/features/dato-image'

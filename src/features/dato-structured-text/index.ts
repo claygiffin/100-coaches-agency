@@ -3,3 +3,4 @@
  */
 
 export * from './DatoStructuredText'
+export * from './customNodeRules'

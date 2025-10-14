@@ -8,7 +8,6 @@ import {
   AboutPartner,
   AboutPartnerFragment,
   AboutServicesFragment,
-  AboutTeam,
   PageIntro,
 } from '@/features/page-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'

@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
 import { DatoImageFocused } from '@/features/dato-image'
@@ -16,8 +15,6 @@ type Props = ComponentProps<'section'> & {
 }
 
 export const LeadershipVideos = ({ data, videos, ...props }: Props) => {
-  const router = useRouter()
-
   const showingVideos = (() => {
     const primary = data?.videoItemsOverrides ?? []
     const fallback = videos ?? []
@@ -32,9 +29,6 @@ export const LeadershipVideos = ({ data, videos, ...props }: Props) => {
 
     return [...primary, ...additional]
   })()
-
-  const openVideo = (slug: string) =>
-    router.push(`/videos/${slug}`, { scroll: false })
 
   return (
     <section

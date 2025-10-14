@@ -23,7 +23,10 @@ export const ArticlesGrid = ({
   const loadAmount = 36
   const allArticlesNews = useMemo(() => {
     return [...articles, ...newsItems]
-      .sort((a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt))
+      .sort(
+        (a, b) =>
+          Date.parse(b.createdAt || '') - Date.parse(a.createdAt || '')
+      )
       .filter(item => {
         if (filter === filters[0]) {
           return true

@@ -1,12 +1,9 @@
 // Modified StructuredText component to handle Gatsby's incompatible type generation
-import { isLink } from 'datocms-structured-text-utils'
-import Link from 'next/link'
 import {
   StructuredText,
   type StructuredTextDocument,
   type StructuredTextGraphQlResponseRecord,
   type StructuredTextPropTypes,
-  renderNodeRule,
 } from 'react-datocms/structured-text'
 
 import { linksRule, noEmptyParagraphsRule } from './customNodeRules'
