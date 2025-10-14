@@ -3,7 +3,7 @@ import type { Metadata, NextPage } from 'next'
 import { toNextMetadata } from 'react-datocms'
 
 import { Article } from '@/features/articles'
-import { VideoFragment } from '@/features/leadership'
+import { VideoFragment } from '@/features/leadership-sections'
 import { Modal } from '@/features/modal'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'

@@ -9,7 +9,7 @@ import {
   BookTestimonials,
 } from '@/features/books'
 // import { BookDescription } from '@/features/books'
-import { BookFragment } from '@/features/leadership'
+import { BookFragment } from '@/features/leadership-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 

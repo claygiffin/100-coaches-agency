@@ -3,7 +3,10 @@
 import { useState } from 'react'
 
 import { DatoImage } from '@/features/dato-image'
-import { ArrowLeftIcon, ArrowRightIcon } from '@/features/leadership'
+import {
+  ArrowLeftIcon,
+  ArrowRightIcon,
+} from '@/features/leadership-sections'
 
 import styles from './ArticleCarousel.module.scss'
 

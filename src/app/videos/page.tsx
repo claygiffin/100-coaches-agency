@@ -1,10 +1,8 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
-import { toNextMetadata } from 'react-datocms'
 
 import { Article } from '@/features/articles'
-import { VideoFragment } from '@/features/leadership'
-import { Modal } from '@/features/modal'
+import { VideoFragment } from '@/features/leadership-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 

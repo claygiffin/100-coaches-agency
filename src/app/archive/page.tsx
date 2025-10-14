@@ -7,7 +7,7 @@ import {
   BookFragment,
   NewsletterFragment,
   VideoFragment,
-} from '@/features/leadership'
+} from '@/features/leadership-sections'
 import { PageLinkFragment } from '@/features/links'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'

@@ -84,7 +84,6 @@
   display: grid;
   grid-template-columns: 2fr 3fr;
   gap: 1em;
-  cursor: pointer;
   @include media('<m') {
     padding: 0.3em;
     gap: 0.5em;
@@ -119,7 +118,7 @@
     }
     .bodyHeading {
       font-size: var(--fs-24);
-      color: black;
+      color: var(--color-brownText);
       margin: 0.5em 0;
       line-height: 1.25;
       font-weight: 400;
@@ -133,17 +132,30 @@
       }
     }
     .bodyText {
-      font-size: var(--fs-18);
-      height: 12em;
-      min-height: 12em;
-      color: black;
+      position: relative;
+      font-size: var(--fs-16);
+      height: 11em;
+      color: var(--color-brownText);
       margin-bottom: 1em;
       overflow: hidden;
       transition: all 300ms linear;
       > p {
         font-weight: 400;
         line-height: 1.5;
-        margin: 0;
+        margin: 0 0 0.5em;
+      }
+      &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 6em;
+        background: linear-gradient(
+          to top,
+          var(--color-goldTint3),
+          transparent
+        );
       }
       a {
         color: var(--color-goldShade3);
@@ -161,10 +173,39 @@
       margin-top: 1.25em;
     }
   }
-  &:hover {
-    .bodyHeading,
-    .bodyText {
-      color: var(--color-gray30);
+}
+.button {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  line-height: 1.25;
+  font-weight: 500;
+  padding: 0.75em 1.25em 0.875em;
+  margin-top: 1em;
+  position: relative;
+  border-radius: 2em;
+  color: #fff;
+  background: linear-gradient(
+    to right,
+    #fff,
+    #fff,
+    var(--color-goldShade1),
+    var(--color-goldShade2)
+  );
+  font-size: var(--fs-16);
+  background-position: 100% 50%;
+  background-size: 300%;
+  transition: all 300ms ease;
+  // transition:
+  //   color 300ms ease,
+  //   background-size 500ms ease;
+  @media (hover: hover) {
+    &:hover {
+      background-position: 0% 50%;
+      color: #000;
     }
   }
 }

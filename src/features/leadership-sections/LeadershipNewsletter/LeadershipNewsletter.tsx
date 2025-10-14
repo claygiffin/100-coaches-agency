@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
@@ -20,12 +21,8 @@ export const LeadershipNewsletters = ({
   newsletter,
   ...props
 }: Props) => {
-  const router = useRouter()
   const showingNewsletter =
     data?.newslettersItem ?? newsletter?.[0] ?? null
-
-  const openNewsletter = (slug: string) =>
-    router.push(`/newsletters/${slug}`, { scroll: false })
 
   return (
     <section
@@ -44,10 +41,7 @@ export const LeadershipNewsletters = ({
         />
       </div>
       {showingNewsletter && (
-        <div
-          className={styles.body}
-          onClick={() => openNewsletter(showingNewsletter?.slug)}
-        >
+        <div className={styles.body}>
           <div className={styles.bodyImageWrapper}>
             <DatoImageFocused
               data={showingNewsletter?.thumbnail?.responsiveImage}
@@ -68,6 +62,13 @@ export const LeadershipNewsletters = ({
             <div className={styles.bodyText}>
               <DatoStructuredText data={showingNewsletter?.body} />
             </div>
+            <Link
+              className={styles.button}
+              href={`/newsletters/${showingNewsletter.slug}`}
+              scroll={false}
+            >
+              Read More
+            </Link>
           </div>
         </div>
       )}

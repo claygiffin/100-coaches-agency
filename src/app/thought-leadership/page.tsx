@@ -20,7 +20,7 @@ import {
   LeadershipVideosFragment,
   NewsletterFragment,
   VideoFragment,
-} from '@/features/leadership'
+} from '@/features/leadership-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 

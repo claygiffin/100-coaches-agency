@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
@@ -21,7 +22,6 @@ export const LeadershipArticles = ({
   articles,
   ...props
 }: Props) => {
-  const router = useRouter()
   const showingArticles = (() => {
     const primary = data?.articleItemsOverrides ?? []
     const fallback = articles ?? []
@@ -36,9 +36,6 @@ export const LeadershipArticles = ({
 
     return [...primary, ...additional]
   })()
-
-  const openArticle = (slug: string) =>
-    router.push(`/articles/${slug}`, { scroll: false })
 
   return (
     <section
@@ -57,10 +54,7 @@ export const LeadershipArticles = ({
         />
       </div>
       {Array.isArray(showingArticles) && (
-        <div
-          className={styles.body}
-          onClick={() => openArticle(showingArticles[0]?.slug)}
-        >
+        <div className={styles.body}>
           <div className={styles.bodyImageWrapper}>
             <DatoImageFocused
               data={showingArticles[0]?.thumbnail?.responsiveImage}
@@ -78,6 +72,12 @@ export const LeadershipArticles = ({
             <div className={styles.bodyText}>
               <DatoStructuredText data={showingArticles[0]?.body} />
             </div>
+            <Link
+              className={styles.button}
+              href={`/articles/${showingArticles[0].slug}`}
+            >
+              Read More
+            </Link>
           </div>
         </div>
       )}
@@ -86,10 +86,11 @@ export const LeadershipArticles = ({
           {Array.isArray(showingArticles) &&
             showingArticles.slice(1).map((article, index) => {
               return (
-                <div
+                <Link
+                  href={`/articles/${article.slug}`}
+                  scroll={false}
                   className={styles.slide}
                   key={index}
-                  onClick={() => openArticle(article?.slug)}
                 >
                   <div className={styles.slideImageWrapper}>
                     <DatoImageFocused
@@ -103,7 +104,7 @@ export const LeadershipArticles = ({
                       {article?.title}
                     </h2>
                   </div>
-                </div>
+                </Link>
               )
             })}
         </Slider>

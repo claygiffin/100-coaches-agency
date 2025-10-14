@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { type ComponentProps } from 'react'
 
@@ -56,11 +57,13 @@ export const LeadershipVideos = ({ data, videos, ...props }: Props) => {
           {Array.isArray(showingVideos) &&
             showingVideos.slice(0, 2).map((video, index) => {
               return (
-                <div key={index}>
-                  <div
-                    className={styles.videoWrapper}
-                    onClick={() => openVideo(video?.slug)}
-                  >
+                <Link
+                  href={`/videos/${video.slug}`}
+                  scroll={false}
+                  className={styles.videoLink}
+                  key={index}
+                >
+                  <div className={styles.videoWrapper}>
                     <DatoImageFocused
                       data={video?.thumbnail.responsiveImage}
                       focalPoint={video?.thumbnail.focalPoint}
@@ -75,7 +78,7 @@ export const LeadershipVideos = ({ data, videos, ...props }: Props) => {
                   <div className={styles.description}>
                     <h2>{video?.title}</h2>
                   </div>
-                </div>
+                </Link>
               )
             })}
         </div>
@@ -84,14 +87,12 @@ export const LeadershipVideos = ({ data, videos, ...props }: Props) => {
             {Array.isArray(showingVideos) &&
               showingVideos.slice(2).map((video, index) => {
                 return (
-                  <div
+                  <Link
+                    href={`/videos/${video.slug}`}
                     className={styles.slide}
                     key={index}
                   >
-                    <div
-                      className={styles.videoThumbnailWrapper}
-                      onClick={() => openVideo(video?.slug)}
-                    >
+                    <div className={styles.videoThumbnailWrapper}>
                       <DatoImageFocused
                         data={video?.thumbnail.responsiveImage}
                         focalPoint={video?.thumbnail.focalPoint}
@@ -108,7 +109,7 @@ export const LeadershipVideos = ({ data, videos, ...props }: Props) => {
                     <div className={styles.videoDescription}>
                       <h2>{video?.title}</h2>
                     </div>
-                  </div>
+                  </Link>
                 )
               })}
           </Slider>

@@ -2,7 +2,7 @@ import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 
 import { Article } from '@/features/articles'
-import { NewsletterFragment } from '@/features/leadership'
+import { NewsletterFragment } from '@/features/leadership-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
