@@ -20,7 +20,7 @@ export async function generateStaticParams() {
   } = await datoRequest<Queries.AllTeamMemberModalQuery>({
     query: gql`
       query AllTeamMemberModal {
-        allTeamMembers(first: 10000) {
+        allTeamMembers(first: 999) {
           slug
         }
       }

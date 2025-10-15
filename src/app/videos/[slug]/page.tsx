@@ -21,7 +21,7 @@ export async function generateStaticParams() {
   } = await datoRequest<Queries.AllVideoPageQuery>({
     query: gql`
       query AllVideoPage {
-        allVideos(first: 10000) {
+        allVideos(first: 999) {
           slug
         }
       }

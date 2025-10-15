@@ -22,7 +22,7 @@ export async function generateStaticParams() {
   } = await datoRequest<Queries.AllNewsletterModalQuery>({
     query: gql`
       query AllNewsletterModal {
-        allNewsletters(first: 10000) {
+        allNewsletters(first: 999) {
           slug
         }
       }

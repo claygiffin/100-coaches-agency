@@ -31,7 +31,7 @@ export async function generateStaticParams() {
   } = await datoRequest<Queries.AllBookPageQuery>({
     query: gql`
       query AllBookPage {
-        allBooks(first: 10000) {
+        allBooks(first: 999) {
           slug
         }
       }

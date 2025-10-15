@@ -17,7 +17,7 @@ export const dynamic = 'force-static'
 
 const query = gql`
   query AllCoachesPage {
-    allCoaches(first: 10000) {
+    allCoaches(first: 999) {
       ...CoachProfile
     }
     allCoachCategories {

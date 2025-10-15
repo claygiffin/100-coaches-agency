@@ -22,7 +22,7 @@ export async function generateStaticParams() {
   } = await datoRequest<Queries.AllCoachProfileModalQuery>({
     query: gql`
       query AllCoachProfileModal {
-        allCoaches(first: 10000) {
+        allCoaches(first: 999) {
           slug
         }
       }

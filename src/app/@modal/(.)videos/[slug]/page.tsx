@@ -22,7 +22,7 @@ export async function generateStaticParams() {
   } = await datoRequest<Queries.AllVideoModalQuery>({
     query: gql`
       query AllVideoModal {
-        allVideos(first: 10000) {
+        allVideos(first: 999) {
           slug
         }
       }

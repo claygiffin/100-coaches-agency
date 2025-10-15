@@ -35,7 +35,7 @@ export async function generateStaticParams() {
   } = await datoRequest<Queries.AllInteriorPageQuery>({
     query: gql`
       query AllInteriorPage {
-        allInteriorPages(first: 5000) {
+        allInteriorPages(first: 999) {
           slug
         }
       }
