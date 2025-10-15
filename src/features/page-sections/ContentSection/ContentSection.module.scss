@@ -20,14 +20,15 @@
   &[data-layout='TEXT_QUOTE'] {
     grid-auto-flow: dense;
     gap: var(--gtr-72);
-    &:nth-child(odd) {
+    &[data-flip='true'] {
       grid-template-columns: 4fr 3fr;
     }
-    &:nth-child(even) {
+    &[data-flip='false'] {
       grid-template-columns: 3fr 4fr;
     }
     @include media('<m') {
-      &:nth-child(n) {
+      &,
+      &[data-flip] {
         grid-template-columns: 1fr;
       }
     }
@@ -102,11 +103,11 @@
   .section[data-layout='TEXT'] & {
     display: contents;
   }
-  .section:nth-child(odd) & {
+  .section[data-flip='true'] & {
     grid-column: 1 / span 1;
     --zero-right: 0px;
   }
-  .section:nth-child(even) & {
+  .section[data-flip='false'] & {
     grid-column: span 1 / -1;
     --zero-left: 0px;
   }

@@ -109,16 +109,24 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
     variables: { slug },
   })
   if (!interiorPage) return
+  let altIndex = 0
   return (
     <main>
       <PageHero data={interiorPage.hero} />
       {interiorPage.content.map(section => {
         switch (section.__typename) {
           case 'ContentSectionRecord': {
+            if (
+              section.layout === 'TEXT_MEDIA' ||
+              section.layout === 'TEXT_QUOTE'
+            ) {
+              altIndex += 1
+            }
             return (
               <ContentSection
                 data={section}
                 key={section.id}
+                data-flip={altIndex % 2 ? true : false}
               />
             )
           }
@@ -147,10 +155,12 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
             )
           }
           case 'BioSectionRecord': {
+            altIndex += 1
             return (
               <BioSection
                 data={section}
                 key={section.id}
+                data-flip={altIndex % 2 ? true : false}
               />
             )
           }
