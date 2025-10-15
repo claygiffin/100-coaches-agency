@@ -56,7 +56,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 
 const AboutPage: NextPage = async () => {
   const {
-    data: { aboutPage, allTeamMembers },
+    data: { aboutPage },
   } = await datoRequest<Queries.AboutPageQuery>({
     query,
   })

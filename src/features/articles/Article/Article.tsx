@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { StructuredText } from 'react-datocms'
 
 import { DatoImage, DatoImageFocused } from '@/features/dato-image'
 import { DatoStructuredText } from '@/features/dato-structured-text'

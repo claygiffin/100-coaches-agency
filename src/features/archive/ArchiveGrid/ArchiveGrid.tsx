@@ -1,8 +1,12 @@
 'use client'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation'
 import type { ComponentProps } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BiChevronDown } from 'react-icons/bi'
 
 import { DatoLink } from '@/features/links'
@@ -87,7 +91,7 @@ export const ArchiveGrid = ({ initialCategory, pageData }: Props) => {
       newParams.set('category', selectedCategory)
       router.push(pathname + '?' + newParams)
     }
-  }, [selectedCategory])
+  }, [selectedCategory, pathname, router, searchParams])
 
   return (
     <main className={styles.main}>

@@ -6,7 +6,7 @@ import {
   type StructuredTextPropTypes,
 } from 'react-datocms/structured-text'
 
-import { linksRule, noEmptyParagraphsRule } from './customNodeRules'
+import { linksRule } from './customNodeRules'
 
 interface Props<
   R1 extends
