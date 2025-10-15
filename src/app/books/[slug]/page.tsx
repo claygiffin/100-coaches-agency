@@ -11,9 +11,12 @@ import {
 // import { BookDescription } from '@/features/books'
 import { BookFragment } from '@/features/leadership-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
+import { Breadcrumb } from '@/features/ui'
 import { datoRequest } from '@/lib/datocms-fetch'
 
 // export const dynamic = 'force-static'
+
+import styles from './booksPage.module.scss'
 
 type Props = {
   params: Promise<{
@@ -82,6 +85,13 @@ const BookPage: NextPage<Props> = async ({ params }) => {
 
   return (
     <main>
+      <Breadcrumb
+        trail={[
+          { title: 'Thought Leadership', path: '/thought-leadership' },
+          { title: 'Books', path: '/archive?category=book' },
+        ]}
+        className={styles.breadcrumb}
+      />
       <BookHero book={book} />
       {/* <BookDescription book={book} /> */}
       <BookTestimonials book={book} />

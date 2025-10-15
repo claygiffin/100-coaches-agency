@@ -1,0 +1,21 @@
+.container {
+  font-size: var(--fs-14);
+}
+.link {
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-gray40);
+  @media (hover: hover) {
+    &:hover {
+      color: var(--color-goldShade1);
+    }
+  }
+}
+.divider {
+  display: inline-block;
+  margin: 0 0.5em;
+  opacity: 0.25;
+  &:before {
+    content: '/';
+  }
+}
