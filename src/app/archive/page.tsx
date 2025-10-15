@@ -14,6 +14,8 @@ import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './archive.module.scss'
 
+export const dynamic = 'force-static'
+
 // GraphQL query
 const query = gql`
   query ArchivePage {

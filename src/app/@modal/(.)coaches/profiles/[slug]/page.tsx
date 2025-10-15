@@ -6,7 +6,7 @@ import { CoachProfile, CoachProfileFragment } from '@/features/coaches'
 import { Modal } from '@/features/modal'
 import { datoRequest } from '@/lib/datocms-fetch'
 
-// export const dynamic = 'force-static'
+// // export const dynamic = 'force-static'
 
 type Props = {
   params: Promise<{

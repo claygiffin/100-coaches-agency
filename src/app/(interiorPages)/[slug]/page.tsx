@@ -26,6 +26,9 @@ type Props = {
   }>
 }
 
+// export const dynamic = 'force-static'
+export const dynamicParams = false
+
 export async function generateStaticParams() {
   const {
     data: { allInteriorPages },

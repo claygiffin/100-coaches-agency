@@ -7,7 +7,7 @@ import { Modal } from '@/features/modal'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
-// export const dynamic = 'force-static'
+// // export const dynamic = 'force-static'
 
 type Props = {
   params: Promise<{

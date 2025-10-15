@@ -14,9 +14,10 @@ import { generateDatoCmsMetadata } from '@/features/seo'
 import { Breadcrumb } from '@/features/ui'
 import { datoRequest } from '@/lib/datocms-fetch'
 
-// export const dynamic = 'force-static'
-
 import styles from './booksPage.module.scss'
+
+// export const dynamic = 'force-static'
+export const dynamicParams = false
 
 type Props = {
   params: Promise<{

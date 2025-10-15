@@ -24,6 +24,8 @@ import {
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
+// export const dynamic = 'force-static'
+
 const query = gql`
   query LeadershipPage {
     thoughtLeadershipPage {
