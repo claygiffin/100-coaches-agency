@@ -23,17 +23,17 @@ export const Card: React.FC<CardProps> = ({
   slug,
   thumbnail,
 }) => {
-  const isVideo = type === 'Video'
+  const isVideo = type === 'Videos'
 
   const getSlug = () => {
     switch (type) {
-      case 'Book':
+      case 'Books':
         return `/books/${slug}`
-      case 'Newsletter':
+      case 'Newsletters':
         return `/newsletters/${slug}`
-      case 'Article':
+      case 'Articles':
         return `/articles/${slug}`
-      case 'Video':
+      case 'Videos':
         return `/videos/${slug}`
       default:
         return `/`
@@ -44,7 +44,7 @@ export const Card: React.FC<CardProps> = ({
     <Link
       className={styles.card}
       href={getSlug()}
-      scroll={slug.includes('/books/')}
+      scroll={getSlug().includes('\/books\/')}
     >
       <div className={styles.imageContainer}>
         {isVideo ? (
