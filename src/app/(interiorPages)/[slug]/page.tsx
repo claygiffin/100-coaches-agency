@@ -19,6 +19,7 @@ import {
 } from '@/features/page-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
+import { notFound } from 'next/navigation'
 
 type Props = {
   params: Promise<{
@@ -111,7 +112,7 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
     query,
     variables: { slug },
   })
-  if (!interiorPage) return
+  if (!interiorPage) notFound()
   let altIndex = 0
   return (
     <main>
