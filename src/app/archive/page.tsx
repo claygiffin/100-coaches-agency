@@ -77,7 +77,7 @@ const ArchivePage: NextPage<Props> = async ({ searchParams }) => {
   return (
     <main className={styles.main}>
       <ArchiveGrid
-        initialCategory={category || 'all content'}
+        initialCategory={category || 'All Content'}
         pageData={data}
       />
     </main>

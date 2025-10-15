@@ -42,7 +42,7 @@ export const LeadershipBooks = ({ data, books, ...props }: Props) => {
         <DatoLink
           data={data?.booksArchiveButton}
           className={styles.archiveButton}
-          searchParam={{ field: 'category', value: 'book' }}
+          searchParam={{ field: 'category', value: 'Books' }}
           iconType={'ARROW_RIGHT'}
         />
       </div>

@@ -88,7 +88,7 @@ const BookPage: NextPage<Props> = async ({ params }) => {
       <Breadcrumb
         trail={[
           { title: 'Thought Leadership', path: '/thought-leadership' },
-          { title: 'Books', path: '/archive?category=book' },
+          { title: 'Books', path: '/archive?category=Books' },
         ]}
         className={styles.breadcrumb}
       />

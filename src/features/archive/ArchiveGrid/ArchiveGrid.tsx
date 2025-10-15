@@ -16,11 +16,11 @@ import { Card } from '../Card/Card'
 import styles from './ArchiveGrid.module.scss'
 
 const categories = [
-  'all content',
-  'article',
-  'video',
-  'newsletter',
-  'book',
+  'All Content',
+  'Articles',
+  'Videos',
+  'Newsletters',
+  'Books',
 ]
 
 type Props = ComponentProps<'section'> & {
@@ -43,21 +43,29 @@ export const ArchiveGrid = ({ initialCategory, pageData }: Props) => {
 
   useEffect(() => {
     if (!pageData) return
-
-    const items = [
+    const allItems = [
       ...(pageData?.allArticles || []),
       ...(pageData?.allBooks || []),
       ...(pageData?.allNewsletters || []),
       ...(pageData?.allVideos || []),
-    ].map(item => ({
-      type:
-        item?.__typename === 'ArticleRecord'
-          ? 'Article'
-          : item?.__typename === 'BookRecord'
-            ? 'Book'
-            : item?.__typename === 'VideoRecord'
-              ? 'Video'
-              : 'Newsletter',
+    ]
+
+    const getType = (item: any) => {
+      switch (item.__typename) {
+        default:
+        case 'ArticleRecord':
+          return 'Articles'
+        case 'BookRecord':
+          return 'Books'
+        case 'NewsletterRecord':
+          return 'Newsletters'
+        case 'VideoRecord':
+          return 'Videos'
+      }
+    }
+
+    const items = allItems.map(item => ({
+      type: getType(item),
       description: item?.title || '',
       date: item?.createdAt || '',
       slug: item?.slug || '',
@@ -74,7 +82,7 @@ export const ArchiveGrid = ({ initialCategory, pageData }: Props) => {
 
   // Optional: Filtered items based on selected initialCategory
   const filteredItems =
-    selectedCategory === 'all content'
+    selectedCategory === 'All Content'
       ? allItems
       : allItems.filter(
           item =>
