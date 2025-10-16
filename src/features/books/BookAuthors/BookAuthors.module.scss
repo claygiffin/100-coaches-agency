@@ -69,15 +69,38 @@
         grid-template-columns: 1fr;
       }
       .photoWrapper {
+        position: relative;
         display: grid;
         width: 3em;
         max-width: 100%;
         justify-self: center;
+        @include aspect-ratio(1);
+        // border-radius: 50%;
+        // overflow: hidden;
+        clip-path: circle();
+        background: linear-gradient(
+          to right,
+          var(--color-gold),
+          var(--color-goldShade2)
+        );
+        &:before {
+          content: '';
+          position: absolute;
+          width: 300%;
+          height: 300%;
+          border-radius: 50%;
+          background: linear-gradient(
+            to right,
+            var(--color-goldShade1),
+            var(--color-goldShade4)
+          );
+          top: 54%;
+          left: 50%;
+          transform: translate(-50%, 0);
+        }
         .photo {
           width: 100%;
-          @include aspect-ratio(1);
-          border-radius: 50%;
-          overflow: hidden;
+          height: 100%;
         }
       }
       .description {

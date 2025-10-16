@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { BookAuthorFragment } from '@/features/books'
 import { ResponsiveImageFragment } from '@/features/dato-image'
 import {
   ExternalLinkFragment,
@@ -34,20 +35,7 @@ export const BookFragment = gql`
     }
     subtitle
     authors {
-      name
-      title
-      bio {
-        value
-      }
-      photo {
-        responsiveImage {
-          ...ResponsiveImage
-        }
-        focalPoint {
-          x
-          y
-        }
-      }
+      ...BookAuthor
     }
     purchaseLink {
       ... on ExternalLinkRecord {
@@ -91,6 +79,7 @@ export const BookFragment = gql`
   ${PageLinkFragment}
   ${PdfFragment}
   ${BookTestimonialFragment}
+  ${BookAuthorFragment}
 `
 
 export const LeadershipBooksFragment = gql`
