@@ -138,9 +138,10 @@
     align-items: center;
   }
   .coachImage {
+    border-radius: 0.25em;
+    overflow: hidden;
     @include media('<s') {
       @include aspect-ratio(1);
-      border-radius: 0.2em;
       overflow: hidden;
     }
   }
