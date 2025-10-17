@@ -28,10 +28,10 @@ export const LeadershipCoursesFragment = gql`
       responsiveImage {
         ...ResponsiveImage
       }
-      focalPoint {
-        x
-        y
-      }
+      url
+      width
+      height
+      format
     }
     coursesDescription {
       value
