@@ -1,5 +1,6 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import { CoachProfile, TeamMemberFragment } from '@/features/coaches'
 import { generateDatoCmsMetadata } from '@/features/seo'
@@ -7,7 +8,7 @@ import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './teamMemberPage.module.scss'
 
-// export const dynamic = 'force-static'
+export const dynamic = 'force-static'
 export const dynamicParams = false
 
 type Props = {
@@ -66,6 +67,8 @@ const TeamMemberModal: NextPage<Props> = async ({ params }) => {
     query,
     variables: { slug },
   })
+  if (!teamMember) notFound()
+
   return (
     <main className={styles.layout}>
       <CoachProfile data={teamMember} />

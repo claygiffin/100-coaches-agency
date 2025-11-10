@@ -16,7 +16,7 @@ import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './booksPage.module.scss'
 
-// export const dynamic = 'force-static'
+export const dynamic = 'force-static'
 export const dynamicParams = false
 
 type Props = {

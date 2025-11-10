@@ -1,5 +1,6 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import { FormModal, FormModalFragment } from '@/features/form'
 import { generateDatoCmsMetadata } from '@/features/seo'
@@ -7,7 +8,7 @@ import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './formPage.module.scss'
 
-// export const dynamic = 'force-static'
+export const dynamic = 'force-static'
 export const dynamicParams = false
 
 type Props = {
@@ -70,6 +71,8 @@ const FormPage: NextPage<Props> = async ({ params }) => {
     query,
     variables: { slug },
   })
+  if (!formModal) notFound()
+
   return (
     <main className={styles.main}>
       <FormModal

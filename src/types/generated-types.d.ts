@@ -8196,6 +8196,11 @@ type NewsletterPageQuery = { __typename?: 'Query', newsletter?: { __typename: 'N
          }
      | null, thumbnail: { __typename?: 'ImageFileField', alt?: string | null, title?: string | null, responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null }, focalPoint: { __typename?: 'focalPoint', x: number, y: number } } } | null };
 
+type SitemapQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SitemapQuery = { __typename?: 'Query', allInteriorPages: Array<{ __typename?: 'InteriorPageRecord', slug: string }>, allArticles: Array<{ __typename?: 'ArticleRecord', slug: string }>, allBooks: Array<{ __typename?: 'BookRecord', slug: string }>, allCoaches: Array<{ __typename?: 'CoachRecord', slug: string }>, allCoachCategories: Array<{ __typename?: 'CoachCategoryRecord', categorySlug: string }>, allFormModals: Array<{ __typename?: 'FormModalRecord', slug: string }>, allNewsletters: Array<{ __typename?: 'NewsletterRecord', slug: string }>, allTeamMembers: Array<{ __typename?: 'TeamMemberRecord', slug: string }>, allVideos: Array<{ __typename?: 'VideoRecord', slug: string }> };
+
 type LeadershipPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 

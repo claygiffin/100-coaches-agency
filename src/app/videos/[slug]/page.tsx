@@ -1,12 +1,13 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import { Article } from '@/features/articles'
 import { VideoFragment } from '@/features/leadership-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
-// export const dynamic = 'force-static'
+export const dynamic = 'force-static'
 export const dynamicParams = false
 
 type Props = {
@@ -69,6 +70,8 @@ const VideoPage: NextPage<Props> = async ({ params }) => {
     query,
     variables: { slug },
   })
+  if (!video) notFound()
+
   return (
     <main>
       <Article

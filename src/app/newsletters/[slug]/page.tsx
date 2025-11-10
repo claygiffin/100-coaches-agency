@@ -1,5 +1,6 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import { Article } from '@/features/articles'
 import { NewsletterFragment } from '@/features/leadership-sections'
@@ -8,7 +9,7 @@ import { datoRequest } from '@/lib/datocms-fetch'
 
 import styles from './article.module.scss'
 
-// export const dynamic = 'force-static'
+export const dynamic = 'force-static'
 export const dynamicParams = false
 
 type Props = {
@@ -72,6 +73,7 @@ const NewsletterPage: NextPage<Props> = async ({ params }) => {
     query,
     variables: { slug },
   })
+  if (!newsletter) notFound()
 
   return (
     <main className={styles.main}>
