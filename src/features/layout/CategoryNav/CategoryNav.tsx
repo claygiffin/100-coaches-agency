@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Fragment, useState } from 'react'
+import { Fragment, useRef, useState } from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 
 import {
@@ -27,16 +27,15 @@ export const CategoryNav = ({
   allLink,
   theme = 'DARK',
 }: PropTypes) => {
-  const [navRef, setNavRef] = useState<HTMLElement | null>(null)
+  const navRef = useRef<HTMLDivElement>(null)
 
   const navWidth = useElementWidth(navRef)
 
-  const [widthRef, setWidthRef] = useState<HTMLElement | null>(null)
+  const widthRef = useRef<HTMLDivElement>(null)
 
   const containerWidth = useElementWidth(widthRef)
 
-  const [collapsedContainerRef, setCollapsedContainerRef] =
-    useState<HTMLElement | null>(null)
+  const collapsedContainerRef = useRef<HTMLDivElement>(null)
 
   const collapsedContainerHeight =
     useElementHeight(collapsedContainerRef) || 0
@@ -53,7 +52,7 @@ export const CategoryNav = ({
     <Fragment>
       <div
         className={styles.widthCheck}
-        ref={node => setWidthRef(node)}
+        ref={widthRef}
       />
       <nav
         className={styles.nav}
@@ -69,7 +68,7 @@ export const CategoryNav = ({
       >
         <div
           className={styles.navItems}
-          ref={node => setNavRef(node)}
+          ref={navRef}
         >
           {categories?.map((category: any, i: number) => (
             <Link
@@ -107,7 +106,7 @@ export const CategoryNav = ({
               <FiChevronDown />
             </button>
             <div className={styles.navItemsCollapsed}>
-              <div ref={node => setCollapsedContainerRef(node)}>
+              <div ref={collapsedContainerRef}>
                 {categories?.map((category: any, i: number) => {
                   if (category.categoryName !== current) {
                     return (

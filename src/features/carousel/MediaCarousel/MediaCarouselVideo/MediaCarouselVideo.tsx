@@ -1,4 +1,4 @@
-import { type ComponentProps, useEffect, useState } from 'react'
+import { type ComponentProps, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import {
@@ -29,10 +29,12 @@ export const MediaCarouselVideo = ({
   className,
   ...props
 }: Props) => {
-  const [ref, setRef] = useState<HTMLElement | null>(null)
+  const ref = useRef<HTMLElement>(null)
+  const [rootRef, setRootRef] = useState<HTMLElement | null>(null)
+
   const { inView, ref: inViewRef } = useInView({
     rootMargin: '100% -50%',
-    root: !isSingle ? ref?.parentElement?.parentElement : undefined,
+    root: !isSingle ? rootRef?.parentElement?.parentElement : undefined,
   })
   const { height, width } = useElementRect(ref)
 
@@ -85,7 +87,7 @@ export const MediaCarouselVideo = ({
             className={classes(styles.video, styles.internal)}
             inViewRoot={
               !isSingle
-                ? ref?.parentElement?.parentElement || undefined
+                ? rootRef?.parentElement?.parentElement || undefined
                 : undefined
             }
             onPlay={() => setHasPlayed(true)}
@@ -102,7 +104,7 @@ export const MediaCarouselVideo = ({
             onPlay={() => setHasPlayed(true)}
             inViewRoot={
               !isSingle
-                ? ref?.parentElement?.parentElement || undefined
+                ? rootRef?.parentElement?.parentElement || undefined
                 : undefined
             }
             style={{
@@ -123,7 +125,8 @@ export const MediaCarouselVideo = ({
       data-orientation={getOrientation()}
       ref={node => {
         inViewRef(node)
-        setRef(node)
+        setRootRef(node)
+        ref.current = node
       }}
       style={{ '--aspect-ratio': getAspectRatio() }}
       {...props}

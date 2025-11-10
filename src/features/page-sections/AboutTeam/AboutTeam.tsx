@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useState } from 'react'
+import { useId, useRef } from 'react'
 
 import { CoachCategoryThumbnail } from '@/features/coaches'
 import {
@@ -16,7 +16,7 @@ type Props = {
 }
 export const AboutTeam = ({ heading, team }: Props) => {
   const clipId = useId()
-  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const sectWidth = useElementWidth(sectionRef) || 0
   const sectHeight = useElementHeight(sectionRef) || 0
 
@@ -24,7 +24,7 @@ export const AboutTeam = ({ heading, team }: Props) => {
     <section
       className={styles.section}
       style={{ '--clip-id-url': `url(#${clipId})` }}
-      ref={node => setSectionRef(node)}
+      ref={sectionRef}
     >
       <svg
         width="0"

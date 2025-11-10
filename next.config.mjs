@@ -4,9 +4,6 @@ const nextConfig = {
   //   staticGenerationMaxConcurrency: 1,
   //   staticGenerationRetryCount: 3,
   // },
-  eslint: {
-    dirs: ['src'],
-  },
   images: {
     remotePatterns: [
       {

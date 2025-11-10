@@ -6,7 +6,7 @@ import {
   type Dispatch,
   type SetStateAction,
   useLayoutEffect,
-  useState,
+  useRef,
 } from 'react'
 import { useInView } from 'react-intersection-observer'
 
@@ -29,9 +29,7 @@ export const Testimonial = ({
   ...props
 }: Props) => {
   const { inView, ref } = useInView({ rootMargin: '100% -49%' })
-  const [heightRef, setHeightRef] = useState<HTMLDivElement | null>(
-    null
-  )
+  const heightRef = useRef<HTMLElement>(null)
   const height = useElementHeight(heightRef)
   useLayoutEffect(() => {
     if (setCarouselHeight && inView) {
@@ -68,7 +66,7 @@ export const Testimonial = ({
       data-variant={variant}
       ref={node => {
         ref(node)
-        setHeightRef(node)
+        heightRef.current = node
       }}
       {...props}
     >

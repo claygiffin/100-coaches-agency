@@ -1,0 +1,90 @@
+.container {
+}
+.hero {
+  z-index: 4;
+  min-height: calc(100svh - var(--nav-height) - var(--alert-height));
+  box-sizing: border-box;
+  padding: var(--row-72) var(--margin);
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  color: #fff;
+  h1 {
+    font-size: var(--fs-21);
+    text-transform: uppercase;
+    font-family: var(--ff-body);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin: 0 0 2em;
+  }
+  .matchcraft {
+    display: grid;
+    --flourish-color: currentColor;
+    --flourish-width: 100%;
+    h2 {
+      font-size: var(--fs-84);
+      text-transform: uppercase;
+      margin: 0.25em 0;
+      font-weight: 325;
+    }
+  }
+  .heroDescription {
+    font-size: var(--fs-24);
+    max-width: 21em;
+    text-align: center;
+  }
+}
+.intro {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  padding: 90svh var(--margin) 0;
+  justify-items: center;
+  > div {
+    font-size: var(--fs-24);
+    font-family: var(--ff-display);
+    max-width: 50ch;
+  }
+}
+.steps {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  .stepInterstitial {
+    height: 100lvh;
+    margin-bottom: 100lvh;
+    width: 100%;
+  }
+  ol {
+    appearance: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+  }
+}
+.outro {
+  position: relative;
+  z-index: 4;
+  color: #fff;
+  padding-top: 50lvh;
+  padding-bottom: calc(5lvh + 2 * var(--row-144));
+  display: grid;
+  justify-content: center;
+  font-size: var(--fs-24);
+
+  > div {
+    max-width: 50ch;
+    p {
+      font-family: var(--ff-display);
+    }
+  }
+  h2 {
+    font-size: var(--fs-48);
+    text-align: center;
+    em {
+      font-style: normal;
+      color: var(--color-goldTint1);
+    }
+  }
+}

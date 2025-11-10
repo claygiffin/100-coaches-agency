@@ -77,6 +77,11 @@
   @each $name, $value in variables.$colors {
     #{"--color-" + $name}: $value;
   }
+
+  // Breakpoints
+  @each $name, $value in variables.$breakpoints {
+    #{"--breakpoint-" + $name}: strip-unit($value);
+  }
 }
 
 html {

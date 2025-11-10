@@ -1,6 +1,6 @@
 'use client'
 
-import { type ComponentProps, useState } from 'react'
+import { type ComponentProps, useRef, useState } from 'react'
 
 import { Carousel } from '@/features/carousel'
 import { Testimonial } from '@/features/testimonials'
@@ -21,14 +21,13 @@ export const TestimonialCarousel = ({
   ...props
 }: Props) => {
   const [carouselHeight, setCarouselHeight] = useState<number>()
-  const [containerRef, setContainerRef] =
-    useState<HTMLDivElement | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const containerWidth = useElementWidth(containerRef)
   return (
     <div
       className={classes(styles.container, className)}
-      ref={setContainerRef}
+      ref={containerRef}
     >
       <Carousel
         snap={true}

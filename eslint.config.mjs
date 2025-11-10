@@ -1,61 +1,37 @@
-import { fixupPluginRules } from '@eslint/compat'
-import { FlatCompat } from '@eslint/eslintrc'
-import js from '@eslint/js'
-import prettier from 'eslint-plugin-prettier/recommended'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import unusedImports from 'eslint-plugin-unused-imports'
-import globals from 'globals'
-import path from 'node:path'
-import { fileURLToPath } from 'node:url'
-import tseslint from 'typescript-eslint'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-  recommendedConfig: js.configs.recommended,
-  allConfig: js.configs.all,
-})
+export default defineConfig([
+  // Next.js recommended rules (Core Web Vitals) + TypeScript rules
+  ...nextVitals,
+  ...nextTs,
+  globalIgnores([
+    // Defaults from eslint-config-next (keep these unless you need different):
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    // Your custom ignores:
+    '**/archive/*.ts',
+    '**/archive/*.tsx',
+    'node_modules',
+    'public',
+    '**/generated-types.d.ts',
+  ]),
 
-const pluginsToPatch = ['@next/next', 'react-hooks']
-
-const compatConfig = [...compat.extends('next/core-web-vitals')]
-
-const patchedConfig = compatConfig.map(entry => {
-  const plugins = entry.plugins
-  for (const key in plugins) {
-    if (plugins.hasOwnProperty(key) && pluginsToPatch.includes(key)) {
-      plugins[key] = fixupPluginRules(plugins[key])
-    }
-  }
-  return entry
-})
-
-export default tseslint.config(
   {
-    ignores: [
-      '**/archive/*.ts',
-      '**/archive/*.tsx',
-      '.next',
-      'node_modules',
-      'public',
-      '.cache',
-    ],
-  },
-  ...patchedConfig,
-  ...tseslint.configs.recommended,
-  prettier,
-  {
-    // extends: ['next/core-web-vitals', 'plugin:prettier/recommended'],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
-    },
     plugins: {
       'unused-imports': unusedImports,
     },
+  },
+  {
     rules: {
+      'react-hooks/set-state-in-effect': 'warn',
+      'react-hooks/refs': 'warn',
+      'react-hooks/purity': 'warn',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/consistent-type-imports': 'warn',
       'no-restricted-imports': [
@@ -77,5 +53,7 @@ export default tseslint.config(
         },
       ],
     },
-  }
-)
+  },
+  // Put the Prettier “recommended” last so it can disable conflicting stylistic rules
+  eslintPluginPrettierRecommended,
+])

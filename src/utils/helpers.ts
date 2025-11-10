@@ -24,3 +24,22 @@ export type PolymorphicComponentProps<
   T extends ElementType,
   Props extends object = Record<string, never>,
 > = Props & AsProp<T> & Omit<ComponentProps<T>, PropsToOmit<T, Props>>
+
+export const createThemeIndex = (start = -1) => {
+  type Action = { type: 'INCREASE'; by?: number } | { type: 'RESET' }
+  let index = start
+  return {
+    dispatch: (action: Action) => {
+      switch (action.type) {
+        case 'INCREASE':
+          index += action.by ?? 1
+          break
+        case 'RESET':
+          index = start
+          break
+      }
+    },
+    next: () => ++index,
+    value: index,
+  }
+}

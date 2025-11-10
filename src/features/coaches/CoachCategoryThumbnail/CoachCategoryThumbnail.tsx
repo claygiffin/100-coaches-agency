@@ -1,8 +1,10 @@
+'use client'
+
 import Link from 'next/link'
 import { useId } from 'react'
 
 import { DatoImage } from '@/features/dato-image'
-import variables from '@/theme/variables.module.scss'
+import { useVariables } from '@/hooks'
 
 import styles from './CoachCategoryThumbnail.module.scss'
 
@@ -12,6 +14,8 @@ type PropTypes = {
 }
 
 export const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
+  const { getBreakpoint, getColor } = useVariables()
+
   const gradientId = useId()
   const getSlug = () => {
     switch (coach.__typename) {
@@ -43,19 +47,19 @@ export const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
               id={gradientId}
             >
               <stop
-                stopColor={variables.color_goldShade3}
+                stopColor={getColor('goldShade3')}
                 offset="0%"
               />
               <stop
-                stopColor={variables.color_goldShade2}
+                stopColor={getColor('goldShade2')}
                 offset="30%"
               />
               <stop
-                stopColor={variables.color_goldShade1}
+                stopColor={getColor('goldShade1')}
                 offset="60%"
               />
               <stop
-                stopColor={variables.color_gold}
+                stopColor={getColor('gold')}
                 offset="100%"
               />
             </linearGradient>
@@ -79,7 +83,7 @@ export const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
             coach.photo.responsiveImage?.alt ||
             `${coach.name} — ${coach.jobTitle}`
           }
-          sizes={`(max-width: ${variables.breakpoint_ms}px) 45vw, (max-width: ${variables.breakpoint_ml}px) 30vw, 20vw`}
+          sizes={`(max-width: ${getBreakpoint('ms')}px) 45vw, (max-width: ${getBreakpoint('ml')}px) 30vw, 20vw`}
         />
       </div>
       <div className={styles.text}>

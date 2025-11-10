@@ -1,16 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { useId, useState } from 'react'
+import { useId, useRef } from 'react'
 import { StructuredText } from 'react-datocms'
 
 import { DatoImage } from '@/features/dato-image'
 import { ArrowButton } from '@/features/ui'
+import { useVariables } from '@/hooks'
 import {
   useElementHeight,
   useElementWidth,
 } from '@/hooks/useElementRect'
-import variables from '@/theme/variables.module.scss'
 
 import styles from './CoachProfile.module.scss'
 
@@ -23,12 +23,11 @@ type CoachProfileProps = {
 }
 
 export const CoachProfile = ({ data }: CoachProfileProps) => {
-  const [headerBgRef, setHeaderBgRef] = useState<HTMLDivElement | null>(
-    null
-  )
+  const { getBreakpoint, getColor } = useVariables()
+  const ref = useRef<HTMLDivElement>(null)
 
-  const bgWidth = useElementWidth(headerBgRef) || 0
-  const bgHeight = useElementHeight(headerBgRef) || 0
+  const bgWidth = useElementWidth(ref) || 0
+  const bgHeight = useElementHeight(ref) || 0
 
   const clipId = useId()
   const gradientId = useId()
@@ -44,7 +43,7 @@ export const CoachProfile = ({ data }: CoachProfileProps) => {
       <section className={styles.header}>
         <div
           className={styles.headerBg}
-          ref={node => setHeaderBgRef(node)}
+          ref={ref}
         >
           <svg viewBox="0 0 948 58">
             <defs>
@@ -56,19 +55,19 @@ export const CoachProfile = ({ data }: CoachProfileProps) => {
                 id={gradientId}
               >
                 <stop
-                  stopColor={variables.color_gold}
+                  stopColor={getColor('gold')}
                   offset="0%"
                 />
                 <stop
-                  stopColor={variables.color_goldShade1}
+                  stopColor={getColor('goldShade1')}
                   offset="40%"
                 />
                 <stop
-                  stopColor={variables.color_goldShade2}
+                  stopColor={getColor('goldShade2')}
                   offset="80%"
                 />
                 <stop
-                  stopColor={variables.color_goldShade3}
+                  stopColor={getColor('goldShade3')}
                   offset="100%"
                 />
               </linearGradient>
@@ -106,7 +105,7 @@ export const CoachProfile = ({ data }: CoachProfileProps) => {
               `${data?.name} — ${data?.jobTitle}`
             }
             objectPosition="0% 0%"
-            sizes={`(max-width: ${variables.breakpoint_ms}px) 50vw, (max-width: ${variables.breakpoint_ml}px) 33vw, 25vw`}
+            sizes={`(max-width: ${getBreakpoint('ms')}px) 50vw, (max-width: ${getBreakpoint('ml')}px) 33vw, 25vw`}
           />
         </div>
       </section>

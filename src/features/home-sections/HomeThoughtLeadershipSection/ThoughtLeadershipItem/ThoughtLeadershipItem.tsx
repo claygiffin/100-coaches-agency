@@ -4,7 +4,7 @@ import { DatoImageFocused } from '@/features/dato-image'
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
 import { MarkdownHeading } from '@/features/ui'
-import variables from '@/theme/variables.module.scss'
+import { useVariables } from '@/hooks/useVariables'
 
 import styles from './ThoughtLeadershipItem.module.scss'
 
@@ -20,6 +20,8 @@ export const ThoughtLeadershipItem = ({
   isActive,
   ...props
 }: Props) => {
+  const { getBreakpoint } = useVariables()
+
   return (
     <article
       className={styles.article}
@@ -30,7 +32,7 @@ export const ThoughtLeadershipItem = ({
         <DatoImageFocused
           data={data?.image?.responsiveImage}
           focalPoint={data?.image?.focalPoint}
-          sizes={`(max-width: ${variables.breakpoint_ml}px) 90vw, 50vw`}
+          sizes={`(max-width: ${getBreakpoint('ml')}px) 90vw, 50vw`}
         />
       </div>
       <div className={styles.content}>

@@ -6,7 +6,7 @@ import {
   useSearchParams,
 } from 'next/navigation'
 import type { ComponentProps } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { BiChevronDown } from 'react-icons/bi'
 
 import { DatoLink } from '@/features/links'
@@ -31,17 +31,17 @@ type Props = ComponentProps<'section'> & {
 export const ArchiveGrid = ({ initialCategory, pageData }: Props) => {
   const [selectedCategory, setSelectedCategory] =
     useState(initialCategory)
-  const [allItems, setAllItems] = useState<
-    Array<{
-      type: string
-      description: string
-      date: string
-      slug: string
-      thumbnail: any
-    }>
-  >([])
+  // const [allItems, setAllItems] = useState<
+  //   Array<{
+  //     type: string
+  //     description: string
+  //     date: string
+  //     slug: string
+  //     thumbnail: any
+  //   }>
+  // >([])
 
-  useEffect(() => {
+  const filteredItems = useMemo(() => {
     if (!pageData) return
     const allItems = [
       ...(pageData?.allArticles || []),
@@ -76,18 +76,13 @@ export const ArchiveGrid = ({ initialCategory, pageData }: Props) => {
     items.sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     )
-
-    setAllItems(items)
-  }, [pageData])
-
-  // Optional: Filtered items based on selected initialCategory
-  const filteredItems =
-    selectedCategory === 'All Content'
-      ? allItems
-      : allItems.filter(
-          item =>
-            item.type.toLowerCase() === selectedCategory.toLowerCase()
-        )
+    if (selectedCategory === 'All Content') {
+      return items
+    }
+    return items?.filter(
+      item => item.type.toLowerCase() === selectedCategory.toLowerCase()
+    )
+  }, [pageData, selectedCategory])
 
   const router = useRouter()
   const pathname = usePathname()
@@ -140,7 +135,7 @@ export const ArchiveGrid = ({ initialCategory, pageData }: Props) => {
         </div>
       </div>
       <div className={styles.cardLayout}>
-        {filteredItems.map((item, index) => (
+        {filteredItems?.map((item, index) => (
           <Card
             key={index}
             {...item}

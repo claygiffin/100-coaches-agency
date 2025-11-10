@@ -5,8 +5,8 @@ import { kebabCase } from 'lodash'
 import {
   type ChangeEvent,
   useCallback,
-  useEffect,
   useId,
+  useRef,
   useState,
 } from 'react'
 
@@ -39,15 +39,13 @@ export const FormTextField = ({ data, onChangeAction }: Props) => {
       setShrink(false)
     }
   }
-  useEffect(() => {
-    if (value.length > 0) {
-      setShrink(true)
-    }
-  }, [value])
 
   const handleChangeText = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setValue(e.target.value)
+      if (e.target.value.length > 0) {
+        setShrink(true)
+      }
       onChangeAction(name, e.target.value)
     },
     [name, onChangeAction]
@@ -58,7 +56,9 @@ export const FormTextField = ({ data, onChangeAction }: Props) => {
       const formatter = new AsYouType(countryCode)
       const formattedInput = formatter.input(input)
       setValue(formattedInput)
-
+      if (formattedInput.length > 0) {
+        setShrink(true)
+      }
       // Combine country code and national number for full E.164 format
       const fullNumber = formatter.getNumber()?.number || ''
       onChangeAction(name, fullNumber)
@@ -68,7 +68,7 @@ export const FormTextField = ({ data, onChangeAction }: Props) => {
 
   const uniqueId = useId()
 
-  const [labelRef, setLabelRef] = useState<HTMLElement | null>(null)
+  const labelRef = useRef<HTMLLabelElement>(null)
   const labelHeight = useElementHeight(labelRef)
 
   return (
@@ -80,7 +80,7 @@ export const FormTextField = ({ data, onChangeAction }: Props) => {
       <label
         htmlFor={name + uniqueId}
         className={styles.label}
-        ref={node => setLabelRef(node)}
+        ref={labelRef}
         data-shrink={shrink}
         data-required={data?.required}
       >

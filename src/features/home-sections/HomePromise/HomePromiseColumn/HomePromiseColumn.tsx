@@ -1,7 +1,5 @@
-'use client'
-
 import { clamp } from 'lodash'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useElementRect } from '@/hooks/useElementRect'
 
@@ -27,8 +25,8 @@ export const ShapeColumn = ({
   ...props
 }: ShapeProps) => {
   const [colRef, setColRef] = useState<HTMLElement | null>(null)
-  // const colRef = useRef<HTMLDivElement>(null)
-  const size = useElementRect(colRef)
+  const colSizeRef = useRef<HTMLDivElement>(null)
+  const size = useElementRect(colSizeRef)
   useEffect(() => {
     if (setColumnPosition && colRef && size) {
       setColumnPosition(colRef.offsetLeft || 0)
@@ -43,7 +41,10 @@ export const ShapeColumn = ({
           offset - 1
         }px * var(--translate-factor, 100)), 0)`,
       }}
-      ref={node => setColRef(node)}
+      ref={node => {
+        setColRef(node)
+        colSizeRef.current = node
+      }}
       data-offset-left={colRef?.offsetLeft}
       {...props}
     >

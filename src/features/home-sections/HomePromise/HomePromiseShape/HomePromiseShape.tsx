@@ -1,6 +1,4 @@
-'use client'
-
-import { useEffect, useMemo, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useElementRect } from '@/hooks/useElementRect'
 
@@ -18,15 +16,14 @@ export const Shape = ({
   setBrightenPosition,
   ...props
 }: ShapeProps) => {
-  const animationDelay = useMemo(() => Math.random() * -4000, [])
-  const triangleRotation = useMemo(
-    () => Math.floor(Math.random() * 4) * 90,
-    []
+  const animationDelay = useState(() => Math.random() * -4000)
+  const triangleRotation = useState(
+    () => Math.floor(Math.random() * 4) * 90
   )
   const shapeRef = useRef<HTMLDivElement>(null)
   // const [shapeRef, setShapeRef] = useState<HTMLDivElement | null>(null)
 
-  const size = useElementRect(shapeRef.current)
+  const size = useElementRect(shapeRef)
   const width = size.width || 0
   const height = size.height || 0
 

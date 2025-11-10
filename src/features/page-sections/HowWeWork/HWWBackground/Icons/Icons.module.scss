@@ -1,0 +1,30 @@
+.svg {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: auto;
+  opacity: 0;
+  transition: opacity 500ms ease;
+  div:has([data-active-phase='1']) > & {
+    opacity: 1;
+  }
+}
+.left {
+  left: 0;
+  div:has([data-active-phase='1']) > & {
+    opacity: 1;
+  }
+}
+.right {
+  right: 0;
+  div:has([data-active-phase='2']) > & {
+    opacity: 1;
+  }
+}
+.icon {
+  opacity: 0.25;
+  transition: opacity 500ms ease;
+  &[data-is-active='true'] {
+    opacity: 1;
+  }
+}

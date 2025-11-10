@@ -4,8 +4,8 @@ import { kebabCase } from 'lodash'
 import {
   type ChangeEvent,
   useCallback,
-  useEffect,
   useId,
+  useRef,
   useState,
 } from 'react'
 
@@ -34,18 +34,15 @@ export const FormSelectField = ({ data, onChangeAction }: Props) => {
     }
   }
 
-  useEffect(() => {
-    if (value.length > 0) {
-      setShrink(true)
-    }
-  }, [value])
-
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
       const idToOptionObject = data?.options?.find(
         option => option?.id === e.target.value
       )
       setValue(idToOptionObject?.value || '')
+      if ((idToOptionObject?.value.length || 0) > 0) {
+        setShrink(true)
+      }
       onChangeAction(name, idToOptionObject?.value || '')
     },
     [name, onChangeAction, data?.options]
@@ -53,11 +50,10 @@ export const FormSelectField = ({ data, onChangeAction }: Props) => {
 
   const uniqueId = useId()
 
-  const [labelRef, setLabelRef] = useState<HTMLElement | null>(null)
+  const labelRef = useRef<HTMLLabelElement>(null)
   const labelHeight = useElementHeight(labelRef)
 
-  const [activeOptionRef, setActiveOptionRef] =
-    useState<HTMLElement | null>(null)
+  const activeOptionRef = useRef<HTMLDivElement>(null)
   const activeOptionHeight = useElementHeight(activeOptionRef)
 
   return (
@@ -70,7 +66,7 @@ export const FormSelectField = ({ data, onChangeAction }: Props) => {
         className={styles.label}
         data-shrink={shrink}
         data-required={data?.required}
-        ref={node => setLabelRef(node)}
+        ref={labelRef}
       >
         {data?.label}
       </label>
@@ -79,7 +75,7 @@ export const FormSelectField = ({ data, onChangeAction }: Props) => {
         <div
           className={classes(styles.input, styles.inputValue)}
           aria-hidden
-          ref={node => setActiveOptionRef(node)}
+          ref={activeOptionRef}
         >
           {value}
         </div>

@@ -29,8 +29,8 @@ export const Form = ({
   className,
   ...props
 }: Props) => {
-  const [formRef, setFormRef] = useState<HTMLFormElement | null>(null)
-  const [successRef, setSuccessRef] = useState<HTMLElement | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
+  const successRef = useRef<HTMLDivElement>(null)
 
   const { height: formHeight } = useElementRect(formRef)
   const { height: successHeight } = useElementRect(successRef)
@@ -116,7 +116,7 @@ export const Form = ({
       />
 
       <div
-        ref={node => setSuccessRef(node)}
+        ref={successRef}
         className={styles.successMessage}
       >
         <DatoStructuredText data={data?.successMessage} />
@@ -124,7 +124,7 @@ export const Form = ({
 
       <form
         className={styles.form}
-        ref={node => setFormRef(node)}
+        ref={formRef}
         name={data?.formName || undefined}
         method="post"
         onSubmit={handleSubmit}

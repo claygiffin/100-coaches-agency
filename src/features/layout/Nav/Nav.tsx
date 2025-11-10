@@ -1,12 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import {
-  type ComponentProps,
-  Fragment,
-  useEffect,
-  useState,
-} from 'react'
+import { type ComponentProps, Fragment, useEffect, useRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { useNavMenuContext } from '@/contexts/navMenuContext'
@@ -26,7 +21,7 @@ type Props = ComponentProps<'div'> & {
 export const Nav = ({ data, className, ...props }: Props) => {
   const { inView: spacerInView, ref: spacerRef } = useInView()
 
-  const [navRef, setNavRef] = useState<HTMLElement | null>(null)
+  const navRef = useRef<HTMLElement>(null)
 
   const navHeight = useElementHeight(navRef) || 0
   const { navMenuIsOpen, setNavMenuIsOpen } = useNavMenuContext()
@@ -56,7 +51,7 @@ export const Nav = ({ data, className, ...props }: Props) => {
       >
         <nav
           className={styles.nav}
-          ref={node => setNavRef(node)}
+          ref={navRef}
         >
           <Link
             href="/"

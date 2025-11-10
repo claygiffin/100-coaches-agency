@@ -1,0 +1,61 @@
+@use '@/theme/mixins' as *;
+
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+.background {
+  @include absolute-fill;
+  opacity: 0;
+  transition: opacity 1000ms ease 1000ms;
+  &[data-is-active='true'] {
+    opacity: 1;
+    z-index: 2;
+    transition-delay: 0ms;
+  }
+  &[data-background-color='White'] {
+    background: linear-gradient(to bottom right, #f2f2f2, #eee);
+  }
+  &[data-background-color='Dark'] {
+    background: linear-gradient(to bottom right, #6d6d6d, #000);
+  }
+  &[data-background-color='Gold'] {
+    background: linear-gradient(
+      to bottom right,
+      #f5bd5d,
+      #df9b35,
+      #a66427
+    );
+  }
+}
+.inner {
+  position: absolute;
+  z-index: 3;
+  top: calc(50% + var(--nav-height) / 2);
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  height: 60lvh;
+  transition:
+    transform 1500ms var(--bezier-ease-out),
+    opacity 1000ms ease;
+  &:has([data-active-phase='1']) {
+    transform: translate3d(25%, -50%, 0) scale3d(1.5, 1.5, 1);
+  }
+  &:has([data-active-phase='2']) {
+    transform: translate3d(-125%, -50%, 0) scale3d(1.5, 1.5, 1);
+  }
+  div:is([data-keyframe='Phase1.0']) & {
+    transform: translate3d(-12.5%, -50%, 0) scale3d(1.75, 1.75, 1);
+  }
+  div:is([data-keyframe='Phase2.0']) & {
+    transform: translate3d(-87.5%, -50%, 0) scale3d(1.75, 1.75, 1);
+  }
+  div:is([data-keyframe='Hero'], [data-keyframe='Outro']) & {
+    opacity: 0.15;
+  }
+}

@@ -1,10 +1,14 @@
+'use client'
+
 import { useId } from 'react'
 
-import variables from '@/theme/variables.module.scss'
+import { useVariables } from '@/hooks/useVariables'
 
 import Fill from '../images/logo-loop-fill.png'
 
 export const LogoHorizontal = ({ ...props }) => {
+  const { getColor } = useVariables()
+
   const pathId = useId()
   const clipId = useId()
   const gradientId = useId()
@@ -23,15 +27,15 @@ export const LogoHorizontal = ({ ...props }) => {
           y2="0%"
         >
           <stop
-            stopColor={variables.color_goldShade2}
+            stopColor={getColor('goldShade2')}
             offset="0%"
           />
           <stop
-            stopColor={variables.color_goldShade1}
+            stopColor={getColor('goldShade1')}
             offset="45%"
           />
           <stop
-            stopColor={variables.color_gold}
+            stopColor={getColor('gold')}
             offset="90%"
           />
         </linearGradient>

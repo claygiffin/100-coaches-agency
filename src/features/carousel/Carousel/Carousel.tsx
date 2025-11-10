@@ -4,9 +4,11 @@ import throttle from 'lodash/throttle'
 import {
   type ComponentProps,
   type ReactNode,
+  type RefObject,
   useEffect,
   useRef,
   useState,
+  useSyncExternalStore,
 } from 'react'
 import { createPortal } from 'react-dom'
 import smoothscroll from 'smoothscroll-polyfill'
@@ -22,7 +24,7 @@ import {
 
 interface Props extends ComponentProps<'div'> {
   children: ReactNode
-  navContainer?: HTMLElement | null
+  navContainer?: RefObject<HTMLElement | null>
   navClass?: string
   scrollAreaClass?: string
   contentClass?: string
@@ -45,77 +47,97 @@ export const Carousel = ({
   className,
   ...props
 }: Props) => {
-  const [scrollPos, setScrollPos] = useState(0)
-
   const contentRef = useRef<HTMLDivElement>(null)
-  const sliderRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [sliderRef, setSliderRef] = useState<HTMLDivElement | null>(
+    null
+  )
   const scrollWidthRef = useRef<HTMLDivElement>(null)
 
-  const containerWidth = useElementWidth(sliderRef.current) || 0
-  const contentWidth = useElementWidth(contentRef.current) || 0
-  const scrollWidth = useElementWidth(scrollWidthRef.current) || 0
+  const containerWidth = useElementWidth(containerRef) || 0
+  const contentWidth = useElementWidth(contentRef) || 0
+  const scrollWidth = useElementWidth(scrollWidthRef) || 0
+  const outerRef = useRef<HTMLDivElement | null>(null)
 
-  const [loaded, setLoaded] = useState(false)
   useEffect(() => {
     smoothscroll.polyfill()
-    // Use loaded state so that carousel doesn't auto scroll to weird positions
-    setLoaded(true)
-    return () => {
-      setLoaded(false)
-    }
+    requestAnimationFrame(() =>
+      outerRef.current?.setAttribute('data-loaded', 'true')
+    )
   }, [])
 
-  useEffect(() => {
-    const sliderRefCopy = sliderRef.current
-    const scrollEffect = () => {
-      if (contentRef.current && sliderRef.current) {
-        setScrollPos(
-          contentRef.current.getBoundingClientRect().x -
-            sliderRef.current.getBoundingClientRect().x
-        )
-      }
-    }
-    const handleScroll = throttle(scrollEffect, 50)
+  const getScrollSnapshot = () => {
+    if (!contentRef.current || !sliderRef) return 0
+    return (
+      contentRef.current.getBoundingClientRect().x -
+      sliderRef.getBoundingClientRect().x
+    )
+  }
 
-    sliderRefCopy?.addEventListener('scroll', handleScroll)
+  const subscribeScroll = (onChange: () => void) => {
+    if (!sliderRef) return () => {}
+
+    // throttle notifications; do NOT set state
+    const notify = throttle(() => {
+      // just notify React that snapshot may have changed
+      onChange()
+    }, 50)
+
+    sliderRef.addEventListener('scroll', notify, { passive: true })
+    // window resize/orientation can also affect layout
+    window.addEventListener('resize', notify, { passive: true })
+    window.addEventListener('orientationchange', notify, {
+      passive: true,
+    })
+
     return () => {
-      sliderRefCopy?.removeEventListener('scroll', handleScroll)
+      sliderRef.removeEventListener('scroll', notify)
+      window.removeEventListener('resize', notify)
+      window.removeEventListener('orientationchange', notify)
+      notify.cancel()
     }
-  }, [])
+  }
+
+  const scrollPos = useSyncExternalStore(
+    subscribeScroll,
+    getScrollSnapshot,
+    () => 0
+  )
 
   const handleScrollBack = () => {
-    sliderRef.current?.scrollBy({
+    sliderRef?.scrollBy({
       top: 0,
       left: -scrollWidth,
       behavior: 'smooth',
     })
   }
   const handleScrollForward = () => {
-    sliderRef.current?.scrollBy({
+    sliderRef?.scrollBy({
       top: 0,
       left: scrollWidth,
       behavior: 'smooth',
     })
   }
 
-  const navRef = useRef<HTMLDivElement | null>(null)
-  const navVisible =
-    sliderRef.current && containerWidth < contentWidth - 20
+  const [navPortalEl, setNavPortalEl] = useState<HTMLElement | null>(
+    null
+  )
+  const navVisible = sliderRef && containerWidth < contentWidth - 20
 
-  const navPortalTarget = navContainer || navRef.current
+  const navPortalTarget = navContainer?.current || navPortalEl
 
   return (
     <div
       className={classes(styles.outer, className)}
       data-visible={navVisible}
-      data-loaded={loaded}
       data-variant={navVariant}
+      ref={outerRef}
       {...props}
     >
       {!navContainer && (
         <div
           data-label="nav container"
-          ref={navRef}
+          ref={setNavPortalEl}
         />
       )}
       {navVisible &&
@@ -144,7 +166,10 @@ export const Carousel = ({
       >
         <div
           className={classes(styles.scrollArea, scrollAreaClass)}
-          ref={sliderRef}
+          ref={node => {
+            setSliderRef(node)
+            containerRef.current = node
+          }}
         >
           <div
             className={classes(styles.content, contentClass)}

@@ -23,7 +23,7 @@ type Props = ComponentProps<'section'> & {
 }
 
 export const AlertBar = ({ data, ...props }: Props) => {
-  const [ref, setRef] = useState<HTMLDivElement | null>(null)
+  const ref = useRef<HTMLDivElement>(null)
   const height = useElementHeight(ref)
   const { navMenuIsOpen } = useNavMenuContext()
 
@@ -77,7 +77,7 @@ export const AlertBar = ({ data, ...props }: Props) => {
       >
         <div
           className={styles.inner}
-          ref={node => setRef(node)}
+          ref={ref}
         >
           <div className={styles.text}>
             <DatoStructuredText data={data?.alertText} />

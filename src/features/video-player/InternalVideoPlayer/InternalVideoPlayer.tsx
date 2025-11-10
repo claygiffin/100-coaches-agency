@@ -1,7 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { type ComponentProps, useEffect, useRef, useState } from 'react'
+import {
+  type ComponentProps,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import {
   VideoPlayer as DatoVideoPlayer,
   type VideoPlayerProps,
@@ -17,7 +23,6 @@ type Props = ComponentProps<'div'> & {
   playerProps?: VideoPlayerProps
   positionerClass?: string
   isBackgroundVideo?: boolean
-  variant?: 'CONTENT_BLOCK' | 'TOUR'
   inViewRoot?: HTMLElement
   onPlay?: () => void
   onPause?: () => void
@@ -29,24 +34,13 @@ export const InternalVideoPlayer = ({
   className,
   positionerClass,
   isBackgroundVideo,
-  variant,
   inViewRoot,
   onPlay = () => {},
   onPause = () => {},
   ...props
 }: Props) => {
-  const getThreshold = () => {
-    switch (variant) {
-      case 'CONTENT_BLOCK':
-        return 0.75
-      case 'TOUR':
-        return 0.25
-      default:
-        return 0
-    }
-  }
   const { inView, ref } = useInView({
-    threshold: getThreshold(),
+    threshold: 0,
     root: inViewRoot || undefined,
   })
   const [loaded, setLoaded] = useState(false)
@@ -55,38 +49,32 @@ export const InternalVideoPlayer = ({
     isBackgroundVideo ? true : false
   )
 
-  const timeout = useRef<NodeJS.Timeout | undefined>(undefined)
-
   // Force looping attribute, which is dropping off for some reason.
   const playerWrapperRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    if (loaded && !!playerProps?.loop) {
-      const player =
-        playerWrapperRef.current?.getElementsByTagName('mux-player')[0]
-      player?.setAttribute('loop', 'true')
-    }
-  }, [loaded, playerProps])
+    if (!loaded || !playerProps?.loop) return
+    const player =
+      playerWrapperRef.current?.getElementsByTagName('mux-player')[0]
+    player?.setAttribute('loop', 'true')
+  }, [loaded, playerProps?.loop])
 
-  useEffect(() => {
-    if (!inView) {
-      timeout.current = setTimeout(() => setPlaying(false), 300)
-    } else {
-      clearTimeout(timeout.current)
-      if (isBackgroundVideo) setPlaying(true)
-    }
-    return () => {
-      clearTimeout(timeout.current)
-    }
-  }, [inView, isBackgroundVideo])
-
+  // Props to enforce background behavior without any state updates in effects
   const backgroundVideoProps = isBackgroundVideo
-    ? {
+    ? ({
         loop: true,
         muted: true,
         nohotkeys: true,
         autoPlay: 'muted',
-      }
-    : {}
+      } as const)
+    : ({} as const)
+
+  // Determine paused behavior:
+  // - Background video: driven by inView
+  // - Regular video: driven by user play/pause events
+  const isPaused = useMemo(() => {
+    if (!inView) return true
+    return isBackgroundVideo ? false : !isPlaying
+  }, [isBackgroundVideo, inView, isPlaying])
 
   if (!data) return
   return (
@@ -96,8 +84,7 @@ export const InternalVideoPlayer = ({
       className={classes(styles.container, className)}
       data-loaded={loaded}
       data-in-view={inView}
-      data-is-playing={isPlaying}
-      data-variant={variant}
+      data-is-playing={!isPaused}
       data-background-video={isBackgroundVideo}
       {...props}
     >
@@ -129,11 +116,11 @@ export const InternalVideoPlayer = ({
             paused={!isPlaying}
             preload
             onPlay={() => {
-              setPlaying(true)
+              if (!isBackgroundVideo) setPlaying(true)
               onPlay()
             }}
             onPause={() => {
-              setPlaying(false)
+              if (!isBackgroundVideo) setPlaying(false)
               onPause()
             }}
             onLoadedData={() => {

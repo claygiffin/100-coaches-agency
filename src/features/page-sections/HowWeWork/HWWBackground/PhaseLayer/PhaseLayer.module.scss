@@ -1,0 +1,21 @@
+.phaseLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: auto;
+  g {
+    opacity: 0;
+    transition: opacity 500ms ease;
+  }
+  &[data-active-phase='1'] {
+    g[data-phase='1'] {
+      opacity: 1;
+    }
+  }
+  &[data-active-phase='2'] {
+    g[data-phase='2'] {
+      opacity: 1;
+    }
+  }
+}

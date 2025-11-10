@@ -1,6 +1,6 @@
 'use client'
 
-import { type ComponentProps, useState } from 'react'
+import { type ComponentProps, useRef, useState } from 'react'
 
 import { Carousel } from '@/features/carousel'
 import { useElementWidth } from '@/hooks'
@@ -23,8 +23,7 @@ export const MediaCarousel = ({
 }: Props) => {
   const [carouselHeight, setCarouselHeight] = useState<number>()
   const [currentSlideWidth, setCurrentSlideWidth] = useState<number>()
-  const [containerRef, setContainerRef] =
-    useState<HTMLDivElement | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const containerWidth = useElementWidth(containerRef)
   const [firstSlideWidth, setFirstSlideWidth] = useState<number>()
@@ -34,7 +33,7 @@ export const MediaCarousel = ({
   return (
     <div
       className={classes(styles.container, className)}
-      ref={setContainerRef}
+      ref={containerRef}
       data-is-single={data.media.length === 1 || undefined}
       {...props}
     >

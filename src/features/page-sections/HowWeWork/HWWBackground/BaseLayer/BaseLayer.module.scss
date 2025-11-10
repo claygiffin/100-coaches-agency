@@ -1,0 +1,15 @@
+.baseLayer {
+  width: auto;
+  height: 100%;
+}
+
+.base {
+  transition: opacity 500ms ease;
+}
+.gradients {
+  opacity: 0;
+  transition: opacity 500ms ease;
+  [data-show-sections='true'] & {
+    opacity: 1;
+  }
+}

@@ -1,6 +1,12 @@
 'use client'
 
-import { type ComponentProps, Fragment, useId, useState } from 'react'
+import {
+  type ComponentProps,
+  Fragment,
+  useId,
+  useRef,
+  useState,
+} from 'react'
 
 import {
   useElementHeight,
@@ -19,7 +25,7 @@ export const HomeThoughtLeadershipSection = ({
   ...props
 }: Props) => {
   const clipId = useId()
-  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const sectWidth = useElementWidth(sectionRef) || 0
   const sectHeight = useElementHeight(sectionRef) || 0
   const [activeSlideIndex, setActiveSlideIndex] = useState(0)
@@ -71,7 +77,7 @@ export const HomeThoughtLeadershipSection = ({
   return (
     <section
       className={styles.section}
-      ref={node => setSectionRef(node)}
+      ref={sectionRef}
       style={{
         '--clip-id-url': `url(#${clipId})`,
       }}

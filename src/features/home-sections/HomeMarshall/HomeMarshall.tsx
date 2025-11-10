@@ -1,6 +1,6 @@
 'use client'
 
-import { type ComponentProps, useId, useState } from 'react'
+import { type ComponentProps, useId, useRef } from 'react'
 
 import { DatoImage } from '@/features/dato-image'
 import { DatoStructuredText } from '@/features/dato-structured-text'
@@ -11,7 +11,7 @@ import {
   useElementHeight,
   useElementWidth,
 } from '@/hooks/useElementRect'
-import variables from '@/theme/variables.module.scss'
+import { useVariables } from '@/hooks/useVariables'
 
 import styles from './HomeMarshall.module.scss'
 
@@ -22,17 +22,16 @@ type Props = ComponentProps<'section'> & {
 export const HomeMarshall = ({ data, ...props }: Props) => {
   const clipId = useId()
 
-  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
 
   const sectWidth = useElementWidth(sectionRef) || 0
   const sectHeight = useElementHeight(sectionRef) || 0
+  const { getBreakpoint } = useVariables()
 
   return (
     <section
       className={styles.section}
-      ref={node => {
-        setSectionRef(node)
-      }}
+      ref={sectionRef}
       style={{ '--clip-id-url': `url(#${clipId})` }}
       {...props}
     >
@@ -63,7 +62,7 @@ export const HomeMarshall = ({ data, ...props }: Props) => {
             className={styles.image}
             data={data?.marshallImage?.responsiveImage}
             objectPosition="100% 20%"
-            sizes={`(max-width: ${variables.breakpoint_ms}px) 90vw, 50vw`}
+            sizes={`(max-width: ${getBreakpoint('ms')}px) 90vw, 50vw`}
           />
         </div>
       </div>

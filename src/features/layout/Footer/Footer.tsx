@@ -1,21 +1,23 @@
 'use client'
 
 import Link from 'next/link'
-import { useId, useMemo, useState } from 'react'
+import { useId, useMemo, useRef } from 'react'
 
 import { LogoStacked } from '@/features/logo'
 import {
   useElementHeight,
   useElementWidth,
 } from '@/hooks/useElementRect'
-import variables from '@/theme/variables.module.scss'
+import { useVariables } from '@/hooks/useVariables'
 
 import styles from './Footer.module.scss'
 
 export const Footer = () => {
+  const { getColor } = useVariables()
+
   const clipId = useId()
   const gradientId = useId()
-  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const sectWidth = useElementWidth(sectionRef) || 0
   const sectHeight = useElementHeight(sectionRef) || 0
 
@@ -24,7 +26,7 @@ export const Footer = () => {
   return (
     <footer
       className={styles.footer}
-      ref={node => setSectionRef(node)}
+      ref={sectionRef}
       style={{ '--clip-id-url': `url(#${clipId})` }}
     >
       <svg
@@ -61,19 +63,19 @@ export const Footer = () => {
             id={gradientId}
           >
             <stop
-              stopColor={variables.color_gold}
+              stopColor={getColor('gold')}
               offset="0%"
             />
             <stop
-              stopColor={variables.color_goldShade1}
+              stopColor={getColor('goldShade1')}
               offset="33%"
             />
             <stop
-              stopColor={variables.color_goldShade2}
+              stopColor={getColor('goldShade2')}
               offset="67%"
             />
             <stop
-              stopColor={variables.color_goldShade3}
+              stopColor={getColor('goldShade3')}
               offset="100%"
             />
           </linearGradient>

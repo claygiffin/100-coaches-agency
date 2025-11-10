@@ -27,8 +27,8 @@
   padding: var(--gtr-36);
   --column-count: 4;
   --max-width: calc(
-    100vw / var(var(--column-count)) - var(--gtr-12) *
-      (var(var(--column-count) - 1) - 2 * var(--gtr-36))
+    100vw / var(--column-count) - var(--gtr-12) *
+      (var(--column-count) - 1) - 2 * var(--gtr-36)
   );
   @include media('<ml') {
     --column-count: 3;

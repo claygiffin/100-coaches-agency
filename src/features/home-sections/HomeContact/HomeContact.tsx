@@ -1,6 +1,6 @@
 'use client'
 
-import { type ComponentProps, useId, useState } from 'react'
+import { type ComponentProps, useId, useRef } from 'react'
 
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
@@ -18,14 +18,14 @@ type Props = ComponentProps<'section'> & {
 
 export const HomeContact = ({ data, ...props }: Props) => {
   const clipId = useId()
-  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const sectWidth = useElementWidth(sectionRef) || 0
   const sectHeight = useElementHeight(sectionRef) || 0
 
   return (
     <section
       className={styles.section}
-      ref={node => setSectionRef(node)}
+      ref={sectionRef}
       style={{ '--clip-id-url': `url(#${clipId})` }}
       id="work-with-us"
       {...props}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useId, useState } from 'react'
+import { useId, useRef } from 'react'
 
 import { DatoStructuredText } from '@/features/dato-structured-text'
 import { DatoLink } from '@/features/links'
@@ -17,7 +17,7 @@ type Props = {
 
 export const AboutServices = ({ data }: Props) => {
   const clipId = useId()
-  const [sectionRef, setSectionRef] = useState<HTMLElement | null>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const sectWidth = useElementWidth(sectionRef) || 0
   const sectHeight = useElementHeight(sectionRef) || 0
 
@@ -25,7 +25,7 @@ export const AboutServices = ({ data }: Props) => {
     <section
       className={styles.section}
       style={{ '--clip-id-url': `url(#${clipId})` }}
-      ref={node => setSectionRef(node)}
+      ref={sectionRef}
     >
       <svg
         width="0"

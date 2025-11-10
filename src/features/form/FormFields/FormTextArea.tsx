@@ -5,8 +5,8 @@ import {
   type ChangeEvent,
   Fragment,
   useCallback,
-  useEffect,
   useId,
+  useRef,
   useState,
 } from 'react'
 
@@ -37,15 +37,13 @@ export const FormTextArea = ({ data, onChangeAction }: Props) => {
       setShrink(false)
     }
   }
-  useEffect(() => {
-    if (value.length > 0) {
-      setShrink(true)
-    }
-  }, [value])
 
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLTextAreaElement>) => {
       setValue(e.target.value)
+      if (e.target.value.length > 0) {
+        setShrink(true)
+      }
       onChangeAction(name, e.target.value)
     },
     [name, onChangeAction]
@@ -53,7 +51,7 @@ export const FormTextArea = ({ data, onChangeAction }: Props) => {
 
   const uniqueId = useId()
 
-  const [labelRef, setLabelRef] = useState<HTMLElement | null>(null)
+  const labelRef = useRef<HTMLLabelElement>(null)
   const labelHeight = useElementHeight(labelRef)
 
   return (
@@ -66,7 +64,7 @@ export const FormTextArea = ({ data, onChangeAction }: Props) => {
       <label
         htmlFor={name + uniqueId}
         className={styles.label}
-        ref={node => setLabelRef(node)}
+        ref={labelRef}
         data-shrink={shrink}
         data-required={data?.required}
       >

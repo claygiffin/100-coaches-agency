@@ -2460,6 +2460,65 @@ type HomePageRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+type HowWeWorkPageModelHeroDescriptionField = {
+  __typename?: 'HowWeWorkPageModelHeroDescriptionField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type HowWeWorkPageModelIntroField = {
+  __typename?: 'HowWeWorkPageModelIntroField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+type HowWeWorkPageModelOutroBodyField = {
+  __typename?: 'HowWeWorkPageModelOutroBodyField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Record of type How We Work Page (how_we_work_page) */
+type HowWeWorkPageRecord = RecordInterface & {
+  __typename?: 'HowWeWorkPageRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  heroDescription?: Maybe<HowWeWorkPageModelHeroDescriptionField>;
+  id: Scalars['ItemId']['output'];
+  intro?: Maybe<HowWeWorkPageModelIntroField>;
+  outroBody?: Maybe<HowWeWorkPageModelOutroBodyField>;
+  outroHeading?: Maybe<Scalars['String']['output']>;
+  pageTitle?: Maybe<Scalars['String']['output']>;
+  seo?: Maybe<SeoField>;
+  slug: Scalars['String']['output'];
+  steps: Array<MatchcraftStepRecord>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Record of type How We Work Page (how_we_work_page) */
+type HowWeWorkPageRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type HubspotFormEmbedModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<HubspotFormEmbedModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<HubspotFormEmbedModelFilter>>>;
@@ -4666,6 +4725,43 @@ type LinksFilter = {
   notIn?: InputMaybe<Array<InputMaybe<Scalars['ItemId']['input']>>>;
 };
 
+type MatchcraftStepModelDescriptionField = {
+  __typename?: 'MatchcraftStepModelDescriptionField';
+  blocks: Array<Scalars['String']['output']>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
+/** Block of type Matchcraft Step (matchcraft_step) */
+type MatchcraftStepRecord = RecordInterface & {
+  __typename?: 'MatchcraftStepRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  description?: Maybe<MatchcraftStepModelDescriptionField>;
+  id: Scalars['ItemId']['output'];
+  title?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Matchcraft Step (matchcraft_step) */
+type MatchcraftStepRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type MediaCarouselModelMediaField = ExternalVideoRecord | ImageBlockRecord | InternalVideoRecord;
 
 /** Block of type Media Carousel (media_carousel) */
@@ -5211,6 +5307,8 @@ type Query = {
   formModal?: Maybe<FormModalRecord>;
   /** Returns the single instance record */
   homePage?: Maybe<HomePageRecord>;
+  /** Returns the single instance record */
+  howWeWorkPage?: Maybe<HowWeWorkPageRecord>;
   /** Returns a specific record */
   hubspotFormEmbed?: Maybe<HubspotFormEmbedRecord>;
   /** Returns a specific record */
@@ -5688,6 +5786,13 @@ type QueryformModalArgs = {
 
 /** The query root for this schema */
 type QueryhomePageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type QueryhowWeWorkPageArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
@@ -7985,6 +8090,11 @@ type FormPageQuery = { __typename?: 'Query', formModal?: { __typename: 'FormModa
         | { __typename: 'SendEmailActionRecord', recipients: string }
       > } } | null };
 
+type HowWeWorkPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type HowWeWorkPageQuery = { __typename?: 'Query', howWeWorkPage?: { __typename: 'HowWeWorkPageRecord', id: string, outroHeading?: string | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }>, heroDescription?: { __typename?: 'HowWeWorkPageModelHeroDescriptionField', value: unknown } | null, intro?: { __typename?: 'HowWeWorkPageModelIntroField', value: unknown } | null, steps: Array<{ __typename: 'MatchcraftStepRecord', id: string, title?: string | null, description?: { __typename?: 'MatchcraftStepModelDescriptionField', value: unknown } | null }>, outroBody?: { __typename?: 'HowWeWorkPageModelOutroBodyField', value: unknown } | null } | null };
+
 type RootLayoutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -9219,6 +9329,10 @@ type CtaBarFragment = { __typename: 'CtaBarRecord', id: string, text: { __typena
         | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
        }
    };
+
+type HowWeWorkFragment = { __typename: 'HowWeWorkPageRecord', id: string, outroHeading?: string | null, heroDescription?: { __typename?: 'HowWeWorkPageModelHeroDescriptionField', value: unknown } | null, intro?: { __typename?: 'HowWeWorkPageModelIntroField', value: unknown } | null, steps: Array<{ __typename: 'MatchcraftStepRecord', id: string, title?: string | null, description?: { __typename?: 'MatchcraftStepModelDescriptionField', value: unknown } | null }>, outroBody?: { __typename?: 'HowWeWorkPageModelOutroBodyField', value: unknown } | null };
+
+type MatchcraftStepFragment = { __typename: 'MatchcraftStepRecord', id: string, title?: string | null, description?: { __typename?: 'MatchcraftStepModelDescriptionField', value: unknown } | null };
 
 type MediaSectionFragment = { __typename: 'MediaSectionRecord', id: string, colorScheme: string, mediaCarousel: { __typename: 'MediaCarouselRecord', id: string, media: Array<
       | { __typename: 'ExternalVideoRecord', id: string, video: { __typename: 'VideoField', url: string, thumbnailUrl: string, title: string, width: number, height: number } }

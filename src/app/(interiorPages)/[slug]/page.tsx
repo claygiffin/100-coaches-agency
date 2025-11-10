@@ -1,5 +1,6 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import {
   BioSection,
@@ -19,7 +20,7 @@ import {
 } from '@/features/page-sections'
 import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
-import { notFound } from 'next/navigation'
+import { createThemeIndex } from '@/utils'
 
 type Props = {
   params: Promise<{
@@ -113,7 +114,7 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
     variables: { slug },
   })
   if (!interiorPage) notFound()
-  let altIndex = 0
+  const themeIndex = createThemeIndex(0)
   return (
     <main>
       <PageHero data={interiorPage.hero} />
@@ -124,13 +125,13 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
               section.layout === 'TEXT_MEDIA' ||
               section.layout === 'TEXT_QUOTE'
             ) {
-              altIndex += 1
+              themeIndex.next()
             }
             return (
               <ContentSection
                 data={section}
                 key={section.id}
-                data-flip={altIndex % 2 ? true : false}
+                data-flip={themeIndex.value % 2 ? true : false}
               />
             )
           }
@@ -159,12 +160,12 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
             )
           }
           case 'BioSectionRecord': {
-            altIndex += 1
+            themeIndex.next()
             return (
               <BioSection
                 data={section}
                 key={section.id}
-                data-flip={altIndex % 2 ? true : false}
+                data-flip={themeIndex.value % 2 ? true : false}
               />
             )
           }

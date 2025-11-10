@@ -1,20 +1,24 @@
 'use client'
 
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useMemo, useRef } from 'react'
 
 import {
   DatoImage,
   type DatoImagePropTypes,
 } from '@/features/dato-image'
-import { useElementRect } from '@/hooks/useElementRect'
-import { classes } from '@/utils/css'
+import { useElementRect } from '@/hooks'
+import { classes } from '@/utils'
 
 import styles from './DatoImageFocused.module.scss'
 
 type Props = DatoImagePropTypes & {
   aspectRatio?: number
-  focalPoint: { x: number; y: number } | undefined | null
+  focalPoint: { x: number; y: number } | null | undefined
 }
+
+// clamp + round to avoid sub-pixel drift feeding the RO loop
+const clamp01 = (n: number) => (n < 0 ? 0 : n > 1 ? 1 : n)
+const round4 = (n: number) => Math.round(n * 10000) / 10000
 
 export const DatoImageFocused = ({
   data,
@@ -24,61 +28,64 @@ export const DatoImageFocused = ({
   ...props
 }: Props) => {
   const ref = useRef<HTMLDivElement | null>(null)
-  const { width, height } = useElementRect(ref.current)
+  const { width, height } = useElementRect(ref)
 
-  const [objectPosition, setObjectPosition] = useState<
-    { x: string; y: string } | undefined
-  >()
+  const objectPosition = useMemo(() => {
+    if (!data?.aspectRatio || !width || !height) return undefined
 
-  useLayoutEffect(() => {
-    const originalAspectRatio = data?.aspectRatio || 0
-    const containerAR = (width && height && width / height) || 0
-    let trueFP = undefined as { x: number; y: number } | undefined
-    if (aspectRatio) {
-      const fpRatioX = aspectRatio / originalAspectRatio
-      const fpRatioY = originalAspectRatio / aspectRatio
-      const getFP = (ratio: number, fp: number) => {
+    const originalAR = data.aspectRatio
+    const containerAR = width / height
+
+    // Determine the focal point in the target aspect ratio
+    let trueFP: { x: number; y: number } | undefined
+    if (aspectRatio && focalPoint) {
+      const fpRatioX = aspectRatio / originalAR
+      const fpRatioY = originalAR / aspectRatio
+
+      const remap = (ratio: number, fp: number) => {
         if (ratio < 1) {
+          // When target AR is narrower than original, remap edge cases
           if (fp < ratio / 2 || 1 - fp < ratio / 2) {
             return fp / ratio
-          } else {
-            return 0.5
           }
-        } else {
-          return fp
+          return 0.5
         }
+        return fp
       }
-      if (fpRatioX && focalPoint) {
-        trueFP = {
-          x: getFP(fpRatioX, focalPoint.x),
-          y: getFP(fpRatioY, focalPoint.y),
-        }
+
+      trueFP = {
+        x: remap(fpRatioX, focalPoint.x),
+        y: remap(fpRatioY, focalPoint.y),
       }
     } else {
-      trueFP = focalPoint || undefined
+      trueFP = focalPoint ?? undefined
     }
-    const ar = aspectRatio || originalAspectRatio
+
+    if (!trueFP) return undefined
+
+    // Compute object-position percentages
+    const ar = aspectRatio ?? originalAR
     const ratioX = ar / containerAR
     const ratioY = containerAR / ar
-    const getPosition = (ratio: number, fp: number) => {
-      const position = (fp - 0.5) * (ratio / (ratio - 1)) + 0.5
-      return ratio > 1 ? Math.max(Math.min(position, 1), 0) : 0.5
+
+    const position = (ratio: number, fp: number) => {
+      if (ratio <= 1) return 0.5
+      const pos = (fp - 0.5) * (ratio / (ratio - 1)) + 0.5
+      // clamp + round to avoid micro-changes that retrigger RO
+      return round4(clamp01(pos))
     }
-    if (ratioX && ratioY && trueFP) {
-      setObjectPosition({
-        x: getPosition(ratioX, trueFP?.x) * 100 + '%',
-        y: getPosition(ratioY, trueFP?.y) * 100 + '%',
-      })
-    }
-  }, [aspectRatio, focalPoint, data, width, height])
+
+    const x = position(ratioX, trueFP.x) * 100
+    const y = position(ratioY, trueFP.y) * 100
+
+    return `${x}% ${y}%`
+  }, [aspectRatio, focalPoint, data?.aspectRatio, width, height])
 
   return (
     <DatoImage
       data={data}
       ref={ref}
-      objectPosition={
-        objectPosition && `${objectPosition?.x} ${objectPosition?.y}`
-      }
+      objectPosition={objectPosition}
       className={classes(styles.image, className)}
       {...props}
     />

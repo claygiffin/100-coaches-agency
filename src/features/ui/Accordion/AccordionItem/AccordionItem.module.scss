@@ -13,7 +13,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 1em;
-  color: var(var(--accordion-color), var(--text-color));
+  color: var(--accordion-color, var(--text-color));
   text-align: left;
   @media (hover: hover) {
     &:hover {

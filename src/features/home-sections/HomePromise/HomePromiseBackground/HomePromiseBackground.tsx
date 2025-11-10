@@ -13,7 +13,7 @@ import {
   useElementHeight,
   useElementWidth,
 } from '@/hooks/useElementRect'
-import variables from '@/theme/variables.module.scss'
+import { useVariables } from '@/hooks/useVariables'
 import { classes } from '@/utils/css'
 
 import { ShapeColumn } from '../HomePromiseColumn/HomePromiseColumn'
@@ -27,25 +27,29 @@ export const HomePromiseBackground = ({
   innerClassName,
   ...props
 }: Props) => {
+  const { getBreakpoint } = useVariables()
+
   const clipId = useId()
 
-  const [containerRef, setContainerRef] =
-    useState<HTMLDivElement | null>(null)
-  const parallaxRef = useRef<HTMLDivElement | null>(null)
+  const containerRef = useRef<HTMLElement>(null)
+
+  const [parallaxRef, setParallaxRef] = useState<HTMLDivElement | null>(
+    null
+  )
 
   const containerWidth = useElementWidth(containerRef) || 0
   const containerHeight = useElementHeight(containerRef) || 0
 
   const columns = useMemo(() => {
-    if (containerWidth < Number(variables.breakpoint_ms)) {
+    if (containerWidth < Number(getBreakpoint('ms'))) {
       return 3
     }
-    if (containerWidth < Number(variables.breakpoint_m)) {
+    if (containerWidth < Number(getBreakpoint('m'))) {
       return 4
     } else {
       return 5
     }
-  }, [containerWidth])
+  }, [containerWidth, getBreakpoint])
 
   const rows = useMemo(() => {
     const ar = containerHeight / containerWidth || 0
@@ -57,43 +61,41 @@ export const HomePromiseBackground = ({
   const handleSetOffset = useCallback(() => {
     window.requestAnimationFrame(() => {
       const windowHeight = window.innerHeight
-      const containerPos =
-        parallaxRef.current?.getBoundingClientRect().y || 0
+      const containerPos = parallaxRef?.getBoundingClientRect().y || 0
       setOffset(containerPos / windowHeight)
     })
-  }, [])
+  }, [parallaxRef])
   useLayoutEffect(handleSetOffset, [handleSetOffset])
 
-  const observer =
-    typeof window !== 'undefined'
-      ? new IntersectionObserver(
-          entries => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                window.addEventListener('scroll', handleSetOffset, {
-                  passive: true,
-                })
-              } else {
-                window.removeEventListener('scroll', handleSetOffset)
-              }
-            })
-          },
-          {
-            root: null,
-            rootMargin: '0% 0%',
-          }
-        )
-      : null
-
   useLayoutEffect(() => {
-    if (parallaxRef.current) {
-      observer?.observe(parallaxRef.current)
+    const observer =
+      typeof window !== 'undefined'
+        ? new IntersectionObserver(
+            entries => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  window.addEventListener('scroll', handleSetOffset, {
+                    passive: true,
+                  })
+                } else {
+                  window.removeEventListener('scroll', handleSetOffset)
+                }
+              })
+            },
+            {
+              root: null,
+              rootMargin: '0% 0%',
+            }
+          )
+        : null
+    if (parallaxRef) {
+      observer?.observe(parallaxRef)
     }
     return () => {
       observer?.disconnect()
       window.removeEventListener('scroll', handleSetOffset)
     }
-  })
+  }, [parallaxRef, handleSetOffset])
 
   const [brightenPosition, setBrightenPosition] = useState({
     top: 0,
@@ -118,7 +120,7 @@ export const HomePromiseBackground = ({
   )
 
   const translateFactors = () => {
-    if (containerWidth < Number(variables.breakpoint_ms)) {
+    if (containerWidth < Number(getBreakpoint('ms'))) {
       return [100, 50]
     } else {
       return [200, 75]
@@ -133,8 +135,8 @@ export const HomePromiseBackground = ({
     <div
       className={styles.container}
       ref={node => {
-        setContainerRef(node)
-        parallaxRef.current = node
+        containerRef.current = node
+        setParallaxRef(node)
       }}
       data-brighten-position={`top: ${brightenPosition.top}, left: ${brightenPosition.left}`}
       style={{
@@ -182,22 +184,18 @@ export const HomePromiseBackground = ({
         <ShapeColumn
           rows={rows}
           offset={offset}
-          brightCircle={
-            containerWidth >= Number(variables.breakpoint_ms)
-          }
+          brightCircle={containerWidth >= Number(getBreakpoint('ms'))}
           setColumnPosition={handleUpdateColumnPositionOne}
         />
         <ShapeColumn
           rows={rows}
           offset={offset}
-          brightCircle={
-            containerWidth >= Number(variables.breakpoint_ms)
-          }
+          brightCircle={containerWidth >= Number(getBreakpoint('ms'))}
           setBrightenPosition={setBrightenPosition}
           setColumnPosition={handleUpdateColumnPositionTwo}
         />
 
-        {containerWidth >= Number(variables.breakpoint_ms) && (
+        {containerWidth >= Number(getBreakpoint('ms')) && (
           <svg
             viewBox={`0 0 ${lineWidth} ${lineHeight}`}
             className={styles.line}

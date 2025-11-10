@@ -1,4 +1,4 @@
-import { type ComponentProps, useEffect, useState } from 'react'
+import { type ComponentProps, useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { DatoImageFocused } from '@/features/dato-image'
@@ -22,13 +22,15 @@ export const MediaCarouselImage = ({
   isSingle,
   ...props
 }: Props) => {
-  const [ref, setRef] = useState<HTMLElement | null>(null)
+  const ref = useRef<HTMLElement>(null)
+  const [rootRef, setRootRef] = useState<HTMLElement | null>(null)
+
   const { inView, ref: inViewRef } = useInView({
     rootMargin: '100% -50%',
     root: isSingle
-      ? ref?.parentElement?.parentElement?.parentElement?.parentElement
-          ?.parentElement?.parentElement
-      : ref?.parentElement?.parentElement,
+      ? rootRef?.parentElement?.parentElement?.parentElement
+          ?.parentElement?.parentElement?.parentElement
+      : rootRef?.parentElement?.parentElement,
   })
   const { height, width } = useElementRect(ref)
   useEffect(() => {
@@ -63,7 +65,8 @@ export const MediaCarouselImage = ({
       className={styles.container}
       ref={node => {
         inViewRef(node)
-        setRef(node)
+        setRootRef(node)
+        ref.current = node
       }}
       style={{ '--aspect-ratio': data.image.width / data.image.height }}
       {...props}

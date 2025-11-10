@@ -1,7 +1,7 @@
 'use client'
 
 import type { ComponentProps } from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import ReactPlayer from 'react-player'
 import type { ReactPlayerProps } from 'react-player/dist/types'
@@ -35,12 +35,6 @@ export const ExternalVideoPlayer = ({
   const [isPlaying, setPlaying] = useState(false)
   const [hasPlayed, setHasPlayed] = useState(false)
 
-  useEffect(() => {
-    if (!inView) {
-      setPlaying(false)
-    }
-  }, [inView])
-
   if (!data) return
   return (
     <div
@@ -50,7 +44,7 @@ export const ExternalVideoPlayer = ({
         '--height': data.height,
       }}
       data-has-played={hasPlayed}
-      data-is-playing={isPlaying}
+      data-is-playing={inView && isPlaying}
       ref={ref}
       {...props}
     >
@@ -70,7 +64,7 @@ export const ExternalVideoPlayer = ({
           setHasPlayed(true)
           onPlay()
         }}
-        playing={isPlaying}
+        playing={inView && isPlaying}
         controls={true}
         {...playerProps}
       />

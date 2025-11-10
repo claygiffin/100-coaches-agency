@@ -58,6 +58,7 @@ export async function POST(request: Request) {
 
   const queryIds = await queriesReferencingCacheTags(cacheTags)
 
+  console.log(`Cache update: `, queryIds)
   await deleteQueries(queryIds)
 
   for (const queryId of queryIds) {
@@ -70,7 +71,7 @@ export async function POST(request: Request) {
      * The next time someone requests any of these outdated entries, the cache
      * will respond with a MISS.
      */
-    revalidateTag(queryId)
+    revalidateTag(queryId, 'max')
   }
 
   return NextResponse.json({ cacheTags, queryIds })

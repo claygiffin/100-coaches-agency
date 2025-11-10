@@ -1,0 +1,38 @@
+.step {
+  padding: 25lvh var(--margin) 50lvh;
+  min-height: 100lvh;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-auto-flow: dense;
+  align-content: flex-start;
+  column-gap: 1em;
+  max-width: 50%;
+  color: var(--color-gray30);
+  body:has([data-active-phase='2']) & {
+    justify-self: flex-end;
+    color: #fff;
+  }
+}
+.number {
+  font-size: var(--fs-84);
+  font-family: var(--ff-display);
+  font-weight: 250;
+  grid-row: 1 / 4;
+  color: var(--color-gold);
+  line-height: 1;
+}
+.title {
+  font-size: var(--fs-27);
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 0.25em 0 0;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.333em;
+  width: fit-content;
+}
+.description {
+  p {
+    margin: 0.5em 0;
+  }
+}

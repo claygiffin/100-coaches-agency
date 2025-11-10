@@ -4,7 +4,6 @@ import {
   type ComponentProps,
   useCallback,
   useLayoutEffect,
-  useRef,
   useState,
 } from 'react'
 
@@ -17,53 +16,52 @@ type Props = ComponentProps<'section'> & {
 }
 
 export const HomeIntro = ({ data }: Props) => {
-  const parallaxWrapRef = useRef<HTMLDivElement | null>(null)
+  const [parallaxWrapRef, setParallaxWrapRef] =
+    useState<HTMLDivElement | null>(null)
   const [inView, setInView] = useState(false)
 
   const [offset, setOffset] = useState(0)
   const handleSetOffset = useCallback(() => {
     window.requestAnimationFrame(() => {
-      const wrapPos =
-        parallaxWrapRef.current?.getBoundingClientRect().y || 0
+      const wrapPos = parallaxWrapRef?.getBoundingClientRect().y || 0
       const windowHeight = window.innerHeight
       const ratio = wrapPos / windowHeight
       setOffset(ratio)
     })
-  }, [])
+  }, [parallaxWrapRef])
   useLayoutEffect(handleSetOffset, [handleSetOffset])
 
-  const observer =
-    typeof window !== 'undefined'
-      ? new IntersectionObserver(
-          entries => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                setInView(true)
-                window.addEventListener('scroll', handleSetOffset, {
-                  passive: true,
-                })
-              } else {
-                setInView(false)
-                window.removeEventListener('scroll', handleSetOffset)
-              }
-            })
-          },
-          {
-            root: null,
-            rootMargin: '0% 0%',
-          }
-        )
-      : null
-
   useLayoutEffect(() => {
-    if (parallaxWrapRef.current) {
-      observer?.observe(parallaxWrapRef.current)
+    const observer =
+      typeof window !== 'undefined'
+        ? new IntersectionObserver(
+            entries => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  setInView(true)
+                  window.addEventListener('scroll', handleSetOffset, {
+                    passive: true,
+                  })
+                } else {
+                  setInView(false)
+                  window.removeEventListener('scroll', handleSetOffset)
+                }
+              })
+            },
+            {
+              root: null,
+              rootMargin: '0% 0%',
+            }
+          )
+        : null
+    if (parallaxWrapRef) {
+      observer?.observe(parallaxWrapRef)
     }
     return () => {
       observer?.disconnect()
       window.removeEventListener('scroll', handleSetOffset)
     }
-  })
+  }, [handleSetOffset, parallaxWrapRef])
 
   return (
     <section
@@ -72,7 +70,7 @@ export const HomeIntro = ({ data }: Props) => {
     >
       <div
         className={styles.parallaxWrapper}
-        ref={parallaxWrapRef}
+        ref={setParallaxWrapRef}
       >
         <div className={styles.parallaxInner}>
           <div

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { HiOutlineExternalLink } from 'react-icons/hi'
 
 import { DatoImage } from '@/features/dato-image'
-import variables from '@/theme/variables.module.scss'
+import { useVariables } from '@/hooks/useVariables'
 import { classes } from '@/utils/css'
 
 import styles from './ArticleThumbnail.module.scss'
@@ -22,6 +22,7 @@ export const ArticleThumbnail = ({ article }: Props) => {
     new Date(article?.createdAt || ''),
     'MMMM d, yyyy'
   )
+  const { getBreakpoint } = useVariables()
   return (
     <Link
       className={classes(
@@ -41,7 +42,7 @@ export const ArticleThumbnail = ({ article }: Props) => {
         <div className={styles.image}>
           <DatoImage
             data={article?.thumbnail.responsiveImage}
-            sizes={`(max-width: ${variables.breakpoint_s}px) 90vw, (max-width: ${variables.breakpoint_ms}px) 45vw, (max-width: ${variables.breakpoint_ml}px) 30vw, 20vw`}
+            sizes={`(max-width: ${getBreakpoint('s')}px) 90vw, (max-width: ${getBreakpoint('ms')}px) 45vw, (max-width: ${getBreakpoint('ml')}px) 30vw, 20vw`}
           />
         </div>
       )}

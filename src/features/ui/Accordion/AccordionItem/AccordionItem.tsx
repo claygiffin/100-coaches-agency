@@ -27,7 +27,7 @@ export const AccordionItem = ({
   const Heading = `h${headingLevel}` as ElementType
   const [isOpen, setOpen] = useState(false)
   const bodyRef = useRef<HTMLDivElement>(null)
-  const bodyHeight = useElementHeight(bodyRef.current)
+  const bodyHeight = useElementHeight(bodyRef)
   return (
     <li
       className={styles.item}

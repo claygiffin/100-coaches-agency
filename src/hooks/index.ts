@@ -4,4 +4,5 @@
 
 export * from './useElementRect'
 export * from './useEscKeyFunction'
+export * from './useVariables'
 export * from './useWindowDimensions'
