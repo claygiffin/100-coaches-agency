@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import { TeamMemberFragment } from '@/features/coaches'
 import {
@@ -60,6 +61,7 @@ const AboutPage: NextPage = async () => {
   } = await datoRequest<Queries.AboutPageQuery>({
     query,
   })
+  if (!aboutPage) notFound()
   return (
     <main>
       <PageIntro

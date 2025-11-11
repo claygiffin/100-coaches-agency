@@ -1,5 +1,6 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import {
   HomeCoachesSection,
@@ -81,6 +82,7 @@ const HomePage: NextPage = async () => {
   } = await datoRequest<Queries.HomePageQuery>({
     query,
   })
+  if (!homePage) notFound()
   return (
     <main data-home>
       <HomeHero data={homePage} />

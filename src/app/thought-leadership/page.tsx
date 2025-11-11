@@ -1,5 +1,6 @@
 import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import { ArticleFragment } from '@/features/articles'
 import {
@@ -98,6 +99,8 @@ const LeadershipPage: NextPage = async () => {
   } = await datoRequest<Queries.LeadershipPageQuery>({
     query,
   })
+
+  if (!thoughtLeadershipPage) notFound()
 
   return (
     <main>

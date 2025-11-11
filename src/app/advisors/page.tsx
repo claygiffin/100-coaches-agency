@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
+import { notFound } from 'next/navigation'
 
 import {
   AboutHow,
@@ -56,6 +57,7 @@ const AdvisorsPage: NextPage = async () => {
   } = await datoRequest<Queries.AdvisorsPageQuery>({
     query,
   })
+  if (!advisorsPage) notFound()
   return (
     <main>
       <PageIntro
