@@ -18,7 +18,7 @@ export const HWWBackground = ({
   ...props
 }: Props) => {
   const getPhaseNumber = () => {
-    const match = keyframe?.match(/^Phase(\d)\./)
+    const match = keyframe?.match(/^Phase(\d)/)
     return match ? Number(match[1]) : undefined
   }
   const getBaseLayerColor = () => {

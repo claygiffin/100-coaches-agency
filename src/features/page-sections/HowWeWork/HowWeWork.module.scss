@@ -1,3 +1,5 @@
+@use '@/theme/mixins' as *;
+
 .container {
 }
 .hero {
@@ -27,6 +29,9 @@
       text-transform: uppercase;
       margin: 0.25em 0;
       font-weight: 325;
+      @include media('<s') {
+        font-size: var(--fs-72);
+      }
     }
   }
   .heroDescription {
@@ -45,16 +50,22 @@
     font-size: var(--fs-24);
     font-family: var(--ff-display);
     max-width: 50ch;
+    @include media('<ms') {
+      font-size: var(--fs-21);
+    }
   }
 }
 .steps {
   position: relative;
   z-index: 4;
   display: grid;
-  .stepInterstitial {
+  padding: 0 var(--margin);
+  .interstitial {
     height: 100lvh;
-    margin-bottom: 100lvh;
     width: 100%;
+  }
+  .phase {
+    display: grid;
   }
   ol {
     appearance: none;
@@ -67,12 +78,13 @@
   position: relative;
   z-index: 4;
   color: #fff;
-  padding-top: 50lvh;
-  padding-bottom: calc(5lvh + 2 * var(--row-144));
+  padding: 50lvh var(--margin) calc(5lvh + 2 * var(--row-144));
   display: grid;
   justify-content: center;
   font-size: var(--fs-24);
-
+  @include media('<ms') {
+    font-size: var(--fs-21);
+  }
   > div {
     max-width: 50ch;
     p {

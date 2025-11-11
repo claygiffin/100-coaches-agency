@@ -6,7 +6,7 @@ import { DatoStructuredText } from '@/features/dato-structured-text'
 import styles from './MatchcraftStep.module.scss'
 
 type Props = ComponentProps<'li'> & {
-  data: Queries.MatchcraftStepFragment
+  data?: Queries.MatchcraftStepFragment
   index: number
   onChangeInView: (index: number, inView: boolean) => void
 }
@@ -17,7 +17,9 @@ export const MatchcraftStep = ({
   index,
   ...props
 }: Props) => {
-  const { inView, ref } = useInView()
+  const { inView, ref } = useInView({
+    rootMargin: '-25% 0% -25%',
+  })
   useEffect(() => {
     onChangeInView(index, inView)
   }, [inView, onChangeInView])
@@ -29,11 +31,15 @@ export const MatchcraftStep = ({
       data-in-view={inView}
       {...props}
     >
-      <div className={styles.number}>{index + 1}.</div>
-      <h3 className={styles.title}>{data.title}</h3>
-      <div className={styles.description}>
-        <DatoStructuredText data={data.description} />
-      </div>
+      {data && (
+        <>
+          <div className={styles.number}>{index + 1}.</div>
+          <h3 className={styles.title}>{data.title}</h3>
+          <div className={styles.description}>
+            <DatoStructuredText data={data.description} />
+          </div>
+        </>
+      )}
     </li>
   )
 }

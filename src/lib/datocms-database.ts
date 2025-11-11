@@ -25,9 +25,8 @@ const database = () =>
   createClient({
     url: process.env.TURSO_DATABASE_URL!,
     authToken: process.env.TURSO_AUTH_TOKEN!,
-    fetch: (input: string | URL, init?: RequestInit) => {
-      return fetch(input, { ...init, cache: 'no-store' })
-    },
+    fetch: (input: string | URL, init?: RequestInit) =>
+      fetch(input, { ...init, cache: 'no-store' }),
   })
 
 /*
@@ -36,6 +35,41 @@ const database = () =>
  */
 function sqlPlaceholders(count: number) {
   return Array.from({ length: count }, () => '?').join(',')
+}
+
+async function ensureQueryCacheTagsTableExists() {
+  const db = database()
+
+  // Create table if it doesn't exist
+  await db.execute(`
+    CREATE TABLE IF NOT EXISTS query_cache_tags (
+      query_id TEXT,
+      cache_tag TEXT
+    )
+  `)
+
+  // Get existing columns
+  const { rows } = await db.execute(
+    `PRAGMA table_info(query_cache_tags)`
+  )
+  const columnNames = rows.map(row => row.name)
+
+  const missingColumns: { name: string; type: string }[] = []
+
+  if (!columnNames.includes('query_id')) {
+    missingColumns.push({ name: 'query_id', type: 'TEXT' })
+  }
+  if (!columnNames.includes('cache_tag')) {
+    missingColumns.push({ name: 'cache_tag', type: 'TEXT' })
+  }
+
+  for (const col of missingColumns) {
+    // NOTE: SQLite doesn't support IF NOT EXISTS for ADD COLUMN,
+    // so this is safe only if you've confirmed it's missing.
+    await db.execute(
+      `ALTER TABLE query_cache_tags ADD COLUMN ${col.name} ${col.type}`
+    )
+  }
 }
 
 /*
@@ -48,6 +82,8 @@ export async function storeQueryCacheTags(
   queryId: string,
   cacheTags: CacheTag[]
 ) {
+  await ensureQueryCacheTagsTableExists() // ensure table and columns exist
+
   await database().execute({
     sql: `
       INSERT INTO query_cache_tags (query_id, cache_tag)
@@ -80,6 +116,9 @@ export async function queriesReferencingCacheTags(
  * Removes all entries that reference the specified queries.
  */
 export async function deleteQueries(queryIds: string[]) {
+  await ensureQueryCacheTagsTableExists()
+  if (queryIds.length === 0) return
+
   await database().execute({
     sql: `
       DELETE FROM query_cache_tags
@@ -93,5 +132,6 @@ export async function deleteQueries(queryIds: string[]) {
  * Wipes out all data contained in the table.
  */
 export async function truncateAssociationsTable() {
+  await ensureQueryCacheTagsTableExists()
   await database().execute('DELETE FROM query_cache_tags')
 }

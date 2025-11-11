@@ -1,3 +1,5 @@
+@use '@/theme/mixins' as *;
+
 .phaseLayer {
   position: absolute;
   top: 0;
@@ -16,6 +18,16 @@
   &[data-active-phase='2'] {
     g[data-phase='2'] {
       opacity: 1;
+    }
+  }
+  @include media('<ms') {
+    body:not(
+        :has([data-keyframe='Phase1.0'], [data-keyframe='Phase2.0'])
+      )
+      & {
+      g[data-phase] {
+        opacity: 0;
+      }
     }
   }
 }

@@ -22,10 +22,12 @@ type Props = ComponentProps<'div'> & {
 export type Keyframe =
   | 'Hero'
   | 'Intro'
+  | 'Phase1'
   | 'Phase1.0'
   | 'Phase1.1'
   | 'Phase1.2'
   | 'Phase1.3'
+  | 'Phase2'
   | 'Phase2.0'
   | 'Phase2.1'
   | 'Phase2.2'
@@ -39,13 +41,25 @@ export const HowWeWork = ({ data, ...props }: Props) => {
     rootMargin: '-25% 0% 0%',
   })
   const { inView: introInView, ref: introRef } = useInView({
-    rootMargin: '0% 0% 0%',
+    rootMargin: '-25% 0% 0%',
   })
   const { inView: phase1InView, ref: phase1Ref } = useInView({
     rootMargin: '0% 0% -50%',
   })
+  const {
+    inView: phase1InterstitialInView,
+    ref: phase1InterstitialRef,
+  } = useInView({
+    rootMargin: '-50% 0% -50%',
+  })
   const { inView: phase2InView, ref: phase2Ref } = useInView({
-    rootMargin: '0% 0% -50%',
+    rootMargin: '-50% 0% -50%',
+  })
+  const {
+    inView: phase2InterstitialInView,
+    ref: phase2InterstitialRef,
+  } = useInView({
+    rootMargin: '-50% 0% -50%',
   })
   const { inView: outroInView, ref: outroRef } = useInView({
     rootMargin: '0% 0% -50%',
@@ -69,10 +83,10 @@ export const HowWeWork = ({ data, ...props }: Props) => {
     if (outroInView) {
       return 'Outro'
     }
-    if (phase1InView) {
+    if (phase1InterstitialInView) {
       return 'Phase1.0'
     }
-    if (phase2InView) {
+    if (phase2InterstitialInView) {
       return 'Phase2.0'
     }
     if (activeStep !== undefined) {
@@ -83,9 +97,17 @@ export const HowWeWork = ({ data, ...props }: Props) => {
         return `Phase2.${activeStep - 3}` as Keyframe
       }
     }
+    if (phase1InView) {
+      return 'Phase1'
+    }
+    if (phase2InView) {
+      return 'Phase2'
+    }
   }, [
     heroInView,
     introInView,
+    phase1InterstitialInView,
+    phase2InterstitialInView,
     phase1InView,
     phase2InView,
     activeStep,
@@ -135,35 +157,45 @@ export const HowWeWork = ({ data, ...props }: Props) => {
       <section className={styles.steps}>
         <ol>
           <div
-            className={styles.stepInterstitial}
             ref={phase1Ref}
-          />
-          {data.steps.map((step, i) => {
-            if (i < 3)
-              return (
-                <MatchcraftStep
-                  data={step}
-                  index={i}
-                  onChangeInView={handleChangeStepVisibility}
-                  key={i}
-                />
-              )
-          })}
+            className={styles.phase}
+          >
+            <div
+              className={styles.interstitial}
+              ref={phase1InterstitialRef}
+            />
+            {data.steps.map((step, i) => {
+              if (i < 3)
+                return (
+                  <MatchcraftStep
+                    data={step}
+                    index={i}
+                    onChangeInView={handleChangeStepVisibility}
+                    key={i}
+                  />
+                )
+            })}
+          </div>
           <div
-            className={styles.stepInterstitial}
             ref={phase2Ref}
-          />
-          {data.steps.map((step, i) => {
-            if (i >= 3)
-              return (
-                <MatchcraftStep
-                  data={step}
-                  index={i}
-                  onChangeInView={handleChangeStepVisibility}
-                  key={i}
-                />
-              )
-          })}
+            className={styles.phase}
+          >
+            <div
+              className={styles.interstitial}
+              ref={phase2InterstitialRef}
+            />
+            {data.steps.map((step, i) => {
+              if (i >= 3)
+                return (
+                  <MatchcraftStep
+                    data={step}
+                    index={i}
+                    onChangeInView={handleChangeStepVisibility}
+                    key={i}
+                  />
+                )
+            })}
+          </div>
         </ol>
       </section>
       <section
