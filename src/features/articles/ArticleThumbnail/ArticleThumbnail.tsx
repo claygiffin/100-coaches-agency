@@ -1,3 +1,5 @@
+'use client'
+
 import { format } from 'date-fns'
 import Link from 'next/link'
 import { HiOutlineExternalLink } from 'react-icons/hi'

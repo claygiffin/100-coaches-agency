@@ -1,3 +1,5 @@
+'use client'
+
 import { type ComponentProps, type ComponentType } from 'react'
 
 import { DatoImageFocused } from '@/features/dato-image'
