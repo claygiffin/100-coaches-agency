@@ -1,6 +1,16 @@
+@use '@/theme/mixins' as *;
+
 .baseLayer {
   width: auto;
   height: 100%;
+  transition:
+    opacity 500ms ease,
+    filter 500ms;
+  @include media('<ms') {
+    body:has([data-active-phase]) & {
+      opacity: 0.875;
+    }
+  }
 }
 
 .base {

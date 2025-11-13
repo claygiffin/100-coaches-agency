@@ -52,6 +52,9 @@
     max-width: 50ch;
     @include media('<ms') {
       font-size: var(--fs-21);
+      p {
+        font-weight: 375;
+      }
     }
   }
 }
@@ -60,6 +63,9 @@
   z-index: 4;
   display: grid;
   padding: 0 var(--margin);
+  @include media('<s') {
+    padding: 0 var(--gtr-36);
+  }
   .interstitial {
     height: 100lvh;
     width: 100%;
@@ -89,6 +95,9 @@
     max-width: 50ch;
     p {
       font-family: var(--ff-display);
+      @include media('<ms') {
+        font-weight: 375;
+      }
     }
   }
   h2 {

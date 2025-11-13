@@ -33,9 +33,9 @@
   line-height: 1;
   @include media('<ms') {
     font-size: var(--fs-60);
-    color: var(--color-goldShade2);
+    color: var(--color-goldShade3);
     body:has([data-active-phase='2']) & {
-      color: var(--color-goldTint2);
+      color: var(--color-goldTint3);
     }
   }
 }
@@ -51,8 +51,9 @@
 .description {
   p {
     margin: 0.5em 0;
-  }
-  @include media('<ms') {
-    font-size: var(--fs-14);
+    @include media('<ms') {
+      font-size: var(--fs-14);
+      font-weight: 400;
+    }
   }
 }
