@@ -7,8 +7,17 @@
     opacity 500ms ease,
     filter 500ms;
   @include media('<ms') {
-    body:has([data-active-phase]) & {
-      opacity: 0.875;
+    body:has([data-active-phase='1']):not(
+        :has([data-keyframe='Phase1.0'])
+      )
+      & {
+      opacity: 0.75;
+    }
+    body:has([data-active-phase='2']):not(
+        :has([data-keyframe='Phase2.0'])
+      )
+      & {
+      opacity: 0.9;
     }
   }
 }
