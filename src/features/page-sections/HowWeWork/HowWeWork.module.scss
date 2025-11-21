@@ -64,7 +64,7 @@
   display: grid;
   padding: 0 var(--margin);
   @include media('<s') {
-    padding: 0 var(--gtr-36);
+    padding: 0 var(--gtr-36) 0 var(--gtr-54);
   }
   .interstitial {
     height: 100lvh;
