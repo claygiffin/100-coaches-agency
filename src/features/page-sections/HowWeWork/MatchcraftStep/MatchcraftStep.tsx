@@ -22,7 +22,7 @@ export const MatchcraftStep = ({
   })
   useEffect(() => {
     onChangeInView(index, inView)
-  }, [inView, onChangeInView])
+  }, [inView, onChangeInView, index])
 
   return (
     <li

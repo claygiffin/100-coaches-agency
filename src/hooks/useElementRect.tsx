@@ -6,6 +6,7 @@ import { type RefObject, useRef, useSyncExternalStore } from 'react'
 type Rect = { width: number | undefined; height: number | undefined }
 type ElementRef = RefObject<HTMLElement | null>
 
+// A stable object for "no size yet"
 const UNDEFINED_RECT: Readonly<Rect> = Object.freeze({
   width: undefined,
   height: undefined,
@@ -26,104 +27,96 @@ export const useElementRect = (
     typeof window !== 'undefined' &&
     typeof ResizeObserver !== 'undefined'
 
-  // Keeps the last emitted Rect object (identity-stable for “no change” fast path)
+  const debouncedRef = useRef<ReturnType<typeof debounce> | null>(null)
   const lastRectRef = useRef<Rect>(UNDEFINED_RECT)
 
-  // Track the currently-observed element and its observers
-  const observedElementRef = useRef<HTMLElement | null>(null)
-  const resizeObserverRef = useRef<ResizeObserver | null>(null)
-  const watchRafIdRef = useRef<number | null>(null)
+  // Keeps track of the element we’re observing so we can rewire when ref.current changes
+  const observedElRef = useRef<HTMLElement | null>(null)
+  const roRef = useRef<ResizeObserver | null>(null)
+  const stopWatchRef = useRef<number | null>(null)
 
-  // ---- Key change: make a single debounced notifier that calls the LATEST onStoreChange via a ref
-  const latestStoreChangeRef = useRef<() => void>(() => {})
-  const debouncedNotifyRef = useRef<ReturnType<typeof debounce> | null>(
-    null
-  )
-  if (!debouncedNotifyRef.current) {
-    debouncedNotifyRef.current = debounce(
-      () => latestStoreChangeRef.current(),
-      debounceMs
-    )
-  }
-
-  const attachObservers = (el: HTMLElement) => {
+  const attachObservers = (
+    el: HTMLElement,
+    onStoreChange: () => void
+  ) => {
     if (!isBrowser) return
-
-    // Notify via rAF -> debounced -> latest onStoreChange
-    const debouncedNotify = debouncedNotifyRef.current!
-    const notifyOnNextFrame = () =>
+    // Lazily build the debounced notifier once
+    if (!debouncedRef.current) {
+      debouncedRef.current = debounce(() => onStoreChange(), debounceMs)
+    }
+    const debouncedNotify = debouncedRef.current
+    const rafNotify = () =>
       window.requestAnimationFrame(() => debouncedNotify())
 
-    // ResizeObserver to catch content/layout-driven size changes
-    const ro = new ResizeObserver(() => notifyOnNextFrame())
+    // ResizeObserver
+    const ro = new ResizeObserver(() => rafNotify())
     ro.observe(el)
-    resizeObserverRef.current = ro
-    observedElementRef.current = el
+    roRef.current = ro
+    observedElRef.current = el
 
     // Orientation changes can affect layout
-    const handleOrientation = () => notifyOnNextFrame()
-    window.addEventListener('orientationchange', handleOrientation, {
+    const orientationHandler = () => rafNotify()
+    window.addEventListener('orientationchange', orientationHandler, {
       passive: true,
     })
 
-    // Immediate first read so the first measured size renders without waiting for RO/debounce
-    window.requestAnimationFrame(() => latestStoreChangeRef.current())
+    // Immediate first read (not debounced) so the first measured size renders
+    window.requestAnimationFrame(onStoreChange)
 
-    // Disposer for non-RO listener
+    // Return a small disposer for the non-RO listener
     return () => {
-      window.removeEventListener('orientationchange', handleOrientation)
+      window.removeEventListener(
+        'orientationchange',
+        orientationHandler
+      )
     }
   }
 
   const detachObservers = () => {
-    resizeObserverRef.current?.disconnect()
-    resizeObserverRef.current = null
-    observedElementRef.current = null
+    roRef.current?.disconnect()
+    roRef.current = null
+    observedElRef.current = null
   }
 
   const subscribe = (onStoreChange: () => void) => {
     if (!isBrowser) return () => {}
 
-    // Always keep the freshest notifier available to the debounced wrapper
-    latestStoreChangeRef.current = onStoreChange
-
-    // Rewire observers if the underlying node behind the ref changes
-    const rewireIfNeeded = () => {
+    // Function to (re)wire observers when the node behind the ref changes
+    const rewire = () => {
       const el = targetRef.current
-      if (el === observedElementRef.current) return
+      if (el === observedElRef.current) return
+      // Element changed: detach old, attach new (if any)
       detachObservers()
       if (el) {
-        disposer = attachObservers(el) || null
+        // attach returns a disposer for orientation listener
+        disposer = attachObservers(el, onStoreChange) || null
       }
     }
 
-    // Lightweight watcher to notice ref.current changes without component state
+    // Keep an eye on ref.current changes using a light rAF watcher.
+    // This avoids needing state in the component while still catching late mounts or swaps.
     let disposer: (() => void) | null = null
-    const tick = () => {
-      rewireIfNeeded()
-      watchRafIdRef.current = window.requestAnimationFrame(tick)
+    const watch = () => {
+      rewire()
+      stopWatchRef.current = window.requestAnimationFrame(watch)
     }
-    watchRafIdRef.current = window.requestAnimationFrame(tick)
+    stopWatchRef.current = window.requestAnimationFrame(watch)
 
     // Unsubscribe
     return () => {
-      // Stop the watcher loop
-      if (watchRafIdRef.current != null) {
-        window.cancelAnimationFrame(watchRafIdRef.current)
-        watchRafIdRef.current = null
+      if (stopWatchRef.current != null) {
+        window.cancelAnimationFrame(stopWatchRef.current)
+        stopWatchRef.current = null
       }
-      // Remove event listeners and RO
       disposer?.()
       detachObservers()
-      // Cancel any pending debounced notifications tied to the old subscription
-      debouncedNotifyRef.current?.cancel()
     }
   }
 
   const getSnapshot = (): Rect => {
     const el = targetRef.current
     if (!isBrowser || !el) {
-      // Preserve identity for “undefined size” so React can bail out of rerenders
+      // Keep identity stable before we have a node
       return lastRectRef.current === UNDEFINED_RECT
         ? lastRectRef.current
         : (lastRectRef.current = UNDEFINED_RECT)
@@ -132,7 +125,7 @@ export const useElementRect = (
     const { width, height } = el.getBoundingClientRect()
     const prev = lastRectRef.current
     if (prev.width === width && prev.height === height) {
-      return prev // same object => no render
+      return prev // same reference -> no re-render
     }
     const next: Rect = { width, height }
     lastRectRef.current = next
@@ -144,6 +137,7 @@ export const useElementRect = (
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }
 
+// Convenience helpers: now ONLY accept object refs
 export const useElementHeight = (el: ElementRef) =>
   useElementRect(el).height
 export const useElementWidth = (el: ElementRef) =>

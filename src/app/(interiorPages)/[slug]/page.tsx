@@ -124,7 +124,7 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
               section.layout === 'TEXT_MEDIA' ||
               section.layout === 'TEXT_QUOTE'
             ) {
-              themeIndex.next()
+              themeIndex.dispatch({ type: 'INCREASE' })
             }
             return (
               <ContentSection
@@ -159,7 +159,7 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
             )
           }
           case 'BioSectionRecord': {
-            themeIndex.next()
+            themeIndex.dispatch({ type: 'INCREASE' })
             return (
               <BioSection
                 data={section}

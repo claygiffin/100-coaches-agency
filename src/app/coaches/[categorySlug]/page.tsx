@@ -21,7 +21,6 @@ import styles from './coachCategoryPage.module.scss'
 
 export const dynamic = 'force-static'
 
-
 type Props = {
   params: Promise<{
     categorySlug: string

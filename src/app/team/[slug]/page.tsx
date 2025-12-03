@@ -10,7 +10,6 @@ import styles from './teamMemberPage.module.scss'
 
 export const dynamic = 'force-static'
 
-
 type Props = {
   params: Promise<{
     slug: string

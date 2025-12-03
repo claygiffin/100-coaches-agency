@@ -9,7 +9,6 @@ import { datoRequest } from '@/lib/datocms-fetch'
 
 export const dynamic = 'force-static'
 
-
 type Props = {
   params: Promise<{
     slug: string
