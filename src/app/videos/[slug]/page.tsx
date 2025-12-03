@@ -8,7 +8,7 @@ import { generateDatoCmsMetadata } from '@/features/seo'
 import { datoRequest } from '@/lib/datocms-fetch'
 
 export const dynamic = 'force-static'
-export const dynamicParams = false
+
 
 type Props = {
   params: Promise<{

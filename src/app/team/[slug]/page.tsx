@@ -9,7 +9,7 @@ import { datoRequest } from '@/lib/datocms-fetch'
 import styles from './teamMemberPage.module.scss'
 
 export const dynamic = 'force-static'
-export const dynamicParams = false
+
 
 type Props = {
   params: Promise<{
