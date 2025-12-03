@@ -139,7 +139,7 @@ export const HowWeWork = ({ data, ...props }: Props) => {
         <h1>How We Work</h1>
         <div className={styles.matchcraft}>
           <Flourish flip />
-          <h2>Matchcraft</h2>
+          <h2>Matchcraft<span className={styles.tm}>™</span></h2>
           <Flourish />
         </div>
         <div className={styles.heroDescription}>

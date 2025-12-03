@@ -29,6 +29,11 @@
       text-transform: uppercase;
       margin: 0.25em 0;
       font-weight: 325;
+      .tm {
+        display: inline-block;
+        font-size: 25%;
+        transform: translateY(-185%);
+      }
       @include media('<s') {
         font-size: var(--fs-72);
       }
