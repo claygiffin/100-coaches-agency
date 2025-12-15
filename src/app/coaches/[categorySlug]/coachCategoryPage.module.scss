@@ -23,12 +23,15 @@
   display: grid;
   position: relative;
   grid-template-columns: repeat(var(--column-count), 1fr);
-  grid-gap: var(--gtr-12);
+  gap: var(--gtr-12);
   padding: var(--gtr-36);
   --column-count: 4;
   --max-width: calc(
-    100vw / var(--column-count) - var(--gtr-12) *
-      (var(--column-count) - 1) - 2 * var(--gtr-36)
+    (
+        100vw - var(--gtr-12) * (var(--column-count) - 1) - 2 *
+          var(--gtr-36)
+      ) /
+      var(--column-count)
   );
   @include media('<ml') {
     --column-count: 3;
