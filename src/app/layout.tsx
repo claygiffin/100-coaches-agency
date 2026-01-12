@@ -1,5 +1,6 @@
 import { GoogleTagManager } from '@next/third-parties/google'
 import gql from 'graphql-tag'
+import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
 import { AlertBar, AlertBarFragment } from '@/features/alert'
@@ -16,6 +17,12 @@ import { datoRequest } from '@/lib/datocms-fetch'
 import { bitter, brother1816 } from '@/theme/fonts/fontface'
 import '@/theme/globals.scss'
 import { classes } from '@/utils/css'
+
+export const metadata: Metadata = {
+  icons: {
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+  },
+}
 
 const query = gql`
   query RootLayout {
