@@ -20,7 +20,9 @@ import { classes } from '@/utils/css'
 
 export const metadata: Metadata = {
   icons: {
-    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
+    ],
   },
 }
 
