@@ -91,3 +91,15 @@
 .thumbnail {
   min-height: 100%;
 }
+.grid {
+  display: grid;
+  gap: var(--gtr-12);
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0 var(--margin);
+  @include media('<ml') {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include media('<ms') {
+    grid-template-columns: 1fr 1fr;
+  }
+}
