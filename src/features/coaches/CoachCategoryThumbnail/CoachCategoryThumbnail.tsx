@@ -5,15 +5,21 @@ import { useId } from 'react'
 
 import { DatoImage } from '@/features/dato-image'
 import { useVariables } from '@/hooks'
+import { classes } from '@/utils'
 
 import styles from './CoachCategoryThumbnail.module.scss'
 
 type PropTypes = {
   coach: Queries.CoachProfileFragment | Queries.TeamMemberFragment
   index: number
+  className?: string
 }
 
-export const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
+export const CoachCategoryThumbnail = ({
+  coach,
+  index,
+  className,
+}: PropTypes) => {
   const { getBreakpoint, getColor } = useVariables()
 
   const gradientId = useId()
@@ -30,7 +36,7 @@ export const CoachCategoryThumbnail = ({ coach, index }: PropTypes) => {
   return (
     <Link
       href={getSlug()}
-      className={styles.container}
+      className={classes(styles.container, className)}
       scroll={false}
     >
       <div className={styles.imageWrap}>

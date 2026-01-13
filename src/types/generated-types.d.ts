@@ -1355,6 +1355,39 @@ type CoachRecordjobTitleExtendedArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+type CoachesSectionModelCoachesField = CoachRecord | TeamMemberRecord;
+
+/** Block of type Coaches Section (coaches_section) */
+type CoachesSectionRecord = RecordInterface & {
+  __typename?: 'CoachesSectionRecord';
+  _createdAt: Scalars['DateTime']['output'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']['output']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']['output']>;
+  _isValid: Scalars['BooleanType']['output'];
+  _modelApiKey: Scalars['String']['output'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _publishedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Generates SEO and Social card meta tags to be used in your frontend */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
+  _updatedAt: Scalars['DateTime']['output'];
+  coaches: Array<CoachesSectionModelCoachesField>;
+  colorScheme: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  heading?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ItemId']['output'];
+  layout: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+};
+
+
+/** Block of type Coaches Section (coaches_section) */
+type CoachesSectionRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type CollectionMetadata = {
   __typename?: 'CollectionMetadata';
   count: Scalars['IntType']['output'];
@@ -4540,7 +4573,7 @@ type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']['input']>;
 };
 
-type InteriorPageModelContentField = BioSectionRecord | ContentSectionRecord | CtaBarRecord | MediaSectionRecord | SectionDividerRecord | TestimonialSectionRecord;
+type InteriorPageModelContentField = BioSectionRecord | CoachesSectionRecord | ContentSectionRecord | CtaBarRecord | MediaSectionRecord | SectionDividerRecord | TestimonialSectionRecord;
 
 type InteriorPageModelFilter = {
   AND?: InputMaybe<Array<InputMaybe<InteriorPageModelFilter>>>;
@@ -7492,6 +7525,10 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
                    }
               > }
           > }, headshot: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
+      | { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, _heading?: string | null, coaches: Array<
+          | { __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }
+          | { __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }
+        > }
       | { __typename: 'ContentSectionRecord', id: string, layout: string, colorScheme: string, heading: string, subheading?: { __typename?: 'ContentSectionModelSubheadingField', value: unknown } | null, body: { __typename?: 'ContentSectionModelBodyField', value: unknown, blocks: Array<
             | { __typename: 'AccordionRecord', id: string, items: Array<{ __typename: 'AccordionItemRecord', id: string, heading: string, body: { __typename?: 'AccordionItemModelBodyField', value: unknown } }> }
             | { __typename: 'ButtonRecord', id: string, button:
@@ -9281,6 +9318,11 @@ type BioSectionFragment = { __typename: 'BioSectionRecord', id: string, layout: 
     > }, headshot: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } };
 
 type CoachCategoryCtaFragment = { __typename: 'CoachCategoryCtaRecord', id: string, ctaHeading: string, ctaLinkText?: string | null, ctaBody?: { __typename?: 'CoachCategoryCtaModelCtaBodyField', value: unknown } | null };
+
+type CoachesSectionFragment = { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, _heading?: string | null, coaches: Array<
+    | { __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }
+    | { __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }
+  > };
 
 type CompaniesSectionFragment = { __typename: 'CompaniesSectionRecord', id: string, heading?: string | null, companies: Array<{ __typename: 'CompanyRecord', id: string, name: string, icon: { __typename?: 'FileField', format: string, url: string, width?: number | null, height?: number | null, alt?: string | null, responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null } }> };
 

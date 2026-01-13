@@ -1,0 +1,93 @@
+@use '@/theme/mixins' as *;
+
+.section {
+  position: relative;
+  display: grid;
+  padding: var(--row-72) 0;
+  background: var(--background);
+  color: var(--text-color);
+  &[data-color-scheme='WHITE'] {
+    --background: #fff;
+    --text-color: var(--color-gray10);
+    --divider-color: var(--color-gold);
+  }
+  &[data-color-scheme='LIGHT'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-gray95),
+      var(--color-gray90)
+    );
+    --text-color: var(--color-gray10);
+    --divider-color: var(--color-gold);
+  }
+  &[data-color-scheme='DARK'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-gray30),
+      var(--color-gray10)
+    );
+    --text-color: #fff;
+    --divider-color: var(--color-goldTint1);
+  }
+  &[data-color-scheme='GOLD'] {
+    --background: linear-gradient(
+      to bottom right,
+      var(--color-goldTint2),
+      var(--color-goldShade1)
+    );
+    --text-color: var(--color-brownText);
+    --divider-color: #fff;
+  }
+}
+%divider {
+  &:after {
+    content: '';
+    position: relative;
+    display: block;
+    border-bottom: 2px solid var(--divider-color);
+    width: 9rem;
+    margin-top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.heading {
+  font-size: var(--fs-36);
+  font-weight: 375;
+  margin: 0.25em var(--margin) 1.5em;
+  text-align: center;
+  @extend %divider;
+}
+.carousel {
+  grid-column: 1 / -1;
+  width: 100vw;
+  --gtr: var(--gtr-12);
+  --margin: calc(var(--gtr-108) * 0.75);
+  --slide-width: #{widthInCols($count: 3)};
+  @include media('<ml') {
+    --slide-width: #{widthInCols($count: 4)};
+  }
+  @include media('<ms') {
+    --margin: var(--gtr-54);
+    --slide-width: #{widthInCols($count: 5)};
+  }
+  @include media('<s') {
+    --margin: var(--gtr-54);
+    --slide-width: #{widthInCols($count: 6)};
+  }
+}
+.carouselNav {
+  --nav-width: var(--fs-48);
+  --arrow-color: #fff;
+  --arrow-color-hover: #fff;
+  --arrow-color-disabled: #ffffff11;
+  --button-bg-color: var(--color-gold);
+  --button-bg-color-disabled: #88888822;
+  --button-bg-color-hover: var(--color-goldShade1);
+  @include media('<ms') {
+    --stroke-width: 1.5;
+  }
+}
+.thumbnail {
+  min-height: 100%;
+}

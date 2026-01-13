@@ -33,7 +33,6 @@ export const createThemeIndex = (start = -1) => {
       switch (action.type) {
         case 'INCREASE':
           index += action.by ?? 1
-          console.log(index)
           break
         case 'RESET':
           index = start

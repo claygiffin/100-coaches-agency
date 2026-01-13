@@ -5,6 +5,8 @@ import { notFound } from 'next/navigation'
 import {
   BioSection,
   BioSectionFragment,
+  CoachesSection,
+  CoachesSectionFragment,
   ContentSection,
   ContentSectionFragment,
   CtaBar,
@@ -72,6 +74,9 @@ const query = gql`
         ... on SectionDividerRecord {
           ...SectionDivider
         }
+        ... on CoachesSectionRecord {
+          ...CoachesSection
+        }
       }
       _seoMetaTags {
         attributes
@@ -87,6 +92,7 @@ const query = gql`
   ${CtaBarFragment}
   ${BioSectionFragment}
   ${SectionDividerFragment}
+  ${CoachesSectionFragment}
 `
 
 export const generateMetadata = async ({
@@ -171,6 +177,14 @@ const InteriorPage: NextPage<Props> = async ({ params }) => {
           case 'SectionDividerRecord': {
             return (
               <SectionDivider
+                data={section}
+                key={section.id}
+              />
+            )
+          }
+          case 'CoachesSectionRecord': {
+            return (
+              <CoachesSection
                 data={section}
                 key={section.id}
               />
