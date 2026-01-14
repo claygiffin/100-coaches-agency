@@ -30,7 +30,7 @@
       transform: scale3d(1.05, 1.05, 1);
     }
   }
-  @include media('<m') {
+  @include media('<ms') {
     display: none;
   }
 }
