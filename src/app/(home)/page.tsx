@@ -2,6 +2,7 @@ import { gql } from 'graphql-tag'
 import type { Metadata, NextPage } from 'next'
 import { notFound } from 'next/navigation'
 
+import { FloatingCta } from '@/features/floating-cta'
 import {
   HomeCoachesSection,
   HomeCoachesSectionFragment,
@@ -96,6 +97,7 @@ const HomePage: NextPage = async () => {
       <HomeMarshall data={homePage} />
       <HomeResults data={homePage} />
       <HomeContact data={homePage} />
+      <FloatingCta />
     </main>
   )
 }
