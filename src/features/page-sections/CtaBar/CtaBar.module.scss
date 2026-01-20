@@ -12,6 +12,9 @@
   flex-wrap: wrap;
   column-gap: 1em;
   row-gap: 0.75em;
+  &:last-of-type {
+    padding-bottom: calc(5vw + 1.25em);
+  }
 }
 .text {
   h2 {

@@ -123,19 +123,6 @@
       color: var(--color-brownText);
     }
   }
-  .linkList {
-    margin-top: 1.5em;
-    &:before {
-      text-transform: uppercase;
-      font-size: 90%;
-      font-weight: 450;
-    }
-    li {
-      margin: 0.5em 0;
-      font-family: var(--ff-display);
-      font-weight: 350;
-    }
-  }
 }
 .carousel {
   grid-column: 1 / -1;
