@@ -6,6 +6,9 @@
   padding: var(--row-72) 0;
   background: var(--background);
   color: var(--text-color);
+  &:last-child {
+    padding-bottom: calc(5vw + var(--row-72));
+  }
   &[data-color-scheme='WHITE'] {
     --background: #fff;
     --text-color: var(--color-gray10);
@@ -54,9 +57,29 @@
 .heading {
   font-size: var(--fs-36);
   font-weight: 375;
-  margin: 0.25em var(--margin) 1.5em;
+  margin: 0.25em var(--margin) 0.5em;
   text-align: center;
+  justify-self: center;
   @extend %divider;
+  .section:not(:has(.body)) & {
+    margin-bottom: 1.5em;
+  }
+}
+.body {
+  width: min(80ch, 100vw - 2 * var(--margin));
+  justify-self: center;
+  margin-bottom: 2em;
+  p {
+    margin: 0.5em 0;
+  }
+  a {
+    color: var(--link-color);
+    @media (hover: hover) {
+      &:hover {
+        color: var(--link-color-hover);
+      }
+    }
+  }
 }
 .carousel {
   grid-column: 1 / -1;

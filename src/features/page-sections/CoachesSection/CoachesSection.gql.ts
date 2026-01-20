@@ -4,6 +4,7 @@ import {
   CoachProfileFragment,
   TeamMemberFragment,
 } from '@/features/coaches'
+import { ButtonFragment } from '@/features/ui'
 
 export const CoachesSectionFragment = gql`
   fragment CoachesSection on CoachesSectionRecord {
@@ -12,6 +13,14 @@ export const CoachesSectionFragment = gql`
     layout
     colorScheme
     _heading: heading
+    _body: body {
+      value
+      blocks {
+        ... on ButtonRecord {
+          ...Button
+        }
+      }
+    }
     coaches {
       ... on CoachRecord {
         ...CoachProfile
@@ -23,4 +32,5 @@ export const CoachesSectionFragment = gql`
   }
   ${CoachProfileFragment}
   ${TeamMemberFragment}
+  ${ButtonFragment}
 `

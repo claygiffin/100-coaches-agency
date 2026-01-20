@@ -1,7 +1,13 @@
+import { isEmptyDocument } from 'datocms-structured-text-utils'
 import { type ComponentProps } from 'react'
 
 import { Carousel } from '@/features/carousel'
 import { CoachCategoryThumbnail } from '@/features/coaches'
+import {
+  DatoStructuredText,
+  noEmptyParagraphsRule,
+} from '@/features/dato-structured-text'
+import { Button } from '@/features/ui'
 
 import styles from './CoachesSection.module.scss'
 
@@ -18,6 +24,26 @@ export const CoachesSection = ({ data, ...props }: Props) => {
     >
       {data._heading && (
         <h2 className={styles.heading}>{data._heading}</h2>
+      )}
+      {!isEmptyDocument(data._body) && (
+        <div className={styles.body}>
+          <DatoStructuredText
+            data={data._body}
+            customNodeRules={[noEmptyParagraphsRule]}
+            renderBlock={({ record }) => {
+              switch (record.__typename) {
+                case 'ButtonRecord': {
+                  return (
+                    <Button
+                      className={styles.button}
+                      data={record}
+                    />
+                  )
+                }
+              }
+            }}
+          />
+        </div>
       )}
       {data.layout === 'CAROUSEL' && (
         <Carousel

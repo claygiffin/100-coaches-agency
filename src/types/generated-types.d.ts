@@ -1355,6 +1355,14 @@ type CoachRecordjobTitleExtendedArgs = {
   markdown?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+type CoachesSectionModelBodyField = {
+  __typename?: 'CoachesSectionModelBodyField';
+  blocks: Array<ButtonRecord>;
+  inlineBlocks: Array<Scalars['String']['output']>;
+  links: Array<Scalars['String']['output']>;
+  value: Scalars['JsonField']['output'];
+};
+
 type CoachesSectionModelCoachesField = CoachRecord | TeamMemberRecord;
 
 /** Block of type Coaches Section (coaches_section) */
@@ -1373,6 +1381,7 @@ type CoachesSectionRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']['output']>;
   _updatedAt: Scalars['DateTime']['output'];
+  body?: Maybe<CoachesSectionModelBodyField>;
   coaches: Array<CoachesSectionModelCoachesField>;
   colorScheme: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
@@ -7525,7 +7534,24 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
                    }
               > }
           > }, headshot: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
-      | { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, _heading?: string | null, coaches: Array<
+      | { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, _heading?: string | null, _body?: { __typename?: 'CoachesSectionModelBodyField', value: unknown, blocks: Array<{ __typename: 'ButtonRecord', id: string, button:
+              | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+              | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+              | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+              | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+              | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+              | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+                  | { __typename: 'AdvisorsPageRecord', slug: string }
+                  | { __typename: 'ArchivePageRecord', slug: string }
+                  | { __typename: 'ArticlesPageRecord', slug: string }
+                  | { __typename: 'CoachCategoryRecord', slug: string }
+                  | { __typename: 'ContactPageRecord', slug: string }
+                  | { __typename: 'HomePageRecord' }
+                  | { __typename: 'HowWeWorkPageRecord', slug: string }
+                  | { __typename: 'InteriorPageRecord', slug: string }
+                  | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+                 }
+             }> } | null, coaches: Array<
           | { __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }
           | { __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }
         > }
@@ -9319,7 +9345,24 @@ type BioSectionFragment = { __typename: 'BioSectionRecord', id: string, layout: 
 
 type CoachCategoryCtaFragment = { __typename: 'CoachCategoryCtaRecord', id: string, ctaHeading: string, ctaLinkText?: string | null, ctaBody?: { __typename?: 'CoachCategoryCtaModelCtaBodyField', value: unknown } | null };
 
-type CoachesSectionFragment = { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, _heading?: string | null, coaches: Array<
+type CoachesSectionFragment = { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, _heading?: string | null, _body?: { __typename?: 'CoachesSectionModelBodyField', value: unknown, blocks: Array<{ __typename: 'ButtonRecord', id: string, button:
+        | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
+        | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
+        | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
+        | { __typename: 'ExternalLinkRecord', id: string, url: string, linkText: string }
+        | { __typename: 'FormLinkRecord', id: string, linkText: string, form: { __typename: 'FormModalRecord', slug: string } }
+        | { __typename: 'PageLinkRecord', id: string, linkText: string, page:
+            | { __typename: 'AdvisorsPageRecord', slug: string }
+            | { __typename: 'ArchivePageRecord', slug: string }
+            | { __typename: 'ArticlesPageRecord', slug: string }
+            | { __typename: 'CoachCategoryRecord', slug: string }
+            | { __typename: 'ContactPageRecord', slug: string }
+            | { __typename: 'HomePageRecord' }
+            | { __typename: 'HowWeWorkPageRecord', slug: string }
+            | { __typename: 'InteriorPageRecord', slug: string }
+            | { __typename: 'ThoughtLeadershipPageRecord', slug: string }
+           }
+       }> } | null, coaches: Array<
     | { __typename: 'CoachRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, bioSummary?: string | null, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'CoachModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }
     | { __typename: 'TeamMemberRecord', id: string, name: string, jobTitle: string, jobTitleExtended?: string | null, photoAlignment: string, slug: string, photo: { __typename?: 'FileField', responsiveImage?: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } | null }, bio?: { __typename?: 'TeamMemberModelBioField', value: unknown } | null, _seoMetaTags: Array<{ __typename?: 'Tag', attributes?: Record<string, string> | null, content?: string | null, tag: string }> }
   > };
