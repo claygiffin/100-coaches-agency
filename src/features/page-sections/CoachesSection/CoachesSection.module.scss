@@ -80,6 +80,62 @@
       }
     }
   }
+
+  .button {
+    display: block;
+    width: fit-content;
+    font-size: 90%;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    padding: 0.75em 1.5em;
+    margin-top: 1.5em;
+    margin-left: -0.333em;
+    line-height: 1.125;
+    font-weight: 425;
+    border-radius: 2.625em;
+    transition: transform 400ms var(--bezier-bounce);
+    transform: scale3d(0.99, 0.99, 1);
+    @media (hover: hover) {
+      &:hover {
+        transform: scale3d(1.05, 1.05, 1);
+      }
+    }
+    .section[data-color-scheme='WHITE'] &,
+    .section[data-color-scheme='LIGHT'] & {
+      background: linear-gradient(
+        to right,
+        var(--color-goldShade2),
+        var(--color-gold)
+      );
+      color: #fff;
+    }
+    .section[data-color-scheme='DARK'] & {
+      background: linear-gradient(
+        to right,
+        var(--color-goldTint2),
+        var(--color-gold)
+      );
+      color: var(--color-brownText);
+    }
+    .section[data-color-scheme='GOLD'] & {
+      background: #fff;
+      color: var(--color-brownText);
+    }
+  }
+  .linkList {
+    margin-top: 1.5em;
+    &:before {
+      text-transform: uppercase;
+      font-size: 90%;
+      font-weight: 450;
+    }
+    li {
+      margin: 0.5em 0;
+      font-family: var(--ff-display);
+      font-weight: 350;
+    }
+  }
 }
 .carousel {
   grid-column: 1 / -1;
