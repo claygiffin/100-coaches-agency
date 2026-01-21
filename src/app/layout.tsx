@@ -57,6 +57,7 @@ const RootLayout = async ({
       <html
         lang="en"
         className={classes(bitter.variable, brother1816.variable)}
+        data-scroll-behavior="smooth"
       >
         <head>
           <GoogleTagManager
