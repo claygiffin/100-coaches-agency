@@ -61,6 +61,7 @@ export const CoachesSection = ({ data, ...props }: Props) => {
               coach={coach}
               key={coach.id}
               index={i}
+              hideContactButton={data.hideProfileContactLink || false}
             />
           ))}
         </Carousel>
@@ -73,6 +74,7 @@ export const CoachesSection = ({ data, ...props }: Props) => {
               coach={coach}
               key={coach.id}
               index={i}
+              hideContactButton={data.hideProfileContactLink || false}
             />
           ))}
         </div>

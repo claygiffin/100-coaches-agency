@@ -20,9 +20,13 @@ type CoachProfileProps = {
     | Queries.TeamMemberFragment
     | null
     | undefined
+  hideContactButton?: boolean
 }
 
-export const CoachProfile = ({ data }: CoachProfileProps) => {
+export const CoachProfile = ({
+  data,
+  hideContactButton,
+}: CoachProfileProps) => {
   const { getBreakpoint, getColor } = useVariables()
   const ref = useRef<HTMLDivElement>(null)
 
@@ -90,12 +94,14 @@ export const CoachProfile = ({ data }: CoachProfileProps) => {
         <div className={styles.headerText}>
           <h1>{data?.name}</h1>
           <h2>{data?.jobTitleExtended || data?.jobTitle}</h2>
-          <ArrowButton
-            as={Link}
-            href="/contact"
-            styleVariant="INLINE"
-            text="Work With Us"
-          />
+          {!hideContactButton && (
+            <ArrowButton
+              as={Link}
+              href="/contact"
+              styleVariant="INLINE"
+              text="Work With Us"
+            />
+          )}
         </div>
         <div className={styles.photoWrap}>
           <DatoImage

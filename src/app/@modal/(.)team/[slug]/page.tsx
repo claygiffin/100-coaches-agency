@@ -12,6 +12,9 @@ type Props = {
   params: Promise<{
     slug: string
   }>
+  searchParams: Promise<{
+    [key: string]: string | string[] | undefined
+  }>
 }
 
 export async function generateStaticParams() {
@@ -54,8 +57,12 @@ export const generateMetadata = async ({
   return toNextMetadata(teamMember?._seoMetaTags || [])
 }
 
-const TeamMemberModal: NextPage<Props> = async ({ params }) => {
+const TeamMemberModal: NextPage<Props> = async ({
+  params,
+  searchParams,
+}) => {
   const { slug } = await params
+  const { nc } = await searchParams
   const {
     data: { teamMember },
   } = await datoRequest<Queries.TeamMemberModalQuery>({
@@ -67,7 +74,10 @@ const TeamMemberModal: NextPage<Props> = async ({ params }) => {
       variant={'PROFILE'}
       metadata={toNextMetadata(teamMember?._seoMetaTags || [])}
     >
-      <CoachProfile data={teamMember} />
+      <CoachProfile
+        data={teamMember}
+        hideContactButton={nc === '1'}
+      />
     </Modal>
   )
 }

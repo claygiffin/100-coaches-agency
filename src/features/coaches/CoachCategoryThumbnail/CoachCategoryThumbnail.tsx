@@ -13,23 +13,26 @@ type PropTypes = {
   coach: Queries.CoachProfileFragment | Queries.TeamMemberFragment
   index: number
   className?: string
+  hideContactButton?: boolean
 }
 
 export const CoachCategoryThumbnail = ({
   coach,
   index,
   className,
+  hideContactButton,
 }: PropTypes) => {
   const { getBreakpoint, getColor } = useVariables()
 
   const gradientId = useId()
   const getSlug = () => {
+    const hideContactButtonParam = hideContactButton ? `?nc=1` : ''
     switch (coach.__typename) {
       case 'CoachRecord': {
-        return `/coaches/profiles/${coach.slug}`
+        return `/coaches/profiles/${coach.slug}${hideContactButtonParam}`
       }
       case 'TeamMemberRecord': {
-        return `/team/${coach.slug}`
+        return `/team/${coach.slug}${hideContactButtonParam}`
       }
     }
   }

@@ -29,6 +29,7 @@ export const CoachesSectionFragment = gql`
         ...TeamMember
       }
     }
+    hideProfileContactLink
   }
   ${CoachProfileFragment}
   ${TeamMemberFragment}

@@ -1386,6 +1386,7 @@ type CoachesSectionRecord = RecordInterface & {
   colorScheme: Scalars['String']['output'];
   createdAt: Scalars['DateTime']['output'];
   heading?: Maybe<Scalars['String']['output']>;
+  hideProfileContactLink?: Maybe<Scalars['BooleanType']['output']>;
   id: Scalars['ItemId']['output'];
   layout: Scalars['String']['output'];
   updatedAt: Scalars['DateTime']['output'];
@@ -7534,7 +7535,7 @@ type InteriorPageQuery = { __typename?: 'Query', interiorPage?: { __typename?: '
                    }
               > }
           > }, headshot: { __typename?: 'ImageFileField', responsiveImage: { __typename: 'ResponsiveImage', sizes: string, src: string, width: number, height: number, aspectRatio: number, alt?: string | null, title?: string | null, base64?: string | null } } }
-      | { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, _heading?: string | null, _body?: { __typename?: 'CoachesSectionModelBodyField', value: unknown, blocks: Array<{ __typename: 'ButtonRecord', id: string, button:
+      | { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, hideProfileContactLink?: boolean | null, _heading?: string | null, _body?: { __typename?: 'CoachesSectionModelBodyField', value: unknown, blocks: Array<{ __typename: 'ButtonRecord', id: string, button:
               | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
               | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
               | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }
@@ -9345,7 +9346,7 @@ type BioSectionFragment = { __typename: 'BioSectionRecord', id: string, layout: 
 
 type CoachCategoryCtaFragment = { __typename: 'CoachCategoryCtaRecord', id: string, ctaHeading: string, ctaLinkText?: string | null, ctaBody?: { __typename?: 'CoachCategoryCtaModelCtaBodyField', value: unknown } | null };
 
-type CoachesSectionFragment = { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, _heading?: string | null, _body?: { __typename?: 'CoachesSectionModelBodyField', value: unknown, blocks: Array<{ __typename: 'ButtonRecord', id: string, button:
+type CoachesSectionFragment = { __typename: 'CoachesSectionRecord', id: string, layout: string, colorScheme: string, hideProfileContactLink?: boolean | null, _heading?: string | null, _body?: { __typename?: 'CoachesSectionModelBodyField', value: unknown, blocks: Array<{ __typename: 'ButtonRecord', id: string, button:
         | { __typename: 'ArticleLinkRecord', id: string, linkText: string, article: { __typename: 'ArticleRecord', slug: string } }
         | { __typename: 'CoachMenuLinkRecord', id: string, linkText: string }
         | { __typename: 'DocumentLinkRecord', id: string, linkText: string, document: { __typename?: 'FileField', filename: string, id: string, url: string } }

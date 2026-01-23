@@ -14,6 +14,9 @@ type Props = {
   params: Promise<{
     slug: string
   }>
+  searchParams: Promise<{
+    [key: string]: string | string[] | undefined
+  }>
 }
 
 export async function generateStaticParams() {
@@ -58,8 +61,12 @@ export const generateMetadata = async ({
   })
 }
 
-const CoachProfileModal: NextPage<Props> = async ({ params }) => {
+const CoachProfileModal: NextPage<Props> = async ({
+  params,
+  searchParams,
+}) => {
   const { slug } = await params
+  const { nc } = await searchParams
   const {
     data: { coach },
   } = await datoRequest<Queries.CoachProfileModalQuery>({
@@ -67,10 +74,12 @@ const CoachProfileModal: NextPage<Props> = async ({ params }) => {
     variables: { slug },
   })
   if (!coach) notFound()
-
   return (
     <main className={styles.layout}>
-      <CoachProfile data={coach} />
+      <CoachProfile
+        data={coach}
+        hideContactButton={nc === '1'}
+      />
     </main>
   )
 }
